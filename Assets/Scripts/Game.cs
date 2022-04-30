@@ -1,14 +1,15 @@
 using UnityEngine;
 
 /// <summary>
-/// 
+/// The main game object, responsible for managing
+/// the state of the game
 /// </summary>
 public class Game : MonoBehaviour
 {
-    /// <summary></summary>
+    /// <summary>The board that fights take place on</summary>
     private Board Board { get; set; }
     
-    /// <summary></summary>
+    /// <summary>The board that holds the player's available pieces</summary>
     private Board Tableu { get; set; }
 
     private void Start() {

@@ -1,24 +1,36 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
-/// 
+/// A game board that pieces can move on
 /// </summary>
 public class Board
 {
-    public int Width { get; } // The number of spaces going horizontally
-    public int Height { get; } // The number of spaces going vertically
-    public Piece[,] Spaces { get; } // The board spaces and the pieces occupying them
-    public List<Piece> PlayerPieces { get; } // The pieces controlled by the player
-    public List<Piece> EnemyPieces { get; } // The pieces controlled by the enemy
-    private double XWorld { get; } // The board's x coordinate in the world space
-    private double YWorld { get; } // The board's y coordinate in the world space
+    /// <summary>The number of spaces going horizontally</summary>
+    public int Width { get; }
+
+    /// <summary>The number of spaces going vertically</summary>
+    public int Height { get; }
+
+    /// <summary>The board spaces and the pieces occupying them</summary>
+    public Piece[,] Spaces { get; }
+
+    /// <summary>The pieces controlled by the player</summary>
+    public List<Piece> PlayerPieces { get; }
+
+    /// <summary>The pieces controlled by the enemy</summary>
+    public List<Piece> EnemyPieces { get; }
+
+    /// <summary>The board's x coordinate in the world-space</summary>
+    private double XWorld { get; }
+
+    /// <summary>The board's y coordinate in the world-space</summary>
+    private double YWorld { get; }
     
-    /// <summary></summary>
-    /// <param name="width"></param>
-    /// <param name="height"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
+    /// <summary>Creates a new instance of a Board</summary>
+    /// <param name="width">The number of horizontal spaces on the board</param>
+    /// <param name="height">The number of vertical spaces on the board</param>
+    /// <param name="x">A world-space x-coordinate to center the board on</param>
+    /// <param name="y">A world-space y-coordinate to center the board on</param>
     public Board(int width, int height, double x, double y)
     {
         Width = width;
@@ -30,11 +42,11 @@ public class Board
         YWorld = y;
     }
 
-    /// <summary></summary>
-    /// <param name="piece"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="isPlayer"></param>
+    /// <summary>Adds a piece to the board</summary>
+    /// <param name="piece">The piece to add</param>
+    /// <param name="x">The x coordinate to place the piece</param>
+    /// <param name="y">The y coordinate to place the piece</param>
+    /// <param name="isPlayer">True if this piece is controlled by the player</param>
     public void Add(Piece piece, int x, int y, bool isPlayer)
     {
         // Update the piece
