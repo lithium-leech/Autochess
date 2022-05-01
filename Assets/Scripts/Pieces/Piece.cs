@@ -6,10 +6,10 @@ using UnityEngine;
 public abstract class Piece
 {
     /// <summary>The piece's in-game sprite</summary>
-    public GameObject UnityObject { get; }
+    public PieceBehavior Behavior { get; }
 
     /// <summary>True if this piece is controlled by the player</summary>
-    public bool PlayerPiece { get; }
+    public bool IsPlayerPiece { get; }
 
     /// <summary>The board this piece is on</summary>
     public Board Board { get; set; }
@@ -19,19 +19,22 @@ public abstract class Piece
 
     /// <summary>Base constructor for Piece abstractions</summary>
     /// <param name="unityObject">The unity object behind this piece</param>
-    /// <param name="playerPiece">True if this Piece is controlled by the player</param>
-    public Piece(GameObject unityObject, bool playerPiece)
+    /// <param name="isPlayerPiece">True if this Piece is controlled by the player</param>
+    public Piece(GameObject unityObject, bool isPlayerPiece)
     {
-        UnityObject = unityObject;
-        PlayerPiece = playerPiece;
+        Behavior = unityObject.GetComponent<PieceBehavior>();
+        IsPlayerPiece = isPlayerPiece;
     }
 
     /// <summary>Enacts this piece's move for a single turn</summary>
     public abstract void Move();
 
     /// <summary>Destroys this piece</summary>
-    public void Destroy()
+    public void Captured()
     {
-        Object.Destroy(UnityObject);
+        if (Board.Spaces[Space.x,Space.y] == this) Board.Spaces[Space.x, Space.y] = null;
+        if (IsPlayerPiece) Board.PlayerPieces.Remove(this);
+        else Board.EnemyPieces.Remove(this);
+        Behavior.Captured();
     }
 }

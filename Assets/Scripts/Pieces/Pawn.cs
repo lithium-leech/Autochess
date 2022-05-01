@@ -42,7 +42,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetMoveSpace()
     {
-        if (PlayerPiece) return new Vector2Int(Space.x, Space.y + 1);
+        if (IsPlayerPiece) return new Vector2Int(Space.x, Space.y + 1);
         else return new Vector2Int(Space.x, Space.y - 1);
     }
 
@@ -50,7 +50,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetLeftAttackSpace()
     {
-        if (PlayerPiece) return new Vector2Int(Space.x - 1, Space.y + 1);
+        if (IsPlayerPiece) return new Vector2Int(Space.x - 1, Space.y + 1);
         else return new Vector2Int(Space.x - 1, Space.y - 1);
     }
 
@@ -58,7 +58,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetRightAttackSpace()
     {
-        if (PlayerPiece) return new Vector2Int(Space.x + 1, Space.y + 1);
+        if (IsPlayerPiece) return new Vector2Int(Space.x + 1, Space.y + 1);
         else return new Vector2Int(Space.x + 1, Space.y - 1);
     }
 

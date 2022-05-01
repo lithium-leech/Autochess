@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -66,16 +65,17 @@ public class Board
             Spaces[space.x,space.y] = null;
             PlayerPieces.Remove(existing);
             EnemyPieces.Remove(existing);
-            existing.Destroy();
+            existing.Captured();
         }
 
         // Add the piece to the appropriate collections
         Spaces[space.x,space.y] = piece;
-        if (piece.PlayerPiece) PlayerPieces.Add(piece);
+        if (piece.IsPlayerPiece) PlayerPieces.Add(piece);
         else EnemyPieces.Add(piece);
 
         // Warp the piece to its new location
-        piece.UnityObject.transform.position = GetWorldPosition(space);
+        Vector2 target = GetWorldPosition(space);
+        piece.Behavior.WarpTo(target);
     }
 
     public void Move(Piece piece, Vector2Int space)
@@ -83,8 +83,8 @@ public class Board
         // Check that this piece is where it's supposed to be
         if (Spaces[piece.Space.x, piece.Space.y] != piece)
         {
-            // Destroy the piece if it is not
-            piece.Destroy();
+            // Destroy this piece if it is not
+            piece.Captured();
             return;
         }
 
@@ -93,7 +93,7 @@ public class Board
 
         // Destroy the captured piece if there is one
         Piece captured = Spaces[space.x, space.y];
-        if (captured != null) captured.Destroy();
+        if (captured != null) captured.Captured();
 
         // Update the piece's location
         Spaces[piece.Space.x, piece.Space.y] = null;
@@ -102,27 +102,11 @@ public class Board
 
         // Move the piece to its new location
         Vector2 target = GetWorldPosition(space);
-        MoveToPosition(piece.UnityObject, target, 0.1f);
+        piece.Behavior.MoveTo(target);
     }
 
     /// <summary>Gets the world coordinates for a given space</summary>
     /// <param name="space">The space to get coordinated for</param>
     /// <returns>World-space coordinates</returns>
     private Vector2 GetWorldPosition(Vector2Int space) => new(XWorld + space.x + 0.5f, YWorld + space.y + 0.5f);
-
-    /// <summary>Moves a unity object to the specified location</summary>
-    /// <param name="unityObject">The unity object to move</param>
-    /// <param name="target">The location to move to</param>
-    /// <param name="speed">The speed to move at</param>
-    private void MoveToPosition(GameObject unityObject, Vector2 target, float speed)
-    {
-        // Starts a thread that moves the object over time
-        Thread move = new(() => {
-            while (Vector2.Distance(unityObject.transform.position, target) > 0)
-            {
-                unityObject.transform.position = Vector2.MoveTowards(unityObject.transform.position, target, speed);
-            }
-        });
-        move.Start();
-    }
 }
