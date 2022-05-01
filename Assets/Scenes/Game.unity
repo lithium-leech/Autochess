@@ -22802,7 +22802,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1102605393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1678290706}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: Fight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1102605393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23338,3 +23350,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757299f99f7164840acb7dc8b3ff25ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WhitePawn: {fileID: 8715072411440580236, guid: 3b51505ab2803cc48a5516904063da10, type: 3}
+  BlackPawn: {fileID: 1511269607019878528, guid: 932ba48121edbc24c8ad793d3a8a9ea2, type: 3}

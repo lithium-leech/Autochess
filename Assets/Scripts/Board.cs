@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using UnityEngine;
 
 /// <summary>
 /// A game board that pieces can move on
@@ -20,18 +22,18 @@ public class Board
     /// <summary>The pieces controlled by the enemy</summary>
     public List<Piece> EnemyPieces { get; }
 
-    /// <summary>The board's x coordinate in the world-space</summary>
-    private double XWorld { get; }
+    /// <summary>The left side of the board's x coordinate in the world-space</summary>
+    private float XWorld { get; }
 
-    /// <summary>The board's y coordinate in the world-space</summary>
-    private double YWorld { get; }
+    /// <summary>The bottom side of the board's y coordinate in the world-space</summary>
+    private float YWorld { get; }
     
     /// <summary>Creates a new instance of a Board</summary>
     /// <param name="width">The number of horizontal spaces on the board</param>
     /// <param name="height">The number of vertical spaces on the board</param>
     /// <param name="x">A world-space x-coordinate to center the board on</param>
     /// <param name="y">A world-space y-coordinate to center the board on</param>
-    public Board(int width, int height, double x, double y)
+    public Board(int width, int height, float x, float y)
     {
         Width = width;
         Height = height;
@@ -44,35 +46,83 @@ public class Board
 
     /// <summary>Adds a piece to the board</summary>
     /// <param name="piece">The piece to add</param>
-    /// <param name="x">The x coordinate to place the piece</param>
-    /// <param name="y">The y coordinate to place the piece</param>
-    /// <param name="isPlayer">True if this piece is controlled by the player</param>
-    public void Add(Piece piece, int x, int y, bool isPlayer)
+    /// <param name="space">The space to place the piece at</param>
+    public void Add(Piece piece, Vector2Int space)
     {
+        // Ensure that the space is on the board
+        if (space.x < 0) space.x = 0;
+        if (space.x >= Width) space.x = Width - 1;
+        if (space.y < 0) space.y = 0;
+        if (space.y >= Height) space.y = Height - 1;
+        
         // Update the piece
         piece.Board = this;
-        piece.X = x;
-        piece.Y = y;
-
-        // Check that x and y are in bounds
-        if (x < 1) x = 1;
-        if (x > Width) x = Width;
-        if (y < 1) y = 1;
-        if (y > Height) y = Height;
+        piece.Space = space;
 
         // Remove the piece on the specified space (if present)
-        Piece existing = Spaces[x,y];
+        Piece existing = Spaces[space.x,space.y];
         if (existing != null)
         {
-            Spaces[x,y] = null;
+            Spaces[space.x,space.y] = null;
             PlayerPieces.Remove(existing);
             EnemyPieces.Remove(existing);
             existing.Destroy();
         }
 
         // Add the piece to the appropriate collections
-        Spaces[x,y] = piece;
-        if (isPlayer) PlayerPieces.Add(piece);
-        else EnemyPieces.Add(piece); 
+        Spaces[space.x,space.y] = piece;
+        if (piece.PlayerPiece) PlayerPieces.Add(piece);
+        else EnemyPieces.Add(piece);
+
+        // Warp the piece to its new location
+        piece.UnityObject.transform.position = GetWorldPosition(space);
+    }
+
+    public void Move(Piece piece, Vector2Int space)
+    {
+        // Check that this piece is where it's supposed to be
+        if (Spaces[piece.Space.x, piece.Space.y] != piece)
+        {
+            // Destroy the piece if it is not
+            piece.Destroy();
+            return;
+        }
+
+        // Do nothing if the piece is remaining stationary
+        if (piece.Space == space) return;
+
+        // Destroy the captured piece if there is one
+        Piece captured = Spaces[space.x, space.y];
+        if (captured != null) captured.Destroy();
+
+        // Update the piece's location
+        Spaces[piece.Space.x, piece.Space.y] = null;
+        Spaces[space.x, space.y] = piece;
+        piece.Space = space;
+
+        // Move the piece to its new location
+        Vector2 target = GetWorldPosition(space);
+        MoveToPosition(piece.UnityObject, target, 0.1f);
+    }
+
+    /// <summary>Gets the world coordinates for a given space</summary>
+    /// <param name="space">The space to get coordinated for</param>
+    /// <returns>World-space coordinates</returns>
+    private Vector2 GetWorldPosition(Vector2Int space) => new(XWorld + space.x + 0.5f, YWorld + space.y + 0.5f);
+
+    /// <summary>Moves a unity object to the specified location</summary>
+    /// <param name="unityObject">The unity object to move</param>
+    /// <param name="target">The location to move to</param>
+    /// <param name="speed">The speed to move at</param>
+    private void MoveToPosition(GameObject unityObject, Vector2 target, float speed)
+    {
+        // Starts a thread that moves the object over time
+        Thread move = new(() => {
+            while (Vector2.Distance(unityObject.transform.position, target) > 0)
+            {
+                unityObject.transform.position = Vector2.MoveTowards(unityObject.transform.position, target, speed);
+            }
+        });
+        move.Start();
     }
 }
