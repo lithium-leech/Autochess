@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Queen : Piece
 {
-    public override Vector2Int NextMove()
+    public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
@@ -30,6 +30,6 @@ public class Queen : Piece
         else if (possibleMoves.Count > 0) newSpace = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
         // Move to the new space
-        return newSpace;
+        EnactTurn(newSpace);
     }
 }

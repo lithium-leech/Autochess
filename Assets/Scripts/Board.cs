@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +53,13 @@ public class Board
     /// <typeparam name="T">The type of piece to add</typeparam>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
-    public void AddPiece<T>(bool white, Vector2Int space) where T : Piece => AddPiece(Game.CreatePiece<T>(white), space);
+    public void AddPiece<T>(bool white, Vector2Int space) where T : Piece => AddPiece(typeof(T), white, space);
+
+    /// <summary>Adds a new piece to the board</summary>
+    /// <param name="type">The type of piece to add</param>
+    /// <param name="white">True if the piece is white</param>
+    /// <param name="space">The space to place the piece at</param>
+    public void AddPiece(Type type, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(type, white), space);
 
     /// <summary>Adds a piece to the board</summary>
     /// <param name="piece">The piece to add</param>

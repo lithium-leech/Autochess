@@ -23,10 +23,14 @@ public class Game : MonoBehaviour
         GameState.SideBoard = new Board(this, 8, 3, -4.0f, -4.0f);
 
         // Create a sample setup
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(3, 6));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(4, 1));
-        GameState.GameBoard.AddPiece<Queen>(true, new Vector2Int(7, 6));
-        GameState.GameBoard.AddPiece<Queen>(false, new Vector2Int(0, 1));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(2, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(3, 7));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(5, 7));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(7, 7));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(0, 0));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(2, 0));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(4, 0));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(7, 1));
     }
 
     private float timeWaited = 0;
@@ -97,15 +101,21 @@ public class Game : MonoBehaviour
     /// <typeparam name="T">The type of piece to create</typeparam>
     /// <param name="white">True if the piece is white</param>
     /// <returns>A Piece</returns>
-    public Piece CreatePiece<T>(bool white) where T : Piece
+    public Piece CreatePiece<T>(bool white) where T : Piece => CreatePiece(typeof(T), white);
+
+    /// <summary>Creates a new instance of a piece</summary>
+    /// <param name="type">The type of piece to create</param>
+    /// <param name="white">True if the piece is white</param>
+    /// <returns>A Piece</returns>
+    public Piece CreatePiece(Type type, bool white)
     {
         int prefab;
-        if (typeof(T) == typeof(Queen)) prefab = 2;
-        else if (typeof(T) == typeof(Pawn)) prefab = 10;
-        else throw new Exception($"Piece Type {nameof(T)} not recognized");
+        if (type == typeof(Queen)) prefab = 2;
+        else if (type == typeof(Pawn)) prefab = 10;
+        else throw new Exception($"Piece Type {type} not recognized");
         if (!white) prefab++;
         GameObject obj = Instantiate(PiecePrefabs[prefab]);
-        Piece piece = obj.GetComponent<T>();
+        Piece piece = (Piece) obj.GetComponent(type);
         piece.IsPlayerPiece = !white;
         piece.Board = GameState.GameBoard;
         return piece;

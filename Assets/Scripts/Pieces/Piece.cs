@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public abstract class Piece : MonoBehaviour
     /// <summary>True if this piece has been captured</summary>
     public bool IsCaptured { get; set; } = false;
 
+    /// <summary>The Type of piece to transform into (null for no upgrade)</summary>
+    public Type Upgrade { get; set; } = null;
+
     /// <summary>True if the piece is moving towards a target location</summary>
     private bool IsMoving { get; set; } = false;
     
@@ -30,9 +34,8 @@ public abstract class Piece : MonoBehaviour
     /// <summary>The incrementor used for lerp movement</summary>
     private float LerpIncrement { get; set; } = 0;
 
-    /// <summary>Determines the piece's next move</summary>
-    /// <returns>The space the piece will move to next</returns>
-    public abstract Vector2Int NextMove();
+    /// <summary>Takes the piece's turn</summary>
+    public abstract void TakeTurn();
 
     void Update()
     {
@@ -42,6 +45,15 @@ public abstract class Piece : MonoBehaviour
             LerpIncrement += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, Target, LerpIncrement);
             if (Vector3.Distance(transform.position, Target) == 0) IsMoving = false;
+        }
+        else
+        {
+            // Upgrade to a piece when initiated
+            if (Upgrade != null)
+            {
+                Board.CapturePiece(this);
+                Board.AddPiece(Upgrade, !IsPlayerPiece, Space);
+            }
         }
 
         // Destroy the object when captured
@@ -68,8 +80,9 @@ public abstract class Piece : MonoBehaviour
         }
     }
 
-    /// <summary>Takes the piece's turn</summary>
-    public void TakeTurn()
+    /// <summary>Moves a piece from its current space to the given space</summary>
+    /// <param name="space">The space to move to</param>
+    protected void EnactTurn(Vector2Int space)
     {
         // Check that this piece is where it's supposed to be
         if (Board.Spaces[Space.x, Space.y] != this)
@@ -78,9 +91,6 @@ public abstract class Piece : MonoBehaviour
             Board.CapturePiece(this);
             return;
         }
-
-        // Get the next move
-        Vector2Int space = NextMove();
 
         // Do nothing if remaining stationary
         if (Space == space) return;

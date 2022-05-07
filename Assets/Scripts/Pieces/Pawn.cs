@@ -5,7 +5,7 @@
 /// </summary>
 public class Pawn : Piece
 {
-    public override Vector2Int NextMove()
+    public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
@@ -31,7 +31,14 @@ public class Pawn : Piece
         }
 
         // Move to the new space
-        return newSpace;
+        EnactTurn(newSpace);
+
+        // If the new space is at the board edge, upgrade to a queen
+        int edge = IsPlayerPiece ? Board.Height - 1 : 0;
+        if (newSpace.y == edge)
+        {
+            Upgrade = typeof(Queen);
+        }
     }
 
     /// <summary>Gets the space in front of the Pawn</summary>
