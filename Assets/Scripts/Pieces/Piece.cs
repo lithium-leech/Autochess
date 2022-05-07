@@ -38,7 +38,7 @@ public abstract class Piece : MonoBehaviour
         // Move towards the target when moving is activated
         if (IsMoving)
         {
-            LerpI += Time.deltaTime/100;
+            LerpI += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, Target, LerpI);
             if (Vector3.Distance(transform.position, Target) == 0) IsMoving = false;
         }
