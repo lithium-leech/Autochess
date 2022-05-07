@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4859299971058977517}
   - component: {fileID: 6632488636558567626}
-  - component: {fileID: 8696090989208722292}
+  - component: {fileID: 4488746408469599229}
   m_Layer: 0
   m_Name: WhiteQueen
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8696090989208722292
+--- !u!114 &4488746408469599229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,6 +94,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3896254195251059801}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3cc37c6b75ec142b6ac15e191806ea, type: 3}
+  m_Script: {fileID: 11500000, guid: a36c85342f4375d4e9355d8c6b101b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -6,13 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Queen : Piece
 {
-    /// <summary>Creates a new instance of a Queen</summary>
-    /// <param name="unityObject">The unity object behind this piece</param>
-    /// <param name="playerPiece">True if this Piece is controlled by the player</param>
-
-    public Queen(GameObject unityObject, bool playerPiece) : base(unityObject, playerPiece) { }
-
-    public override void Move()
+    public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
@@ -30,10 +24,10 @@ public class Queen : Piece
         GetChoicesInDirection(-1, 1, possibleMoves, possibleCaptures);
 
         // Capture a new piece if possible
-        if (possibleCaptures.Count > 0) newSpace = possibleCaptures[RND.Next(possibleCaptures.Count)];
-        
+        if (possibleCaptures.Count > 0) newSpace = possibleCaptures[Random.Range(0, possibleCaptures.Count)];
+
         // Otherwise move if possible
-        else if (possibleMoves.Count > 0) newSpace = possibleMoves[RND.Next(possibleMoves.Count)];
+        else if (possibleMoves.Count > 0) newSpace = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
         // Move to the new space
         Board.Move(this, newSpace);

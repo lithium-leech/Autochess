@@ -1,16 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// A chess Pawn
 /// </summary>
 public class Pawn : Piece
 {
-    /// <summary>Creates a new instance of a Pawn</summary>
-    /// <param name="pawnObject">The unity object behind this piece</param>
-    /// <param name="playerPiece">True if this Piece is controlled by the player</param>
-    public Pawn(GameObject pawnObject, bool playerPiece) : base(pawnObject, playerPiece) {}
-
-    public override void Move()
+    public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
@@ -24,7 +19,7 @@ public class Pawn : Piece
         if (HasEnemy(leftAttack) && HasEnemy(rightAttack))
         {
             // Choose randomly if both options are available
-            if (RND.Next(2) == 1) newSpace = leftAttack;
+            if (Random.Range(0, 2) == 1) newSpace = leftAttack;
             else newSpace = rightAttack;
         }
         else if (HasEnemy(leftAttack)) newSpace = leftAttack;

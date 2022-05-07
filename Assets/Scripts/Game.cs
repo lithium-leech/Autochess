@@ -1,4 +1,3 @@
-using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -56,11 +55,33 @@ public class Game : MonoBehaviour
         GameState.SideBoard = new Board(8, 3, -4.0f, -4.0f);
 
         // Create a sample setup
-        GameState.GameBoard.Add(new Pawn(Instantiate(WhitePawn), false), new Vector2Int(3, 6));
-        GameState.GameBoard.Add(new Queen(Instantiate(WhiteQueen), false), new Vector2Int(7, 6));
-        GameState.GameBoard.Add(new Pawn(Instantiate(BlackPawn), true), new Vector2Int(4, 1));
-        GameState.GameBoard.Add(new Queen(Instantiate(BlackQueen), true), new Vector2Int(0, 1));
+        GameObject object1 = Instantiate(WhitePawn);
+        Pawn piece1 = object1.GetComponent<Pawn>();
+        piece1.IsPlayerPiece = false;
+        piece1.Board = GameState.GameBoard;
+        GameState.GameBoard.Add(piece1, new Vector2Int(3, 6));
+        
+        GameObject object2 = Instantiate(BlackPawn);
+        Pawn piece2 = object2.GetComponent<Pawn>();
+        piece2.IsPlayerPiece = true;
+        piece2.Board = GameState.GameBoard;
+        GameState.GameBoard.Add(piece2, new Vector2Int(4, 1));
+
+        GameObject object3 = Instantiate(WhiteQueen);
+        Queen piece3 = object3.GetComponent<Queen>();
+        piece3.IsPlayerPiece = false;
+        piece3.Board = GameState.GameBoard;
+        GameState.GameBoard.Add(piece3, new Vector2Int(7, 6));
+
+        GameObject object4 = Instantiate(BlackQueen);
+        Queen piece4 = object4.GetComponent<Queen>();
+        piece4.IsPlayerPiece = true;
+        piece4.Board = GameState.GameBoard;
+        GameState.GameBoard.Add(piece4, new Vector2Int(0, 1));
     }
+
+    private float timeWaited = 0;
+    private bool whiteTurn = true;
 
     private void Update()
     {
@@ -69,8 +90,43 @@ public class Game : MonoBehaviour
         {
             GameState.InFight = true;
             GameState.FightStarted = false;
-            Thread battle = new(Fight);
-            battle.Start();
+            timeWaited = 0;
+            whiteTurn = true;
+        }
+
+        // Run fight operations
+        if (GameState.InFight)
+        {
+            timeWaited += Time.deltaTime;
+            if (timeWaited > GameState.TurnPause)
+            {
+                // Move the current player's pieces
+                if (whiteTurn)
+                {
+                    foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
+                }
+                else
+                {
+                    foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
+                }
+
+                // Check if the battle is over
+                if (GameState.GameBoard.PlayerPieces.Count < 1)
+                {
+                    GameState.FightOver = true;
+                    GameState.InFight = false;
+                }
+                else if (GameState.GameBoard.EnemyPieces.Count < 1)
+                {
+                    GameState.Victory = true;
+                    GameState.FightOver = true;
+                    GameState.InFight = false;
+                }
+
+                // Go to the next turn
+                whiteTurn = !whiteTurn;
+                timeWaited = 0;
+            }
         }
 
         // Perform end of fight actions
@@ -86,42 +142,5 @@ public class Game : MonoBehaviour
                 
             }
         }
-    }
-
-    /// <summary>Runs the battle sequence</summary>
-    private void Fight()
-    {
-        // Pause briefly before starting the fight
-        int turnPause = 2000;
-        Thread.Sleep(turnPause/4);
-        bool playerTurn = false;
-
-        // Start the battle loop (with finite finish)
-        for (int i = 0; i < 100; i++)
-        {
-            // Move the current player's pieces
-            if (playerTurn)
-            {
-                foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.Move();
-            }
-            else
-            {
-                foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.Move();
-            }
-            playerTurn = !playerTurn;
-            Thread.Sleep(turnPause);
-
-            // Check if the battle is over
-            if (GameState.GameBoard.PlayerPieces.Count < 1)
-            {
-                break;
-            }
-            else if (GameState.GameBoard.EnemyPieces.Count < 1)
-            {
-                GameState.Victory = true;
-                break;
-            }
-        }
-        GameState.FightOver = true;
     }
 }

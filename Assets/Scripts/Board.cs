@@ -75,7 +75,7 @@ public class Board
 
         // Warp the piece to its new location
         Vector2 target = GetWorldPosition(space);
-        piece.Behavior.WarpTo(target);
+        piece.WarpTo(target);
     }
 
     public void Move(Piece piece, Vector2Int space)
@@ -102,7 +102,7 @@ public class Board
 
         // Move the piece to its new location
         Vector2 target = GetWorldPosition(space);
-        piece.Behavior.MoveTo(target);
+        piece.MoveTo(target);
     }
 
     /// <summary>Gets the world coordinates for a given space</summary>

@@ -4,42 +4,47 @@ using UnityEngine;
 /// <summary>
 /// A single game piece
 /// </summary>
-public abstract class Piece
+public abstract class Piece : MonoBehaviour
 {
-    /// <summary>The piece's in-game sprite</summary>
-    public PieceBehavior Behavior { get; }
-
     /// <summary>True if this piece is controlled by the player</summary>
-    public bool IsPlayerPiece { get; }
+    public bool IsPlayerPiece { get; set; }
 
     /// <summary>The board this piece is on</summary>
     public Board Board { get; set; }
 
     /// <summary>The piece's coordinates on the board</summary>
     public Vector2Int Space { get; set; }
+    
+    /// <summary>True if this piece has been captured</summary>
+    private bool IsCaptured { get; set; } = false;
 
-    /// <summary>Provides random number generation</summary>
-    protected System.Random RND { get; } = new();
+    /// <summary>True if the piece is moving towards a target location</summary>
+    private bool IsMoving { get; set; } = false;
+    
+    /// <summary>The target location this piece is moving towards</summary>
+    private Vector3 Target { get; set; }
 
-    /// <summary>Base constructor for Piece abstractions</summary>
-    /// <param name="unityObject">The unity object behind this piece</param>
-    /// <param name="isPlayerPiece">True if this Piece is controlled by the player</param>
-    public Piece(GameObject unityObject, bool isPlayerPiece)
-    {
-        Behavior = unityObject.GetComponent<PieceBehavior>();
-        IsPlayerPiece = isPlayerPiece;
-    }
+    /// <summary>The z-coordinate that pieces exist at</summary>
+    private float Z { get; } = -1.0f;
+
+    /// <summary>The incrementor used for lerp movement</summary>
+    private float LerpI { get; set; } = 0;
 
     /// <summary>Enacts this piece's move for a single turn</summary>
-    public abstract void Move();
+    public abstract void TakeTurn();
 
-    /// <summary>Destroys this piece</summary>
-    public void Capture()
+    void Update()
     {
-        if (Board.Spaces[Space.x,Space.y] == this) Board.Spaces[Space.x, Space.y] = null;
-        if (IsPlayerPiece) Board.PlayerPieces.Remove(this);
-        else Board.EnemyPieces.Remove(this);
-        Behavior.Captured();
+        // Move towards the target when moving is activated
+        if (IsMoving)
+        {
+            LerpI += Time.deltaTime/100;
+            transform.position = Vector3.Lerp(transform.position, Target, LerpI);
+            if (Vector3.Distance(transform.position, Target) == 0) IsMoving = false;
+        }
+
+        // Destroy the object when captured
+        if (IsCaptured) GameObject.Destroy(gameObject);
     }
 
     /// <summary>Checks if a space has a piece on it</summary>
@@ -93,4 +98,38 @@ public abstract class Piece
             if (!HasPiece(pointer)) possibleMoves.Add(pointer);
         }
     }
+
+    /// <summary>Warps the piece to the specified location</summary>
+    /// <param name="position">The world coordinates to warp to</param>
+    public void WarpTo(Vector2 position)
+    {
+
+        transform.position = AddZ(position);
+        Target = AddZ(position);
+        IsMoving = true;
+        LerpI = 0;
+    }
+
+    /// <summary>Moves the piece to the specified location</summary>
+    /// <param name="position">The world coordinates to move to</param>
+    public void MoveTo(Vector2 position)
+    {
+        Target = AddZ(position);
+        IsMoving = true;
+        LerpI = 0;
+    }
+
+    /// <summary>Destroys this piece</summary>
+    public void Capture()
+    {
+        if (Board.Spaces[Space.x, Space.y] == this) Board.Spaces[Space.x, Space.y] = null;
+        if (IsPlayerPiece) Board.PlayerPieces.Remove(this);
+        else Board.EnemyPieces.Remove(this);
+        IsCaptured = true;
+    }
+
+    /// <summary>Adds a z-coordinate to the given position</summary>
+    /// <param name="position">The position to add a z-coordinate to</param>
+    /// <returns>A Vector3</returns>
+    private Vector3 AddZ(Vector2 position) => new(position.x, position.y, Z);
 }

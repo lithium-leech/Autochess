@@ -12,6 +12,9 @@ public static class GameState
     /// <summary>True if the fight was won</summary>
     public volatile static bool Victory;
 
+    /// <summary>The time in between turns (seconds)</summary>
+    public static float TurnPause = 2;
+
     /// <summary>The board that fights take place on</summary>
     public static Board GameBoard { get; set; }
 
