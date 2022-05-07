@@ -23314,15 +23314,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757299f99f7164840acb7dc8b3ff25ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WhiteKing: {fileID: 7852475214301588939, guid: 2a037b531dc8e4545b0f97e06aa1287e, type: 3}
-  WhiteQueen: {fileID: 3896254195251059801, guid: 04c24ade2e3c1a041a98651c0bb5fca0, type: 3}
-  WhiteBishop: {fileID: 8271896067037728970, guid: be5dae919b3ada7438982035b8687182, type: 3}
-  WhiteKnight: {fileID: 7221479797056526835, guid: cef7bc98d4ba9214899c53c452397faf, type: 3}
-  WhiteRook: {fileID: 3404138899399545808, guid: c7dea724f74c2e347a022dcaa2690870, type: 3}
-  WhitePawn: {fileID: 8715072411440580236, guid: 3b51505ab2803cc48a5516904063da10, type: 3}
-  BlackKing: {fileID: 2007522372393362288, guid: bb07d0fb04d423148965921a9cac254a, type: 3}
-  BlackQueen: {fileID: 2609028624824512037, guid: e3608a9a43f6ee040802390e7065e81a, type: 3}
-  BlackBishop: {fileID: 1974372599988245210, guid: ab1a0ad583191344594de13a4ec5e9d1, type: 3}
-  BlackKnight: {fileID: 576352002407085669, guid: 5908645ce5365504992eea2b6b9fa621, type: 3}
-  BlackRook: {fileID: 7136111846648681520, guid: 03f9c52e768fa7d4394b5fb2e734a079, type: 3}
-  BlackPawn: {fileID: 1511269607019878528, guid: 932ba48121edbc24c8ad793d3a8a9ea2, type: 3}
+  PiecePrefabs:
+  - {fileID: 7852475214301588939, guid: 2a037b531dc8e4545b0f97e06aa1287e, type: 3}
+  - {fileID: 2007522372393362288, guid: bb07d0fb04d423148965921a9cac254a, type: 3}
+  - {fileID: 3896254195251059801, guid: 04c24ade2e3c1a041a98651c0bb5fca0, type: 3}
+  - {fileID: 2609028624824512037, guid: e3608a9a43f6ee040802390e7065e81a, type: 3}
+  - {fileID: 8271896067037728970, guid: be5dae919b3ada7438982035b8687182, type: 3}
+  - {fileID: 1974372599988245210, guid: ab1a0ad583191344594de13a4ec5e9d1, type: 3}
+  - {fileID: 7221479797056526835, guid: cef7bc98d4ba9214899c53c452397faf, type: 3}
+  - {fileID: 576352002407085669, guid: 5908645ce5365504992eea2b6b9fa621, type: 3}
+  - {fileID: 3404138899399545808, guid: c7dea724f74c2e347a022dcaa2690870, type: 3}
+  - {fileID: 7136111846648681520, guid: 03f9c52e768fa7d4394b5fb2e734a079, type: 3}
+  - {fileID: 8715072411440580236, guid: 3b51505ab2803cc48a5516904063da10, type: 3}
+  - {fileID: 1511269607019878528, guid: 932ba48121edbc24c8ad793d3a8a9ea2, type: 3}

@@ -6,17 +6,17 @@ using UnityEngine;
 /// </summary>
 public abstract class Piece : MonoBehaviour
 {
-    /// <summary>True if this piece is controlled by the player</summary>
-    public bool IsPlayerPiece { get; set; }
-
     /// <summary>The board this piece is on</summary>
     public Board Board { get; set; }
 
     /// <summary>The piece's coordinates on the board</summary>
     public Vector2Int Space { get; set; }
     
+    /// <summary>True if this piece is controlled by the player</summary>
+    public bool IsPlayerPiece { get; set; }
+    
     /// <summary>True if this piece has been captured</summary>
-    private bool IsCaptured { get; set; } = false;
+    public bool IsCaptured { get; set; } = false;
 
     /// <summary>True if the piece is moving towards a target location</summary>
     private bool IsMoving { get; set; } = false;
@@ -28,18 +28,19 @@ public abstract class Piece : MonoBehaviour
     private float Z { get; } = -1.0f;
 
     /// <summary>The incrementor used for lerp movement</summary>
-    private float LerpI { get; set; } = 0;
+    private float LerpIncrement { get; set; } = 0;
 
-    /// <summary>Enacts this piece's move for a single turn</summary>
-    public abstract void TakeTurn();
+    /// <summary>Determines the piece's next move</summary>
+    /// <returns>The space the piece will move to next</returns>
+    public abstract Vector2Int NextMove();
 
     void Update()
     {
         // Move towards the target when moving is activated
         if (IsMoving)
         {
-            LerpI += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, Target, LerpI);
+            LerpIncrement += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, Target, LerpIncrement);
             if (Vector3.Distance(transform.position, Target) == 0) IsMoving = false;
         }
 
@@ -47,89 +48,79 @@ public abstract class Piece : MonoBehaviour
         if (IsCaptured) GameObject.Destroy(gameObject);
     }
 
-    /// <summary>Checks if a space has a piece on it</summary>
-    /// <param name="space">The space to check</param>
-    /// <returns>True if the space has a piece on it</returns>
-    public bool HasPiece(Vector2Int space)
-    {
-        if (OnBoard(space))
-        {
-            if (Board.Spaces[space.x, space.y] != null)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /// <summary>Checks if a space has an enemy piece on it</summary>
-    /// <param name="space">The space to check</param>
-    /// <returns>True if the space has an enemy piece on it</returns>
-    public bool HasEnemy(Vector2Int space)
-    {
-        if (!HasPiece(space)) return false;
-        else if (Board.Spaces[space.x, space.y].IsPlayerPiece == IsPlayerPiece) return false;
-        else return true;
-    }
-
-    /// <summary>Checks if a space is on the board</summary>
-    /// <param name="space">The space to check</param>
-    /// <returns>True if the space is on the board</returns>
-    public bool OnBoard(Vector2Int space)
-    {
-        return space.x >= 0 && space.x < Board.Width && space.y >= 0 && space.y < Board.Height;
-    }
-
     /// <summary>Searches for possible choices using the given direction increments</summary>
     /// <param name="xi">x increment</param>
     /// <param name="yi">y increment</param>
+    /// <param name="range">The range a piece can move</param>
     /// <param name="possibleMoves">A list of possible moves to add to</param>
     /// <param name="possibleCaptures">A list of possible captures to add to</param>
-    public void GetChoicesInDirection(int xi, int yi, IList<Vector2Int> possibleMoves, IList<Vector2Int> possibleCaptures)
+    public void GetChoicesInDirection(int xi, int yi, int range, IList<Vector2Int> possibleMoves, IList<Vector2Int> possibleCaptures)
     {
         Vector2Int pointer = new(Space.x, Space.y);
-        int maxLoops = Mathf.Max(Board.Width, Board.Height);
+        int maxLoops = Mathf.Max(Board.Width, Board.Height, range);
         for (int i = 0; i < maxLoops; i++)
         {
             pointer.x += xi;
             pointer.y += yi;
-            if (!OnBoard(pointer)) break;
-            if (HasEnemy(pointer)) { possibleCaptures.Add(pointer); break; }
-            if (!HasPiece(pointer)) possibleMoves.Add(pointer);
+            if (!Board.OnBoard(pointer)) break;
+            if (Board.HasEnemy(IsPlayerPiece, pointer)) { possibleCaptures.Add(pointer); break; }
+            if (!Board.HasPiece(pointer)) possibleMoves.Add(pointer);
         }
     }
 
-    /// <summary>Warps the piece to the specified location</summary>
-    /// <param name="position">The world coordinates to warp to</param>
-    public void WarpTo(Vector2 position)
+    /// <summary>Takes the piece's turn</summary>
+    public void TakeTurn()
     {
+        // Check that this piece is where it's supposed to be
+        if (Board.Spaces[Space.x, Space.y] != this)
+        {
+            // Destroy this piece if it is not
+            Board.CapturePiece(this);
+            return;
+        }
 
-        transform.position = AddZ(position);
-        Target = AddZ(position);
+        // Get the next move
+        Vector2Int space = NextMove();
+
+        // Do nothing if remaining stationary
+        if (Space == space) return;
+
+        // Destroy the captured piece if there is one
+        Piece captured = Board.Spaces[space.x, space.y];
+        if (captured != null) Board.CapturePiece(captured);
+
+        // Update the location
+        Board.Spaces[Space.x, Space.y] = null;
+        Board.Spaces[space.x, space.y] = this;
+        Space = space;
+
+        // Move to the new location
+        MoveTo(space);
+    }
+
+    /// <summary>Warps the piece to the specified location</summary>
+    /// <param name="space">The space to warp to</param>
+    public void WarpTo(Vector2Int space)
+    {
+        Vector3 position = GetWorldPosition(space);
+        transform.position = position;
+        Target = position;
         IsMoving = true;
-        LerpI = 0;
+        LerpIncrement = 0;
     }
 
     /// <summary>Moves the piece to the specified location</summary>
-    /// <param name="position">The world coordinates to move to</param>
-    public void MoveTo(Vector2 position)
+    /// <param name="space">The space to move to</param>
+    public void MoveTo(Vector2Int space)
     {
-        Target = AddZ(position);
+        Vector3 position = GetWorldPosition(space);
+        Target = position;
         IsMoving = true;
-        LerpI = 0;
+        LerpIncrement = 0;
     }
 
-    /// <summary>Destroys this piece</summary>
-    public void Capture()
-    {
-        if (Board.Spaces[Space.x, Space.y] == this) Board.Spaces[Space.x, Space.y] = null;
-        if (IsPlayerPiece) Board.PlayerPieces.Remove(this);
-        else Board.EnemyPieces.Remove(this);
-        IsCaptured = true;
-    }
-
-    /// <summary>Adds a z-coordinate to the given position</summary>
-    /// <param name="position">The position to add a z-coordinate to</param>
-    /// <returns>A Vector3</returns>
-    private Vector3 AddZ(Vector2 position) => new(position.x, position.y, Z);
+    /// <summary>Gets the world coordinates for a given space</summary>
+    /// <param name="space">The space to get coordinated for</param>
+    /// <returns>World-space coordinates</returns>
+    private Vector3 GetWorldPosition(Vector2Int space) => new(Board.XWorld + space.x + 0.5f, Board.YWorld + space.y + 0.5f, Z);
 }

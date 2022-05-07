@@ -5,7 +5,7 @@
 /// </summary>
 public class Pawn : Piece
 {
-    public override void TakeTurn()
+    public override Vector2Int NextMove()
     {
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
@@ -16,22 +16,22 @@ public class Pawn : Piece
         Vector2Int rightAttack = GetRightAttackSpace();
 
         // Capture a piece if possible
-        if (HasEnemy(leftAttack) && HasEnemy(rightAttack))
+        if (Board.HasEnemy(IsPlayerPiece, leftAttack) && Board.HasEnemy(IsPlayerPiece, rightAttack))
         {
             // Choose randomly if both options are available
             if (Random.Range(0, 2) == 1) newSpace = leftAttack;
             else newSpace = rightAttack;
         }
-        else if (HasEnemy(leftAttack)) newSpace = leftAttack;
-        else if (HasEnemy(rightAttack)) newSpace = rightAttack;
+        else if (Board.HasEnemy(IsPlayerPiece, leftAttack)) newSpace = leftAttack;
+        else if (Board.HasEnemy(IsPlayerPiece, rightAttack)) newSpace = rightAttack;
         else
         {
             // Otherwise move if possible
-            if (!HasPiece(move) && OnBoard(move)) newSpace = move;
+            if (!Board.HasPiece(move) && Board.OnBoard(move)) newSpace = move;
         }
 
         // Move to the new space
-        Board.Move(this, newSpace);
+        return newSpace;
     }
 
     /// <summary>Gets the space in front of the Pawn</summary>
