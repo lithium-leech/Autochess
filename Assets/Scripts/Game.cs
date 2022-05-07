@@ -7,8 +7,38 @@ using UnityEngine;
 /// </summary>
 public class Game : MonoBehaviour
 {
+    /// <summary>Prefab for a white king</summary>
+    public GameObject WhiteKing;
+
+    /// <summary>Prefab for a white queen</summary>
+    public GameObject WhiteQueen;
+
+    /// <summary>Prefab for a white bishop</summary>
+    public GameObject WhiteBishop;
+
+    /// <summary>Prefab for a white knight</summary>
+    public GameObject WhiteKnight;
+
+    /// <summary>Prefab for a white rook</summary>
+    public GameObject WhiteRook;
+
     /// <summary>Prefab for a white pawn</summary>
     public GameObject WhitePawn;
+
+    /// <summary>Prefab for a black king</summary>
+    public GameObject BlackKing;
+
+    /// <summary>Prefab for a black queen</summary>
+    public GameObject BlackQueen;
+
+    /// <summary>Prefab for a black bishop</summary>
+    public GameObject BlackBishop;
+
+    /// <summary>Prefab for a black knight</summary>
+    public GameObject BlackKnight;
+
+    /// <summary>Prefab for a black rook</summary>
+    public GameObject BlackRook;
 
     /// <summary>Prefab for a black pawn</summary>
     public GameObject BlackPawn;
