@@ -65,7 +65,7 @@ public class Board
             Spaces[space.x,space.y] = null;
             PlayerPieces.Remove(existing);
             EnemyPieces.Remove(existing);
-            existing.Captured();
+            existing.Capture();
         }
 
         // Add the piece to the appropriate collections
@@ -84,7 +84,7 @@ public class Board
         if (Spaces[piece.Space.x, piece.Space.y] != piece)
         {
             // Destroy this piece if it is not
-            piece.Captured();
+            piece.Capture();
             return;
         }
 
@@ -93,7 +93,7 @@ public class Board
 
         // Destroy the captured piece if there is one
         Piece captured = Spaces[space.x, space.y];
-        if (captured != null) captured.Captured();
+        if (captured != null) captured.Capture();
 
         // Update the piece's location
         Spaces[piece.Space.x, piece.Space.y] = null;

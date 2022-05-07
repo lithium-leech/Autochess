@@ -12,15 +12,18 @@ public class PieceBehavior : MonoBehaviour
     private Vector3 Target { get; set; }
 
     /// <summary>The z-coordinate that pieces exist at</summary>
-    private const float Z = -1.0f;
+    private float Z { get; } = -1.0f;
+
+    /// <summary>The incrementor used for lerp movement</summary>
+    private float LerpI { get; set; } = 0;
 
     void Update()
     {
         // Move towards the target when moving is activated
         if (IsMoving)
         {
-            float step = 2.0f * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, Target, step);
+            LerpI += Time.deltaTime/100;
+            transform.position = Vector3.Lerp(transform.position, Target, LerpI);
             if (Vector3.Distance(transform.position, Target) == 0) IsMoving = false;
         }
 
@@ -36,6 +39,7 @@ public class PieceBehavior : MonoBehaviour
         transform.position = AddZ(position);
         Target = AddZ(position);
         IsMoving = true;
+        LerpI = 0;
     }
 
     /// <summary>Moves the piece to the specified location</summary>
@@ -44,6 +48,7 @@ public class PieceBehavior : MonoBehaviour
     {
         Target = AddZ(position);
         IsMoving = true;
+        LerpI = 0;
     }
 
     /// <summary>Marks this piece as captured</summary>

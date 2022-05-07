@@ -57,7 +57,9 @@ public class Game : MonoBehaviour
 
         // Create a sample setup
         GameState.GameBoard.Add(new Pawn(Instantiate(WhitePawn), false), new Vector2Int(3, 6));
+        GameState.GameBoard.Add(new Queen(Instantiate(WhiteQueen), false), new Vector2Int(7, 6));
         GameState.GameBoard.Add(new Pawn(Instantiate(BlackPawn), true), new Vector2Int(4, 1));
+        GameState.GameBoard.Add(new Queen(Instantiate(BlackQueen), true), new Vector2Int(0, 1));
     }
 
     private void Update()
