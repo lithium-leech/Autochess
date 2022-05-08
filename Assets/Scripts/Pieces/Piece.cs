@@ -69,14 +69,14 @@ public abstract class Piece : MonoBehaviour
     public void GetChoicesInDirection(int xi, int yi, int range, IList<Vector2Int> possibleMoves, IList<Vector2Int> possibleCaptures)
     {
         Vector2Int pointer = new(Space.x, Space.y);
-        int maxLoops = Mathf.Max(Board.Width, Board.Height, range);
-        for (int i = 0; i < maxLoops; i++)
+        for (int i = 0; i < range; i++)
         {
             pointer.x += xi;
             pointer.y += yi;
             if (!Board.OnBoard(pointer)) break;
             if (Board.HasEnemy(IsPlayerPiece, pointer)) { possibleCaptures.Add(pointer); break; }
-            if (!Board.HasPiece(pointer)) possibleMoves.Add(pointer);
+            if (Board.HasPiece(pointer)) break;
+            else possibleMoves.Add(pointer);
         }
     }
 

@@ -2,9 +2,9 @@
 using UnityEngine;
 
 /// <summary>
-/// A chess queen
+/// A chess bishop
 /// </summary>
-public class Queen : Piece
+public class Bishop : Piece
 {
     public override void TakeTurn()
     {
@@ -14,13 +14,9 @@ public class Queen : Piece
         // Get the possible moves this piece can make
         List<Vector2Int> possibleMoves = new();
         List<Vector2Int> possibleCaptures = new();
-        GetChoicesInDirection(0, 1, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(1, 1, 100, possibleMoves, possibleCaptures);
-        GetChoicesInDirection(1, 0, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(1, -1, 100, possibleMoves, possibleCaptures);
-        GetChoicesInDirection(0, -1, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(-1, -1, 100, possibleMoves, possibleCaptures);
-        GetChoicesInDirection(-1, 0, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(-1, 1, 100, possibleMoves, possibleCaptures);
 
         // Capture a new piece if possible

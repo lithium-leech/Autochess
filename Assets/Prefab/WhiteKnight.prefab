@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6058699973147095494}
   - component: {fileID: 3330471200630479004}
+  - component: {fileID: 4373327855633730273}
   m_Layer: 0
   m_Name: WhiteKnight
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4373327855633730273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7221479797056526835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c4af11bdd2c4d4e97d754c7df6d0c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

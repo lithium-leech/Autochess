@@ -23,13 +23,37 @@ public class Game : MonoBehaviour
         GameState.SideBoard = new Board(this, 8, 3, -4.0f, -4.0f);
 
         // Create a sample setup
+        GameState.GameBoard.AddPiece<King>(true, new Vector2Int(3, 7));
+        GameState.GameBoard.AddPiece<Queen>(true, new Vector2Int(4, 7));
+        GameState.GameBoard.AddPiece<Bishop>(true, new Vector2Int(2, 7));
+        GameState.GameBoard.AddPiece<Bishop>(true, new Vector2Int(5, 7));
+        GameState.GameBoard.AddPiece<Knight>(true, new Vector2Int(1, 7));
+        GameState.GameBoard.AddPiece<Knight>(true, new Vector2Int(6, 7));
+        GameState.GameBoard.AddPiece<Rook>(true, new Vector2Int(0, 7));
+        GameState.GameBoard.AddPiece<Rook>(true, new Vector2Int(7, 7));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(0, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(1, 6));
         GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(2, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(3, 7));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(5, 7));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(7, 7));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(0, 0));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(2, 0));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(4, 0));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(3, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(4, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(5, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(6, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(7, 6));
+        GameState.GameBoard.AddPiece<King>(false, new Vector2Int(3, 0));
+        GameState.GameBoard.AddPiece<Queen>(false, new Vector2Int(4, 0));
+        GameState.GameBoard.AddPiece<Bishop>(false, new Vector2Int(2, 0));
+        GameState.GameBoard.AddPiece<Bishop>(false, new Vector2Int(5, 0));
+        GameState.GameBoard.AddPiece<Knight>(false, new Vector2Int(1, 0));
+        GameState.GameBoard.AddPiece<Knight>(false, new Vector2Int(6, 0));
+        GameState.GameBoard.AddPiece<Rook>(false, new Vector2Int(0, 0));
+        GameState.GameBoard.AddPiece<Rook>(false, new Vector2Int(7, 0));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(0, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(1, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(2, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(3, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(4, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(5, 1));
+        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(6, 1));
         GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(7, 1));
     }
 
@@ -110,7 +134,11 @@ public class Game : MonoBehaviour
     public Piece CreatePiece(Type type, bool white)
     {
         int prefab;
-        if (type == typeof(Queen)) prefab = 2;
+        if (type == typeof(King)) prefab = 0;
+        else if (type == typeof(Queen)) prefab = 2;
+        else if (type == typeof(Bishop)) prefab = 4;
+        else if (type == typeof(Knight)) prefab = 6;
+        else if (type == typeof(Rook)) prefab = 8;
         else if (type == typeof(Pawn)) prefab = 10;
         else throw new Exception($"Piece Type {type} not recognized");
         if (!white) prefab++;

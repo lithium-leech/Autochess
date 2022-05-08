@@ -10,7 +10,7 @@ public class Pawn : Piece
         // Assume initially that the piece cannot move
         Vector2Int newSpace = new(Space.x, Space.y);
 
-        // Get the possible moves this Pawn can make
+        // Get the possible moves this piece can make
         Vector2Int move = GetMoveSpace();
         Vector2Int leftAttack = GetLeftAttackSpace();
         Vector2Int rightAttack = GetRightAttackSpace();
