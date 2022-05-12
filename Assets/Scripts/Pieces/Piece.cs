@@ -28,9 +28,6 @@ public abstract class Piece : MonoBehaviour
     /// <summary>The target location this piece is moving towards</summary>
     private Vector3 Target { get; set; }
 
-    /// <summary>The z-coordinate that pieces exist at</summary>
-    private float Z { get; } = -1.0f;
-
     /// <summary>The incrementor used for lerp movement</summary>
     private float LerpIncrement { get; set; } = 0;
 
@@ -132,5 +129,5 @@ public abstract class Piece : MonoBehaviour
     /// <summary>Gets the world coordinates for a given space</summary>
     /// <param name="space">The space to get coordinated for</param>
     /// <returns>World-space coordinates</returns>
-    private Vector3 GetWorldPosition(Vector2Int space) => new(Board.XWorld + space.x + 0.5f, Board.YWorld + space.y + 0.5f, Z);
+    private Vector3 GetWorldPosition(Vector2Int space) => new(Board.CornerBL.x + space.x + 0.5f, Board.CornerBL.y + space.y + 0.5f, GameState.PieceZ);
 }

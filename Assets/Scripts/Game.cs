@@ -10,6 +10,12 @@ public class Game : MonoBehaviour
     /// <summary>Prefabs for game pieces</summary>
     public GameObject[] PiecePrefabs;
 
+    /// <summary>The main camera</summary>
+    public Camera Camera;
+
+    /// <summary>The Piece currently being moved around by the player</summary>
+    private Piece HeldPiece { get; set; }
+
     private void Start()
     {
         // Set game states
@@ -19,42 +25,21 @@ public class Game : MonoBehaviour
         GameState.Victory = false;
 
         // Create the game boards
-        GameState.GameBoard = new Board(this, 8, 8, -4.0f, 1.0f);
-        GameState.SideBoard = new Board(this, 8, 3, -4.0f, -4.0f);
+        GameState.GameBoard = new Board(this, 8, 8, new Vector2(-4.0f, 1.0f));
+        GameState.SideBoard = new Board(this, 8, 3, new Vector2(-4.0f, -4.0f));
 
         // Create a sample setup
-        GameState.GameBoard.AddPiece<King>(true, new Vector2Int(3, 7));
-        GameState.GameBoard.AddPiece<Queen>(true, new Vector2Int(4, 7));
-        GameState.GameBoard.AddPiece<Bishop>(true, new Vector2Int(2, 7));
-        GameState.GameBoard.AddPiece<Bishop>(true, new Vector2Int(5, 7));
-        GameState.GameBoard.AddPiece<Knight>(true, new Vector2Int(1, 7));
-        GameState.GameBoard.AddPiece<Knight>(true, new Vector2Int(6, 7));
-        GameState.GameBoard.AddPiece<Rook>(true, new Vector2Int(0, 7));
-        GameState.GameBoard.AddPiece<Rook>(true, new Vector2Int(7, 7));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(0, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(1, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(2, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(3, 6));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(0, 7));
+        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(2, 7));
         GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(4, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(5, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(6, 6));
         GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(7, 6));
-        GameState.GameBoard.AddPiece<King>(false, new Vector2Int(3, 0));
-        GameState.GameBoard.AddPiece<Queen>(false, new Vector2Int(4, 0));
-        GameState.GameBoard.AddPiece<Bishop>(false, new Vector2Int(2, 0));
-        GameState.GameBoard.AddPiece<Bishop>(false, new Vector2Int(5, 0));
-        GameState.GameBoard.AddPiece<Knight>(false, new Vector2Int(1, 0));
-        GameState.GameBoard.AddPiece<Knight>(false, new Vector2Int(6, 0));
-        GameState.GameBoard.AddPiece<Rook>(false, new Vector2Int(0, 0));
-        GameState.GameBoard.AddPiece<Rook>(false, new Vector2Int(7, 0));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(0, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(1, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(2, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(3, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(4, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(5, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(6, 1));
-        GameState.GameBoard.AddPiece<Pawn>(false, new Vector2Int(7, 1));
+
+        GameState.SideBoard.AddPiece<Pawn>(false);
+        GameState.SideBoard.AddPiece<Pawn>(false);
+        GameState.SideBoard.AddPiece<Pawn>(false);
+
+        // Start off in planning phase
+        GameState.InPlanningPhase = true;
     }
 
     private float timeWaited = 0;
@@ -62,62 +47,133 @@ public class Game : MonoBehaviour
 
     private void Update()
     {
-        // Start a fight once it's been switched on
+        DetectFightStart();
+        RunFight();
+        DetectFightFinish();
+        RunPlanningPhase();
+    }
+
+    /// <summary>Starts a fight once it's been switched on</summary>
+    private void DetectFightStart()
+    {
         if (GameState.FightStarted && !GameState.InFight)
         {
-            GameState.InFight = true;
             GameState.FightStarted = false;
+            GameState.InFight = true;
+            GameState.InPlanningPhase = false;
             timeWaited = 0;
             whiteTurn = true;
         }
+    }
 
-        // Run fight operations
-        if (GameState.InFight)
+    /// <summary>Runs the battle operations</summary>
+    private void RunFight()
+    {
+        // Only run when in the fighting phase
+        if (!GameState.InFight) return;
+
+        // Pause between turns
+        timeWaited += Time.deltaTime;
+        if (timeWaited < GameState.TurnPause) return;
+         
+        // Move the current player's pieces
+        if (whiteTurn)
         {
-            timeWaited += Time.deltaTime;
-            if (timeWaited > GameState.TurnPause)
-            {
-                // Move the current player's pieces
-                if (whiteTurn)
-                {
-                    foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
-                }
-                else
-                {
-                    foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
-                }
-
-                // Check if the battle is over
-                if (GameState.GameBoard.PlayerPieces.Count < 1)
-                {
-                    GameState.FightOver = true;
-                    GameState.InFight = false;
-                }
-                else if (GameState.GameBoard.EnemyPieces.Count < 1)
-                {
-                    GameState.Victory = true;
-                    GameState.FightOver = true;
-                    GameState.InFight = false;
-                }
-
-                // Go to the next turn
-                whiteTurn = !whiteTurn;
-                timeWaited = 0;
-            }
+            foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
+        }
+        else
+        {
+            foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
         }
 
-        // Perform end of fight actions
-        if (GameState.FightOver)
+        // Check if the battle is over
+        if (GameState.GameBoard.PlayerPieces.Count < 1)
         {
-            GameState.FightOver = false;
-            if (GameState.Victory)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            GameState.FightOver = true;
+            GameState.InFight = false;
+        }
+        else if (GameState.GameBoard.EnemyPieces.Count < 1)
+        {
+            GameState.Victory = true;
+            GameState.FightOver = true;
+            GameState.InFight = false;
+        }
+
+        // Go to the next turn
+        whiteTurn = !whiteTurn;
+        timeWaited = 0;
+    }
+
+    /// <summary>Performs end of fight operations</summary>
+    private void DetectFightFinish()
+    {
+        // Only run when the fight first ends
+        if (!GameState.FightOver) return;
+        GameState.FightOver = false;
+         
+        // Determine if the battle was won
+        if (GameState.Victory)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    /// <summary>Handles player inputs during the planning phase</summary>
+    private void RunPlanningPhase()
+    {
+        // Only run when in the planning phase
+        if (!GameState.InPlanningPhase) return;
+
+        // Get the current mouse position
+        Vector3 position = Camera.ScreenToWorldPoint(Input.mousePosition);
+        position.z = GameState.PieceZ;
+
+        // Check if the position is inside a board
+        Board board = null;
+        if (GameState.GameBoard.CornerBL.x <= position.x &&
+            position.x <= GameState.GameBoard.CornerTR.x &&
+            GameState.GameBoard.CornerBL.y <= position.y &&
+            position.y <= GameState.GameBoard.CornerTR.y)
+            board = GameState.GameBoard;
+        else if (GameState.SideBoard.CornerBL.x <= position.x &&
+            position.x <= GameState.SideBoard.CornerTR.x &&
+            GameState.SideBoard.CornerBL.y <= position.y &&
+            position.y <= GameState.SideBoard.CornerTR.y)
+            board = GameState.SideBoard;
+        
+        // If it is inside a board, get the space/piece
+        Vector2Int space = new(-1, -1);
+        if (board != null) space = board.GetSpace(position);
+
+        // Pick up a piece when the screen is clicked/pressed
+        if (Input.GetMouseButtonDown(0) && board != null)
+        {
+            HeldPiece = board.Spaces[space.x, space.y];
+            if (HeldPiece != null)
+                if (HeldPiece.IsPlayerPiece)
+                {
+                    board.RemovePiece(HeldPiece);
+                    HeldPiece.transform.position = position - (Vector3.forward * 10);
+                }
+                else HeldPiece = null;
+        }
+        
+        // Drag the selected piece as the pointer moves
+        else if (Input.GetMouseButton(0) && HeldPiece != null)
+        {
+            HeldPiece.transform.position = position - (Vector3.forward * 10);
+        }
+        
+        // Drop the piece in a new space (Or the old one)
+        else if (Input.GetMouseButtonUp(0) && HeldPiece != null)
+        {
+            if (board != null && board.OnBoard(space) && !board.HasPiece(space)) board.AddPiece(HeldPiece, space);
+            else HeldPiece.Board.AddPiece(HeldPiece, HeldPiece.Space);
+            HeldPiece = null;
         }
     }
 

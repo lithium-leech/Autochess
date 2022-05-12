@@ -15,7 +15,7 @@ public class Menu : MonoBehaviour
     /// <summary>Starts the next battle sequence</summary>
     public void Fight()
     {
-        GameState.StartFight();
+        GameState.FightStarted = true;
     }
 
     /// <summary>Exits the game and goes back to the main menu</summary>

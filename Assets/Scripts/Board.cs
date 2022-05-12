@@ -25,19 +25,18 @@ public class Board
     /// <summary>The pieces controlled by the enemy</summary>
     public List<Piece> EnemyPieces { get; }
 
-    /// <summary>The left side of the board's x coordinate in the world-space</summary>
-    public float XWorld { get; }
+    /// <summary>The world coordinates for this board's bottom left corner</summary>
+    public Vector2 CornerBL { get; }
 
-    /// <summary>The bottom side of the board's y coordinate in the world-space</summary>
-    public float YWorld { get; }
+    /// <summary>The world coordinates for this board's top right corner</summary>
+    public Vector2 CornerTR { get; }
 
     /// <summary>Creates a new instance of a Board</summary>
     /// <param name="game">The Game that this board exists in</param>
     /// <param name="width">The number of horizontal spaces on the board</param>
     /// <param name="height">The number of vertical spaces on the board</param>
-    /// <param name="x">A world-space x-coordinate to center the board on</param>
-    /// <param name="y">A world-space y-coordinate to center the board on</param>
-    public Board(Game game, int width, int height, float x, float y)
+    /// <param name="cornerBL">World-space coordinates for the bottom left corner of the board</param>
+    public Board(Game game, int width, int height, Vector2 cornerBL)
     {
         Game = game;
         Width = width;
@@ -45,9 +44,14 @@ public class Board
         Spaces = new Piece[width,height];
         PlayerPieces = new List<Piece>();
         EnemyPieces = new List<Piece>();
-        XWorld = x;
-        YWorld = y;
+        CornerBL = cornerBL;
+        CornerTR = cornerBL + new Vector2(width, height);
     }
+
+    /// <summary>Adds a new piece to the board in the first empty space</summary>
+    /// <typeparam name="T">The type of piece to add</typeparam>
+    /// <param name="white">True if the piece is white</param>
+    public void AddPiece<T>(bool white) where T : Piece => AddPiece<T>(white, GetFirstEmptySpace());
 
     /// <summary>Adds a new piece to the board</summary>
     /// <typeparam name="T">The type of piece to add</typeparam>
@@ -55,11 +59,20 @@ public class Board
     /// <param name="space">The space to place the piece at</param>
     public void AddPiece<T>(bool white, Vector2Int space) where T : Piece => AddPiece(typeof(T), white, space);
 
+    /// <summary>Adds a new piece to the board in the first empty space</summary>
+    /// <param name="type">The type of piece to add</param>
+    /// <param name="white">True if the piece is white</param>
+    public void AddPiece(Type type, bool white) => AddPiece(type, white, GetFirstEmptySpace());
+
     /// <summary>Adds a new piece to the board</summary>
     /// <param name="type">The type of piece to add</param>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
     public void AddPiece(Type type, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(type, white), space);
+
+    /// <summary>Adds a piece to the board in the first empty space</summary>
+    /// <param name="piece">The piece to add</param>
+    public void AddPiece(Piece piece) => AddPiece(piece, GetFirstEmptySpace());
 
     /// <summary>Adds a piece to the board</summary>
     /// <param name="piece">The piece to add</param>
@@ -112,6 +125,20 @@ public class Board
         piece.IsCaptured = true;
     }
 
+    /// <summary>Gets the first empty space on the board</summary>
+    /// <returns>A board space</returns>
+    public Vector2Int GetFirstEmptySpace()
+    {
+        Vector2Int space = new(0, 0);
+        for (int j = Height - 1; j >= 0; j--)
+        for (int i = 0; i < Width; i++)
+        {
+            space = new Vector2Int(i, j);
+            if (!HasPiece(space)) return space;
+        }
+        return space;
+    }
+
     /// <summary>Checks if a space is on the board</summary>
     /// <param name="space">The space to check</param>
     /// <returns>True if the space is on the board</returns>
@@ -137,5 +164,15 @@ public class Board
         if (!HasPiece(space)) return false;
         else if (Spaces[space.x, space.y].IsPlayerPiece == isPlayerPiece) return false;
         else return true;
+    }
+
+    /// <summary>Gets a board space from a given world position</summary>
+    /// <param name="position">The world position to get a space for</param>
+    /// <returns>A board space</returns>
+    public Vector2Int GetSpace(Vector2 position)
+    {
+        int x = (int)Math.Floor(position.x - CornerBL.x);
+        int y = (int)Math.Floor(position.y - CornerBL.y);
+        return new Vector2Int(x, y);
     }
 }
