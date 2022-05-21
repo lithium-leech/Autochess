@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,26 +8,37 @@ using UnityEngine;
 /// </summary>
 public class Game : MonoBehaviour
 {
-    /// <summary>Prefabs for game pieces</summary>
+    /// Properties to set using Unity interface
     public GameObject[] PiecePrefabs;
-
-    /// <summary>The main camera</summary>
+    public GameObject[] HighlightPrefabs;
     public Camera Camera;
 
+    /// <summary>The time elapsed so far, in between turns</summary>
+    private float TimeWaited { get; set; }
+
+    /// <summary>True if it is currently white's turn</summary>
+    private bool WhiteTurn { get; set; }
+    
     /// <summary>The Piece currently being moved around by the player</summary>
     private Piece HeldPiece { get; set; }
+
+    /// <summary>Space highlights displayed during the planning phase</summary>
+    private IEnumerable<GameObject> Highlights { get; set; }
 
     private void Start()
     {
         // Set game states
+        GameState.PlanningStarted = false;
+        GameState.InPlanning = false;
+        GameState.PlanningOver = false;
         GameState.FightStarted = false;
         GameState.InFight = false;
         GameState.FightOver = false;
         GameState.Victory = false;
 
         // Create the game boards
-        GameState.GameBoard = new Board(this, 8, 8, new Vector2(-4.0f, 1.0f));
-        GameState.SideBoard = new Board(this, 8, 3, new Vector2(-4.0f, -4.0f));
+        GameState.GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, 1.0f));
+        GameState.SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -4.0f));
 
         // Create a sample setup
         GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(0, 7));
@@ -38,96 +50,37 @@ public class Game : MonoBehaviour
         GameState.SideBoard.AddPiece<Pawn>(false);
         GameState.SideBoard.AddPiece<Pawn>(false);
 
-        // Start off in planning phase
-        GameState.InPlanningPhase = true;
+        // Start the planning phase
+        GameState.PlanningStarted = true;
     }
-
-    private float timeWaited = 0;
-    private bool whiteTurn = true;
 
     private void Update()
     {
-        DetectFightStart();
-        RunFight();
-        DetectFightFinish();
-        RunPlanningPhase();
+        if (!GameState.InPlanning && GameState.PlanningStarted) DetectPlanningStart();
+        if (GameState.InPlanning) RunPlanning();
+        if (GameState.InPlanning && GameState.PlanningOver) DetectPlanningFinish();
+        if (!GameState.InFight && GameState.FightStarted) DetectFightStart();
+        if (GameState.InFight) RunFight();
+        if (GameState.InFight && GameState.FightOver) DetectFightFinish();
     }
 
-    /// <summary>Starts a fight once it's been switched on</summary>
-    private void DetectFightStart()
+    /// <summary>Starts the planning phase</summary>
+    private void DetectPlanningStart()
     {
-        if (GameState.FightStarted && !GameState.InFight)
-        {
-            GameState.FightStarted = false;
-            GameState.InFight = true;
-            GameState.InPlanningPhase = false;
-            timeWaited = 0;
-            whiteTurn = true;
-        }
-    }
+        // Only run the planning started sequence once
+        GameState.PlanningStarted = false;
+        GameState.InPlanning = true;
 
-    /// <summary>Runs the battle operations</summary>
-    private void RunFight()
-    {
-        // Only run when in the fighting phase
-        if (!GameState.InFight) return;
-
-        // Pause between turns
-        timeWaited += Time.deltaTime;
-        if (timeWaited < GameState.TurnPause) return;
-         
-        // Move the current player's pieces
-        if (whiteTurn)
-        {
-            foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
-        }
-        else
-        {
-            foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
-        }
-
-        // Check if the battle is over
-        if (GameState.GameBoard.PlayerPieces.Count < 1)
-        {
-            GameState.FightOver = true;
-            GameState.InFight = false;
-        }
-        else if (GameState.GameBoard.EnemyPieces.Count < 1)
-        {
-            GameState.Victory = true;
-            GameState.FightOver = true;
-            GameState.InFight = false;
-        }
-
-        // Go to the next turn
-        whiteTurn = !whiteTurn;
-        timeWaited = 0;
-    }
-
-    /// <summary>Performs end of fight operations</summary>
-    private void DetectFightFinish()
-    {
-        // Only run when the fight first ends
-        if (!GameState.FightOver) return;
-        GameState.FightOver = false;
-         
-        // Determine if the battle was won
-        if (GameState.Victory)
-        {
-
-        }
-        else
-        {
-
-        }
+        // Add highlights around spaces that the player can put pieces
+        List<GameObject> highlights = new();
+        highlights.AddRange(AddHighlights(GameState.GameBoard));
+        highlights.AddRange(AddHighlights(GameState.SideBoard));
+        Highlights = highlights;
     }
 
     /// <summary>Handles player inputs during the planning phase</summary>
-    private void RunPlanningPhase()
+    private void RunPlanning()
     {
-        // Only run when in the planning phase
-        if (!GameState.InPlanningPhase) return;
-
         // Get the current mouse position
         Vector3 position = Camera.ScreenToWorldPoint(Input.mousePosition);
         position.z = GameState.PieceZ;
@@ -147,7 +100,7 @@ public class Game : MonoBehaviour
         
         // If it is inside a board, get the space/piece
         Vector2Int space = new(-1, -1);
-        if (board != null) space = board.GetSpace(position);
+        if (board != null) space = board.ToSpace(position);
 
         // Pick up a piece when the screen is clicked/pressed
         if (Input.GetMouseButtonDown(0) && board != null)
@@ -171,9 +124,84 @@ public class Game : MonoBehaviour
         // Drop the piece in a new space (Or the old one)
         else if (Input.GetMouseButtonUp(0) && HeldPiece != null)
         {
-            if (board != null && board.OnBoard(space) && !board.HasPiece(space)) board.AddPiece(HeldPiece, space);
+            if (board != null && board.IsPlayerSpace(space) && !board.HasPiece(space)) board.AddPiece(HeldPiece, space);
             else HeldPiece.Board.AddPiece(HeldPiece, HeldPiece.Space);
             HeldPiece = null;
+        }
+    }
+
+    /// <summary>Performs end of planning phase operations</summary>
+    private void DetectPlanningFinish()
+    {
+        // Only run the fight over sequence once
+        GameState.PlanningOver = false;
+        GameState.InPlanning = false;
+
+        // Remove highlights loaded in planning start
+        foreach (GameObject highlight in Highlights) Destroy(highlight);
+        Highlights = new List<GameObject>();
+    }
+
+    /// <summary>Starts a fight once it's been switched on</summary>
+    private void DetectFightStart()
+    {
+        // Only run the fight started sequence once
+        GameState.FightStarted = false;
+        GameState.InFight = true;
+
+        // Set the initial fighting states
+        TimeWaited = 0;
+        WhiteTurn = true;
+    }
+
+    /// <summary>Runs the battle operations</summary>
+    private void RunFight()
+    {
+        // Pause between turns
+        TimeWaited += Time.deltaTime;
+        if (TimeWaited < GameState.TurnPause) return;
+         
+        // Move the current player's pieces
+        if (WhiteTurn)
+        {
+            foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
+        }
+        else
+        {
+            foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
+        }
+
+        // Check if the battle is over
+        if (GameState.GameBoard.PlayerPieces.Count < 1)
+        {
+            GameState.FightOver = true;
+        }
+        else if (GameState.GameBoard.EnemyPieces.Count < 1)
+        {
+            GameState.Victory = true;
+            GameState.FightOver = true;
+        }
+
+        // Go to the next turn
+        WhiteTurn = !WhiteTurn;
+        TimeWaited = 0;
+    }
+
+    /// <summary>Performs end of fight operations</summary>
+    private void DetectFightFinish()
+    {
+        // Only run the fight over sequence once
+        GameState.FightOver = false;
+        GameState.InFight = false;
+         
+        // Determine if the battle was won
+        if (GameState.Victory)
+        {
+
+        }
+        else
+        {
+
         }
     }
 
@@ -203,5 +231,50 @@ public class Game : MonoBehaviour
         piece.IsPlayerPiece = !white;
         piece.Board = GameState.GameBoard;
         return piece;
+    }
+
+    /// <summary>Add highlights around the player rows of the given board</summary>
+    /// <param name="board">The board to add highlights to</param>
+    /// <returns>The created highlight objects</returns>
+    private IEnumerable<GameObject> AddHighlights(Board board)
+    {
+        // Start with an empty list
+        IList<GameObject> highlights = new List<GameObject>();
+
+        // No highlights needed if there are 0 player rows
+        if (board.PlayerRows > 0)
+        {
+            // Create the bottom row
+            highlights.Add(CreateHighlight(0, board, new Vector2Int(-1, -1)));
+            for (int i = 0; i < board.Width; i++) highlights.Add(CreateHighlight(7, board, new Vector2Int(i, -1)));
+            highlights.Add(CreateHighlight(6, board, new Vector2Int(board.Width, -1)));
+
+            // Create the left and right columns
+            for (int i = 0; i < board.PlayerRows; i++)
+            {
+                highlights.Add(CreateHighlight(5, board, new Vector2Int(-1, i)));
+                highlights.Add(CreateHighlight(1, board, new Vector2Int(board.Width, i)));
+            }
+
+            // Create the top row
+            highlights.Add(CreateHighlight(2, board, new Vector2Int(-1, board.PlayerRows)));
+            for (int i = 0; i < board.Width; i++) highlights.Add(CreateHighlight(3, board, new Vector2Int(i, board.PlayerRows)));
+            highlights.Add(CreateHighlight(4, board, new Vector2Int(board.Width, board.PlayerRows)));
+        }
+
+        // Return the generated highlights
+        return highlights;
+    }
+
+    /// <summary>Creates a single space highlight object</summary>
+    /// <param name="prefab">The prefab index to load a highlight for</param>
+    /// <param name="board">The board to load the highlight on</param>
+    /// <param name="space">The space to place the highlight on</param>
+    /// <returns>A new highlight object</returns>
+    private GameObject CreateHighlight(int prefab, Board board, Vector2Int space)
+    {
+        GameObject highlight = Instantiate(HighlightPrefabs[prefab]);
+        highlight.transform.position = board.ToPosition(space);
+        return highlight;
     }
 }

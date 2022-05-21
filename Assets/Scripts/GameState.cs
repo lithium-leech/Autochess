@@ -1,5 +1,14 @@
 public static class GameState
 {
+    /// <summary>True when the planning phase is started</summary>
+    public volatile static bool PlanningStarted;
+
+    /// <summary>True if the planning phase is currently running</summary>
+    public volatile static bool InPlanning;
+
+    /// <summary>True when the planning phase is over/summary>
+    public volatile static bool PlanningOver;
+    
     /// <summary>True when the fight is started</summary>
     public volatile static bool FightStarted;
     
@@ -11,9 +20,6 @@ public static class GameState
 
     /// <summary>True if the fight was won</summary>
     public volatile static bool Victory;
-
-    /// <summary>True if the planning phase is currently running</summary>
-    public volatile static bool InPlanningPhase;
 
     /// <summary>The time in between turns (seconds)</summary>
     public static float TurnPause = 2;

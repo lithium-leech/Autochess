@@ -19,6 +19,9 @@ public class Board
     /// <summary>The board spaces and the pieces occupying them</summary>
     public Piece[,] Spaces { get; }
 
+    /// <summary>The number of rows (starting at the bottom) that the player can use</summary>
+    public int PlayerRows { get; set; }
+
     /// <summary>The pieces controlled by the player</summary>
     public List<Piece> PlayerPieces { get; }
 
@@ -35,13 +38,15 @@ public class Board
     /// <param name="game">The Game that this board exists in</param>
     /// <param name="width">The number of horizontal spaces on the board</param>
     /// <param name="height">The number of vertical spaces on the board</param>
+    /// <param name="playerRows">The number of rows the player can use</param>
     /// <param name="cornerBL">World-space coordinates for the bottom left corner of the board</param>
-    public Board(Game game, int width, int height, Vector2 cornerBL)
+    public Board(Game game, int width, int height, int playerRows, Vector2 cornerBL)
     {
         Game = game;
         Width = width;
         Height = height;
         Spaces = new Piece[width,height];
+        PlayerRows = playerRows;
         PlayerPieces = new List<Piece>();
         EnemyPieces = new List<Piece>();
         CornerBL = cornerBL;
@@ -166,13 +171,23 @@ public class Board
         else return true;
     }
 
+    /// <summary>Checks if a space is usable by the player</summary>
+    /// <param name="space">The space to check</param>
+    /// <returns>True if the space is usable by the player</returns>
+    public bool IsPlayerSpace(Vector2Int space)
+    {
+        if (OnBoard(space))
+            return space.y < PlayerRows;
+        return false;
+    }
+
     /// <summary>Gets a board space from a given world position</summary>
     /// <param name="position">The world position to get a space for</param>
     /// <returns>A board space</returns>
-    public Vector2Int GetSpace(Vector2 position)
-    {
-        int x = (int)Math.Floor(position.x - CornerBL.x);
-        int y = (int)Math.Floor(position.y - CornerBL.y);
-        return new Vector2Int(x, y);
-    }
+    public Vector2Int ToSpace(Vector3 position) => new((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
+
+    /// <summary>Gets the world coordinates for a given space</summary>
+    /// <param name="space">The space to get coordinated for</param>
+    /// <returns>World-space coordinates</returns>
+    public Vector3 ToPosition(Vector2Int space) => new(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, GameState.PieceZ);
 }

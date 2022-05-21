@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour
     /// <summary>Starts the next battle sequence</summary>
     public void Fight()
     {
+        GameState.PlanningOver = true;
         GameState.FightStarted = true;
     }
 

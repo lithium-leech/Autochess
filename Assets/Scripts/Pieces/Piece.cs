@@ -109,7 +109,7 @@ public abstract class Piece : MonoBehaviour
     /// <param name="space">The space to warp to</param>
     public void WarpTo(Vector2Int space)
     {
-        Vector3 position = GetWorldPosition(space);
+        Vector3 position = Board.ToPosition(space);
         transform.position = position;
         Target = position;
         IsMoving = true;
@@ -120,14 +120,9 @@ public abstract class Piece : MonoBehaviour
     /// <param name="space">The space to move to</param>
     public void MoveTo(Vector2Int space)
     {
-        Vector3 position = GetWorldPosition(space);
+        Vector3 position = Board.ToPosition(space);
         Target = position;
         IsMoving = true;
         LerpIncrement = 0;
     }
-
-    /// <summary>Gets the world coordinates for a given space</summary>
-    /// <param name="space">The space to get coordinated for</param>
-    /// <returns>World-space coordinates</returns>
-    private Vector3 GetWorldPosition(Vector2Int space) => new(Board.CornerBL.x + space.x + 0.5f, Board.CornerBL.y + space.y + 0.5f, GameState.PieceZ);
 }
