@@ -48,7 +48,7 @@ public class Game : MonoBehaviour
 
         // Create the game boards
         GameState.GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, 1.0f));
-        GameState.SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -4.0f));
+        GameState.SideBoard = new Board(this, 8, 3, 0, new Vector2(-4.0f, -4.0f));
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
@@ -156,6 +156,7 @@ public class Game : MonoBehaviour
         // Only run the fight started sequence once
         GameState.FightStarted = false;
         GameState.InFight = true;
+        GameState.Victory = false;
 
         // Set the initial fighting states
         TimeWaited = 0;
@@ -309,7 +310,7 @@ public class Game : MonoBehaviour
     private void PlacePlayerPieces()
     {
         GameState.SideBoard.Clear();
-        foreach (Type pieceType in EnemyPieces) GameState.SideBoard.AddPiece(pieceType, false);
+        foreach (Type pieceType in PlayerPieces) GameState.SideBoard.AddPiece(pieceType, false);
     }
 
     /// <summary>Gets a random empty space on the enemy's side of the game board</summary>
