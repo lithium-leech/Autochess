@@ -130,6 +130,14 @@ public class Board
         piece.IsCaptured = true;
     }
 
+    /// <summary>Removes all pieces from the board</summary>
+    public void Clear()
+    {
+        for (int x = 0; x < Width; x++)
+        for (int y = 0; y < Height; y++)
+            if (HasPiece(new Vector2Int(x, y))) CapturePiece(Spaces[x, y]);
+    }
+
     /// <summary>Gets the first empty space on the board</summary>
     /// <returns>A board space</returns>
     public Vector2Int GetFirstEmptySpace()

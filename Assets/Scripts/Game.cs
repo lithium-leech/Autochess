@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +13,7 @@ public class Game : MonoBehaviour
     public GameObject[] PiecePrefabs;
     public GameObject[] HighlightPrefabs;
     public Camera Camera;
+    public GameObject LevelText;
 
     /// <summary>The time elapsed so far, in between turns</summary>
     private float TimeWaited { get; set; }
@@ -25,6 +27,12 @@ public class Game : MonoBehaviour
     /// <summary>Space highlights displayed during the planning phase</summary>
     private IEnumerable<GameObject> Highlights { get; set; }
 
+    /// <summary>The enemies roster of pieces (indexes to prefabs)</summary>
+    private IList<Type> EnemyPieces { get; set; }
+
+    /// <summary>The player's roster of pieces</summary>
+    private IList<Type> PlayerPieces { get; set; }
+
     private void Start()
     {
         // Set game states
@@ -35,20 +43,20 @@ public class Game : MonoBehaviour
         GameState.InFight = false;
         GameState.FightOver = false;
         GameState.Victory = false;
+        GameState.Level = 1;
+        LevelText.GetComponent<TextMeshProUGUI>().text = "1";
 
         // Create the game boards
         GameState.GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, 1.0f));
         GameState.SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -4.0f));
 
-        // Create a sample setup
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(0, 7));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(2, 7));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(4, 6));
-        GameState.GameBoard.AddPiece<Pawn>(true, new Vector2Int(7, 6));
-
-        GameState.SideBoard.AddPiece<Pawn>(false);
-        GameState.SideBoard.AddPiece<Pawn>(false);
-        GameState.SideBoard.AddPiece<Pawn>(false);
+        // Create a sample setup;
+        EnemyPieces = new List<Type>();
+        PlayerPieces = new List<Type>();
+        EnemyPieces.Add(typeof(Pawn));
+        PlayerPieces.Add(typeof(Pawn));
+        PlaceEnemyPieces();
+        PlacePlayerPieces();
 
         // Start the planning phase
         GameState.PlanningStarted = true;
@@ -160,7 +168,20 @@ public class Game : MonoBehaviour
         // Pause between turns
         TimeWaited += Time.deltaTime;
         if (TimeWaited < GameState.TurnPause) return;
-         
+        
+        // Check if the battle is over
+        if (GameState.GameBoard.PlayerPieces.Count < 1)
+        {
+            GameState.FightOver = true;
+            return;
+        }
+        else if (GameState.GameBoard.EnemyPieces.Count < 1)
+        {
+            GameState.Victory = true;
+            GameState.FightOver = true;
+            return;
+        }
+        
         // Move the current player's pieces
         if (WhiteTurn)
         {
@@ -169,17 +190,6 @@ public class Game : MonoBehaviour
         else
         {
             foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
-        }
-
-        // Check if the battle is over
-        if (GameState.GameBoard.PlayerPieces.Count < 1)
-        {
-            GameState.FightOver = true;
-        }
-        else if (GameState.GameBoard.EnemyPieces.Count < 1)
-        {
-            GameState.Victory = true;
-            GameState.FightOver = true;
         }
 
         // Go to the next turn
@@ -193,15 +203,21 @@ public class Game : MonoBehaviour
         // Only run the fight over sequence once
         GameState.FightOver = false;
         GameState.InFight = false;
-         
+        
         // Determine if the battle was won
         if (GameState.Victory)
         {
-
+            GameState.Level++;
+            LevelText.GetComponent<TextMeshProUGUI>().text = GameState.Level.ToString();
+            if (EnemyPieces.Count < 16) EnemyPieces.Add(GetRandomPiece());
+            if (PlayerPieces.Count < 24) PlayerPieces.Add(GetRandomPiece());
+            PlaceEnemyPieces();
+            PlacePlayerPieces();
+            GameState.PlanningStarted = true;
         }
         else
         {
-
+            // Just wait for player to exit
         }
     }
 
@@ -276,5 +292,50 @@ public class Game : MonoBehaviour
         GameObject highlight = Instantiate(HighlightPrefabs[prefab]);
         highlight.transform.position = board.ToPosition(space);
         return highlight;
+    }
+
+    /// <summary>Sets up the enemy's roster of pieces on their side of the board</summary>
+    private void PlaceEnemyPieces()
+    {
+        GameState.GameBoard.Clear();
+        foreach (Type pieceType in EnemyPieces)
+        {
+            Vector2Int space = GetRandomEmptySpace();
+            GameState.GameBoard.AddPiece(pieceType, true, space);
+        }
+    }
+
+    /// <summary>Sets up the player's roster of pieces in the sideboard</summary>
+    private void PlacePlayerPieces()
+    {
+        GameState.SideBoard.Clear();
+        foreach (Type pieceType in EnemyPieces) GameState.SideBoard.AddPiece(pieceType, false);
+    }
+
+    /// <summary>Gets a random empty space on the enemy's side of the game board</summary>
+    /// <returns>An empty space on the game board</returns>
+    private Vector2Int GetRandomEmptySpace()
+    {
+        IList<Vector2Int> emptySpaces = new List<Vector2Int>();
+        for (int x = 0; x < GameState.GameBoard.Width; x++)
+        for (int y = 6; y < GameState.GameBoard.Height; y++)
+        {
+            Vector2Int space = new(x, y);
+            if (!GameState.GameBoard.HasPiece(space)) emptySpaces.Add(space);
+        }
+        return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
+    }
+
+    /// <summary>Returns a random type of piece</summary>
+    /// <returns>A Piece type</returns>
+    private Type GetRandomPiece()
+    {
+        int choice = UnityEngine.Random.Range(1, 7);
+        if (choice == 1) return typeof(Pawn);
+        else if (choice == 2) return typeof(Rook);
+        else if (choice == 3) return typeof(Knight);
+        else if (choice == 4) return typeof(Bishop);
+        else if (choice == 5) return typeof(Queen);
+        else return typeof(King);
     }
 }

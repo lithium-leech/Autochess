@@ -21,6 +21,9 @@ public static class GameState
     /// <summary>True if the fight was won</summary>
     public volatile static bool Victory;
 
+    /// <summary>The current level</summary>
+    public static int Level = 0;
+
     /// <summary>The time in between turns (seconds)</summary>
     public static float TurnPause = 2;
 
