@@ -10,11 +10,17 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
+    public AudioSource[] Music;
     public GameObject[] PiecePrefabs;
     public GameObject[] HighlightPrefabs;
     public Camera Camera;
     public GameObject LevelText;
+    public GameObject GameOverMenu;
+    public GameObject ConcedeMenu;
 
+    /// <summary>The index of the music currently being played</summary>
+    private int CurrentMusic { get; set; } = -1;
+    
     /// <summary>The time elapsed so far, in between turns</summary>
     private float TimeWaited { get; set; }
 
@@ -43,7 +49,11 @@ public class Game : MonoBehaviour
         GameState.InFight = false;
         GameState.FightOver = false;
         GameState.Victory = false;
+        GameState.ConcedeStarted = false;
+        GameState.InConcede = false;
         GameState.Level = 1;
+        GameState.RoundsToConcede = 20;
+        GameState.RoundsStatic = 0;
         LevelText.GetComponent<TextMeshProUGUI>().text = "1";
 
         // Create the game boards
@@ -70,6 +80,7 @@ public class Game : MonoBehaviour
         if (!GameState.InFight && GameState.FightStarted) DetectFightStart();
         if (GameState.InFight) RunFight();
         if (GameState.InFight && GameState.FightOver) DetectFightFinish();
+        if (!GameState.InConcede && GameState.ConcedeStarted) PromptConcede();
     }
 
     /// <summary>Starts the planning phase</summary>
@@ -78,6 +89,9 @@ public class Game : MonoBehaviour
         // Only run the planning started sequence once
         GameState.PlanningStarted = false;
         GameState.InPlanning = true;
+
+        // Start the planning music
+        PlayMusic(0);
 
         // Add highlights around spaces that the player can put pieces
         List<GameObject> highlights = new();
@@ -145,6 +159,9 @@ public class Game : MonoBehaviour
         GameState.PlanningOver = false;
         GameState.InPlanning = false;
 
+        // Stop the planning music
+        StopMusic();
+
         // Remove highlights loaded in planning start
         foreach (GameObject highlight in Highlights) Destroy(highlight);
         Highlights = new List<GameObject>();
@@ -157,6 +174,8 @@ public class Game : MonoBehaviour
         GameState.FightStarted = false;
         GameState.InFight = true;
         GameState.Victory = false;
+        GameState.RoundsToConcede = 20;
+        GameState.RoundsStatic = 0;
 
         // Set the initial fighting states
         TimeWaited = 0;
@@ -169,7 +188,10 @@ public class Game : MonoBehaviour
         // Pause between turns
         TimeWaited += Time.deltaTime;
         if (TimeWaited < GameState.TurnPause) return;
-        
+
+        // Start the fight music when the first move is taken
+        if (CurrentMusic < 0) PlayMusic(1);
+
         // Check if the battle is over
         if (GameState.GameBoard.PlayerPieces.Count < 1)
         {
@@ -182,20 +204,38 @@ public class Game : MonoBehaviour
             GameState.FightOver = true;
             return;
         }
-        
+
         // Move the current player's pieces
-        if (WhiteTurn)
-        {
-            foreach (Piece piece in GameState.GameBoard.EnemyPieces) piece.TakeTurn();
-        }
-        else
-        {
-            foreach (Piece piece in GameState.GameBoard.PlayerPieces) piece.TakeTurn();
-        }
+        if (WhiteTurn) RunRound(GameState.GameBoard.EnemyPieces);
+        else RunRound(GameState.GameBoard.PlayerPieces);
+
+        // Check if the player should be prompted to concede
+        if (!GameState.InConcede)
+            if (GameState.RoundsStatic > 1 || GameState.RoundsToConcede < 1)
+                GameState.ConcedeStarted = true;
 
         // Go to the next turn
+        GameState.RoundsToConcede--;
         WhiteTurn = !WhiteTurn;
         TimeWaited = 0;
+    }
+
+    /// <summary>Runs the battle operations for one set of pieces</summary>
+    /// <param name="pieces">The pieces to move</param>
+    private void RunRound(List<Piece> pieces)
+    {
+        bool pieceMoved = false;
+        foreach (Piece piece in pieces)
+        {
+            if (pieceMoved) piece.TakeTurn();
+            else
+            {
+                Vector2Int space = piece.Space;
+                piece.TakeTurn();
+                if (space != piece.Space) pieceMoved = true;
+            }
+        }
+        if (!pieceMoved) GameState.RoundsStatic++;
     }
 
     /// <summary>Performs end of fight operations</summary>
@@ -204,7 +244,13 @@ public class Game : MonoBehaviour
         // Only run the fight over sequence once
         GameState.FightOver = false;
         GameState.InFight = false;
-        
+        GameState.ConcedeStarted = false;
+        GameState.InConcede = false;
+        ConcedeMenu.SetActive(false);
+
+        // Stop the battle music
+        StopMusic();
+
         // Determine if the battle was won
         if (GameState.Victory)
         {
@@ -218,8 +264,34 @@ public class Game : MonoBehaviour
         }
         else
         {
-            // Just wait for player to exit
+            // Load the Game Over menu
+            GameOverMenu.SetActive(true);
         }
+    }
+
+    /// <summary>Shows a prompt asking the player if they want to concede</summary>
+    private void PromptConcede()
+    {
+        ConcedeMenu.SetActive(true);
+    }
+
+    /// <summary>The player concedes defeat and the fight is lost</summary>
+    public void ConfirmConcede()
+    {
+        ConcedeMenu.SetActive(false);
+        GameState.ConcedeStarted = false;
+        GameState.InConcede = false;
+        GameState.FightOver = true;
+    }
+
+    /// <summary>The player does not concede and the fight continues</summary>
+    public void CancelConcede()
+    {
+        ConcedeMenu.SetActive(false);
+        GameState.ConcedeStarted = false;
+        GameState.InConcede = false;
+        GameState.RoundsStatic = 0;
+        GameState.RoundsToConcede = 20;
     }
 
     /// <summary>Creates a new instance of a piece</summary>
@@ -338,5 +410,24 @@ public class Game : MonoBehaviour
         else if (choice == 4) return typeof(Bishop);
         else if (choice == 5) return typeof(Queen);
         else return typeof(King);
+    }
+
+    /// <summary>Plays the music at the given index</summary>
+    /// <param name="index">The index of the music to play</param>
+    private void PlayMusic(int index)
+    {
+        StopMusic();
+        CurrentMusic = index;
+        Music[CurrentMusic].Play();
+    }
+    
+    /// <summary>Stops any music that's playing</summary>
+    private void StopMusic()
+    {
+        if (CurrentMusic > -1)
+        {
+            Music[CurrentMusic].Stop();
+            CurrentMusic = -1;
+        }
     }
 }

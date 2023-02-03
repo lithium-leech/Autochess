@@ -1,3 +1,6 @@
+/// <summary>
+/// Holds a static collection of global game state variables
+/// </summary>
 public static class GameState
 {
     /// <summary>True when the planning phase is started</summary>
@@ -21,14 +24,26 @@ public static class GameState
     /// <summary>True if the fight was won</summary>
     public volatile static bool Victory;
 
+    /// <summary>True if the player should be prompted to concede</summary>
+    public volatile static bool ConcedeStarted;
+
+    /// <summary>True if the player is being prompted to concede</summary>
+    public volatile static bool InConcede;
+
     /// <summary>The current level</summary>
-    public static int Level = 0;
+    public static int Level { get; set; } = 0;
+
+    /// <summary>The number of rounds until the player should be prompted to concede</summary>
+    public static int RoundsToConcede { get; set; } = 0;
+
+    /// <summary>The number of rounds that have occured with no pieces moving</summary>
+    public static int RoundsStatic { get; set; } = 0;
 
     /// <summary>The time in between turns (seconds)</summary>
-    public static float TurnPause = 2;
+    public static float TurnPause { get; } = 2;
 
     /// <summary>The Z-plane that pieces exist on</summary>
-    public static float PieceZ = -1;
+    public static float PieceZ { get; } = -1;
 
     /// <summary>The board that fights take place on</summary>
     public static Board GameBoard { get; set; }
