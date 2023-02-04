@@ -64,7 +64,7 @@ public class Game : MonoBehaviour
 
         // Create the game boards
         GameState.GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, 1.0f));
-        GameState.SideBoard = new Board(this, 8, 3, 0, new Vector2(-4.0f, -4.0f));
+        GameState.SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -4.0f));
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
