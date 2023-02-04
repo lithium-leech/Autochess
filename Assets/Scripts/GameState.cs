@@ -33,6 +33,9 @@ public static class GameState
     /// <summary>The current level</summary>
     public static int Level { get; set; } = 0;
 
+    /// <summary>The player's highest level achieved</summary>
+    public static int HighScore { get; set; } = 0;
+
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
     public static int RoundsToConcede { get; set; } = 0;
 

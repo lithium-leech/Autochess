@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
     public GameObject[] HighlightPrefabs;
     public Camera Camera;
     public GameObject LevelText;
+    public GameObject ScoreText;
+    public GameObject HighScoreText;
     public GameObject GameOverMenu;
     public GameObject ConcedeMenu;
 
@@ -41,6 +43,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        // Load saved data
+        SaveData saveData = SaveSystem.Load();
+
         // Set game states
         GameState.PlanningStarted = false;
         GameState.InPlanning = false;
@@ -52,6 +57,7 @@ public class Game : MonoBehaviour
         GameState.ConcedeStarted = false;
         GameState.InConcede = false;
         GameState.Level = 1;
+        GameState.HighScore = saveData.HighScore;
         GameState.RoundsToConcede = 20;
         GameState.RoundsStatic = 0;
         LevelText.GetComponent<TextMeshProUGUI>().text = "1";
@@ -81,6 +87,16 @@ public class Game : MonoBehaviour
         if (GameState.InFight) RunFight();
         if (GameState.InFight && GameState.FightOver) DetectFightFinish();
         if (!GameState.InConcede && GameState.ConcedeStarted) PromptConcede();
+    }
+
+    private void OnDestroy()
+    {
+        // Create the save data
+        SaveData saveData = new SaveData();
+        saveData.HighScore = GameState.HighScore;
+
+        // Write the save data to a file
+        SaveSystem.Save(saveData);
     }
 
     /// <summary>Starts the planning phase</summary>
@@ -255,6 +271,7 @@ public class Game : MonoBehaviour
         if (GameState.Victory)
         {
             GameState.Level++;
+            if (GameState.Level > GameState.HighScore) GameState.HighScore = GameState.Level;
             LevelText.GetComponent<TextMeshProUGUI>().text = GameState.Level.ToString();
             if (EnemyPieces.Count < 16) EnemyPieces.Add(GetRandomPiece());
             if (PlayerPieces.Count < 24) PlayerPieces.Add(GetRandomPiece());
@@ -265,6 +282,8 @@ public class Game : MonoBehaviour
         else
         {
             // Load the Game Over menu
+            ScoreText.GetComponent<TextMeshProUGUI>().text = GameState.Level.ToString();
+            HighScoreText.GetComponent<TextMeshProUGUI>().text = GameState.HighScore.ToString();
             GameOverMenu.SetActive(true);
         }
     }
