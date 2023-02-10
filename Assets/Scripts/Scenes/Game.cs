@@ -62,7 +62,7 @@ public class Game : MonoBehaviour
         GameState.InConcede = false;
         GameState.Level = 1;
         GameState.HighScore = saveData.HighScore;
-        GameState.RoundsToConcede = 20;
+        GameState.RoundsToConcede = 40;
         GameState.RoundsStatic = 0;
         LevelText.GetComponent<TextMeshProUGUI>().text = "1";
 
