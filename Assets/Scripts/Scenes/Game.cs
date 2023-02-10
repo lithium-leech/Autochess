@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
     public GameObject HighScoreText;
     public GameObject GameOverMenu;
     public GameObject ConcedeMenu;
+    public GameObject UpgradeMenu;
 
     /// <summary>The index of the music currently being played</summary>
     private int CurrentMusic { get; set; } = -1;
@@ -40,6 +41,9 @@ public class Game : MonoBehaviour
 
     /// <summary>The player's roster of pieces</summary>
     private IList<Type> PlayerPieces { get; set; }
+
+    /// <summary>The next level choices the player is currently being offered</summary>
+    private NextLevelChoices CurrentChoices { get; set; }
 
     private void Start()
     {
@@ -71,8 +75,6 @@ public class Game : MonoBehaviour
         PlayerPieces = new List<Type>();
         EnemyPieces.Add(typeof(Pawn));
         PlayerPieces.Add(typeof(Pawn));
-        PlaceEnemyPieces();
-        PlacePlayerPieces();
 
         // Start the planning phase
         GameState.PlanningStarted = true;
@@ -108,6 +110,55 @@ public class Game : MonoBehaviour
 
         // Start the planning music
         PlayMusic(0);
+
+        // Display new level choices (unless this is the first level)
+        if (GameState.Level > 1)
+        {
+            CurrentChoices = new NextLevelChoices();
+            CurrentChoices.ShowPiecesInMenu(this);
+            UpgradeMenu.SetActive(true);
+        }
+        else PostChoiceSetup();
+    }
+
+    /// <summary>Applies the changes for the next level options selected by the player</summary>
+    /// <param name="choice">The option number selected by the player</param>
+    public void PlanningChoice(int choice)
+    {
+        CurrentChoices.RemovePiecesInMenu();
+        UpgradeMenu.SetActive(false);
+        Type playerPiece;
+        Type enemyPiece;
+        if (choice == 1)
+        {
+            playerPiece = CurrentChoices.PlayerPiece1;
+            enemyPiece = CurrentChoices.EnemyPiece1;
+        }
+        else if (choice == 2)
+        {
+            playerPiece = CurrentChoices.PlayerPiece2;
+            enemyPiece = CurrentChoices.EnemyPiece2;
+        }
+        else if (choice == 3)
+        {
+            playerPiece = CurrentChoices.PlayerPiece3;
+            enemyPiece = CurrentChoices.EnemyPiece3;
+        }
+        else
+        {
+            throw new Exception($"Next level choice {choice} not recognized");
+        }
+        if (EnemyPieces.Count < 16) EnemyPieces.Add(enemyPiece);
+        if (PlayerPieces.Count < 24) PlayerPieces.Add(playerPiece);
+        PostChoiceSetup();
+    }
+
+    /// <summary>Sets up the game boards after the player makes their selection for the next level</summary>
+    private void PostChoiceSetup()
+    {
+        // Set up the boards
+        PlaceEnemyPieces();
+        PlacePlayerPieces();
 
         // Add highlights around spaces that the player can put pieces
         List<GameObject> highlights = new();
@@ -273,10 +324,6 @@ public class Game : MonoBehaviour
             GameState.Level++;
             if (GameState.Level > GameState.HighScore) GameState.HighScore = GameState.Level;
             LevelText.GetComponent<TextMeshProUGUI>().text = GameState.Level.ToString();
-            if (EnemyPieces.Count < 16) EnemyPieces.Add(GetRandomPiece());
-            if (PlayerPieces.Count < 24) PlayerPieces.Add(GetRandomPiece());
-            PlaceEnemyPieces();
-            PlacePlayerPieces();
             GameState.PlanningStarted = true;
         }
         else
@@ -416,19 +463,6 @@ public class Game : MonoBehaviour
             if (!GameState.GameBoard.HasPiece(space)) emptySpaces.Add(space);
         }
         return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
-    }
-
-    /// <summary>Returns a random type of piece</summary>
-    /// <returns>A Piece type</returns>
-    private Type GetRandomPiece()
-    {
-        int choice = UnityEngine.Random.Range(1, 7);
-        if (choice == 1) return typeof(Pawn);
-        else if (choice == 2) return typeof(Rook);
-        else if (choice == 3) return typeof(Knight);
-        else if (choice == 4) return typeof(Bishop);
-        else if (choice == 5) return typeof(Queen);
-        else return typeof(King);
     }
 
     /// <summary>Plays the music at the given index</summary>

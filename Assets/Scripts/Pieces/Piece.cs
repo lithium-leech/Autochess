@@ -116,6 +116,16 @@ public abstract class Piece : MonoBehaviour
         LerpIncrement = 0;
     }
 
+    /// <summary>Warps the piece to the specified location</summary>
+    /// <param name="space">The world coordinates to warp to</param>
+    public void WarpTo(Vector3 position)
+    {
+        transform.position = position;
+        Target = position;
+        IsMoving = true;
+        LerpIncrement = 0;
+    }
+
     /// <summary>Moves the piece to the specified location</summary>
     /// <param name="space">The space to move to</param>
     public void MoveTo(Vector2Int space)
