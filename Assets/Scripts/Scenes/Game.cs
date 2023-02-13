@@ -302,7 +302,8 @@ public class Game : MonoBehaviour
                 if (space != piece.Space) pieceMoved = true;
             }
         }
-        if (!pieceMoved) GameState.RoundsStatic++;
+        if (pieceMoved) GameState.RoundsStatic = 0;
+        else GameState.RoundsStatic++;
     }
 
     /// <summary>Performs end of fight operations</summary>
