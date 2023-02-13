@@ -395,7 +395,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 782767527}
-  - component: {fileID: 782767528}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -426,18 +425,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &782767528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782767526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d102b9b26aa3775448d417fe9aae7199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &887722884
 GameObject:
   m_ObjectHideFlags: 0
@@ -23438,7 +23425,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 782767528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
@@ -23572,7 +23559,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 782767528}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
@@ -23699,6 +23686,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Music:
   - {fileID: 726479531}
+  PlayButton: {fileID: 1897499479}
+  ExitButton: {fileID: 1719268256}
 --- !u!4 &1954344729
 Transform:
   m_ObjectHideFlags: 0

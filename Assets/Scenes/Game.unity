@@ -340,19 +340,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 60677984}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2013257038}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: PlanningChoice
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &60677984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,8 +410,8 @@ RectTransform:
   m_Children:
   - {fileID: 1846284130}
   - {fileID: 862010445}
-  - {fileID: 632161399}
   - {fileID: 1532630656}
+  - {fileID: 632161399}
   m_Father: {fileID: 203902743}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -607,7 +595,7 @@ GameObject:
   - component: {fileID: 321443911}
   - component: {fileID: 321443910}
   m_Layer: 0
-  m_Name: ReplayButton
+  m_Name: StartOverButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +665,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1538580361}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: Play
         m_Mode: 1
@@ -894,7 +882,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 66437107}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -944,19 +932,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 632161401}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2013257038}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: ConfirmConcede
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &632161401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23940,19 +23916,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1102605393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1678290706}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: Fight
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1102605393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24788,19 +24752,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1486239070}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2013257038}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: PlanningChoice
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1486239070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24871,7 +24823,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 66437107}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -24921,19 +24873,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1532630658}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2013257038}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: CancelConcede
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1532630658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24981,7 +24921,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538580360}
-  - component: {fileID: 1538580361}
   - component: {fileID: 1538580362}
   m_Layer: 0
   m_Name: GameOverMenu
@@ -25013,18 +24952,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1538580361
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538580359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d102b9b26aa3775448d417fe9aae7199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1538580362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25256,9 +25183,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1678290706}
-        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: MainMenu
+      - m_Target: {fileID: 2013257038}
+        m_TargetAssemblyTypeName: Game, Assembly-CSharp
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25388,19 +25315,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1660043323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2013257038}
-        m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: PlanningChoice
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1660043323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25448,7 +25363,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1678290705}
-  - component: {fileID: 1678290706}
   m_Layer: 0
   m_Name: InGameMenu
   m_TagString: Untagged
@@ -25479,18 +25393,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1678290706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1678290704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d102b9b26aa3775448d417fe9aae7199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1714984626
 GameObject:
   m_ObjectHideFlags: 0
@@ -25842,7 +25744,7 @@ GameObject:
   - component: {fileID: 1887320524}
   - component: {fileID: 1887320523}
   m_Layer: 0
-  m_Name: Replay
+  m_Name: StartOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25888,7 +25790,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play Again
+  m_text: Start Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
   m_sharedMaterial: {fileID: 580118765808523505, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
@@ -26142,6 +26044,14 @@ MonoBehaviour:
   LevelText: {fileID: 640066734}
   ScoreText: {fileID: 1290031176}
   HighScoreText: {fileID: 1714984626}
+  ExitGameButton: {fileID: 1631209464}
+  FightButton: {fileID: 1102605392}
+  CancelConcedeButton: {fileID: 1532630657}
+  ConfirmConcedeButton: {fileID: 632161400}
+  StartOverButton: {fileID: 321443910}
+  ChoiceOneButton: {fileID: 60677983}
+  ChoiceTwoButton: {fileID: 1660043322}
+  ChoiceThreeButton: {fileID: 1486239069}
   GameOverMenu: {fileID: 1538580359}
   ConcedeMenu: {fileID: 66437106}
   UpgradeMenu: {fileID: 1199122612}
