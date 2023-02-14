@@ -26,6 +26,9 @@ public class DefeatStage : IStage
         Game.HighScoreText.GetComponent<TextMeshProUGUI>().text = Game.HighScore.ToString();
         Game.GameOverMenu.SetActive(true);
 
+        // Load an ad
+        Game.RetryButton.LoadAd();
+
         // Add button listeners
         Game.StartOverButton.onClick.AddListener(StartOver);
         Game.RetryButton.onReward += RetryLevel;
