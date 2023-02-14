@@ -36,7 +36,7 @@ public class Game : MonoBehaviour
     public static float TurnPause { get; } = 2;
 
     /// <summary>The Z-plane that pieces exist on</summary>
-    public static float PieceZ { get; } = -1;
+    public static float PieceZ { get; } = -5;
 
     /// <summary>The current stage of the game being run</summary>
     public IStage CurrentStage { get; set; } = null;
@@ -92,8 +92,11 @@ public class Game : MonoBehaviour
         EnemyPieces = new List<Type>();
         PlayerGameBoard = new List<PositionRecord>();
         PlayerSideBoard = new List<PositionRecord>();
-        EnemyPieces.Add(typeof(Pawn));
-        PlayerSideBoard.Add(new PositionRecord(typeof(Pawn), new Vector2Int(0,1)));
+        for (int i = 0; i < 16; i++)
+        {
+            EnemyPieces.Add(typeof(Pawn));
+            PlayerSideBoard.Add(new PositionRecord(typeof(Queen), null));
+        }
 
         // Start the planning phase
         NextStage = new PlanningStage(this);

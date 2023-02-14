@@ -86,8 +86,11 @@ public class UpgradeStage : IStage
             throw new Exception($"Next level choice {choice} not recognized");
         }
 
-        // Add the pieces
+        // Add the enemy piece, removing a lower value piece if necessary
+        if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);
         if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
+
+        // Add the player piece as long a sideboard space is empty
         if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(new PositionRecord(playerPiece, null));
 
         // Remove the upgrade menu
@@ -99,5 +102,35 @@ public class UpgradeStage : IStage
 
         // Go to the planning phase
         Game.NextStage = new PlanningStage(Game);
+    }
+
+    /// <summary>Remove an enemy piece with lower value than the given Type</summary>
+    /// <param name="type">The piece Type to make space for</param>
+    public void RemoveLowerValue(Type type)
+    {
+        int valueToAdd = GetTypeValue(type);
+        for (int i = 0; i < Game.EnemyPieces.Count; i++)
+        {
+            int valueToRemove = GetTypeValue(Game.EnemyPieces[i]);
+            if (valueToRemove <= valueToAdd)
+            {
+                Game.EnemyPieces.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>Get the value of a give piece Type</summary>
+    /// <param name="type">The piece Type to evaluate</param>
+    /// <returns>An integer value</returns>
+    public int GetTypeValue(Type type)
+    {
+        if (type == typeof(Pawn)) return 0;
+        else if (type == typeof(Knight)) return 1;
+        else if (type == typeof(King)) return 2;
+        else if (type == typeof(Bishop)) return 3;
+        else if (type == typeof(Rook)) return 4;
+        else if (type == typeof(Queen)) return 5;
+        else throw new Exception($"Type {type} not recognized");
     }
 }
