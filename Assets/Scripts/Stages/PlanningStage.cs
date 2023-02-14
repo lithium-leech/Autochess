@@ -103,6 +103,9 @@ public class PlanningStage : IStage
     /// <summary>Starts the fight sequence</summary>
     public void StartFight()
     {
+        // Don't start the fight if there are no pieces on the board
+        if (Game.GameBoard.PlayerPieces.Count < 1) return;
+
         // De-activate the fight button
         Game.FightButton.onClick.RemoveAllListeners();
         
