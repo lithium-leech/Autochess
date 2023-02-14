@@ -35,6 +35,7 @@ public class PlanningStage : IStage
         List<GameObject> highlights = new();
         highlights.AddRange(AddHighlights(Game.GameBoard));
         highlights.AddRange(AddHighlights(Game.SideBoard));
+        highlights.AddRange(AddHighlights(Game.TrashBoard));
         Highlights = highlights;
 
         // Activate the fight button
@@ -59,6 +60,11 @@ public class PlanningStage : IStage
             Game.SideBoard.CornerBL.y <= position.y &&
             position.y <= Game.SideBoard.CornerTR.y)
             board = Game.SideBoard;
+        else if (Game.TrashBoard.CornerBL.x <= position.x &&
+            position.x <= Game.TrashBoard.CornerTR.x &&
+            Game.TrashBoard.CornerBL.y <= position.y &&
+            position.y <= Game.TrashBoard.CornerTR.y)
+            board = Game.TrashBoard;
 
         // If it is inside a board, get the space/piece
         Vector2Int space = new(-1, -1);

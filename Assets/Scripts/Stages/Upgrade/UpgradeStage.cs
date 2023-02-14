@@ -34,6 +34,10 @@ public class UpgradeStage : IStage
         Choices.ShowPiecesInMenu(Game);
         Game.UpgradeMenu.SetActive(true);
 
+        // Delete any pieces in the trash
+        foreach (Piece piece in Game.TrashBoard.PlayerPieces)
+            piece.IsCaptured= true;
+
         // Add button listeners
         Game.ChoiceOneButton.onClick.AddListener(ChooseOne);
         Game.ChoiceTwoButton.onClick.AddListener(ChooseTwo);

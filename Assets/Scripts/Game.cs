@@ -69,6 +69,9 @@ public class Game : MonoBehaviour
     /// <summary>The board that holds the player's available pieces</summary>
     public Board SideBoard { get; set; }
 
+    /// <summary>The board for discarding unwanted peices</summary>
+    public Board TrashBoard { get; set; }
+
     private void Start()
     {
         // Load saved data
@@ -83,6 +86,7 @@ public class Game : MonoBehaviour
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
         SideBoard = new Board(this, 8, 2, 2, new Vector2(-4.0f, -5.0f));
+        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -7.5f));
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
