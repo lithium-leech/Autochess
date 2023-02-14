@@ -24,7 +24,7 @@ public class MusicBox
     public void PlayMusic(int index)
     {
         // Change the music if a new song is requested
-        if (CurrentMusic != index && index > 0 && index < Music.Length)
+        if (CurrentMusic != index && index > -1 && index < Music.Length)
         {
             StopMusic();
             CurrentMusic = index;

@@ -92,11 +92,8 @@ public class Game : MonoBehaviour
         EnemyPieces = new List<Type>();
         PlayerGameBoard = new List<PositionRecord>();
         PlayerSideBoard = new List<PositionRecord>();
-        for (int i = 0; i < 16; i++)
-        {
-            EnemyPieces.Add(typeof(Pawn));
-            PlayerSideBoard.Add(new PositionRecord(typeof(Queen), null));
-        }
+        EnemyPieces.Add(typeof(Pawn));
+        PlayerSideBoard.Add(new PositionRecord(typeof(Pawn), null));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);
