@@ -78,8 +78,8 @@ public class Game : MonoBehaviour
         LevelText.GetComponent<TextMeshProUGUI>().text = "1";
 
         // Create the game boards
-        GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, 0.0f));
-        SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -5.0f));
+        GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
+        SideBoard = new Board(this, 8, 2, 2, new Vector2(-4.0f, -5.0f));
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
