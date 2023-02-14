@@ -28,6 +28,7 @@ public class DefeatStage : IStage
 
         // Add button listeners
         Game.StartOverButton.onClick.AddListener(StartOver);
+        Game.RetryButton.onReward += RetryLevel;
     }
 
     public void During()
@@ -39,10 +40,14 @@ public class DefeatStage : IStage
     {
         // Remove button Listeners
         Game.StartOverButton.onClick.RemoveAllListeners();
+        Game.RetryButton.onReward -= RetryLevel;
 
         // Hide the game over menu
         Game.GameOverMenu.SetActive(false);
     }
+
+    /// <summary>Starts the level over</summary>
+    public void RetryLevel() => Game.NextStage = new PlanningStage(Game);
 
     /// <summary>Starts the game over</summary>
     public void StartOver() => SceneManager.LoadScene("Game");

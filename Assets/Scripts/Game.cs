@@ -23,6 +23,7 @@ public class Game : MonoBehaviour
     public Button FightButton;
     public Button CancelConcedeButton;
     public Button ConfirmConcedeButton;
+    public RewardedAdsButton RetryButton;
     public Button StartOverButton;
     public Button ChoiceOneButton;
     public Button ChoiceTwoButton;
