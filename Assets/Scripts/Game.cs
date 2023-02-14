@@ -74,6 +74,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        // Load the first ad
+        RetryButton.LoadAd();
+
         // Load saved data
         SaveData saveData = SaveSystem.Load();
 
