@@ -29,8 +29,7 @@ public class PlanningStage : IStage
         Game.MusicBox.PlayMusic(0);
 
         // Set up the boards
-        PlaceEnemyPieces();
-        PlacePlayerPieces();
+        PlacePieces();
 
         // Add highlights around spaces that the player can put pieces
         List<GameObject> highlights = new();
@@ -98,6 +97,14 @@ public class PlanningStage : IStage
         // Remove highlights loaded in planning start
         foreach (GameObject highlight in Highlights) UnityEngine.Object.Destroy(highlight);
         Highlights = new List<GameObject>();
+
+        // Save the current positions of the player's pieces
+        Game.PlayerGameBoard.Clear();
+        Game.PlayerSideBoard.Clear();
+        foreach (Piece piece in Game.GameBoard.PlayerPieces)
+            Game.PlayerGameBoard.Add(new PositionRecord(piece.GetType(), piece.Space));
+        foreach (Piece piece in Game.SideBoard.PlayerPieces)
+            Game.PlayerSideBoard.Add(new PositionRecord(piece.GetType(), piece.Space));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -113,22 +120,41 @@ public class PlanningStage : IStage
         Game.NextStage = new CombatStage(Game);
     }
 
-    /// <summary>Sets up the enemy's roster of pieces on their side of the board</summary>
-    public void PlaceEnemyPieces()
+    /// <summary>Sets up the peices on the game board and side board</summary>
+    public void PlacePieces()
     {
+        // Clear both boards
         Game.GameBoard.Clear();
+        Game.SideBoard.Clear();
+
+        // Place the enemies peices on the game board
         foreach (Type pieceType in Game.EnemyPieces)
         {
             Vector2Int space = GetRandomEmptySpace();
             Game.GameBoard.AddPiece(pieceType, true, space);
         }
-    }
 
-    /// <summary>Sets up the player's roster of pieces in the sideboard</summary>
-    public void PlacePlayerPieces()
-    {
-        Game.SideBoard.Clear();
-        foreach (Type pieceType in Game.PlayerPieces) Game.SideBoard.AddPiece(pieceType, false);
+        // Place the player's peices on the game board
+        foreach (PositionRecord record in Game.PlayerGameBoard)
+        {
+            if (record.Space == null)
+            {
+                if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(record);
+            }
+            else
+            {
+                Game.GameBoard.AddPiece(record.Type, false, record.Space.Value);
+            }
+        }
+
+        // Place the player's peices on the side board
+        foreach (PositionRecord record in Game.PlayerSideBoard)
+        {
+            if (record.Space == null)
+                Game.SideBoard.AddPiece(record.Type, false);
+            else
+                Game.SideBoard.AddPiece(record.Type, false, record.Space.Value);
+        }
     }
 
     /// <summary>Add highlights around the player rows of the given board</summary>

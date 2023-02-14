@@ -84,7 +84,7 @@ public class UpgradeStage : IStage
 
         // Add the pieces
         if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
-        if (Game.PlayerPieces.Count < 24) Game.PlayerPieces.Add(playerPiece);
+        if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(new PositionRecord(playerPiece, null));
 
         // Remove the upgrade menu
         Choices.RemovePiecesInMenu();

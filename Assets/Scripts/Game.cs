@@ -51,8 +51,11 @@ public class Game : MonoBehaviour
     /// <summary>The enemies roster of pieces (indexes to prefabs)</summary>
     public IList<Type> EnemyPieces { get; set; }
 
-    /// <summary>The player's roster of pieces</summary>
-    public IList<Type> PlayerPieces { get; set; }
+    /// <summary>The player's pieces on the game board</summary>
+    public IList<PositionRecord> PlayerGameBoard { get; set; }
+
+    /// <summary>The player's pieces on the side board</summary>
+    public IList<PositionRecord> PlayerSideBoard { get; set; }
 
     /// <summary>The current level</summary>
     public int Level { get; set; } = 0;
@@ -83,9 +86,10 @@ public class Game : MonoBehaviour
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
-        PlayerPieces = new List<Type>();
+        PlayerGameBoard = new List<PositionRecord>();
+        PlayerSideBoard = new List<PositionRecord>();
         EnemyPieces.Add(typeof(Pawn));
-        PlayerPieces.Add(typeof(Pawn));
+        PlayerSideBoard.Add(new PositionRecord(typeof(Pawn), new Vector2Int(0,1)));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);
