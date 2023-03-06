@@ -112,7 +112,7 @@ public class UpgradeStage : IStage
         for (int i = 0; i < Game.EnemyPieces.Count; i++)
         {
             int valueToRemove = GetTypeValue(Game.EnemyPieces[i]);
-            if (valueToRemove <= valueToAdd)
+            if (valueToRemove < valueToAdd)
             {
                 Game.EnemyPieces.RemoveAt(i);
                 return;
