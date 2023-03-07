@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d76dd86e8d0413146a80c8b891a77fa1
+guid: f0b83f8cb9a2ac6468a1c3b5eef52acb
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Basic Pixel Font
+  - DotGothic16
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

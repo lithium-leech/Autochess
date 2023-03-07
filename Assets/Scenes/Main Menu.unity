@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.062499974}
-  m_SizeDelta: {x: 0, y: -0.12500004}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -0.000000044703484}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210183757
 MonoBehaviour:
@@ -184,8 +184,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[Exit]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
-  m_sharedMaterial: {fileID: 580118765808523505, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -699,8 +699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.06249997}
-  m_SizeDelta: {x: 0, y: -0.12500006}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -0.000000059604645}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234312106
 MonoBehaviour:
@@ -724,8 +724,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[Play]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
-  m_sharedMaterial: {fileID: 580118765808523505, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -23829,7 +23829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.1875, y: 4}
+  m_AnchoredPosition: {x: 0, y: 4}
   m_SizeDelta: {x: 8.25, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2065466182
@@ -23854,8 +23854,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Autochess
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
-  m_sharedMaterial: {fileID: 580118765808523505, guid: 1950ba1a01a8e1e44b72c06d1daa23f3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -23886,8 +23886,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

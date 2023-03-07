@@ -19,38 +19,42 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 941728382976
-    m_Localized: Spielen
+    m_Localized: Autochess
     m_Metadata:
       m_Items: []
   - m_Id: 1422345289728
-    m_Localized: Verlassen
+    m_Localized: Spielen
     m_Metadata:
       m_Items: []
   - m_Id: 5212536487936
-    m_Localized: Spielende
+    m_Localized: Verlassen
     m_Metadata:
       m_Items: []
   - m_Id: 9649652940800
-    m_Localized: Punktzahl
+    m_Localized: Spielende
     m_Metadata:
       m_Items: []
   - m_Id: 11086487273472
-    m_Localized: Highscore
+    m_Localized: Punktzahl
     m_Metadata:
       m_Items: []
   - m_Id: 12529453678592
-    m_Localized: Nochmal Versuchen
+    m_Localized: Highscore
     m_Metadata:
       m_Items: []
   - m_Id: 13489693442048
-    m_Localized: Neu Anfangen
+    m_Localized: Nochmal Versuchen
     m_Metadata:
       m_Items: []
   - m_Id: 14551271784448
-    m_Localized: "N\xE4chstes Level"
+    m_Localized: Neu Anfangen
     m_Metadata:
       m_Items: []
   - m_Id: 15638221471744
+    m_Localized: "N\xE4chstes Level"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72935161380864
     m_Localized: Aufgeben?
     m_Metadata:
       m_Items: []

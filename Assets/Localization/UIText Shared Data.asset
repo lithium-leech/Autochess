@@ -16,38 +16,42 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: c3dae0920d6d1ba4ba3d431ad48359ac
   m_Entries:
   - m_Id: 941728382976
-    m_Key: Play
+    m_Key: Autochess
     m_Metadata:
       m_Items: []
   - m_Id: 1422345289728
-    m_Key: Quit
+    m_Key: Play
     m_Metadata:
       m_Items: []
   - m_Id: 5212536487936
-    m_Key: GameOver
+    m_Key: Quit
     m_Metadata:
       m_Items: []
   - m_Id: 9649652940800
-    m_Key: Score
+    m_Key: GameOver
     m_Metadata:
       m_Items: []
   - m_Id: 11086487273472
-    m_Key: HighScore
+    m_Key: Score
     m_Metadata:
       m_Items: []
   - m_Id: 12529453678592
-    m_Key: Retry
+    m_Key: HighScore
     m_Metadata:
       m_Items: []
   - m_Id: 13489693442048
-    m_Key: StartOver
+    m_Key: Retry
     m_Metadata:
       m_Items: []
   - m_Id: 14551271784448
-    m_Key: NextLevel
+    m_Key: StartOver
     m_Metadata:
       m_Items: []
   - m_Id: 15638221471744
+    m_Key: NextLevel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 72935161380864
     m_Key: Concede
     m_Metadata:
       m_Items: []
