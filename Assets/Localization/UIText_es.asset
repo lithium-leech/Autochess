@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: UIText_en
+  m_Name: UIText_es
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
+    m_Code: es
   m_SharedData: {fileID: 11400000, guid: c3dae0920d6d1ba4ba3d431ad48359ac, type: 2}
   m_Metadata:
     m_Items: []
@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1422345289728
-    m_Localized: Quit
+    m_Localized: Salir
     m_Metadata:
       m_Items: []
   - m_Id: 5212536487936
@@ -31,27 +31,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9649652940800
-    m_Localized: Score
+    m_Localized: "Puntuaci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 11086487273472
-    m_Localized: High Score
+    m_Localized: "Mejor Puntuaci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 12529453678592
-    m_Localized: Try Again
+    m_Localized: Reintentarlo
     m_Metadata:
       m_Items: []
   - m_Id: 13489693442048
-    m_Localized: Start Over
+    m_Localized: Volver a Empezar
     m_Metadata:
       m_Items: []
   - m_Id: 14551271784448
-    m_Localized: Next Level
+    m_Localized: Nivel Siguiente
     m_Metadata:
       m_Items: []
   - m_Id: 15638221471744
-    m_Localized: Concede?
+    m_Localized: "\xBFRendirse?"
     m_Metadata:
       m_Items: []
   references:

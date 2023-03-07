@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 941728382976
-    m_Localized: Fortfahren
+    m_Localized: Spielen
     m_Metadata:
       m_Items: []
   - m_Id: 1422345289728
-    m_Localized: "Schlie\xDFen"
+    m_Localized: Verlassen
     m_Metadata:
       m_Items: []
   - m_Id: 5212536487936
