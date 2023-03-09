@@ -88,8 +88,8 @@ public class Game : MonoBehaviour
 
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
-        SideBoard = new Board(this, 8, 2, 2, new Vector2(-4.0f, -5.0f));
-        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -7.5f));
+        SideBoard = new Board(this, 8, 2, 2, new Vector2(-4.0f, -4.5f));
+        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -7.0f));
 
         // Create a sample setup;
         EnemyPieces = new List<Type>();
