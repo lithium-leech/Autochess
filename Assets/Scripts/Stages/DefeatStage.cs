@@ -22,12 +22,12 @@ public class DefeatStage : IStage
         Game.MusicBox.StopMusic();
 
         // Show the final score
-        Game.ScoreText.GetComponent<TextMeshProUGUI>().text = Game.Level.ToString();
-        Game.HighScoreText.GetComponent<TextMeshProUGUI>().text = Game.HighScore.ToString();
+        Game.ScoreText.text = Game.Level.ToString();
+        Game.HighScoreText.text = Game.HighScore.ToString();
         Game.GameOverMenu.SetActive(true);
 
         // Add button listeners
-        Game.StartOverButton.onClick.AddListener(StartOver);
+        Game.EndGameButton.onClick.AddListener(EndGame);
         Game.RetryButton.onReward += RetryLevel;
     }
 
@@ -39,7 +39,7 @@ public class DefeatStage : IStage
     public void End()
     {
         // Remove button Listeners
-        Game.StartOverButton.onClick.RemoveAllListeners();
+        Game.EndGameButton.onClick.RemoveAllListeners();
         Game.RetryButton.onReward -= RetryLevel;
 
         // Hide the game over menu
@@ -50,5 +50,5 @@ public class DefeatStage : IStage
     public void RetryLevel() => Game.NextStage = new PlanningStage(Game);
 
     /// <summary>Starts the game over</summary>
-    public void StartOver() => SceneManager.LoadScene("Game");
+    public void EndGame() => SceneManager.LoadScene("Main Menu");
 }

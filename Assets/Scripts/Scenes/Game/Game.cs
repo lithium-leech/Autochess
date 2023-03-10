@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,21 +15,23 @@ public class Game : MonoBehaviour
     public GameObject[] PiecePrefabs;
     public GameObject[] HighlightPrefabs;
     public Camera Camera;
-    public GameObject LevelText;
-    public GameObject ScoreText;
-    public GameObject HighScoreText;
-    public GameObject ExitGameButton;
+    public TextMeshProUGUI LevelText;
+    public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI HighScoreText;
+    public Button MenuButton;
     public Button FightButton;
+    public Button ConcedeButton;
     public Button CancelConcedeButton;
     public Button ConfirmConcedeButton;
     public RewardedAdsButton RetryButton;
-    public Button StartOverButton;
+    public Button EndGameButton;
     public Button ChoiceOneButton;
     public Button ChoiceTwoButton;
     public Button ChoiceThreeButton;
-    public GameObject GameOverMenu;
     public GameObject ConcedeMenu;
     public GameObject UpgradeMenu;
+    public GameObject GameOverMenu;
+    public GameObject SettingsMenu;
 
     /// <summary>The time in between turns (seconds)</summary>
     public static float TurnPause { get; } = 2;
@@ -79,12 +80,13 @@ public class Game : MonoBehaviour
 
         // Load saved data
         SaveData saveData = SaveSystem.Load();
+        HighScore = saveData.HighScore;
+        foreach (AudioSource source in Music) source.volume = saveData.Volume;
 
         // Set game states
         MusicBox = new MusicBox(Music);
         Level = 1;
-        HighScore = saveData.HighScore;
-        LevelText.GetComponent<TextMeshProUGUI>().text = "1";
+        LevelText.text = "1";
 
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
@@ -97,6 +99,10 @@ public class Game : MonoBehaviour
         PlayerSideBoard = new List<PositionRecord>();
         EnemyPieces.Add(typeof(Pawn));
         PlayerSideBoard.Add(new PositionRecord(typeof(Pawn), null));
+
+        // Add button handlers
+        MenuButton.onClick.AddListener(OpenSettings);
+        ConcedeButton.onClick.AddListener(Concede);
 
         // Start the planning phase
         NextStage = new PlanningStage(this);
@@ -122,16 +128,24 @@ public class Game : MonoBehaviour
 
     private void OnDestroy()
     {
-        // Create the save data
+        // Create new save data
         SaveData saveData = new SaveData();
         saveData.HighScore = HighScore;
+        saveData.Volume = Music[0].volume;
 
         // Write the save data to a file
         SaveSystem.Save(saveData);
     }
 
-    /// <summary>Exits the game and goes back to the main menu</summary>
-    public void ExitGame() => SceneManager.LoadScene("Main Menu");
+    /// <summary>Opens the settings menu</summary>
+    public void OpenSettings() => SettingsMenu.SetActive(true);
+
+    /// <summary>Concedes the stage, taking the player straight to defeat</summary>
+    public void Concede()
+    {
+        SettingsMenu.SetActive(false);
+        NextStage = new DefeatStage(this);
+    }
 
     /// <summary>Creates a new instance of a piece</summary>
     /// <typeparam name="T">The type of piece to create</typeparam>

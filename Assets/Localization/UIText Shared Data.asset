@@ -44,7 +44,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14551271784448
-    m_Key: StartOver
+    m_Key: End
     m_Metadata:
       m_Items: []
   - m_Id: 15638221471744
@@ -52,6 +52,30 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 72935161380864
+    m_Key: AskConcede
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157508955815936
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1250694902497280
+    m_Key: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1252831090884608
+    m_Key: Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1254281409904640
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1255608978423808
+    m_Key: LanguageName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418188627820544
     m_Key: Concede
     m_Metadata:
       m_Items: []

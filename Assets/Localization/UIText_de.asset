@@ -47,7 +47,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 14551271784448
-    m_Localized: Neu Anfangen
+    m_Localized: Spiel Beenden
     m_Metadata:
       m_Items: []
   - m_Id: 15638221471744
@@ -56,6 +56,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 72935161380864
     m_Localized: Aufgeben?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157508955815936
+    m_Localized: Einstellungen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1250694902497280
+    m_Localized: "Schlie\xDFen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1252831090884608
+    m_Localized: "Lautst\xE4rke"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1254281409904640
+    m_Localized: Sprache
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1255608978423808
+    m_Localized: Deutsch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1418188627820544
+    m_Localized: Aufgeben
     m_Metadata:
       m_Items: []
   references:

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
   m_StartupSelectors:
-  - rid: 964481863319289856
-  - rid: 964481863319289857
-  - rid: 964481863319289858
+  - rid: 964481941114716178
+  - rid: 964481941114716194
+  - rid: 964481941114716197
   m_AvailableLocales:
     rid: 964481863319289859
   m_AssetDatabase:
@@ -28,21 +28,10 @@ MonoBehaviour:
     - rid: 964481867317772291
   m_ProjectLocaleIdentifier:
     m_Code: en
-  m_InitializeSynchronously: 0
+  m_InitializeSynchronously: 1
   references:
     version: 2
     RefIds:
-    - rid: 964481863319289856
-      type: {class: CommandLineLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
-      data:
-        m_CommandLineArgument: -language=
-    - rid: 964481863319289857
-      type: {class: SystemLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
-    - rid: 964481863319289858
-      type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
-      data:
-        m_LocaleId:
-          m_Code: en
     - rid: 964481863319289859
       type: {class: LocalesProvider, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
     - rid: 964481863319289860
@@ -192,7 +181,7 @@ MonoBehaviour:
       data:
         m_DisplayName:
           m_TableReference:
-            m_TableCollectionName: GUID:c3dae0920d6d1ba4ba3d431ad48359ac
+            m_TableCollectionName: 
           m_TableEntryReference:
             m_KeyId: 941728382976
             m_Key: 
@@ -213,7 +202,7 @@ MonoBehaviour:
           m_LocalVariables: []
         m_DisplayName:
           m_TableReference:
-            m_TableCollectionName: GUID:c3dae0920d6d1ba4ba3d431ad48359ac
+            m_TableCollectionName: 
           m_TableEntryReference:
             m_KeyId: 941728382976
             m_Key: 
@@ -256,3 +245,14 @@ MonoBehaviour:
           m_FallbackState: 0
           m_WaitForCompletion: 0
           m_LocalVariables: []
+    - rid: 964481941114716178
+      type: {class: PlayerPrefLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+      data:
+        m_PlayerPreferenceKey: PreferredLocale
+    - rid: 964481941114716194
+      type: {class: SystemLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+    - rid: 964481941114716197
+      type: {class: SpecificLocaleSelector, ns: UnityEngine.Localization.Settings, asm: Unity.Localization}
+      data:
+        m_LocaleId:
+          m_Code: en

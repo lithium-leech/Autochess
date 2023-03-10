@@ -6,8 +6,11 @@ using UnityEngine.Events;
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
     [SerializeField] Button _showAdButton;
-    [SerializeField] string _androidAdUnitId = "Rewarded_Android";
+#if UNITY_IOS
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
+#elif UNITY_ANDROID
+    [SerializeField] string _androidAdUnitId = "Rewarded_Android";
+#endif
     string _adUnitId = null; // This will remain null for unsupported platforms
 
     // An event that is triggered when a reward is granted
@@ -21,6 +24,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 #elif UNITY_ANDROID
         _adUnitId = _androidAdUnitId;
 #endif
+
+        // Disable the button until the ad is ready to show:
+        _showAdButton.interactable = false;
     }
 
     // Load content to the Ad Unit:
@@ -40,14 +46,19 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         {
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
+            // Enable the button for users to click:
+            _showAdButton.interactable = true;
         }
     }
 
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
+        // Disable the button:
+        _showAdButton.interactable = false;
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
+        
     }
 
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
