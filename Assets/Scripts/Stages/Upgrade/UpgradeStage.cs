@@ -1,5 +1,8 @@
 using System;
 using TMPro;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 /// <summary>
 /// The stage of the game where the player chooses upgrades for the next level
@@ -28,6 +31,14 @@ public class UpgradeStage : IStage
         Game.Level++;
         if (Game.Level > Game.HighScore) Game.HighScore = Game.Level;
         Game.LevelText.GetComponent<TextMeshProUGUI>().text = Game.Level.ToString();
+        PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
+        IntVariable score = pvs["game"]["score"] as IntVariable;
+        IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
+        using (PersistentVariablesSource.UpdateScope())
+        {
+            score.Value = Game.Level;
+            highscore.Value = Game.HighScore;
+        }
 
         // Display new level choices
         Choices = new NextLevelChoices();

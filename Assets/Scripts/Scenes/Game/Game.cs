@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 /// <summary>
@@ -16,8 +19,6 @@ public class Game : MonoBehaviour
     public GameObject[] HighlightPrefabs;
     public Camera Camera;
     public TextMeshProUGUI LevelText;
-    public TextMeshProUGUI ScoreText;
-    public TextMeshProUGUI HighScoreText;
     public Button MenuButton;
     public Button FightButton;
     public Button ConcedeButton;
@@ -32,12 +33,18 @@ public class Game : MonoBehaviour
     public GameObject UpgradeMenu;
     public GameObject GameOverMenu;
     public GameObject SettingsMenu;
-
+    
     /// <summary>The time in between turns (seconds)</summary>
     public static float TurnPause { get; } = 2;
 
     /// <summary>The Z-plane that pieces exist on</summary>
     public static float PieceZ { get; } = -5;
+    
+    /// <summary>The player's current level</summary>
+    public int Level { get; set; }
+
+    /// <summary>The player's highest score</summary>
+    public int HighScore { get; set; }
 
     /// <summary>The current stage of the game being run</summary>
     public IStage CurrentStage { get; set; } = null;
@@ -57,12 +64,6 @@ public class Game : MonoBehaviour
 
     /// <summary>The player's pieces on the side board</summary>
     public IList<PositionRecord> PlayerSideBoard { get; set; }
-
-    /// <summary>The current level</summary>
-    public int Level { get; set; } = 0;
-
-    /// <summary>The player's highest level achieved</summary>
-    public int HighScore { get; set; } = 0;
 
     /// <summary>The board that fights take place on</summary>
     public Board GameBoard { get; set; }
@@ -86,7 +87,15 @@ public class Game : MonoBehaviour
         // Set game states
         MusicBox = new MusicBox(Music);
         Level = 1;
-        LevelText.text = "1";
+        LevelText.text = Level.ToString();
+        PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
+        IntVariable score = pvs["game"]["score"] as IntVariable;
+        IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
+        using (PersistentVariablesSource.UpdateScope())
+        {
+            score.Value = Level;
+            highscore.Value = HighScore;
+        }
 
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
@@ -128,6 +137,10 @@ public class Game : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Remove button handlers
+        MenuButton.onClick.RemoveAllListeners();
+        ConcedeButton.onClick.RemoveAllListeners();
+
         // Create new save data
         SaveData saveData = new SaveData();
         saveData.HighScore = HighScore;

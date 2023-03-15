@@ -50,6 +50,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5af138ae5bbee024c89a2dfeb0feef56, type: 2}
   - {fileID: 11400000, guid: f90f6e1aab25d224e8124ded1b32c324, type: 2}
   - {fileID: 11400000, guid: e41e839a987082e48b63b363584ef6f6, type: 2}
+  - {fileID: 11400000, guid: 6cd0b66569314b94695aeb55ead6b361, type: 2}
+  - {fileID: 11400000, guid: 182a422a6d6e0fa45a373a0807adb192, type: 2}
+  - {fileID: 11400000, guid: 643bd27cbe12a6b4b8c55356dbf9685f, type: 2}
+  - {fileID: 11400000, guid: 4999339fca175814bbb143b46dc0c921, type: 2}
+  - {fileID: 11400000, guid: df2a2204c8b35b84dbe63f3b1bacec97, type: 2}
+  - {fileID: 11400000, guid: f7b3c52414c473b40aaef71e64b66782, type: 2}
+  - {fileID: 11400000, guid: 17d320ee4304dee4f809d35f9ae56b03, type: 2}
+  - {fileID: 11400000, guid: 07efff2347e749744b788a539b54570b, type: 2}
+  - {fileID: 11400000, guid: 070256d9bb7137d46a84aaa1bf70b4e6, type: 2}
+  - {fileID: 11400000, guid: 90d018a33aa3a064a8392c476294588e, type: 2}
+  - {fileID: 11400000, guid: abcc419a04f4fac45a22a8bf103d09a5, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -98,6 +109,17 @@ MonoBehaviour:
     - Locale-fr
     - Locale-ja-JP
     - Locale-es
+    - Locale-pt
+    - Locale-ja
+    - Locale-ru
+    - Locale-hi
+    - Locale-ur
+    - Locale-ar
+    - Locale-zh-Hans
+    - Locale-ko
+    - Locale-zh
+    - Locale-bn
+    - Locale-id
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: c5e47df6489119444bf09010a5283077, type: 2}

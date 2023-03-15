@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -21,9 +20,7 @@ public class DefeatStage : IStage
         // Stop all music
         Game.MusicBox.StopMusic();
 
-        // Show the final score
-        Game.ScoreText.text = Game.Level.ToString();
-        Game.HighScoreText.text = Game.HighScore.ToString();
+        // Show the game over screen
         Game.GameOverMenu.SetActive(true);
 
         // Add button listeners

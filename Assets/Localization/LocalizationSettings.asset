@@ -47,7 +47,7 @@ MonoBehaviour:
           m_TableCollectionName: 
         m_UseFallback: 0
         m_MissingTranslationState: 1
-        m_NoTranslationFoundMessage: No translation found for '{key}' in {table.TableCollectionName}
+        m_NoTranslationFoundMessage: '#Error#'
         m_SmartFormat:
           rid: 964481863319289862
     - rid: 964481863319289862
@@ -106,7 +106,9 @@ MonoBehaviour:
     - rid: 964481863319289866
       type: {class: PersistentVariablesSource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
       data:
-        m_Groups: []
+        m_Groups:
+        - name: game
+          group: {fileID: 11400000, guid: a3a39e8dba2a8b444b9deb9f289bbe83, type: 2}
     - rid: 964481863319289867
       type: {class: DictionarySource, ns: UnityEngine.Localization.SmartFormat.Extensions, asm: Unity.Localization}
     - rid: 964481863319289868
@@ -181,9 +183,9 @@ MonoBehaviour:
       data:
         m_DisplayName:
           m_TableReference:
-            m_TableCollectionName: 
+            m_TableCollectionName: GUID:e333d8f90199b21488639e1b80f3336d
           m_TableEntryReference:
-            m_KeyId: 941728382976
+            m_KeyId: 49318903808
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0
@@ -202,9 +204,9 @@ MonoBehaviour:
           m_LocalVariables: []
         m_DisplayName:
           m_TableReference:
-            m_TableCollectionName: 
+            m_TableCollectionName: GUID:e333d8f90199b21488639e1b80f3336d
           m_TableEntryReference:
-            m_KeyId: 941728382976
+            m_KeyId: 49318903808
             m_Key: 
           m_FallbackState: 0
           m_WaitForCompletion: 0

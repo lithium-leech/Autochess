@@ -1,12 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// A behavior which makes a game object hidden by default
+/// </summary>
 public class Hidden : MonoBehaviour
 {
-    public GameObject hiddenObject;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        hiddenObject.SetActive(false);
-    }
+    void Start() => gameObject.SetActive(false);
 }

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: f71ac4b43fb86c6438b69743cf5e7f1a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - EnglishFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - GermanFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - FrenchFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - SpanishFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - PortugueseFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - RussianFont: {fileID: 11400000, guid: c4880f54a3ba9bc439684fde89a890d9, type: 2}
+  - HindiFont: {fileID: 11400000, guid: 938647d90f06d9640847979a81dab502, type: 2}
+  - UrduFont: {fileID: 11400000, guid: bf3ac30d05b931c4b8f102694b19f97e, type: 2}
+  - ArabicFont: {fileID: 11400000, guid: cec659d0ae50e2f4d9681a01482d6867, type: 2}
+  - ChineseFont: {fileID: 11400000, guid: 17e6b5ae4224d0d438f01261083ed6d8, type: 2}
+  - JapaneseFont: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
+  - KoreanFont: {fileID: 11400000, guid: f74470c6ff543134f816b2c4e754e64e, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

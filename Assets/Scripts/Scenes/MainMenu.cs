@@ -34,6 +34,11 @@ public class MainMenu : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Remove button handlers
+        PlayButton.onClick.RemoveAllListeners();
+        SettingsButton.onClick.RemoveAllListeners();
+        ExitButton.onClick.RemoveAllListeners();
+
         // Create new save data
         SaveData saveData = new SaveData();
         saveData.HighScore = SaveData.HighScore;

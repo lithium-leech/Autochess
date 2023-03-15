@@ -2,6 +2,9 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+/// <summary>
+/// Static methods which can be used to load and save data
+/// </summary>
 public static class SaveSystem
 {
     /// <summary>The file path to write and read data from</summary>

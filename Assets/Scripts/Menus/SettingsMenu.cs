@@ -6,6 +6,9 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
+/// <summary>
+/// Adds behaviors needed for changing game settings
+/// </summary>
 public class SettingsMenu : MonoBehaviour
 {
     /// Properties to set using Unity interface
@@ -44,6 +47,16 @@ public class SettingsMenu : MonoBehaviour
         LanguageLeftButton.onClick.AddListener(LanguageDown);
         LanguageRightButton.onClick.AddListener(LanguageUp);
         CloseButton.onClick.AddListener(Close);
+    }
+
+    private void OnDestroy()
+    {
+        // Remove button handlers
+        VolumeLeftButton.onClick.RemoveAllListeners();
+        VolumeRightButton.onClick.RemoveAllListeners();
+        LanguageLeftButton.onClick.RemoveAllListeners();
+        LanguageRightButton.onClick.RemoveAllListeners();
+        CloseButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>Decreases the volume</summary>
