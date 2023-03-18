@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6618893164906983224}
   - component: {fileID: 3841667060763372182}
   - component: {fileID: 5906580344920903000}
+  - component: {fileID: -6804346105435780163}
   m_Layer: 0
   m_Name: WhitePawn
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94abaf2004eb2f74b98be3b6edbdb15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6804346105435780163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715072411440580236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d80dc17f0ddbf741b0467524e9f6a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Group: 2
+  Identity: 4

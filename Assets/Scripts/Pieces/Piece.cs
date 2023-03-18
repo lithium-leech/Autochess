@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,8 +18,8 @@ public abstract class Piece : MonoBehaviour
     /// <summary>True if this piece has been captured</summary>
     public bool IsCaptured { get; set; } = false;
 
-    /// <summary>The Type of piece to transform into (null for no upgrade)</summary>
-    public Type Upgrade { get; set; } = null;
+    /// <summary>The piece to transform into</summary>
+    public AssetGroup.Piece Transform { get; set; } = AssetGroup.Piece.None;
 
     /// <summary>True if the piece is moving towards a target location</summary>
     private bool IsMoving { get; set; } = false;
@@ -45,11 +44,11 @@ public abstract class Piece : MonoBehaviour
         }
         else
         {
-            // Upgrade to a piece when initiated
-            if (Upgrade != null)
+            // Change to a different piece when initiated
+            if (Transform != AssetGroup.Piece.None)
             {
                 Board.CapturePiece(this);
-                Board.AddPiece(Upgrade, !IsPlayerPiece, Space);
+                Board.AddPiece(Transform, !IsPlayerPiece, Space);
             }
         }
 

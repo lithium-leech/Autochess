@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4734690083467477743}
   - component: {fileID: 160338934813030864}
   - component: {fileID: 8510591424775233386}
+  - component: {fileID: -2635817729323508673}
   m_Layer: 0
   m_Name: WhiteKing
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78186e996099d6c46a6c5094432cf052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2635817729323508673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852475214301588939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d80dc17f0ddbf741b0467524e9f6a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Group: 2
+  Identity: 2

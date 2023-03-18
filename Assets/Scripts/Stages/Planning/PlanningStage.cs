@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +8,7 @@ public class PlanningStage : IStage
 {
     /// <summary>Creates a new instance of a PlanningStage</summary>
     /// <param name="game">The Game to run the PlanningStage in</param>
-    public PlanningStage(Game game)
-    {
-        Game = game;
-    }
+    public PlanningStage(Game game) => Game = game;
 
     /// <summary>The Game this is being run in</summary>
     private Game Game { get; set; }
@@ -26,7 +22,7 @@ public class PlanningStage : IStage
     public void Start()
     {
         // Start the planning music
-        Game.MusicBox.PlayMusic(0);
+        GameState.MusicBox.PlayMusic(SongName.Planning);
 
         // Set up the boards
         PlacePieces();
@@ -45,8 +41,8 @@ public class PlanningStage : IStage
     public void During()
     {
         // Get the current mouse position
-        Vector3 position = Game.Camera.ScreenToWorldPoint(Input.mousePosition);
-        position.z = Game.PieceZ;
+        Vector3 position = GameState.Camera.ScreenToWorldPoint(Input.mousePosition);
+        position.z = GameState.PieceZ;
 
         // Check if the position is inside a board
         Board board = null;
@@ -108,9 +104,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PositionRecord(piece.GetType(), piece.Space));
+            Game.PlayerGameBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, piece.Space));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PositionRecord(piece.GetType(), piece.Space));
+            Game.PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, piece.Space));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -134,7 +130,7 @@ public class PlanningStage : IStage
         Game.SideBoard.Clear();
 
         // Place the enemies peices on the game board
-        foreach (Type pieceType in Game.EnemyPieces)
+        foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
         {
             Vector2Int space = GetRandomEmptySpace();
             Game.GameBoard.AddPiece(pieceType, true, space);
@@ -149,7 +145,7 @@ public class PlanningStage : IStage
             }
             else
             {
-                Game.GameBoard.AddPiece(record.Type, false, record.Space.Value);
+                Game.GameBoard.AddPiece(record.Kind, false, record.Space.Value);
             }
         }
 
@@ -157,9 +153,9 @@ public class PlanningStage : IStage
         foreach (PositionRecord record in Game.PlayerSideBoard)
         {
             if (record.Space == null)
-                Game.SideBoard.AddPiece(record.Type, false);
+                Game.SideBoard.AddPiece(record.Kind, false);
             else
-                Game.SideBoard.AddPiece(record.Type, false, record.Space.Value);
+                Game.SideBoard.AddPiece(record.Kind, false, record.Space.Value);
         }
     }
 
@@ -175,21 +171,21 @@ public class PlanningStage : IStage
         if (board.PlayerRows > 0)
         {
             // Create the bottom row
-            highlights.Add(Game.CreateHighlight(0, board, new Vector2Int(-1, -1)));
-            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(7, board, new Vector2Int(i, -1)));
-            highlights.Add(Game.CreateHighlight(6, board, new Vector2Int(board.Width, -1)));
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomLeft, board, new Vector2Int(-1, -1)));
+            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Bottom, board, new Vector2Int(i, -1)));
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomRight, board, new Vector2Int(board.Width, -1)));
 
             // Create the left and right columns
             for (int i = 0; i < board.PlayerRows; i++)
             {
-                highlights.Add(Game.CreateHighlight(5, board, new Vector2Int(-1, i)));
-                highlights.Add(Game.CreateHighlight(1, board, new Vector2Int(board.Width, i)));
+                highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Left, board, new Vector2Int(-1, i)));
+                highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Right, board, new Vector2Int(board.Width, i)));
             }
 
             // Create the top row
-            highlights.Add(Game.CreateHighlight(2, board, new Vector2Int(-1, board.PlayerRows)));
-            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(3, board, new Vector2Int(i, board.PlayerRows)));
-            highlights.Add(Game.CreateHighlight(4, board, new Vector2Int(board.Width, board.PlayerRows)));
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopLeft, board, new Vector2Int(-1, board.PlayerRows)));
+            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Top, board, new Vector2Int(i, board.PlayerRows)));
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopRight, board, new Vector2Int(board.Width, board.PlayerRows)));
         }
 
         // Return the generated highlights

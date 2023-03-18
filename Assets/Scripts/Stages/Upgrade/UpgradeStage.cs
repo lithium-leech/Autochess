@@ -11,10 +11,7 @@ public class UpgradeStage : IStage
 {
     /// <summary>Creates a new instance of an UpgradeStage</summary>
     /// <param name="game">The Game to run the UpgradeStage in</param>
-    public UpgradeStage(Game game)
-    {
-        Game = game;
-    }
+    public UpgradeStage(Game game) => Game = game;
 
     /// <summary>The Game this is being run in</summary>
     private Game Game { get; set; }
@@ -25,19 +22,19 @@ public class UpgradeStage : IStage
     public void Start()
     {
         // Start the planning music
-        Game.MusicBox.PlayMusic(0);
+        GameState.MusicBox.PlayMusic(SongName.Planning);
 
         // Go to the next level
-        Game.Level++;
-        if (Game.Level > Game.HighScore) Game.HighScore = Game.Level;
-        Game.LevelText.GetComponent<TextMeshProUGUI>().text = Game.Level.ToString();
+        GameState.Level++;
+        if (GameState.Level > GameState.HighScore) GameState.HighScore = GameState.Level;
+        Game.LevelText.GetComponent<TextMeshProUGUI>().text = GameState.Level.ToString();
         PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
         IntVariable score = pvs["game"]["score"] as IntVariable;
         IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
         using (PersistentVariablesSource.UpdateScope())
         {
-            score.Value = Game.Level;
-            highscore.Value = Game.HighScore;
+            score.Value = GameState.Level;
+            highscore.Value = GameState.HighScore;
         }
 
         // Display new level choices
@@ -55,15 +52,9 @@ public class UpgradeStage : IStage
         Game.ChoiceThreeButton.onClick.AddListener(ChooseThree);
     }
 
-    public void During()
-    {
+    public void During() { }
 
-    }
-
-    public void End()
-    {
-        
-    }
+    public void End() { }
 
     // Button listeners
     public void ChooseOne() => Choose(1);
@@ -75,8 +66,8 @@ public class UpgradeStage : IStage
     private void Choose(int choice)
     {
         // Get the pieces corresponding to the selected option
-        Type playerPiece;
-        Type enemyPiece;
+        AssetGroup.Piece playerPiece;
+        AssetGroup.Piece enemyPiece;
         if (choice == 1)
         {
             playerPiece = Choices.PlayerPiece1;
@@ -115,14 +106,14 @@ public class UpgradeStage : IStage
         Game.NextStage = new PlanningStage(Game);
     }
 
-    /// <summary>Remove an enemy piece with lower value than the given Type</summary>
-    /// <param name="type">The piece Type to make space for</param>
-    public void RemoveLowerValue(Type type)
+    /// <summary>Remove an enemy piece with lower value than the given kind</summary>
+    /// <param name="kind">The kind of piece to make space for</param>
+    public void RemoveLowerValue(AssetGroup.Piece kind)
     {
-        int valueToAdd = GetTypeValue(type);
+        int valueToAdd = GetPieceValue(kind);
         for (int i = 0; i < Game.EnemyPieces.Count; i++)
         {
-            int valueToRemove = GetTypeValue(Game.EnemyPieces[i]);
+            int valueToRemove = GetPieceValue(Game.EnemyPieces[i]);
             if (valueToRemove < valueToAdd)
             {
                 Game.EnemyPieces.RemoveAt(i);
@@ -131,17 +122,20 @@ public class UpgradeStage : IStage
         }
     }
 
-    /// <summary>Get the value of a give piece Type</summary>
-    /// <param name="type">The piece Type to evaluate</param>
+    /// <summary>Get the value of a given kind of piece</summary>
+    /// <param name="kind">The kind of piece to evaluate</param>
     /// <returns>An integer value</returns>
-    public int GetTypeValue(Type type)
+    public int GetPieceValue(AssetGroup.Piece kind)
     {
-        if (type == typeof(Pawn)) return 0;
-        else if (type == typeof(Knight)) return 1;
-        else if (type == typeof(King)) return 2;
-        else if (type == typeof(Bishop)) return 3;
-        else if (type == typeof(Rook)) return 4;
-        else if (type == typeof(Queen)) return 5;
-        else throw new Exception($"Type {type} not recognized");
+        return kind switch
+        {
+            AssetGroup.Piece.Pawn => 0,
+            AssetGroup.Piece.Knight => 1,
+            AssetGroup.Piece.King => 2,
+            AssetGroup.Piece.Bishop => 3,
+            AssetGroup.Piece.Rook => 4,
+            AssetGroup.Piece.Queen => 5,
+            _ => throw new Exception($"Piece kind {kind} not recognized")
+        };
     }
 }

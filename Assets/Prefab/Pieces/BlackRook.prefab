@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6907198198955567749}
   - component: {fileID: 2785004190657151102}
   - component: {fileID: 916291319896107190}
+  - component: {fileID: -5742296389033725962}
   m_Layer: 0
   m_Name: BlackRook
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91b9e074c4cd794e964a8f59fa11734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5742296389033725962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7136111846648681520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d80dc17f0ddbf741b0467524e9f6a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Group: 3
+  Identity: 6

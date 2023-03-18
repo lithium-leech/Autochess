@@ -37,7 +37,7 @@ public class Pawn : Piece
         int edge = IsPlayerPiece ? Board.Height - 1 : 0;
         if (newSpace.y == edge)
         {
-            Upgrade = typeof(Queen);
+            Transform = AssetGroup.Piece.Queen;
         }
     }
 

@@ -12,7 +12,6 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    public AudioSource[] Music;
     public TextMeshProUGUI VolumeValue;
     public Button VolumeLeftButton;
     public Button VolumeRightButton;
@@ -62,23 +61,21 @@ public class SettingsMenu : MonoBehaviour
     /// <summary>Decreases the volume</summary>
     public void VolumeDown()
     {
-        foreach (AudioSource source in Music)
-            source.volume -= 0.1f;
+        GameState.MusicBox.Volume -= 0.1f;
         UpdateVolume();
     }
 
     /// <summary>Increases the volume</summary>
     public void VolumeUp()
     {
-        foreach (AudioSource source in Music)
-            source.volume += 0.1f;
+        GameState.MusicBox.Volume += 0.1f;
         UpdateVolume();
     }
 
     /// <summary>Updates the volume value to the current volume</summary>
     private void UpdateVolume()
     {
-        float tens = Music[0].volume * 10.0f;
+        float tens = GameState.MusicBox.Volume * 10.0f;
         int rounded = Mathf.RoundToInt(tens);
         int percent = rounded * 10;
         VolumeValue.text = $"{percent}%";

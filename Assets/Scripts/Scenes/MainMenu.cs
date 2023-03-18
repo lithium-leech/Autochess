@@ -8,23 +8,15 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    public AudioSource[] Music;
     public GameObject SettingsMenu;
     public Button PlayButton;
     public Button SettingsButton;
     public Button ExitButton;
     
-    /// <summary>The save data initially loaded</summary>
-    private SaveData SaveData;
-
     void Start()
     {
-        // Load saved data
-        SaveData = SaveSystem.Load();
-        foreach (AudioSource source in Music) source.volume = SaveData.Volume;
-
         // Start the main menu music
-        Music[0].Play();
+        GameState.MusicBox.PlayMusic(SongName.Menu);
 
         // Add button handlers
         PlayButton.onClick.AddListener(Play);
@@ -38,14 +30,6 @@ public class MainMenu : MonoBehaviour
         PlayButton.onClick.RemoveAllListeners();
         SettingsButton.onClick.RemoveAllListeners();
         ExitButton.onClick.RemoveAllListeners();
-
-        // Create new save data
-        SaveData saveData = new SaveData();
-        saveData.HighScore = SaveData.HighScore;
-        saveData.Volume = Music[0].volume;
-
-        // Write the save data to a file
-        SaveSystem.Save(saveData);
     }
 
     /// <summary>Starts a new game</summary>

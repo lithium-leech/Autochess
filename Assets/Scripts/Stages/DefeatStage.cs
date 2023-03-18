@@ -18,7 +18,7 @@ public class DefeatStage : IStage
     public void Start()
     {
         // Stop all music
-        Game.MusicBox.StopMusic();
+        GameState.MusicBox.StopMusic();
 
         // Show the game over screen
         Game.GameOverMenu.SetActive(true);
@@ -28,10 +28,7 @@ public class DefeatStage : IStage
         Game.RetryButton.onReward += RetryLevel;
     }
 
-    public void During()
-    {
-
-    }
+    public void During() {}
 
     public void End()
     {
@@ -47,5 +44,5 @@ public class DefeatStage : IStage
     public void RetryLevel() => Game.NextStage = new PlanningStage(Game);
 
     /// <summary>Starts the game over</summary>
-    public void EndGame() => SceneManager.LoadScene("Main Menu");
+    public void EndGame() => SceneManager.LoadScene("MainMenu");
 }

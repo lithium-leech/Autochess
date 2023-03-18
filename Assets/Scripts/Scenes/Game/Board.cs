@@ -20,7 +20,7 @@ public class Board
     public Piece[,] Spaces { get; }
 
     /// <summary>The number of rows (starting at the bottom) that the player can use</summary>
-    public int PlayerRows { get; set; }
+    public int PlayerRows { get; }
 
     /// <summary>The pieces controlled by the player</summary>
     public List<Piece> PlayerPieces { get; }
@@ -54,26 +54,15 @@ public class Board
     }
 
     /// <summary>Adds a new piece to the board in the first empty space</summary>
-    /// <typeparam name="T">The type of piece to add</typeparam>
+    /// <param name="kind">The kind of piece to add</param>
     /// <param name="white">True if the piece is white</param>
-    public void AddPiece<T>(bool white) where T : Piece => AddPiece<T>(white, GetFirstEmptySpace());
+    public void AddPiece(AssetGroup.Piece kind, bool white) => AddPiece(kind, white, GetFirstEmptySpace());
 
     /// <summary>Adds a new piece to the board</summary>
-    /// <typeparam name="T">The type of piece to add</typeparam>
+    /// <param name="kind">The kind of piece to add</param>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
-    public void AddPiece<T>(bool white, Vector2Int space) where T : Piece => AddPiece(typeof(T), white, space);
-
-    /// <summary>Adds a new piece to the board in the first empty space</summary>
-    /// <param name="type">The type of piece to add</param>
-    /// <param name="white">True if the piece is white</param>
-    public void AddPiece(Type type, bool white) => AddPiece(type, white, GetFirstEmptySpace());
-
-    /// <summary>Adds a new piece to the board</summary>
-    /// <param name="type">The type of piece to add</param>
-    /// <param name="white">True if the piece is white</param>
-    /// <param name="space">The space to place the piece at</param>
-    public void AddPiece(Type type, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(type, white), space);
+    public void AddPiece(AssetGroup.Piece kind, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(kind, white), space);
 
     /// <summary>Adds a piece to the board in the first empty space</summary>
     /// <param name="piece">The piece to add</param>
@@ -197,5 +186,5 @@ public class Board
     /// <summary>Gets the world coordinates for a given space</summary>
     /// <param name="space">The space to get coordinated for</param>
     /// <returns>World-space coordinates</returns>
-    public Vector3 ToPosition(Vector2Int space) => new(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, Game.PieceZ);
+    public Vector3 ToPosition(Vector2Int space) => new(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, GameState.PieceZ);
 }

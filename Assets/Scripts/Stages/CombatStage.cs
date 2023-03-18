@@ -33,7 +33,7 @@ public class CombatStage : IStage
 
     public void Start()
     {
-        Game.MusicBox.StopMusic();
+        GameState.MusicBox.StopMusic();
         TimeWaited = 0;
         WhiteTurn = true;
         EndConcede();
@@ -43,7 +43,7 @@ public class CombatStage : IStage
     {
         // Pause between turns
         TimeWaited += Time.deltaTime;
-        if (TimeWaited < Game.TurnPause) return;
+        if (TimeWaited < GameState.TurnPause) return;
 
         // Check if the battle is over
         if (Game.GameBoard.PlayerPieces.Count < 1)
@@ -60,7 +60,7 @@ public class CombatStage : IStage
         }
         
         // Start the fight music when the first move is taken
-        Game.MusicBox.PlayMusic(1);
+        GameState.MusicBox.PlayMusic(SongName.Battle);
 
         // Move the current player's pieces
         if (WhiteTurn) RunRound(Game.GameBoard.EnemyPieces);

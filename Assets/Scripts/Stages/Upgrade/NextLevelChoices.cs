@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,37 +20,39 @@ public class NextLevelChoices
     }
 
     /// <summary>The piece the player gets if option 1 is chosen</summary>
-    public Type PlayerPiece1 { get; set; }
+    public AssetGroup.Piece PlayerPiece1 { get; set; }
 
     /// <summary>The piece the enemy gets if option 1 is chosen</summary>
-    public Type EnemyPiece1 { get; set; }
+    public AssetGroup.Piece EnemyPiece1 { get; set; }
 
     /// <summary>The piece the player gets if option 2 is chosen</summary>
-    public Type PlayerPiece2 { get; set; }
+    public AssetGroup.Piece PlayerPiece2 { get; set; }
 
     /// <summary>The piece the enemy gets if option 2 is chosen</summary>
-    public Type EnemyPiece2 { get; set; }
+    public AssetGroup.Piece EnemyPiece2 { get; set; }
 
     /// <summary>The piece the player gets if option 3 is chosen</summary>
-    public Type PlayerPiece3 { get; set; }
+    public AssetGroup.Piece PlayerPiece3 { get; set; }
 
     /// <summary>The piece the enemy gets if option 3 is chosen</summary>
-    public Type EnemyPiece3 { get; set; }
+    public AssetGroup.Piece EnemyPiece3 { get; set; }
 
     /// <summary>Instantiated pieces shown in the upgrade menu</summary>
     private IList<Piece> Pieces { get; set; } = new List<Piece>();
 
     /// <summary>Returns a random type of piece</summary>
     /// <returns>A Piece type</returns>
-    private Type GetRandomPiece()
+    private AssetGroup.Piece GetRandomPiece()
     {
-        int choice = UnityEngine.Random.Range(1, 7);
-        if (choice == 1) return typeof(Pawn);
-        else if (choice == 2) return typeof(Rook);
-        else if (choice == 3) return typeof(Knight);
-        else if (choice == 4) return typeof(Bishop);
-        else if (choice == 5) return typeof(Queen);
-        else return typeof(King);
+        return Random.Range(1, 7) switch
+        {
+            1 => AssetGroup.Piece.Pawn,
+            2 => AssetGroup.Piece.Rook,
+            3 => AssetGroup.Piece.Knight,
+            4 => AssetGroup.Piece.Bishop,
+            5 => AssetGroup.Piece.Queen,
+            _ => AssetGroup.Piece.King
+        };
     }
 
     /// <summary>Instantiates the choices as pieces so that they can be seen in the upgrade menu</summary>

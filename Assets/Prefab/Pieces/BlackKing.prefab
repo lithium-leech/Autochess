@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8904550672790859468}
   - component: {fileID: 7078322335012688893}
   - component: {fileID: 6013989316770810165}
+  - component: {fileID: 8024791162999814927}
   m_Layer: 0
   m_Name: BlackKing
   m_TagString: Untagged
@@ -97,3 +98,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78186e996099d6c46a6c5094432cf052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8024791162999814927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007522372393362288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d80dc17f0ddbf741b0467524e9f6a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Group: 3
+  Identity: 2

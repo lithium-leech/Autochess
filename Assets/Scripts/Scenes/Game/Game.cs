@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,10 +13,6 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    public AudioSource[] Music;
-    public GameObject[] PiecePrefabs;
-    public GameObject[] HighlightPrefabs;
-    public Camera Camera;
     public TextMeshProUGUI LevelText;
     public Button MenuButton;
     public Button FightButton;
@@ -33,18 +28,6 @@ public class Game : MonoBehaviour
     public GameObject UpgradeMenu;
     public GameObject GameOverMenu;
     public GameObject SettingsMenu;
-    
-    /// <summary>The time in between turns (seconds)</summary>
-    public static float TurnPause { get; } = 2;
-
-    /// <summary>The Z-plane that pieces exist on</summary>
-    public static float PieceZ { get; } = -5;
-    
-    /// <summary>The player's current level</summary>
-    public int Level { get; set; }
-
-    /// <summary>The player's highest score</summary>
-    public int HighScore { get; set; }
 
     /// <summary>The current stage of the game being run</summary>
     public IStage CurrentStage { get; set; } = null;
@@ -53,11 +36,8 @@ public class Game : MonoBehaviour
     /// <remarks>null when the current stage should keep runnning</remarks>
     public IStage NextStage { get; set; } = null;
 
-    /// <summary>An object for playing music</summary>
-    public MusicBox MusicBox { get; set; }
-
     /// <summary>The enemies roster of pieces (indexes to prefabs)</summary>
-    public IList<Type> EnemyPieces { get; set; }
+    public IList<AssetGroup.Piece> EnemyPieces { get; set; }
 
     /// <summary>The player's pieces on the game board</summary>
     public IList<PositionRecord> PlayerGameBoard { get; set; }
@@ -79,22 +59,16 @@ public class Game : MonoBehaviour
         // Load the first ad
         RetryButton.LoadAd();
 
-        // Load saved data
-        SaveData saveData = SaveSystem.Load();
-        HighScore = saveData.HighScore;
-        foreach (AudioSource source in Music) source.volume = saveData.Volume;
-
-        // Set game states
-        MusicBox = new MusicBox(Music);
-        Level = 1;
-        LevelText.text = Level.ToString();
+        // Go to the first level
+        GameState.Level = 1;
+        LevelText.text = GameState.Level.ToString();
         PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
         IntVariable score = pvs["game"]["score"] as IntVariable;
         IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
         using (PersistentVariablesSource.UpdateScope())
         {
-            score.Value = Level;
-            highscore.Value = HighScore;
+            score.Value = GameState.Level;
+            highscore.Value = GameState.HighScore;
         }
 
         // Create the game boards
@@ -103,11 +77,11 @@ public class Game : MonoBehaviour
         TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -7.0f));
 
         // Create a sample setup;
-        EnemyPieces = new List<Type>();
+        EnemyPieces = new List<AssetGroup.Piece>();
         PlayerGameBoard = new List<PositionRecord>();
         PlayerSideBoard = new List<PositionRecord>();
-        EnemyPieces.Add(typeof(Pawn));
-        PlayerSideBoard.Add(new PositionRecord(typeof(Pawn), null));
+        EnemyPieces.Add(AssetGroup.Piece.Pawn);
+        PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, null));
 
         // Add button handlers
         MenuButton.onClick.AddListener(OpenSettings);
@@ -140,14 +114,6 @@ public class Game : MonoBehaviour
         // Remove button handlers
         MenuButton.onClick.RemoveAllListeners();
         ConcedeButton.onClick.RemoveAllListeners();
-
-        // Create new save data
-        SaveData saveData = new SaveData();
-        saveData.HighScore = HighScore;
-        saveData.Volume = Music[0].volume;
-
-        // Write the save data to a file
-        SaveSystem.Save(saveData);
     }
 
     /// <summary>Opens the settings menu</summary>
@@ -161,41 +127,27 @@ public class Game : MonoBehaviour
     }
 
     /// <summary>Creates a new instance of a piece</summary>
-    /// <typeparam name="T">The type of piece to create</typeparam>
+    /// <param name="kind">The kind of piece to create</param>
     /// <param name="white">True if the piece is white</param>
     /// <returns>A Piece</returns>
-    public Piece CreatePiece<T>(bool white) where T : Piece => CreatePiece(typeof(T), white);
-
-    /// <summary>Creates a new instance of a piece</summary>
-    /// <param name="type">The type of piece to create</param>
-    /// <param name="white">True if the piece is white</param>
-    /// <returns>A Piece</returns>
-    public Piece CreatePiece(Type type, bool white)
+    public Piece CreatePiece(AssetGroup.Piece kind, bool white)
     {
-        int prefab;
-        if (type == typeof(King)) prefab = 0;
-        else if (type == typeof(Queen)) prefab = 2;
-        else if (type == typeof(Bishop)) prefab = 4;
-        else if (type == typeof(Knight)) prefab = 6;
-        else if (type == typeof(Rook)) prefab = 8;
-        else if (type == typeof(Pawn)) prefab = 10;
-        else throw new Exception($"Piece Type {type} not recognized");
-        if (!white) prefab++;
-        GameObject obj = Instantiate(PiecePrefabs[prefab]);
-        Piece piece = (Piece) obj.GetComponent(type);
+        AssetGroup.Groups groupKey = white ? AssetGroup.Groups.WhitePiece : AssetGroup.Groups.BlackPiece;
+        GameObject obj = Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
+        Piece piece = obj.GetComponent<Piece>();
         piece.IsPlayerPiece = !white;
-        piece.Board = GameBoard;
         return piece;
     }
 
-    /// <summary>Creates a single space highlight object</summary>
-    /// <param name="prefab">The prefab index to load a highlight for</param>
+    /// <summary>Creates a new instance of a single highlight object</summary>
+    /// <param name="kind">The kind of highlight to create</param>
     /// <param name="board">The board to load the highlight on</param>
     /// <param name="space">The space to place the highlight on</param>
     /// <returns>A new highlight object</returns>
-    public GameObject CreateHighlight(int prefab, Board board, Vector2Int space)
+    public GameObject CreateHighlight(AssetGroup.Highlight kind, Board board, Vector2Int space)
     {
-        GameObject highlight = Instantiate(HighlightPrefabs[prefab]);
+        AssetGroup.Groups groupKey = AssetGroup.Groups.Highlight;
+        GameObject highlight = Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         highlight.transform.position = board.ToPosition(space);
         return highlight;
     }
