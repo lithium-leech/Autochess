@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -56,9 +57,6 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        // Load the first ad
-        RetryButton.LoadAd();
-
         // Go to the first level
         GameState.Level = 1;
         LevelText.text = GameState.Level.ToString();

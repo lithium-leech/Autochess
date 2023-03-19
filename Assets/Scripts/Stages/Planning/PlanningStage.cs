@@ -104,9 +104,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, piece.Space));
+            Game.PlayerGameBoard.Add(new PositionRecord(piece.Kind, piece.Space));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, piece.Space));
+            Game.PlayerSideBoard.Add(new PositionRecord(piece.Kind, piece.Space));
     }
 
     /// <summary>Starts the fight sequence</summary>

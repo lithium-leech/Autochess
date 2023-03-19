@@ -21,7 +21,7 @@ public class SceneLauncher : MonoBehaviour
         GameState.HighScore = saveData.HighScore;
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         // Create new save data
         SaveData saveData = new SaveData();

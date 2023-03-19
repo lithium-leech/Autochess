@@ -30,6 +30,9 @@ public abstract class Piece : MonoBehaviour
     /// <summary>The incrementor used for lerp movement</summary>
     private float LerpIncrement { get; set; } = 0;
 
+    /// <summary>The kind of piece this is</summary>
+    public abstract AssetGroup.Piece Kind { get; }
+
     /// <summary>Takes the piece's turn</summary>
     public abstract void TakeTurn();
 

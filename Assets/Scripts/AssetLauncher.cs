@@ -17,7 +17,9 @@ public class AssetLauncher : MonoBehaviour
     {
         // Load assets if necessary
         if (!AssetManager.LoadOperation.IsValid())
+        {
             AssetManager.LoadAssetsAsync(LabelReference);
+        }
         Slider = LoadingBar.GetComponent<Slider>();
     }
 

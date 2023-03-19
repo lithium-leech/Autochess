@@ -6,6 +6,8 @@ using UnityEngine;
 /// </summary>
 public class Rook : Piece
 {
+    public override AssetGroup.Piece Kind { get { return AssetGroup.Piece.Rook; } }
+
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
