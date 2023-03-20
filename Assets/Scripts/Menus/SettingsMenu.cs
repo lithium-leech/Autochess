@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.UI;
 
 /// <summary>
 /// Adds behaviors needed for changing game settings
@@ -12,15 +11,18 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour
 {
     /// Properties to set using Unity interface
+    public Game Game;
     public TextMeshProUGUI VolumeValue;
-    public Button VolumeLeftButton;
-    public Button VolumeRightButton;
-    public Button LanguageLeftButton;
-    public Button LanguageRightButton;
-    public Button CloseButton;
+    public TextMeshProUGUI SpeedValue;
 
     /// <summary>The available locale identifiers</summary>
-    private IList<Locale> Locales;
+    private IList<Locale> Locales { get; set; }
+
+    /// <summary>The available game speeds</summary>
+    private float[] Speeds { get; } = new float[3] { 1.0f, 2.0f, 4.0f };
+    
+    /// <summary>The index of the speed currently being used</summary>
+    private int SpeedIndex { get; set; } = 0;
 
     /// <summary>The index of the currently selected locale</summary>
     private int LocaleIndex;
@@ -39,23 +41,6 @@ public class SettingsMenu : MonoBehaviour
 
         // Load current settings
         UpdateVolume();
-
-        // Add button handlers
-        VolumeLeftButton.onClick.AddListener(VolumeDown);
-        VolumeRightButton.onClick.AddListener(VolumeUp);
-        LanguageLeftButton.onClick.AddListener(LanguageDown);
-        LanguageRightButton.onClick.AddListener(LanguageUp);
-        CloseButton.onClick.AddListener(Close);
-    }
-
-    private void OnDestroy()
-    {
-        // Remove button handlers
-        VolumeLeftButton.onClick.RemoveAllListeners();
-        VolumeRightButton.onClick.RemoveAllListeners();
-        LanguageLeftButton.onClick.RemoveAllListeners();
-        LanguageRightButton.onClick.RemoveAllListeners();
-        CloseButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>Decreases the volume</summary>
@@ -97,6 +82,36 @@ public class SettingsMenu : MonoBehaviour
         if (LocaleIndex >= Locales.Count) LocaleIndex = 0;
         PlayerPrefs.SetString("PreferredLocale", Locales[LocaleIndex].Identifier.Code);
         LocalizationSettings.SelectedLocale = Locales[LocaleIndex];
+    }
+
+    /// <summary>Decreases the game speed</summary>
+    public void SpeedDown()
+    {
+        SpeedIndex--;
+        if (SpeedIndex < 0) SpeedIndex = 0;
+        UpdateSpeed();
+    }
+
+    /// <summary>Increases the game speed</summary>
+    public void SpeedUp()
+    {
+        SpeedIndex++;
+        if (SpeedIndex >= Speeds.Length) SpeedIndex = Speeds.Length - 1;
+        UpdateSpeed();
+    }
+
+    /// <summary>Updates game speed to the speed value</summary>
+    private void UpdateSpeed()
+    {
+        GameState.TurnPause = 2.0f / Speeds[SpeedIndex];
+        SpeedValue.text = $"{Speeds[SpeedIndex]}x";
+    }
+
+    /// <summary>Concedes the stage, taking the player straight to defeat</summary>
+    public void Concede()
+    {
+        gameObject.SetActive(false);
+        Game.NextStage = new DefeatStage(Game);
     }
 
     /// <summary>Closes the settings menu</summary>

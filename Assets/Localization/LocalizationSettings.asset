@@ -47,7 +47,7 @@ MonoBehaviour:
           m_TableCollectionName: 
         m_UseFallback: 0
         m_MissingTranslationState: 1
-        m_NoTranslationFoundMessage: '#Error#'
+        m_NoTranslationFoundMessage: '#Missing#'
         m_SmartFormat:
           rid: 964481863319289862
     - rid: 964481863319289862

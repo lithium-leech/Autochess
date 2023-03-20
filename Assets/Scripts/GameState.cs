@@ -12,7 +12,7 @@ public static class GameState
     public static MusicBox MusicBox { get; set; }
     
     /// <summary>The time in between turns (seconds)</summary>
-    public static float TurnPause { get; } = 2.0f;
+    public static float TurnPause { get; set; } = 2.0f;
 
     /// <summary>The Z-plane that pieces exist on</summary>
     public static float PieceZ { get; } = -5.0f;

@@ -17,24 +17,28 @@ public class CombatStage : IStage
     private Game Game { get; set; }
 
     /// <summary>The time elapsed so far, in between turns</summary>
-    public float TimeWaited { get; set; }
+    private float TimeWaited { get; set; }
+
+    /// <summary>The time to wait before the next turn</summary>
+    private float TurnPause { get; set; }
 
     /// <summary>True if it is currently white's turn</summary>
-    public bool WhiteTurn { get; set; }
+    private bool WhiteTurn { get; set; }
 
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
-    public int RoundsToConcede { get; set; }
+    private int RoundsToConcede { get; set; }
 
     /// <summary>The number of rounds that have occured with no pieces moving</summary>
-    public int RoundsStatic { get; set; }
+    private int RoundsStatic { get; set; }
 
     /// <summary>True if the concede menu is currently being shown</summary>
-    public bool ShowingConcede { get; set; }
+    private bool ShowingConcede { get; set; }
 
     public void Start()
     {
         GameState.MusicBox.StopMusic();
         TimeWaited = 0;
+        TurnPause = GameState.TurnPause;
         WhiteTurn = true;
         EndConcede();
     }
@@ -43,7 +47,8 @@ public class CombatStage : IStage
     {
         // Pause between turns
         TimeWaited += Time.deltaTime;
-        if (TimeWaited < GameState.TurnPause) return;
+        if (TimeWaited < TurnPause) return;
+        TurnPause = GameState.TurnPause;
 
         // Check if the battle is over
         if (Game.GameBoard.PlayerPieces.Count < 1)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,9 +14,7 @@ public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
     public TextMeshProUGUI LevelText;
-    public Button MenuButton;
     public Button FightButton;
-    public Button ConcedeButton;
     public Button CancelConcedeButton;
     public Button ConfirmConcedeButton;
     public RewardedAdsButton RetryButton;
@@ -81,10 +78,6 @@ public class Game : MonoBehaviour
         EnemyPieces.Add(AssetGroup.Piece.Pawn);
         PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, null));
 
-        // Add button handlers
-        MenuButton.onClick.AddListener(OpenSettings);
-        ConcedeButton.onClick.AddListener(Concede);
-
         // Start the planning phase
         NextStage = new PlanningStage(this);
     }
@@ -107,22 +100,8 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        // Remove button handlers
-        MenuButton.onClick.RemoveAllListeners();
-        ConcedeButton.onClick.RemoveAllListeners();
-    }
-
     /// <summary>Opens the settings menu</summary>
     public void OpenSettings() => SettingsMenu.SetActive(true);
-
-    /// <summary>Concedes the stage, taking the player straight to defeat</summary>
-    public void Concede()
-    {
-        SettingsMenu.SetActive(false);
-        NextStage = new DefeatStage(this);
-    }
 
     /// <summary>Creates a new instance of a piece</summary>
     /// <param name="kind">The kind of piece to create</param>

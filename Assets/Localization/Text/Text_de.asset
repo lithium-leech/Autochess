@@ -85,6 +85,14 @@ MonoBehaviour:
     m_Localized: Aufgeben?
     m_Metadata:
       m_Items: []
+  - m_Id: 1720684659261440
+    m_Localized: Wird geladen...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2272959727321088
+    m_Localized: Geschwindigkeit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:
