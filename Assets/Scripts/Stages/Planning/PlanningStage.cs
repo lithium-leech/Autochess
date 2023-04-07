@@ -36,6 +36,7 @@ public class PlanningStage : IStage
 
         // Activate the fight button
         Game.FightButton.onClick.AddListener(StartFight);
+        Game.FightButton.interactable = true;
     }
 
     public void During()
@@ -96,6 +97,10 @@ public class PlanningStage : IStage
 
     public void End()
     {
+        // De-activate the fight button
+        Game.FightButton.onClick.RemoveAllListeners();
+        Game.FightButton.interactable = false;
+
         // Remove highlights loaded in planning start
         foreach (GameObject highlight in Highlights) UnityEngine.Object.Destroy(highlight);
         Highlights = new List<GameObject>();
@@ -117,7 +122,8 @@ public class PlanningStage : IStage
 
         // De-activate the fight button
         Game.FightButton.onClick.RemoveAllListeners();
-        
+        Game.FightButton.interactable = false;
+
         // Queue the combat stage
         Game.NextStage = new CombatStage(Game);
     }

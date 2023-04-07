@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -35,5 +36,13 @@ public class AdsInitializer : MonoBehaviour, IUnityAdsInitializationListener
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
         Debug.Log($"Unity Ads Initialization Failed: {error} - {message}");
+
+        // Try again after 10 seconds
+        Task retry = new(async () =>
+        {
+            await Task.Delay(10000);
+            Advertisement.Initialize(_gameId, _testMode, this);
+        });
+        retry.Start();
     }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
+using System.Threading.Tasks;
 
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -79,12 +80,23 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         Debug.Log($"Error loading Ad Unit {adUnitId}: {error} - {message}");
         // Use the error details to determine whether to try to load another ad.
+
+        // Try again after 10 seconds
+        Task retry = new(async () =>
+        {
+            await Task.Delay(10000);
+            Advertisement.Load(_adUnitId, this);
+        });
+        retry.Start();
     }
 
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error} - {message}");
         // Use the error details to determine whether to try to load another ad.
+
+        // Move on as if the ad was shown
+        OnUnityAdsShowComplete(adUnitId, UnityAdsShowCompletionState.COMPLETED);
     }
 
     public void OnUnityAdsShowStart(string adUnitId) { }

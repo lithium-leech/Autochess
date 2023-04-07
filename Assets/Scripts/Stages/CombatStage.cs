@@ -84,6 +84,10 @@ public class CombatStage : IStage
 
     public void End()
     {
+        // Remove any remaining pieces
+        Game.GameBoard.Clear();
+        Game.SideBoard.Clear();
+
         // Remove the concede menu
         EndConcede();
     }

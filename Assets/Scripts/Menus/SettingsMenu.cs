@@ -47,6 +47,7 @@ public class SettingsMenu : MonoBehaviour
     public void VolumeDown()
     {
         GameState.MusicBox.Volume -= 0.1f;
+        if (GameState.MusicBox.Volume < 0.0f) GameState.MusicBox.Volume = 0.0f;
         UpdateVolume();
     }
 
@@ -54,6 +55,7 @@ public class SettingsMenu : MonoBehaviour
     public void VolumeUp()
     {
         GameState.MusicBox.Volume += 0.1f;
+        if (GameState.MusicBox.Volume > 1.0f) GameState.MusicBox.Volume = 1.0f;
         UpdateVolume();
     }
 

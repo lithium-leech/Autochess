@@ -19,6 +19,9 @@ public class UpgradeStage : IStage
     /// <summary>The next level choices the player is being offered</summary>
     public NextLevelChoices Choices { get; set; }
 
+    /// <summary>False until a choice has been made</summary>
+    private bool ChoiceMade { get; set; } = false;
+
     public void Start()
     {
         // Start the planning music
@@ -54,17 +57,33 @@ public class UpgradeStage : IStage
 
     public void During() { }
 
-    public void End() { }
+    public void End()
+    {
+        // Apply the first choice in case a selection wasn't made yet
+        ApplyChoice(1);
+    }
 
     // Button listeners
     public void ChooseOne() => Choose(1);
     public void ChooseTwo() => Choose(2);
     public void ChooseThree() => Choose(3);
 
+    /// <summary>Chooses one of the options</summary>
+    /// <param name="choice">The option chosen</param>
+    public void Choose(int choice)
+    {
+        ApplyChoice(choice);
+        Game.NextStage = new PlanningStage(Game);
+    }
+
     /// <summary>Applies the changes for the next level option selected by the player</summary>
     /// <param name="choice">The option number selected by the player</param>
-    private void Choose(int choice)
+    private void ApplyChoice(int choice)
     {
+        // Only apply a choice once
+        if (ChoiceMade) return;
+        else ChoiceMade = true;
+
         // Get the pieces corresponding to the selected option
         AssetGroup.Piece playerPiece;
         AssetGroup.Piece enemyPiece;
@@ -101,9 +120,6 @@ public class UpgradeStage : IStage
         Game.ChoiceOneButton.onClick.RemoveAllListeners();
         Game.ChoiceTwoButton.onClick.RemoveAllListeners();
         Game.ChoiceThreeButton.onClick.RemoveAllListeners();
-
-        // Go to the planning phase
-        Game.NextStage = new PlanningStage(Game);
     }
 
     /// <summary>Remove an enemy piece with lower value than the given kind</summary>
