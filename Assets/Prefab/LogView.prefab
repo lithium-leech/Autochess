@@ -923,6 +923,7 @@ MonoBehaviour:
   LogButton: {fileID: 7299812797293653039}
   CopyButton: {fileID: 7789466019905735308}
   LogText: {fileID: 7299812797331440927}
+  Scroll: {fileID: 7299812798657043652}
 --- !u!1 &7299812798657043654
 GameObject:
   m_ObjectHideFlags: 0

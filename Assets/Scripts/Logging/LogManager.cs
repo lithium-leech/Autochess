@@ -12,6 +12,7 @@ public class LogManager : MonoBehaviour
     public Button LogButton;
     public Button CopyButton;
     public TextMeshProUGUI LogText;
+    public ScrollRect Scroll;
 
     /// <summary>All of the log messages</summary>
     private static LimitedLogMessages Logs { get; } = new LimitedLogMessages(1000);
@@ -33,9 +34,13 @@ public class LogManager : MonoBehaviour
     /// <summary>Toggles the log window</summary>
     public void ShowLogs()
     {
+        // Show the log view
         MenuCover.SetActive(!MenuCover.activeInHierarchy);
         CopyButton.gameObject.SetActive(!CopyButton.gameObject.activeInHierarchy);
         CopyButton.interactable = !CopyButton.interactable;
+        
+        // Scroll to the bottom of the log view
+        Scroll.verticalNormalizedPosition = 0f;
     }
 
     public void CopyLogs() => GUIUtility.systemCopyBuffer = Logs.PlainText();
