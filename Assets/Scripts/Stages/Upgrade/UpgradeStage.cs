@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -43,7 +45,7 @@ public class UpgradeStage : IStage
         // Display new level choices
         Choices = new NextLevelChoices();
         Choices.ShowPiecesInMenu(Game);
-        Game.UpgradeMenu.SetActive(true);
+        MenuManager.AddActiveMenu(Game.UpgradeMenu);
 
         // Delete any pieces in the trash
         foreach (Piece piece in Game.TrashBoard.PlayerPieces)
@@ -116,7 +118,7 @@ public class UpgradeStage : IStage
 
         // Remove the upgrade menu
         Choices.RemovePiecesInMenu();
-        Game.UpgradeMenu.SetActive(false);
+        MenuManager.RemoveActiveMenu(Game.UpgradeMenu);
         Game.ChoiceOneButton.onClick.RemoveAllListeners();
         Game.ChoiceTwoButton.onClick.RemoveAllListeners();
         Game.ChoiceThreeButton.onClick.RemoveAllListeners();

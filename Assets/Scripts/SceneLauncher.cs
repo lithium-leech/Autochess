@@ -13,7 +13,7 @@ public class SceneLauncher : MonoBehaviour
     {
         // Load saved data
         SaveData saveData = SaveSystem.Load();
-        
+
         // Initialize the game state
         GameState.Camera = Camera;
         GameState.MusicBox = MusicBox;

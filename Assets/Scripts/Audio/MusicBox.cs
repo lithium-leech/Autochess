@@ -38,6 +38,7 @@ public class MusicBox : MonoBehaviour
     /// <param name="name">The name of the song to play</param>
     public void PlayMusic(SongName name)
     {
+
         // Stop the music if none is given
         if (name == SongName.None)
             StopMusic();
@@ -45,6 +46,7 @@ public class MusicBox : MonoBehaviour
         else if (name != CurrentSong)
         {
             StopMusic();
+            Debug.Log($"Playing {name} music...");
             CurrentSong = name;
             Sources[CurrentSong].Play();
         }
@@ -55,6 +57,7 @@ public class MusicBox : MonoBehaviour
     {
         if (CurrentSong != SongName.None)
         {
+            Debug.Log($"Stopping music...");
             Sources[CurrentSong].Stop();
             CurrentSong = SongName.None;
         }

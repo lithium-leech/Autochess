@@ -30,15 +30,15 @@ public static class AssetManager
             if (asset.TryGetComponent<AssetKey>(out var key))
             {
                 if (key.Group == AssetGroup.Groups.None)
-                    Debug.Log($"Unable to find the group for: {asset.name}");
+                    Debug.LogWarning($"Unable to find the asset group for: {asset.name}");
                 else if (key.ID == 0)
-                    Debug.Log($"Unable to find the identifier for: {asset.name}");
+                    Debug.LogWarning($"Unable to find the asset identifier for: {asset.name}");
                 else
                     Prefabs[key.Group].Add(key.ID, asset);
             }
             else
             {
-                Debug.Log($"Unable to find a key for: {asset.name}");
+                Debug.LogWarning($"Unable to find an asset key for: {asset.name}");
             }
         });
     }

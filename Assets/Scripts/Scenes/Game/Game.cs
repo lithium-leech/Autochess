@@ -22,6 +22,7 @@ public class Game : MonoBehaviour
     public Button ChoiceOneButton;
     public Button ChoiceTwoButton;
     public Button ChoiceThreeButton;
+    public GameObject InGameMenu;
     public GameObject ConcedeMenu;
     public GameObject UpgradeMenu;
     public GameObject GameOverMenu;
@@ -54,6 +55,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        // Initialize the menu manager
+        MenuManager.Initialize(InGameMenu);
+
         // Go to the first level
         GameState.Level = 1;
         LevelText.text = GameState.Level.ToString();
@@ -88,6 +92,7 @@ public class Game : MonoBehaviour
         if (NextStage != null)
         {
             // Replace the current stage with the next one
+            Debug.Log($"Switching to {NextStage.GetType()}.");
             CurrentStage?.End();
             CurrentStage = NextStage;
             NextStage = null;
@@ -100,8 +105,8 @@ public class Game : MonoBehaviour
         }
     }
 
-    /// <summary>Opens the settings menu</summary>
-    public void OpenSettings() => SettingsMenu.SetActive(true);
+    /// <summary>Opens the settings</summary>
+    public void OpenSettings() => MenuManager.OpenOverlay(SettingsMenu);
 
     /// <summary>Creates a new instance of a piece</summary>
     /// <param name="kind">The kind of piece to create</param>

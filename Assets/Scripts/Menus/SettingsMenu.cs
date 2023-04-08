@@ -48,6 +48,7 @@ public class SettingsMenu : MonoBehaviour
     {
         GameState.MusicBox.Volume -= 0.1f;
         if (GameState.MusicBox.Volume < 0.0f) GameState.MusicBox.Volume = 0.0f;
+        Debug.Log($"Lowered volume to {GameState.MusicBox.Volume:0.0}.");
         UpdateVolume();
     }
 
@@ -56,6 +57,7 @@ public class SettingsMenu : MonoBehaviour
     {
         GameState.MusicBox.Volume += 0.1f;
         if (GameState.MusicBox.Volume > 1.0f) GameState.MusicBox.Volume = 1.0f;
+        Debug.Log($"Raised volume to {GameState.MusicBox.Volume:0.0}.");
         UpdateVolume();
     }
 
@@ -75,6 +77,7 @@ public class SettingsMenu : MonoBehaviour
         if (LocaleIndex < 0) LocaleIndex = Locales.Count - 1;
         PlayerPrefs.SetString("PreferredLocale", Locales[LocaleIndex].Identifier.Code);
         LocalizationSettings.SelectedLocale = Locales[LocaleIndex];
+        Debug.Log($"Changed locale to {LocalizationSettings.SelectedLocale.LocaleName}.");
     }
 
     /// <summary>Switches to the next locale</summary>
@@ -84,6 +87,7 @@ public class SettingsMenu : MonoBehaviour
         if (LocaleIndex >= Locales.Count) LocaleIndex = 0;
         PlayerPrefs.SetString("PreferredLocale", Locales[LocaleIndex].Identifier.Code);
         LocalizationSettings.SelectedLocale = Locales[LocaleIndex];
+        Debug.Log($"Changed locale to {LocalizationSettings.SelectedLocale.LocaleName}.");
     }
 
     /// <summary>Decreases the game speed</summary>
@@ -91,6 +95,7 @@ public class SettingsMenu : MonoBehaviour
     {
         SpeedIndex--;
         if (SpeedIndex < 0) SpeedIndex = 0;
+        Debug.Log($"Lowered speed to {Speeds[SpeedIndex]}.");
         UpdateSpeed();
     }
 
@@ -99,6 +104,7 @@ public class SettingsMenu : MonoBehaviour
     {
         SpeedIndex++;
         if (SpeedIndex >= Speeds.Length) SpeedIndex = Speeds.Length - 1;
+        Debug.Log($"Raised speed to {Speeds[SpeedIndex]}.");
         UpdateSpeed();
     }
 
@@ -112,10 +118,11 @@ public class SettingsMenu : MonoBehaviour
     /// <summary>Concedes the stage, taking the player straight to defeat</summary>
     public void Concede()
     {
-        gameObject.SetActive(false);
+        Debug.Log($"Conceding...");
+        MenuManager.CloseOverlay();
         Game.NextStage = new DefeatStage(Game);
     }
 
     /// <summary>Closes the settings menu</summary>
-    public void Close() => gameObject.SetActive(false);
+    public void Close() => MenuManager.CloseOverlay();
 }

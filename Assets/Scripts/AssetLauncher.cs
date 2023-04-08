@@ -18,6 +18,7 @@ public class AssetLauncher : MonoBehaviour
         // Load assets if necessary
         if (!AssetManager.LoadOperation.IsValid())
         {
+            Debug.Log("Loading assets...");
             AssetManager.LoadAssetsAsync(LabelReference);
         }
         Slider = LoadingBar.GetComponent<Slider>();
@@ -33,16 +34,18 @@ public class AssetLauncher : MonoBehaviour
             {
                 if (Kind == AssetGroup.Scene.None)
                 {
-                    Debug.Log("No scene assets have been selected for launch");
+                    Debug.LogWarning("No scene asset has been selected for launch.");
                 }
                 else
                 {
+                    Debug.Log($"Launching scene {Kind}");
                     GameObject asset = AssetManager.Prefabs[AssetGroup.Groups.Scene][(int)Kind];
                     Instantiate(asset);
                 }
             }
             catch (Exception e)
             {
+                Debug.LogError($"Failed to launch scene {Kind}: {e.Message}");
                 throw e;
             }
             finally

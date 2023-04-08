@@ -14,10 +14,12 @@ public static class SaveSystem
     /// <param name="data">The save data to store</param>
     public static void Save(SaveData data)
     {
+        Debug.Log("Saving data...");
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(FilePath, FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
+        Debug.Log("Finished saving data.");
     }
 
     /// <summary>Loads saved data</summary>
@@ -28,10 +30,12 @@ public static class SaveSystem
         if (!File.Exists(FilePath)) return new SaveData();
 
         // Load the saved data
+        Debug.Log("Loading saved data...");
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(FilePath, FileMode.Open);
         SaveData data = formatter.Deserialize(stream) as SaveData;
         stream.Close();
+        Debug.Log("Finished loading saved data.");
         return data;
     }
 }

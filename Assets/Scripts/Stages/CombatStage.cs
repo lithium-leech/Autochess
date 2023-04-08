@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 /// <summary>
@@ -36,12 +37,27 @@ public class CombatStage : IStage
 
     public void Start()
     {
+        // Initialize battle start
         GameState.MusicBox.StopMusic();
         TimeWaited = 0;
         TurnPause = GameState.TurnPause;
         WhiteTurn = true;
         EndConcede();
+
+        // Log starting board state
+        StringBuilder positions = new("(");
+        for (int x = 0; x < Game.GameBoard.Width; x++)
+        for (int y = 0; y < Game.GameBoard.Height; y++)
+        {
+            Piece piece = Game.GameBoard.Spaces[x, y];
+            if (piece != null)
+                positions.Append($" {ControlString(piece)}{piece.Kind}[{x},{y}]");
+        }
+        positions.Append(" )");
+        Debug.Log($"Starting Positions: {positions}");
     }
+
+    private string ControlString(Piece piece) => piece.IsPlayerPiece ? "Player" : "Enemy";
 
     public void During()
     {
@@ -68,8 +84,26 @@ public class CombatStage : IStage
         GameState.MusicBox.PlayMusic(SongName.Battle);
 
         // Move the current player's pieces
-        if (WhiteTurn) RunRound(Game.GameBoard.EnemyPieces);
-        else RunRound(Game.GameBoard.PlayerPieces);
+        List<Piece> pieces;
+        string color;
+        if (WhiteTurn)
+        {
+            pieces = Game.GameBoard.EnemyPieces;
+            color = "White";
+        }
+        else
+        {
+            pieces = Game.GameBoard.PlayerPieces;
+            color = "Black";
+        }
+        RunRound(pieces);
+
+        // Log the moves
+        StringBuilder moves = new StringBuilder("(");
+        foreach (Piece piece in pieces)
+            moves.Append($" {piece.Kind}[{piece.Space.x},{piece.Space.y}]");
+        moves.Append(" )");
+        Debug.Log($"{color} Moves: {moves}");
 
         // Check if the player should be prompted to concede
         if (!ShowingConcede)
@@ -115,7 +149,7 @@ public class CombatStage : IStage
     public void StartConcede()
     {
         ShowingConcede = true;
-        Game.ConcedeMenu.SetActive(true);
+        MenuManager.AddActiveMenu(Game.ConcedeMenu);
         Game.CancelConcedeButton.onClick.AddListener(EndConcede);
         Game.ConfirmConcedeButton.onClick.AddListener(ConfirmConcede);
     }
@@ -130,7 +164,7 @@ public class CombatStage : IStage
     /// <summary>Removes the concede menu and resets concede logic</summary>
     public void EndConcede()
     {
-        Game.ConcedeMenu.SetActive(false);
+        MenuManager.RemoveActiveMenu(Game.ConcedeMenu);
         Game.CancelConcedeButton.onClick.RemoveAllListeners();
         Game.ConfirmConcedeButton.onClick.RemoveAllListeners();
         RoundsStatic = 0;

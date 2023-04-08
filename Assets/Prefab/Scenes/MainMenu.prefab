@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0418\u0433\u0440\u0430\u0442\u044C"
+  m_text: Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
+  m_text: Close
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -1279,7 +1279,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2341969180455137020}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2341969181025641377}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: OpenSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2341969180495128704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,7 +1360,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u044B\u0439\u0442\u0438"
+  m_text: Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -1537,7 +1549,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  m_text: Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -1726,7 +1738,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+  m_text: English
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -2327,7 +2339,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2341969180791095064}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2341969181025641377}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2341969180915691143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,13 +2648,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2341969179942805309}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2341969181025641377}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2692,10 +2716,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4d9e03dcb00da4292bc400309690d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Menu: {fileID: 2341969179942805309}
   SettingsMenu: {fileID: 2341969180728408020}
-  PlayButton: {fileID: 2341969180935800814}
-  SettingsButton: {fileID: 2341969180455137021}
-  ExitButton: {fileID: 2341969180791095065}
 --- !u!114 &5541338285444682073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2778,7 +2800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0410\u0432\u0442\u043E\u0448\u0430\u0445\u043C\u0430\u0442\u044B"
+  m_text: Autochess
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -3100,7 +3122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0431\u044A\u0435\u043C"
+  m_text: Volume
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
@@ -3289,7 +3311,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u042F\u0437\u044B\u043A"
+  m_text: Language
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}
   m_sharedMaterial: {fileID: -5149380372968093605, guid: 6fb76e21d02c1a34285aa69588590702, type: 2}

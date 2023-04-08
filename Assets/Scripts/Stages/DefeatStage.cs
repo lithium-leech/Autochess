@@ -21,7 +21,7 @@ public class DefeatStage : IStage
         GameState.MusicBox.StopMusic();
 
         // Show the game over screen
-        Game.GameOverMenu.SetActive(true);
+        MenuManager.AddActiveMenu(Game.GameOverMenu);
 
         // Add button listeners
         Game.EndGameButton.onClick.AddListener(EndGame);
@@ -37,7 +37,7 @@ public class DefeatStage : IStage
         Game.RetryButton.onReward -= RetryLevel;
 
         // Hide the game over menu
-        Game.GameOverMenu.SetActive(false);
+        MenuManager.RemoveActiveMenu(Game.GameOverMenu);
     }
 
     /// <summary>Starts the level over</summary>
