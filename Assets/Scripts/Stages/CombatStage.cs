@@ -29,7 +29,7 @@ public class CombatStage : IStage
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
     private int RoundsToConcede { get; set; }
 
-    /// <summary>The number of rounds that have occured with no pieces moving</summary>
+    /// <summary>The number of rounds that have occurred with no pieces moving</summary>
     private int RoundsStatic { get; set; }
 
     /// <summary>True if the concede menu is currently being shown</summary>

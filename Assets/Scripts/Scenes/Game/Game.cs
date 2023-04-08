@@ -32,7 +32,7 @@ public class Game : MonoBehaviour
     public IStage CurrentStage { get; set; } = null;
 
     /// <summary>The next stage of the game to run</summary>
-    /// <remarks>null when the current stage should keep runnning</remarks>
+    /// <remarks>null when the current stage should keep running</remarks>
     public IStage NextStage { get; set; } = null;
 
     /// <summary>The enemies roster of pieces (indexes to prefabs)</summary>
@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
     /// <summary>The board that holds the player's available pieces</summary>
     public Board SideBoard { get; set; }
 
-    /// <summary>The board for discarding unwanted peices</summary>
+    /// <summary>The board for discarding unwanted pieces</summary>
     public Board TrashBoard { get; set; }
 
     private void Start()

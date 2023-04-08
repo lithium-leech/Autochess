@@ -20,7 +20,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // An event that is triggered when a reward is granted
     public UnityAction onReward;
 
-    /// <summary>Finishes ad initialization for this button</summary>
+    // Initializes ads for this button, after unity ads have been initialized
     public void Initialize()
     {
         // Get the Ad Unit ID for the current platform:

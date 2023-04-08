@@ -128,21 +128,21 @@ public class PlanningStage : IStage
         Game.NextStage = new CombatStage(Game);
     }
 
-    /// <summary>Sets up the peices on the game board and side board</summary>
+    /// <summary>Sets up the pieces on the game board and side board</summary>
     public void PlacePieces()
     {
         // Clear both boards
         Game.GameBoard.Clear();
         Game.SideBoard.Clear();
 
-        // Place the enemies peices on the game board
+        // Place the enemies pieces on the game board
         foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
         {
             Vector2Int space = GetRandomEmptySpace();
             Game.GameBoard.AddPiece(pieceType, true, space);
         }
 
-        // Place the player's peices on the game board
+        // Place the player's pieces on the game board
         foreach (PositionRecord record in Game.PlayerGameBoard)
         {
             if (record.Space == null)
@@ -155,7 +155,7 @@ public class PlanningStage : IStage
             }
         }
 
-        // Place the player's peices on the side board
+        // Place the player's pieces on the side board
         foreach (PositionRecord record in Game.PlayerSideBoard)
         {
             if (record.Space == null)
