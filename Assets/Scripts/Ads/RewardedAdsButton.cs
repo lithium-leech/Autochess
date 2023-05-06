@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Advertisements;
 using UnityEngine.Events;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 /// </summary>
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] Button _showAdButton;
+    [SerializeField] BasicButton _showAdButton;
 #if UNITY_IOS
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
 #elif UNITY_ANDROID
@@ -31,7 +30,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+        _showAdButton.SetEnabled(false);
 
         // Start loading the first ad
         LoadAd();
@@ -55,7 +54,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             _showAdButton.onClick.AddListener(ShowAd);
             
             // Enable the button for users to click:
-            _showAdButton.interactable = true;
+            _showAdButton.SetEnabled(true);
         }
     }
 
@@ -77,7 +76,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void ShowAd()
     {
         // Disable the button:
-        _showAdButton.interactable = false;
+        _showAdButton.SetEnabled(false);
         _showAdButton.onClick.RemoveAllListeners();
 
         // Then show the ad:

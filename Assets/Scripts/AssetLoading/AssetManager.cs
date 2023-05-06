@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public static class AssetManager
 {
     /// <summary>A collection with all of the loaded prefabs</summary>
-    public static IDictionary<AssetGroup.Groups, IDictionary<int, GameObject>> Prefabs { get; } = new Dictionary<AssetGroup.Groups, IDictionary<int, GameObject>>();
+    public static IDictionary<AssetGroup.Group, IDictionary<int, GameObject>> Prefabs { get; } = new Dictionary<AssetGroup.Group, IDictionary<int, GameObject>>();
 
     /// <summary>The operation that is loading assets</summary>
     public static AsyncOperationHandle<IList<GameObject>> LoadOperation { get; set; }
@@ -19,8 +19,8 @@ public static class AssetManager
     public static void LoadAssetsAsync(AssetLabelReference labelReference)
     {
         // Initialize dictionary groups
-        foreach (AssetGroup.Groups type in Enum.GetValues(typeof(AssetGroup.Groups)))
-            if (type != AssetGroup.Groups.None)
+        foreach (AssetGroup.Group type in Enum.GetValues(typeof(AssetGroup.Group)))
+            if (type != AssetGroup.Group.None)
                 if (!Prefabs.ContainsKey(type))
                     Prefabs.Add(type, new Dictionary<int, GameObject>());
 
@@ -29,7 +29,7 @@ public static class AssetManager
         {
             if (asset.TryGetComponent<AssetKey>(out var key))
             {
-                if (key.Group == AssetGroup.Groups.None)
+                if (key.Group == AssetGroup.Group.None)
                     Debug.LogWarning($"Unable to find the asset group for: {asset.name}");
                 else if (key.ID == 0)
                     Debug.LogWarning($"Unable to find the asset identifier for: {asset.name}");

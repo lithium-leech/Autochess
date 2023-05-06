@@ -39,7 +39,7 @@ public class AssetLauncher : MonoBehaviour
                 else
                 {
                     Debug.Log($"Launching scene {Kind}");
-                    GameObject asset = AssetManager.Prefabs[AssetGroup.Groups.Scene][(int)Kind];
+                    GameObject asset = AssetManager.Prefabs[AssetGroup.Group.Scene][(int)Kind];
                     Instantiate(asset);
                 }
             }

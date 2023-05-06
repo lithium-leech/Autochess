@@ -33,6 +33,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Packed
+  - m_GUID: f2ee57e21a2ad8240a4f55e34c92c638
+    m_Address: Assets/Prefab/Panels
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Packed
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:

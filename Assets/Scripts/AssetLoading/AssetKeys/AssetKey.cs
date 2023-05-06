@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class AssetKey : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    public AssetGroup.Groups Group;
+    public AssetGroup.Group Group;
 
     // The secondary key used to identify an asset within its group
     public abstract int ID { get; }

@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class LogManager : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    public GameObject MenuCover;
-    public Button LogButton;
-    public Button CopyButton;
+    public GameObject ScreenCover;
+    public BasicButton LogButton;
+    public BasicButton CopyButton;
+    public BasicButton CloseButton;
     public TextMeshProUGUI LogText;
-    public ScrollRect Scroll;
+    public ScrollRect Console;
 
     /// <summary>All of the log messages</summary>
     private static LimitedLogMessages Logs { get; } = new LimitedLogMessages(1000);
@@ -31,17 +32,29 @@ public class LogManager : MonoBehaviour
         LogText.text = Logs.RichText();
     }
 
-    /// <summary>Toggles the log window</summary>
+    /// <summary>Shows the log window</summary>
     public void ShowLogs()
     {
         // Show the log view
-        MenuCover.SetActive(!MenuCover.activeInHierarchy);
-        CopyButton.gameObject.SetActive(!CopyButton.gameObject.activeInHierarchy);
-        CopyButton.interactable = !CopyButton.interactable;
-        
+        ScreenCover.SetActive(true);
+
+        // Disable log button
+        LogButton.SetEnabled(false);
+
         // Scroll to the bottom of the log view
-        Scroll.verticalNormalizedPosition = 0f;
+        Console.verticalNormalizedPosition = 0f;
     }
 
+    /// <summary>Close the log window</summary>
+    public void CloseLogs()
+    {
+        // Hide the log view
+        ScreenCover.SetActive(false);
+
+        // Enable log button
+        LogButton.SetEnabled(true);
+    }
+
+    /// <summary>Copy the logs into the clipboard</summary>
     public void CopyLogs() => GUIUtility.systemCopyBuffer = Logs.PlainText();
 }

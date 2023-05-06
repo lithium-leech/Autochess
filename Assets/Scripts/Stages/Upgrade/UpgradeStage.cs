@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using TMPro;
-using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -20,9 +18,6 @@ public class UpgradeStage : IStage
 
     /// <summary>The next level choices the player is being offered</summary>
     public NextLevelChoices Choices { get; set; }
-
-    /// <summary>False until a choice has been made</summary>
-    private bool ChoiceMade { get; set; } = false;
 
     public void Start()
     {
@@ -45,6 +40,7 @@ public class UpgradeStage : IStage
         // Display new level choices
         Choices = new NextLevelChoices();
         Choices.ShowPiecesInMenu(Game);
+        Game.ChoiceButtons.SelectButton(-1);
         MenuManager.AddActiveMenu(Game.UpgradeMenu);
 
         // Delete any pieces in the trash
@@ -52,61 +48,40 @@ public class UpgradeStage : IStage
             piece.IsCaptured= true;
 
         // Add button listeners
-        Game.ChoiceOneButton.onClick.AddListener(ChooseOne);
-        Game.ChoiceTwoButton.onClick.AddListener(ChooseTwo);
-        Game.ChoiceThreeButton.onClick.AddListener(ChooseThree);
+        Game.ConfirmChoiceButton.onClick.AddListener(Confirm);
     }
 
     public void During() { }
 
     public void End()
     {
-        // Apply the first choice in case a selection wasn't made yet
-        ApplyChoice(1);
-    }
+        // Remove button listeners
+        Game.ConfirmChoiceButton.onClick.RemoveAllListeners();
 
-    // Button listeners
-    public void ChooseOne() => Choose(1);
-    public void ChooseTwo() => Choose(2);
-    public void ChooseThree() => Choose(3);
-
-    /// <summary>Chooses one of the options</summary>
-    /// <param name="choice">The option chosen</param>
-    public void Choose(int choice)
-    {
-        ApplyChoice(choice);
-        Game.NextStage = new PlanningStage(Game);
-    }
-
-    /// <summary>Applies the changes for the next level option selected by the player</summary>
-    /// <param name="choice">The option number selected by the player</param>
-    private void ApplyChoice(int choice)
-    {
-        // Only apply a choice once
-        if (ChoiceMade) return;
-        else ChoiceMade = true;
+        // Default to the first choice if one was not selected
+        if (Game.ChoiceButtons.SelectedIndex < 0) Game.ChoiceButtons.SelectedIndex = 0;
 
         // Get the pieces corresponding to the selected option
         AssetGroup.Piece playerPiece;
         AssetGroup.Piece enemyPiece;
-        if (choice == 1)
+        if (Game.ChoiceButtons.SelectedIndex == 0)
+        {
+            playerPiece = Choices.PlayerPiece0;
+            enemyPiece = Choices.EnemyPiece0;
+        }
+        else if (Game.ChoiceButtons.SelectedIndex == 1)
         {
             playerPiece = Choices.PlayerPiece1;
             enemyPiece = Choices.EnemyPiece1;
         }
-        else if (choice == 2)
+        else if (Game.ChoiceButtons.SelectedIndex == 2)
         {
             playerPiece = Choices.PlayerPiece2;
             enemyPiece = Choices.EnemyPiece2;
         }
-        else if (choice == 3)
-        {
-            playerPiece = Choices.PlayerPiece3;
-            enemyPiece = Choices.EnemyPiece3;
-        }
         else
         {
-            throw new Exception($"Next level choice {choice} not recognized");
+            throw new Exception($"Next level choice {Game.ChoiceButtons.SelectedIndex} not recognized");
         }
 
         // Add the enemy piece, removing a lower value piece if necessary
@@ -118,10 +93,18 @@ public class UpgradeStage : IStage
 
         // Remove the upgrade menu
         Choices.RemovePiecesInMenu();
+        Choices.RemovePanelsInMenu();
         MenuManager.RemoveActiveMenu(Game.UpgradeMenu);
-        Game.ChoiceOneButton.onClick.RemoveAllListeners();
-        Game.ChoiceTwoButton.onClick.RemoveAllListeners();
-        Game.ChoiceThreeButton.onClick.RemoveAllListeners();
+    }
+
+    /// <summary>Chooses one of the options</summary>
+    /// <param name="choice">The option chosen</param>
+    public void Confirm()
+    {
+        if (Game.ChoiceButtons.SelectedIndex > -1)
+        {
+            Game.NextStage = new PlanningStage(Game);
+        }
     }
 
     /// <summary>Remove an enemy piece with lower value than the given kind</summary>

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
-using UnityEngine.UI;
 
 /// <summary>
 /// The main game object, responsible for managing
@@ -14,14 +13,13 @@ public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
     public TextMeshProUGUI LevelText;
-    public Button FightButton;
-    public Button CancelConcedeButton;
-    public Button ConfirmConcedeButton;
+    public BasicButton FightButton;
+    public BasicButton CancelConcedeButton;
+    public BasicButton ConfirmConcedeButton;
+    public RadioButtonGroup ChoiceButtons;
+    public BasicButton ConfirmChoiceButton;
     public RewardedAdsButton RetryButton;
-    public Button EndGameButton;
-    public Button ChoiceOneButton;
-    public Button ChoiceTwoButton;
-    public Button ChoiceThreeButton;
+    public BasicButton EndGameButton;
     public GameObject InGameMenu;
     public GameObject ConcedeMenu;
     public GameObject UpgradeMenu;
@@ -72,8 +70,8 @@ public class Game : MonoBehaviour
 
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
-        SideBoard = new Board(this, 8, 2, 2, new Vector2(-4.0f, -4.5f));
-        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -7.0f));
+        SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -5.75f));
+        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -8.5f));
 
         // Create a sample setup;
         EnemyPieces = new List<AssetGroup.Piece>();
@@ -114,11 +112,27 @@ public class Game : MonoBehaviour
     /// <returns>A Piece</returns>
     public Piece CreatePiece(AssetGroup.Piece kind, bool white)
     {
-        AssetGroup.Groups groupKey = white ? AssetGroup.Groups.WhitePiece : AssetGroup.Groups.BlackPiece;
+        AssetGroup.Group groupKey = white ? AssetGroup.Group.WhitePiece : AssetGroup.Group.BlackPiece;
         GameObject obj = Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         Piece piece = obj.GetComponent<Piece>();
         piece.IsPlayerPiece = !white;
         return piece;
+    }
+
+    /// <summary>Creates a new instance of a panel</summary>
+    /// <param name="kind">The kind of panel to create</param>
+    /// <returns>A Panel</returns>
+    public GameObject CreatePanel(bool white, bool info)
+    {
+        AssetGroup.Panel kind;
+        if (white)
+            if (info) kind = AssetGroup.Panel.WhiteInfo;
+            else kind = AssetGroup.Panel.WhiteTile;
+        else
+            if (info) kind = AssetGroup.Panel.BlackInfo;
+            else kind = AssetGroup.Panel.BlackTile;
+        GameObject panel = Instantiate(AssetManager.Prefabs[AssetGroup.Group.Panel][(int)kind]);
+        return panel;
     }
 
     /// <summary>Creates a new instance of a single highlight object</summary>
@@ -128,7 +142,7 @@ public class Game : MonoBehaviour
     /// <returns>A new highlight object</returns>
     public GameObject CreateHighlight(AssetGroup.Highlight kind, Board board, Vector2Int space)
     {
-        AssetGroup.Groups groupKey = AssetGroup.Groups.Highlight;
+        AssetGroup.Group groupKey = AssetGroup.Group.Highlight;
         GameObject highlight = Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         highlight.transform.position = board.ToPosition(space);
         return highlight;
