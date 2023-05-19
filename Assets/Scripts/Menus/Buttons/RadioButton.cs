@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -21,6 +22,9 @@ public class RadioButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     /// <remarks>Should only be set by the group object</remarks>
     public int Index { get; set; }
     
+    /// <summary>An event that triggers when this button is selected</summary>
+    public UnityEvent onSelect;
+
     /// <summary>A property to hold the sprite originally attached to the DefaultImage</summary>
     private Sprite DefaultSprite { get; set; }
 
@@ -101,6 +105,7 @@ public class RadioButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Selected = true;
         Image.sprite = SelectedSprite;
+        onSelect.Invoke();
     }
     
     /// <summary>Deselects this button</summary>

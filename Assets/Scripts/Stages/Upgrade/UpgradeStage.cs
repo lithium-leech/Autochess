@@ -17,7 +17,7 @@ public class UpgradeStage : IStage
     private Game Game { get; set; }
 
     /// <summary>The next level choices the player is being offered</summary>
-    public NextLevelChoices Choices { get; set; }
+    public PieceChoices Choices { get; set; }
 
     public void Start()
     {
@@ -38,8 +38,9 @@ public class UpgradeStage : IStage
         }
 
         // Display new level choices
-        Choices = new NextLevelChoices();
-        Choices.ShowPiecesInMenu(Game);
+        Choices = new PieceChoices(Game);
+        Choices.ShowPanels();
+        Choices.ShowChoices();
         Game.ChoiceButtons.SelectButton(-1);
         MenuManager.AddActiveMenu(Game.UpgradeMenu);
 
@@ -49,6 +50,12 @@ public class UpgradeStage : IStage
 
         // Add button listeners
         Game.ConfirmChoiceButton.onClick.AddListener(Confirm);
+        for (int i = 0; i < Game.ChoiceButtons.Buttons.Length; i++)
+        {
+            int choice = i; // Capture the index in order to pass by value
+            RadioButton button = Game.ChoiceButtons.Buttons[choice];
+            button.onSelect.AddListener(() => Choices.ShowInfo(choice));
+        }
     }
 
     public void During() { }
@@ -64,25 +71,8 @@ public class UpgradeStage : IStage
         // Get the pieces corresponding to the selected option
         AssetGroup.Piece playerPiece;
         AssetGroup.Piece enemyPiece;
-        if (Game.ChoiceButtons.SelectedIndex == 0)
-        {
-            playerPiece = Choices.PlayerPiece0;
-            enemyPiece = Choices.EnemyPiece0;
-        }
-        else if (Game.ChoiceButtons.SelectedIndex == 1)
-        {
-            playerPiece = Choices.PlayerPiece1;
-            enemyPiece = Choices.EnemyPiece1;
-        }
-        else if (Game.ChoiceButtons.SelectedIndex == 2)
-        {
-            playerPiece = Choices.PlayerPiece2;
-            enemyPiece = Choices.EnemyPiece2;
-        }
-        else
-        {
-            throw new Exception($"Next level choice {Game.ChoiceButtons.SelectedIndex} not recognized");
-        }
+        playerPiece = Choices.PlayerPieces[Game.ChoiceButtons.SelectedIndex];
+        enemyPiece = Choices.EnemyPieces[Game.ChoiceButtons.SelectedIndex];
 
         // Add the enemy piece, removing a lower value piece if necessary
         if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);

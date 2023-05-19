@@ -23,6 +23,7 @@ public class Game : MonoBehaviour
     public GameObject InGameMenu;
     public GameObject ConcedeMenu;
     public GameObject UpgradeMenu;
+    public GameObject InfoMenu;
     public GameObject GameOverMenu;
     public GameObject SettingsMenu;
 
