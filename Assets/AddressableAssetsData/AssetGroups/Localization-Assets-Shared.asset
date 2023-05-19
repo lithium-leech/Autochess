@@ -21,6 +21,22 @@ MonoBehaviour:
     m_Address: Assets/Localization/Text Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: c9b0f0dd1c1954d43b011b896f30d4a1
+    m_Address: Assets/Localization/PieceNames/PieceNames Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: cde200267f1928441aedd7f3064be2ea
+    m_Address: Assets/Localization/PieceInfo/PieceInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: ebf4d51ff22f2c9468f46d3687247696
+    m_Address: Assets/Localization/PowerNames/PowerNames Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 6e99863eb310a224d91e6503d6bb098b
+    m_Address: Assets/Localization/PowerInfo/PowerInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:

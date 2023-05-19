@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -13,6 +14,10 @@ public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
     public TextMeshProUGUI LevelText;
+    public LocalizeStringEvent PlayerChoiceNameText;
+    public LocalizeStringEvent PlayerChoiceInfoText;
+    public LocalizeStringEvent EnemyChoiceNameText;
+    public LocalizeStringEvent EnemyChoiceInfoText;
     public BasicButton FightButton;
     public BasicButton CancelConcedeButton;
     public BasicButton ConfirmConcedeButton;

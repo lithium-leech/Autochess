@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
 
 /// <summary>
 /// Holds information about the choices a player has when
@@ -97,11 +99,14 @@ public class PieceChoices
         InfoPieces.Clear();
 
         // Create new sprites
-        CreatePiece(choice, true, true);
-        CreatePiece(choice, false, true);
+        Piece playerPiece = CreatePiece(choice, true, true);
+        Piece enemyPiece = CreatePiece(choice, false, true);
 
         // Change text
-
+        Game.PlayerChoiceNameText.StringReference = new LocalizedString("PieceNames", $"{playerPiece.Kind}");
+        Game.PlayerChoiceInfoText.StringReference = new LocalizedString("PieceInfo", $"{playerPiece.Kind}");
+        Game.EnemyChoiceNameText.StringReference = new LocalizedString("PieceNames", $"{enemyPiece.Kind}");
+        Game.EnemyChoiceInfoText.StringReference = new LocalizedString("PieceInfo", $"{enemyPiece.Kind}");
     }
 
     /// <summary>Removes the pieces being shown in the upgrade menu</summary>

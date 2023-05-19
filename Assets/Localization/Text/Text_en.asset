@@ -98,11 +98,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 18855440823795712
-    m_Localized: Choose a Piece
+    m_Localized: Choose Pieces
     m_Metadata:
       m_Items: []
   - m_Id: 18855444439285760
-    m_Localized: Choose a Power
+    m_Localized: Choose Powers
     m_Metadata:
       m_Items: []
   references:

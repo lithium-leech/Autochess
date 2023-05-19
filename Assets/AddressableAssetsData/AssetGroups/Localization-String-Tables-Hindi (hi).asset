@@ -23,6 +23,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-hi
     - Preload
+  - m_GUID: 4139a6aaf7336514d8633bc65dd95407
+    m_Address: PieceNames_hi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hi
+    - Preload
+  - m_GUID: 94bca85ce276f914f95b8cd172a3b0f7
+    m_Address: PieceInfo_hi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hi
+    - Preload
+  - m_GUID: 5221eed28be1e5d4592a61834c324a5d
+    m_Address: PowerNames_hi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hi
+    - Preload
+  - m_GUID: d7d862195db5e0d4e9defd694c5f5af0
+    m_Address: PowerInfo_hi
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-hi
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:
