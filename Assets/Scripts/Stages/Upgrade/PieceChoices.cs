@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Tables;
 
 /// <summary>
 /// Holds information about the choices a player has when
@@ -94,9 +93,8 @@ public class PieceChoices
     /// <param name="choice">The choice to show info for</param>
     public void ShowInfo(int choice)
     {
-        // Erase previous sprites
-        foreach (Piece piece in InfoPieces) piece.IsCaptured = true;
-        InfoPieces.Clear();
+        // Erase previous info
+        RemoveInfo();
 
         // Create new sprites
         Piece playerPiece = CreatePiece(choice, true, true);
@@ -114,8 +112,6 @@ public class PieceChoices
     {
         foreach (Piece piece in Pieces) piece.IsCaptured = true;
         Pieces.Clear();
-        foreach (Piece piece in InfoPieces) piece.IsCaptured = true;
-        InfoPieces.Clear();
     }
 
     /// <summary>Removes the panels being shown in the upgrade menu</summary>
@@ -123,6 +119,24 @@ public class PieceChoices
     {
         foreach (GameObject panel in Panels) GameObject.Destroy(panel);
         Panels.Clear();
+    }
+
+    /// <summary>Removes info being displayed in the upgrade menu</summary>
+    public void RemoveInfo()
+    {
+        // Remove sprites
+        foreach (Piece piece in InfoPieces) piece.IsCaptured = true;
+        InfoPieces.Clear();
+
+        // Remove text
+        Game.PlayerChoiceNameText.StringReference = new LocalizedString();
+        Game.PlayerChoiceInfoText.StringReference = new LocalizedString();
+        Game.EnemyChoiceNameText.StringReference = new LocalizedString();
+        Game.EnemyChoiceInfoText.StringReference = new LocalizedString();
+        Game.PlayerChoiceNameText.Text = string.Empty;
+        Game.PlayerChoiceInfoText.Text = string.Empty;
+        Game.EnemyChoiceNameText.Text = string.Empty;
+        Game.EnemyChoiceInfoText.Text = string.Empty;
     }
 
     /// <summary>Create a panel sprite</summary>

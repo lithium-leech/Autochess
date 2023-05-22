@@ -14,10 +14,10 @@ public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
     public TextMeshProUGUI LevelText;
-    public LocalizeStringEvent PlayerChoiceNameText;
-    public LocalizeStringEvent PlayerChoiceInfoText;
-    public LocalizeStringEvent EnemyChoiceNameText;
-    public LocalizeStringEvent EnemyChoiceInfoText;
+    public TextLocalizer PlayerChoiceNameText;
+    public TextLocalizer PlayerChoiceInfoText;
+    public TextLocalizer EnemyChoiceNameText;
+    public TextLocalizer EnemyChoiceInfoText;
     public BasicButton FightButton;
     public BasicButton CancelConcedeButton;
     public BasicButton ConfirmConcedeButton;

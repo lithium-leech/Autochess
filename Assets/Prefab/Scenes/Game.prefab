@@ -2387,10 +2387,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelText: {fileID: 2871266139693474435}
-  PlayerChoiceNameText: {fileID: 8981510784296729420}
-  PlayerChoiceInfoText: {fileID: 8168650247532459992}
-  EnemyChoiceNameText: {fileID: 8303053458977379105}
-  EnemyChoiceInfoText: {fileID: 5496060139526006843}
+  PlayerChoiceNameText: {fileID: 3137057401621526746}
+  PlayerChoiceInfoText: {fileID: 808543661709512458}
+  EnemyChoiceNameText: {fileID: 638630899291532662}
+  EnemyChoiceInfoText: {fileID: 6179208048180463743}
   FightButton: {fileID: 1801407063622727751}
   CancelConcedeButton: {fileID: 1572980926373395784}
   ConfirmConcedeButton: {fileID: 7924664819122848722}

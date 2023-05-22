@@ -64,6 +64,12 @@ public class UpgradeStage : IStage
     {
         // Remove button listeners
         Game.ConfirmChoiceButton.onClick.RemoveAllListeners();
+        for (int i = 0; i < Game.ChoiceButtons.Buttons.Length; i++)
+        {
+            int choice = i; // Capture the index in order to pass by value
+            RadioButton button = Game.ChoiceButtons.Buttons[choice];
+            button.onSelect.RemoveAllListeners();
+        }
 
         // Default to the first choice if one was not selected
         if (Game.ChoiceButtons.SelectedIndex < 0) Game.ChoiceButtons.SelectedIndex = 0;
@@ -84,6 +90,7 @@ public class UpgradeStage : IStage
         // Remove the upgrade menu
         Choices.RemovePiecesInMenu();
         Choices.RemovePanelsInMenu();
+        Choices.RemoveInfo();
         MenuManager.RemoveActiveMenu(Game.UpgradeMenu);
     }
 
