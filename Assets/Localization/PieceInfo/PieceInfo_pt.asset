@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cde200267f1928441aedd7f3064be2ea, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 894970281984
+    m_Localized: Move-se uma casa para a frente ou captura uma casa na diagonal.
+      Torna-se uma dama se chegar ao outro lado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 904663318528
+    m_Localized: Move-se na horizontal ou na vertical.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934325436416
+    m_Localized: "Move-se em forma de L (2 para fora, 1 para o outro lado) e salta
+      sobre as pe\xE7as que se atravessam no seu caminho."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951438196736
+    m_Localized: Move-se na diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 969410789376
+    m_Localized: Move-se na horizontal, na vertical ou na diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 987047837696
+    m_Localized: "Move-se uma casa em qualquer direc\xE7\xE3o."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

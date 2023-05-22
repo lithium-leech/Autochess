@@ -74,7 +74,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1421821001728
-    m_Localized: Salir del juego
+    m_Localized: Salir del Juego
     m_Metadata:
       m_Items: []
   - m_Id: 1466565836800
@@ -91,6 +91,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2272959727321088
     m_Localized: Velocidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855437095059456
+    m_Localized: Confirmar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855440823795712
+    m_Localized: Elija Piezas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855444439285760
+    m_Localized: Elija Poderes
     m_Metadata:
       m_Items: []
   references:

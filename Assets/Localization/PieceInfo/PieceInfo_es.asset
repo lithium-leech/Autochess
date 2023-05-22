@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cde200267f1928441aedd7f3064be2ea, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 894970281984
+    m_Localized: Avanza una casilla o captura una casilla en diagonal. Se convierte
+      en dama si llega al otro lado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 904663318528
+    m_Localized: Se mueve en horizontal o vertical.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934325436416
+    m_Localized: "Se mueve en forma de L (2 fuera, 1 a trav\xE9s) y salta por encima
+      de las piezas que se interponen en su camino."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951438196736
+    m_Localized: Se mueve en diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 969410789376
+    m_Localized: Se mueve en horizontal, vertical o diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 987047837696
+    m_Localized: "Se mueve una casilla en cualquier direcci\xF3n."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

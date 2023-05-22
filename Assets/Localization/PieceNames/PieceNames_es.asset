@@ -17,7 +17,31 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: c9b0f0dd1c1954d43b011b896f30d4a1, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1311556943872
+    m_Localized: "Pe\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1330624249856
+    m_Localized: Torre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1350245203968
+    m_Localized: Caballo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1378388983808
+    m_Localized: Alfil
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1398613917696
+    m_Localized: Dama
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1417601531904
+    m_Localized: Rey
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

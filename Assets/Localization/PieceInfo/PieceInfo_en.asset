@@ -19,7 +19,8 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 894970281984
-    m_Localized: Moves one space forward, or captures one space diagonally.
+    m_Localized: Moves one space forward, or captures one space diagonally. Becomes
+      a queen if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 904663318528
@@ -27,7 +28,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 934325436416
-    m_Localized: Moves in an L shape (2 out, 1 over) jumping over pieces in the way.
+    m_Localized: Moves in an L shape (2 out, 1 across) jumping over pieces in the
+      way.
     m_Metadata:
       m_Items: []
   - m_Id: 951438196736

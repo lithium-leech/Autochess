@@ -93,6 +93,18 @@ MonoBehaviour:
     m_Localized: Geschwindigkeit
     m_Metadata:
       m_Items: []
+  - m_Id: 18855437095059456
+    m_Localized: "Best\xE4tigen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855440823795712
+    m_Localized: "Figuren W\xE4hlen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855444439285760
+    m_Localized: "Kr\xE4fte W\xE4hlen"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

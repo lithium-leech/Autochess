@@ -65,7 +65,7 @@ MonoBehaviour:
       m_Items:
       - rid: 964482023748272134
   - m_Id: 1281580253184
-    m_Localized: "Pontua\xE7\xE3o m\xE1xima: {game.highscore}"
+    m_Localized: "Pontua\xE7\xE3o M\xE1xima: {game.highscore}"
     m_Metadata:
       m_Items:
       - rid: 964482023748272134
@@ -74,7 +74,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1421821001728
-    m_Localized: Sair do jogo
+    m_Localized: Sair do Jogo
     m_Metadata:
       m_Items: []
   - m_Id: 1466565836800
@@ -91,6 +91,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2272959727321088
     m_Localized: Velocidade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855437095059456
+    m_Localized: Confirmar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855440823795712
+    m_Localized: "Seleccionar Pe\xE7as"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855444439285760
+    m_Localized: Seleccionar  Poderes
     m_Metadata:
       m_Items: []
   references:

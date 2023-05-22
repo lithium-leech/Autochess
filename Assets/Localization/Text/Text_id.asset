@@ -70,11 +70,11 @@ MonoBehaviour:
       m_Items:
       - rid: 964482061820493830
   - m_Id: 1297241784320
-    m_Localized: Coba lagi
+    m_Localized: Coba Lagi
     m_Metadata:
       m_Items: []
   - m_Id: 1421821001728
-    m_Localized: Keluar permainan
+    m_Localized: Keluar Permainan
     m_Metadata:
       m_Items: []
   - m_Id: 1788327673856
@@ -91,6 +91,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2272959727321088
     m_Localized: Kecepatan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855437095059456
+    m_Localized: Konfirmasi
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855440823795712
+    m_Localized: Pilih Potongan
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18855444439285760
+    m_Localized: Pilih Kekuatan
     m_Metadata:
       m_Items: []
   references:

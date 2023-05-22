@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cde200267f1928441aedd7f3064be2ea, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 894970281984
+    m_Localized: "Zieht ein Feld vorw\xE4rts oder schl\xE4gt ein Feld diagonal. Wird
+      zur Dame, wenn er die andere Seite erreicht."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 904663318528
+    m_Localized: Zieht horizontal oder vertikal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934325436416
+    m_Localized: "Zieht L-f\xF6rmig (2 raus, 1 r\xFCber) und springt \xFCber Figuren,
+      die ihm im Weg stehen."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951438196736
+    m_Localized: Zieht diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 969410789376
+    m_Localized: Zieht horizontal, vertikal oder diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 987047837696
+    m_Localized: Zieht ein Feld in eine beliebige Richtung.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -17,7 +17,33 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: cde200267f1928441aedd7f3064be2ea, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 894970281984
+    m_Localized: "Avance d'une case ou capture une case en diagonalement. Devient
+      une dame lorsqu'il atteint l'autre c\xF4t\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 904663318528
+    m_Localized: "Se d\xE9place horizontalement ou verticalement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934325436416
+    m_Localized: "Se d\xE9place en forme de L (2 sortent, 1 traverse) et saute par-dessus
+      les pi\xE8ces qui se trouvent sur son chemin."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 951438196736
+    m_Localized: "Se d\xE9place diagonalement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 969410789376
+    m_Localized: "Se d\xE9place horizontalement, verticalement ou en diagonalement."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 987047837696
+    m_Localized: "Se d\xE9place d'une case dans n'importe quelle direction."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
