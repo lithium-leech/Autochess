@@ -17,7 +17,7 @@ public class UpgradeStage : IStage
     private Game Game { get; set; }
 
     /// <summary>The next level choices the player is being offered</summary>
-    public PieceChoices Choices { get; set; }
+    public UpgradeChoices Choices { get; set; }
 
     public void Start()
     {
@@ -38,15 +38,26 @@ public class UpgradeStage : IStage
         }
 
         // Display new level choices
-        Choices = new PieceChoices(Game);
-        Choices.ShowPanels();
-        Choices.ShowChoices();
+        if (GameState.Level % 20 == 1)
+        {
+            // Reset pieces
+        }
+        else if (GameState.Level % 5 == 0)
+        {
+            // Award a new power
+            // Choices = new PowerChoices(Game);
+        }
+        else
+        {
+            // Award a new piece
+            Choices = new PieceChoices(Game);
+        }
+        Choices.Show();
         Game.ChoiceButtons.SelectButton(-1);
         MenuManager.AddActiveMenu(Game.UpgradeMenu);
 
         // Delete any pieces in the trash
-        foreach (Piece piece in Game.TrashBoard.PlayerPieces)
-            piece.IsCaptured= true;
+        foreach (Piece piece in Game.TrashBoard.PlayerPieces) piece.IsCaptured= true;
 
         // Add button listeners
         Game.ConfirmChoiceButton.onClick.AddListener(Confirm);
@@ -74,23 +85,11 @@ public class UpgradeStage : IStage
         // Default to the first choice if one was not selected
         if (Game.ChoiceButtons.SelectedIndex < 0) Game.ChoiceButtons.SelectedIndex = 0;
 
-        // Get the pieces corresponding to the selected option
-        AssetGroup.Piece playerPiece;
-        AssetGroup.Piece enemyPiece;
-        playerPiece = Choices.PlayerPieces[Game.ChoiceButtons.SelectedIndex];
-        enemyPiece = Choices.EnemyPieces[Game.ChoiceButtons.SelectedIndex];
-
-        // Add the enemy piece, removing a lower value piece if necessary
-        if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);
-        if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
-
-        // Add the player piece as long a sideboard space is empty
-        if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(new PositionRecord(playerPiece, null));
+        // Apply the selected choice
+        Choices.ApplyChoice(Game.ChoiceButtons.SelectedIndex);
 
         // Remove the upgrade menu
-        Choices.RemovePiecesInMenu();
-        Choices.RemovePanelsInMenu();
-        Choices.RemoveInfo();
+        Choices.Remove();
         MenuManager.RemoveActiveMenu(Game.UpgradeMenu);
     }
 
@@ -102,38 +101,5 @@ public class UpgradeStage : IStage
         {
             Game.NextStage = new PlanningStage(Game);
         }
-    }
-
-    /// <summary>Remove an enemy piece with lower value than the given kind</summary>
-    /// <param name="kind">The kind of piece to make space for</param>
-    public void RemoveLowerValue(AssetGroup.Piece kind)
-    {
-        int valueToAdd = GetPieceValue(kind);
-        for (int i = 0; i < Game.EnemyPieces.Count; i++)
-        {
-            int valueToRemove = GetPieceValue(Game.EnemyPieces[i]);
-            if (valueToRemove < valueToAdd)
-            {
-                Game.EnemyPieces.RemoveAt(i);
-                return;
-            }
-        }
-    }
-
-    /// <summary>Get the value of a given kind of piece</summary>
-    /// <param name="kind">The kind of piece to evaluate</param>
-    /// <returns>An integer value</returns>
-    public int GetPieceValue(AssetGroup.Piece kind)
-    {
-        return kind switch
-        {
-            AssetGroup.Piece.Pawn => 0,
-            AssetGroup.Piece.Knight => 1,
-            AssetGroup.Piece.King => 2,
-            AssetGroup.Piece.Bishop => 3,
-            AssetGroup.Piece.Rook => 4,
-            AssetGroup.Piece.Queen => 5,
-            _ => throw new Exception($"Piece kind {kind} not recognized")
-        };
     }
 }

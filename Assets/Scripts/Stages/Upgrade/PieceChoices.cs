@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Localization;
 
 /// <summary>
 /// Holds information about the choices a player has when
 /// they're choosing pieces for the next level
 /// </summary>
-public class PieceChoices
+public class PieceChoices : UpgradeChoices
 {
     /// <summary>Creates a new set of piece choices</summary>
-    public PieceChoices(Game game)
+    public PieceChoices(Game game) : base(game)
     {
-        Game = game;
-        NumberOfChoices = game.ChoiceButtons.Buttons.Length;
-
         // Pick random pieces
         PlayerPieces = new AssetGroup.Piece[NumberOfChoices];
         EnemyPieces = new AssetGroup.Piece[NumberOfChoices];
@@ -25,62 +21,19 @@ public class PieceChoices
         }
     }
 
-    /// <summary>The piece the player gets if the first option is chosen</summary>
+    /// <summary>The available powers for the player</summary>
     public AssetGroup.Piece[] PlayerPieces { get; }
 
-    /// <summary>The piece the enemy gets if the first option is chosen</summary>
+    /// <summary>The available powers for the enemy</summary>
     public AssetGroup.Piece[] EnemyPieces { get; }
 
-    /// <summary>The game to show the choices in</summary>
-    private Game Game { get; }
-
-    /// <summary>The number of available choices</summary>
-    private int NumberOfChoices { get; }
-
-    /// <summary>Instantiated panels shown in the upgrade menu</summary>
-    private IList<GameObject> Panels { get; set; } = new List<GameObject>();
-    
     /// <summary>Instantiated pieces shown in the upgrade menu</summary>
     private IList<Piece> Pieces { get; set; } = new List<Piece>();
     
     /// <summary>Instantiated pieces shown in the info section</summary>
     private IList<Piece> InfoPieces { get; set; } = new List<Piece>();
 
-    /// <summary>Returns a random type of piece</summary>
-    /// <returns>A Piece type</returns>
-    private AssetGroup.Piece GetRandomPiece()
-    {
-        return UnityEngine.Random.Range(1, 7) switch
-        {
-            1 => AssetGroup.Piece.Pawn,
-            2 => AssetGroup.Piece.Rook,
-            3 => AssetGroup.Piece.Knight,
-            4 => AssetGroup.Piece.Bishop,
-            5 => AssetGroup.Piece.Queen,
-            6 => AssetGroup.Piece.King,
-            _ => throw new Exception($"A random selection in PieceChoices was not implemented")
-        }; ;
-    }
-
-    /// <summary>Creates all of the background panels in the upgrade menu</summary>
-    public void ShowPanels()
-    {
-        // Create choice panels
-        for (int i = 0; i < NumberOfChoices; i++)
-        {
-            CreatePanel(i, true, false, false);
-            CreatePanel(i, false, false, false);
-        }
-
-        // Create info panels
-        CreatePanel(-1, true, true, false);
-        CreatePanel(-1, false, true, false);
-        CreatePanel(-1, true, true, true);
-        CreatePanel(-1, false, true, true);
-    }
-
-    /// <summary>Creates piece sprites for the choices in the upgrade menu</summary>
-    public void ShowChoices()
+    protected override void ShowChoices()
     {
         for (int i = 0; i < NumberOfChoices; i++)
         {
@@ -89,9 +42,7 @@ public class PieceChoices
         }
     }
 
-    /// <summary>Displays info for the given choice in the upgrade menu</summary>
-    /// <param name="choice">The choice to show info for</param>
-    public void ShowInfo(int choice)
+    public override void ShowInfo(int choice)
     {
         // Erase previous info
         RemoveInfo();
@@ -107,22 +58,13 @@ public class PieceChoices
         Game.EnemyChoiceInfoText.StringReference = new LocalizedString("PieceInfo", $"{enemyPiece.Kind}");
     }
 
-    /// <summary>Removes the pieces being shown in the upgrade menu</summary>
-    public void RemovePiecesInMenu()
+    protected override void RemoveChoices()
     {
         foreach (Piece piece in Pieces) piece.IsCaptured = true;
         Pieces.Clear();
     }
 
-    /// <summary>Removes the panels being shown in the upgrade menu</summary>
-    public void RemovePanelsInMenu()
-    {
-        foreach (GameObject panel in Panels) GameObject.Destroy(panel);
-        Panels.Clear();
-    }
-
-    /// <summary>Removes info being displayed in the upgrade menu</summary>
-    public void RemoveInfo()
+    protected override void RemoveInfo()
     {
         // Remove sprites
         foreach (Piece piece in InfoPieces) piece.IsCaptured = true;
@@ -139,35 +81,26 @@ public class PieceChoices
         Game.EnemyChoiceInfoText.Text = string.Empty;
     }
 
-    /// <summary>Create a panel sprite</summary>
-    /// <param name="choice">The choice to create the sprite for</param>
-    /// <param name="player">True if this is the player's half of the choice</param>
-    /// <param name="player">True if this is an info panel</param>
-    /// <param name="player">True if this the text panel</param>
-    /// <returns>A new panel</returns>
-    private GameObject CreatePanel(int choice, bool player, bool info, bool text)
+    public override void ApplyChoice(int choice)
     {
-        GameObject panel = Game.CreatePanel(!player, text);
-        if (text)
-        {
-            panel.transform.SetParent(Game.InfoMenu.transform);
-            panel.transform.SetAsFirstSibling();
-        }
-        if (info)
-        {
-            panel.transform.position = InfoPosition(player, true, text);
-        }
-        else
-        {
-            panel.transform.position = ChoicePosition(choice, player, true);
-        }
-        Panels.Add(panel);
-        return panel;
+        // Get the pieces corresponding to the selected option
+        AssetGroup.Piece playerPiece;
+        AssetGroup.Piece enemyPiece;
+        playerPiece = PlayerPieces[Game.ChoiceButtons.SelectedIndex];
+        enemyPiece = EnemyPieces[Game.ChoiceButtons.SelectedIndex];
+
+        // Add the enemy piece, removing a lower value piece if necessary
+        if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);
+        if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
+
+        // Add the player piece as long a sideboard space is empty
+        if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(new PositionRecord(playerPiece, null));
     }
 
     /// <summary>Create a piece sprite</summary>
     /// <param name="choice">The choice to create the sprite for</param>
     /// <param name="player">True if this is the player's half of the choice</param>
+    /// <param name="info">True if this is going to be shown in the info menu</param>
     /// <returns>A new Piece</returns>
     private Piece CreatePiece(int choice, bool player, bool info)
     {
@@ -194,36 +127,52 @@ public class PieceChoices
         return piece;
     }
 
-    /// <summary>Gets the position of the desired choice display</summary>
-    /// <param name="choice">The choice index</param>
-    /// <param name="player">True if this is the player half of the choice</param>
-    /// <param name="panel">True if this is the background panel</param>
-    /// <returns>A Vector3</returns>
-    private Vector3 ChoicePosition(int choice, bool player, bool panel)
+    /// <summary>Returns a random type of piece</summary>
+    /// <returns>A Piece type</returns>
+    private AssetGroup.Piece GetRandomPiece()
     {
-        float x = choice switch
+        return UnityEngine.Random.Range(1, 7) switch
         {
-            0 => -2.125f,
-            1 => 0.0f,
-            2 => 2.125f,
-            _ => throw new Exception("A choice index was not implemented in PieceChoices")
-        };
-        float y = player ? 2.25f : 3.25f;
-        float z = panel ? -32.0f : -33.0f;
-        return new Vector3(x, y, z);
+            1 => AssetGroup.Piece.Pawn,
+            2 => AssetGroup.Piece.Rook,
+            3 => AssetGroup.Piece.Knight,
+            4 => AssetGroup.Piece.Bishop,
+            5 => AssetGroup.Piece.Queen,
+            6 => AssetGroup.Piece.King,
+            _ => throw new Exception($"A random selection in PieceChoices was not implemented")
+        }; ;
     }
 
-    /// <summary>Gets the position of the desired info display</summary>
-    /// <param name="player">True if this is the player half of the info</param>
-    /// <param name="panel">True if this is the background panel</param>
-    /// <param name="text">True if this is the text panel</param>
-    /// <returns>A Vector3</returns>
-    private Vector3 InfoPosition(bool player, bool panel, bool text)
+    /// <summary>Remove an enemy piece with lower value than the given kind</summary>
+    /// <param name="kind">The kind of piece to make space for</param>
+    public void RemoveLowerValue(AssetGroup.Piece kind)
     {
-        float dx = text ? 2.0f : 0.5f;
-        float x = player ? -dx : dx;
-        float y = text ? -5.625f : -3.875f;
-        float z = text ? -31.0f : panel ? -33.0f : -34.0f;
-        return new Vector3(x, y, z);
+        int valueToAdd = GetPieceValue(kind);
+        for (int i = 0; i < Game.EnemyPieces.Count; i++)
+        {
+            int valueToRemove = GetPieceValue(Game.EnemyPieces[i]);
+            if (valueToRemove < valueToAdd)
+            {
+                Game.EnemyPieces.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
+    /// <summary>Get the value of a given kind of piece</summary>
+    /// <param name="kind">The kind of piece to evaluate</param>
+    /// <returns>An integer value</returns>
+    public int GetPieceValue(AssetGroup.Piece kind)
+    {
+        return kind switch
+        {
+            AssetGroup.Piece.Pawn => 0,
+            AssetGroup.Piece.Knight => 1,
+            AssetGroup.Piece.King => 2,
+            AssetGroup.Piece.Bishop => 3,
+            AssetGroup.Piece.Rook => 4,
+            AssetGroup.Piece.Queen => 5,
+            _ => throw new Exception($"Piece kind {kind} not recognized")
+        };
     }
 }
