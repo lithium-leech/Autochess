@@ -64,7 +64,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         Debug.LogError($"Failed to load Ad {adUnitId}: {error} - {message}");
         // TODO: Use the error details to determine whether to try to load another ad
         // Try again after 10 seconds
-        Task retry = new(async () =>
+        Task retry = new Task(async () =>
         {
             await Task.Delay(10000);
             Advertisement.Load(_adUnitId, this);

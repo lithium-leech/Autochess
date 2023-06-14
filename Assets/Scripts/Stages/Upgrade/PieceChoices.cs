@@ -107,13 +107,13 @@ public class PieceChoices : UpgradeChoices
         Piece piece;
         if (player)
         {
-            piece = Game.CreatePiece(PlayerPieces[choice], false);
+            piece = Game.CreatePiece(PlayerPieces[choice], true, GameState.IsPlayerWhite);
         }
         else
         {
-            piece = Game.CreatePiece(EnemyPieces[choice], true);
+            piece = Game.CreatePiece(EnemyPieces[choice], false, !GameState.IsPlayerWhite);
         }
-        piece.IsPlayerPiece = player;
+        piece.IsPlayer = player;
         if (info)
         {
             piece.WarpTo(InfoPosition(player, false, false));

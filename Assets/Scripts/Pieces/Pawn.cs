@@ -10,7 +10,7 @@ public class Pawn : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Vector2Int newSpace = new(Space.x, Space.y);
+        Vector2Int newSpace = new Vector2Int(Space.x, Space.y);
 
         // Get the possible moves this piece can make
         Vector2Int move = GetMoveSpace();
@@ -18,14 +18,14 @@ public class Pawn : Piece
         Vector2Int rightAttack = GetRightAttackSpace();
 
         // Capture a piece if possible
-        if (Board.HasEnemy(IsPlayerPiece, leftAttack) && Board.HasEnemy(IsPlayerPiece, rightAttack))
+        if (Board.HasEnemy(IsPlayer, leftAttack) && Board.HasEnemy(IsPlayer, rightAttack))
         {
             // Choose randomly if both options are available
             if (Random.Range(0, 2) == 1) newSpace = leftAttack;
             else newSpace = rightAttack;
         }
-        else if (Board.HasEnemy(IsPlayerPiece, leftAttack)) newSpace = leftAttack;
-        else if (Board.HasEnemy(IsPlayerPiece, rightAttack)) newSpace = rightAttack;
+        else if (Board.HasEnemy(IsPlayer, leftAttack)) newSpace = leftAttack;
+        else if (Board.HasEnemy(IsPlayer, rightAttack)) newSpace = rightAttack;
         else
         {
             // Otherwise move if possible
@@ -36,7 +36,7 @@ public class Pawn : Piece
         EnactTurn(newSpace);
 
         // If the new space is at the board edge, upgrade to a queen
-        int edge = IsPlayerPiece ? Board.Height - 1 : 0;
+        int edge = IsPlayer ? Board.Height - 1 : 0;
         if (newSpace.y == edge)
         {
             Transform = AssetGroup.Piece.Queen;
@@ -47,7 +47,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetMoveSpace()
     {
-        if (IsPlayerPiece) return new Vector2Int(Space.x, Space.y + 1);
+        if (IsPlayer) return new Vector2Int(Space.x, Space.y + 1);
         else return new Vector2Int(Space.x, Space.y - 1);
     }
 
@@ -55,7 +55,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetLeftAttackSpace()
     {
-        if (IsPlayerPiece) return new Vector2Int(Space.x - 1, Space.y + 1);
+        if (IsPlayer) return new Vector2Int(Space.x - 1, Space.y + 1);
         else return new Vector2Int(Space.x - 1, Space.y - 1);
     }
 
@@ -63,7 +63,7 @@ public class Pawn : Piece
     /// <returns>The space's coordinates</returns>
     private Vector2Int GetRightAttackSpace()
     {
-        if (IsPlayerPiece) return new Vector2Int(Space.x + 1, Space.y + 1);
+        if (IsPlayer) return new Vector2Int(Space.x + 1, Space.y + 1);
         else return new Vector2Int(Space.x + 1, Space.y - 1);
     }
 }

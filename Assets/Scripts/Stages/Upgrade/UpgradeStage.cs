@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
@@ -41,11 +40,14 @@ public class UpgradeStage : IStage
         if (GameState.Level % 20 == 1)
         {
             // Reset pieces
+            
+            // and award a new power
+            Choices = new PowerChoices(Game);
         }
         else if (GameState.Level % 5 == 0)
         {
             // Award a new power
-            // Choices = new PowerChoices(Game);
+            Choices = new PowerChoices(Game);
         }
         else
         {

@@ -10,6 +10,7 @@ namespace AssetGroup
         WhitePiece,
         BlackPiece,
         Highlight,
-        Panel
+        Panel,
+        Power
     }
 }

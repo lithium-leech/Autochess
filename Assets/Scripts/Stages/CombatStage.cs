@@ -24,7 +24,7 @@ public class CombatStage : IStage
     private float TurnPause { get; set; }
 
     /// <summary>True if it is currently white's turn</summary>
-    private bool WhiteTurn { get; set; }
+    private bool IsPlayerTurn { get; set; }
 
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
     private int RoundsToConcede { get; set; }
@@ -41,11 +41,11 @@ public class CombatStage : IStage
         GameState.MusicBox.StopMusic();
         TimeWaited = 0;
         TurnPause = GameState.TurnPause;
-        WhiteTurn = true;
+        IsPlayerTurn = GameState.IsPlayerWhite;
         EndConcede();
 
         // Log starting board state
-        StringBuilder positions = new("(");
+        StringBuilder positions = new StringBuilder("(");
         for (int x = 0; x < Game.GameBoard.Width; x++)
         for (int y = 0; y < Game.GameBoard.Height; y++)
         {
@@ -57,7 +57,7 @@ public class CombatStage : IStage
         Debug.Log($"Starting Positions: {positions}");
     }
 
-    private string ControlString(Piece piece) => piece.IsPlayerPiece ? "Player" : "Enemy";
+    private string ControlString(Piece piece) => piece.IsPlayer ? "Player" : "Enemy";
 
     public void During()
     {
@@ -85,16 +85,16 @@ public class CombatStage : IStage
 
         // Move the current player's pieces
         List<Piece> pieces;
-        string color;
-        if (WhiteTurn)
+        string actor;
+        if (IsPlayerTurn)
         {
-            pieces = Game.GameBoard.EnemyPieces;
-            color = "White";
+            pieces = Game.GameBoard.PlayerPieces;
+            actor = "Player";
         }
         else
         {
-            pieces = Game.GameBoard.PlayerPieces;
-            color = "Black";
+            pieces = Game.GameBoard.EnemyPieces;
+            actor = "Enemy";
         }
         RunRound(pieces);
 
@@ -103,7 +103,7 @@ public class CombatStage : IStage
         foreach (Piece piece in pieces)
             moves.Append($" {piece.Kind}[{piece.Space.x},{piece.Space.y}]");
         moves.Append(" )");
-        Debug.Log($"{color} Moves: {moves}");
+        Debug.Log($"{actor} Moves: {moves}");
 
         // Check if the player should be prompted to concede
         if (!ShowingConcede)
@@ -112,7 +112,7 @@ public class CombatStage : IStage
 
         // Go to the next turn
         RoundsToConcede--;
-        WhiteTurn = !WhiteTurn;
+        IsPlayerTurn = !IsPlayerTurn;
         TimeWaited = 0;
     }
 
@@ -128,7 +128,7 @@ public class CombatStage : IStage
 
     /// <summary>Runs the battle operations for one set of pieces</summary>
     /// <param name="pieces">The pieces to move</param>
-    public void RunRound(List<Piece> pieces)
+    private void RunRound(List<Piece> pieces)
     {
         bool pieceMoved = false;
         foreach (Piece piece in pieces)
@@ -146,7 +146,7 @@ public class CombatStage : IStage
     }
 
     /// <summary>Displays the concede menu to the player</summary>
-    public void StartConcede()
+    private void StartConcede()
     {
         ShowingConcede = true;
         MenuManager.AddActiveMenu(Game.ConcedeMenu);
@@ -155,14 +155,14 @@ public class CombatStage : IStage
     }
 
     /// <summary>The player concedes and the fight is lost</summary>
-    public void ConfirmConcede()
+    private void ConfirmConcede()
     {
         Game.NextStage = new DefeatStage(Game);
         EndConcede();
     }
 
     /// <summary>Removes the concede menu and resets concede logic</summary>
-    public void EndConcede()
+    private void EndConcede()
     {
         MenuManager.RemoveActiveMenu(Game.ConcedeMenu);
         Game.CancelConcedeButton.onClick.RemoveAllListeners();

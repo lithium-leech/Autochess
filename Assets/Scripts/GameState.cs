@@ -22,4 +22,7 @@ public static class GameState
 
     /// <summary>The player's highest score</summary>
     public static int HighScore { get; set; } = 0;
+
+    /// <summary>True if the player's color is white</summary>
+    public static bool IsPlayerWhite { get; set; } = false;
 }

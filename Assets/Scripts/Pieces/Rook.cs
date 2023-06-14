@@ -11,11 +11,11 @@ public class Rook : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Vector2Int newSpace = new(Space.x, Space.y);
+        Vector2Int newSpace = new Vector2Int(Space.x, Space.y);
 
         // Get the possible moves this piece can make
-        List<Vector2Int> possibleMoves = new();
-        List<Vector2Int> possibleCaptures = new();
+        List<Vector2Int> possibleMoves = new List<Vector2Int>();
+        List<Vector2Int> possibleCaptures = new List<Vector2Int>();
         GetChoicesInDirection(0, 1, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(1, 0, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(0, -1, 100, possibleMoves, possibleCaptures);

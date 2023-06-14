@@ -28,7 +28,7 @@ public class PlanningStage : IStage
         PlacePieces();
 
         // Add highlights around spaces that the player can put pieces
-        List<GameObject> highlights = new();
+        List<GameObject> highlights = new List<GameObject>();
         highlights.AddRange(AddHighlights(Game.GameBoard));
         highlights.AddRange(AddHighlights(Game.SideBoard));
         highlights.AddRange(AddHighlights(Game.TrashBoard));
@@ -64,7 +64,7 @@ public class PlanningStage : IStage
             board = Game.TrashBoard;
 
         // If it is inside a board, get the space/piece
-        Vector2Int space = new(-1, -1);
+        Vector2Int space = new Vector2Int(-1, -1);
         if (board != null) space = board.ToSpace(position);
 
         // Pick up a piece when the screen is clicked/pressed
@@ -72,7 +72,7 @@ public class PlanningStage : IStage
         {
             HeldPiece = board.Spaces[space.x, space.y];
             if (HeldPiece != null)
-                if (HeldPiece.IsPlayerPiece)
+                if (HeldPiece.IsPlayer)
                 {
                     board.RemovePiece(HeldPiece);
                     HeldPiece.transform.position = position - (Vector3.forward * 10);
@@ -139,7 +139,7 @@ public class PlanningStage : IStage
         foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
         {
             Vector2Int space = GetRandomEmptySpace();
-            Game.GameBoard.AddPiece(pieceType, true, space);
+            Game.GameBoard.AddPiece(pieceType, false, !GameState.IsPlayerWhite, space);
         }
 
         // Place the player's pieces on the game board
@@ -151,7 +151,7 @@ public class PlanningStage : IStage
             }
             else
             {
-                Game.GameBoard.AddPiece(record.Kind, false, record.Space.Value);
+                Game.GameBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space.Value);
             }
         }
 
@@ -159,9 +159,9 @@ public class PlanningStage : IStage
         foreach (PositionRecord record in Game.PlayerSideBoard)
         {
             if (record.Space == null)
-                Game.SideBoard.AddPiece(record.Kind, false);
+                Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite);
             else
-                Game.SideBoard.AddPiece(record.Kind, false, record.Space.Value);
+                Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space.Value);
         }
     }
 
@@ -204,9 +204,9 @@ public class PlanningStage : IStage
     {
         IList<Vector2Int> emptySpaces = new List<Vector2Int>();
         for (int x = 0; x < Game.GameBoard.Width; x++)
-            for (int y = 6; y < Game.GameBoard.Height; y++)
+            for (int y = Game.GameBoard.Height - Game.GameBoard.EnemyRows; y < Game.GameBoard.Height; y++)
             {
-                Vector2Int space = new(x, y);
+                Vector2Int space = new Vector2Int(x, y);
                 if (!Game.GameBoard.HasPiece(space)) emptySpaces.Add(space);
             }
         return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];

@@ -13,7 +13,10 @@ public abstract class Piece : MonoBehaviour
     public Vector2Int Space { get; set; }
     
     /// <summary>True if this piece is controlled by the player</summary>
-    public bool IsPlayerPiece { get; set; }
+    public bool IsPlayer { get; set; }
+    
+    /// <summary>True if the piece is white</summary>
+    public bool IsWhite { get; set; }
     
     /// <summary>True if this piece has been captured</summary>
     public bool IsCaptured { get; set; } = false;
@@ -51,7 +54,7 @@ public abstract class Piece : MonoBehaviour
             if (Transform != AssetGroup.Piece.None)
             {
                 Board.CapturePiece(this);
-                Board.AddPiece(Transform, !IsPlayerPiece, Space);
+                Board.AddPiece(Transform, IsPlayer, IsWhite, Space);
             }
         }
 
@@ -67,13 +70,13 @@ public abstract class Piece : MonoBehaviour
     /// <param name="possibleCaptures">A list of possible captures to add to</param>
     public void GetChoicesInDirection(int xi, int yi, int range, IList<Vector2Int> possibleMoves, IList<Vector2Int> possibleCaptures)
     {
-        Vector2Int pointer = new(Space.x, Space.y);
+        Vector2Int pointer = new Vector2Int(Space.x, Space.y);
         for (int i = 0; i < range; i++)
         {
             pointer.x += xi;
             pointer.y += yi;
             if (!Board.OnBoard(pointer)) break;
-            if (Board.HasEnemy(IsPlayerPiece, pointer)) { possibleCaptures.Add(pointer); break; }
+            if (Board.HasEnemy(IsPlayer, pointer)) { possibleCaptures.Add(pointer); break; }
             if (Board.HasPiece(pointer)) break;
             else possibleMoves.Add(pointer);
         }

@@ -11,10 +11,10 @@ public class Knight : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Vector2Int newSpace = new(Space.x, Space.y);
+        Vector2Int newSpace = new Vector2Int(Space.x, Space.y);
 
         // Get the spaces this piece can move
-        List<Vector2Int> possibleSpaces = new();
+        List<Vector2Int> possibleSpaces = new List<Vector2Int>();
         possibleSpaces.Add(new Vector2Int(Space.x + 1, Space.y + 2));
         possibleSpaces.Add(new Vector2Int(Space.x + 2, Space.y + 1));
         possibleSpaces.Add(new Vector2Int(Space.x + 2, Space.y - 1));
@@ -25,13 +25,13 @@ public class Knight : Piece
         possibleSpaces.Add(new Vector2Int(Space.x - 1, Space.y + 2));
 
         // Get the possible moves this piece can make
-        List<Vector2Int> possibleMoves = new();
-        List<Vector2Int> possibleCaptures = new();
+        List<Vector2Int> possibleMoves = new List<Vector2Int>();
+        List<Vector2Int> possibleCaptures = new List<Vector2Int>();
         foreach (Vector2Int space in possibleSpaces)
         {
             if (Board.OnBoard(space))
             {
-                if (Board.HasEnemy(IsPlayerPiece, space)) possibleCaptures.Add(space);
+                if (Board.HasEnemy(IsPlayer, space)) possibleCaptures.Add(space);
                 else if (!Board.HasPiece(space)) possibleMoves.Add(space);
             }
         }

@@ -20,7 +20,10 @@ public class Board
     public Piece[,] Spaces { get; }
 
     /// <summary>The number of rows (starting at the bottom) that the player can use</summary>
-    public int PlayerRows { get; }
+    public int PlayerRows { get; set; }
+    
+    /// <summary>The number of rows (starting at the top) that the enemy can use</summary>
+    public int EnemyRows { get; set; }
 
     /// <summary>The pieces controlled by the player</summary>
     public List<Piece> PlayerPieces { get; }
@@ -39,14 +42,16 @@ public class Board
     /// <param name="width">The number of horizontal spaces on the board</param>
     /// <param name="height">The number of vertical spaces on the board</param>
     /// <param name="playerRows">The number of rows the player can use</param>
+    /// <param name="enemyRows">The number of rows the enemy can use</param>
     /// <param name="cornerBL">World-space coordinates for the bottom left corner of the board</param>
-    public Board(Game game, int width, int height, int playerRows, Vector2 cornerBL)
+    public Board(Game game, int width, int height, int playerRows, int enemyRows, Vector2 cornerBL)
     {
         Game = game;
         Width = width;
         Height = height;
         Spaces = new Piece[width,height];
         PlayerRows = playerRows;
+        EnemyRows = enemyRows;
         PlayerPieces = new List<Piece>();
         EnemyPieces = new List<Piece>();
         CornerBL = cornerBL;
@@ -55,14 +60,16 @@ public class Board
 
     /// <summary>Adds a new piece to the board in the first empty space</summary>
     /// <param name="kind">The kind of piece to add</param>
+    /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
-    public void AddPiece(AssetGroup.Piece kind, bool white) => AddPiece(kind, white, GetFirstEmptySpace());
+    public void AddPiece(AssetGroup.Piece kind, bool player, bool white) => AddPiece(kind, player, white, GetFirstEmptySpace());
 
     /// <summary>Adds a new piece to the board</summary>
     /// <param name="kind">The kind of piece to add</param>
+    /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
-    public void AddPiece(AssetGroup.Piece kind, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(kind, white), space);
+    public void AddPiece(AssetGroup.Piece kind, bool player, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(kind, player, white), space);
 
     /// <summary>Adds a piece to the board in the first empty space</summary>
     /// <param name="piece">The piece to add</param>
@@ -95,7 +102,7 @@ public class Board
 
         // Add the piece to the appropriate collections
         Spaces[space.x,space.y] = piece;
-        if (piece.IsPlayerPiece) PlayerPieces.Add(piece);
+        if (piece.IsPlayer) PlayerPieces.Add(piece);
         else EnemyPieces.Add(piece);
 
         // Warp the piece to its new location
@@ -107,7 +114,7 @@ public class Board
     public void RemovePiece(Piece piece)
     {
         if (Spaces[piece.Space.x, piece.Space.y] == piece) Spaces[piece.Space.x, piece.Space.y] = null;
-        if (piece.IsPlayerPiece) PlayerPieces.Remove(piece);
+        if (piece.IsPlayer) PlayerPieces.Remove(piece);
         else EnemyPieces.Remove(piece);
     }
 
@@ -131,7 +138,7 @@ public class Board
     /// <returns>A board space</returns>
     public Vector2Int GetFirstEmptySpace()
     {
-        Vector2Int space = new(0, 0);
+        Vector2Int space = new Vector2Int(0, 0);
         for (int j = Height - 1; j >= 0; j--)
         for (int i = 0; i < Width; i++)
         {
@@ -164,7 +171,7 @@ public class Board
     public bool HasEnemy(bool isPlayerPiece, Vector2Int space)
     {
         if (!HasPiece(space)) return false;
-        else if (Spaces[space.x, space.y].IsPlayerPiece == isPlayerPiece) return false;
+        else if (Spaces[space.x, space.y].IsPlayer == isPlayerPiece) return false;
         else return true;
     }
 
@@ -181,10 +188,10 @@ public class Board
     /// <summary>Gets a board space from a given world position</summary>
     /// <param name="position">The world position to get a space for</param>
     /// <returns>A board space</returns>
-    public Vector2Int ToSpace(Vector3 position) => new((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
+    public Vector2Int ToSpace(Vector3 position) => new Vector2Int((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
 
     /// <summary>Gets the world coordinates for a given space</summary>
     /// <param name="space">The space to get coordinated for</param>
     /// <returns>World-space coordinates</returns>
-    public Vector3 ToPosition(Vector2Int space) => new(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, GameState.PieceZ);
+    public Vector3 ToPosition(Vector2Int space) => new Vector3(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, GameState.PieceZ);
 }

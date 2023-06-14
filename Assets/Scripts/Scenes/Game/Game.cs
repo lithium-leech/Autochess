@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -75,9 +74,9 @@ public class Game : MonoBehaviour
         }
 
         // Create the game boards
-        GameBoard = new Board(this, 8, 8, 2, new Vector2(-4.0f, -1.0f));
-        SideBoard = new Board(this, 8, 3, 3, new Vector2(-4.0f, -5.75f));
-        TrashBoard = new Board(this, 1, 1, 1, new Vector2(-3.0f, -8.5f));
+        GameBoard = new Board(this, 8, 8, 2, 2, new Vector2(-4.0f, -1.0f));
+        SideBoard = new Board(this, 8, 3, 3, 0, new Vector2(-4.0f, -5.75f));
+        TrashBoard = new Board(this, 1, 1, 1, 0, new Vector2(-3.0f, -8.5f));
 
         // Create a sample setup;
         EnemyPieces = new List<AssetGroup.Piece>();
@@ -114,15 +113,30 @@ public class Game : MonoBehaviour
 
     /// <summary>Creates a new instance of a piece</summary>
     /// <param name="kind">The kind of piece to create</param>
+    /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
     /// <returns>A Piece</returns>
-    public Piece CreatePiece(AssetGroup.Piece kind, bool white)
+    public Piece CreatePiece(AssetGroup.Piece kind, bool player, bool white)
     {
         AssetGroup.Group groupKey = white ? AssetGroup.Group.WhitePiece : AssetGroup.Group.BlackPiece;
         GameObject obj = Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         Piece piece = obj.GetComponent<Piece>();
-        piece.IsPlayerPiece = !white;
+        piece.IsPlayer = player;
+        piece.IsWhite = white;
         return piece;
+    }
+
+    /// <summary>Creates a new instance of a power</summary>
+    /// <param name="kind">The kind of power to create</param>
+    /// <param name="player">True if the power is for the player</param>
+    /// <returns>A Power</returns>
+    public Power CreatePower(AssetGroup.Power kind, bool player)
+    {
+        GameObject obj = Instantiate(AssetManager.Prefabs[AssetGroup.Group.Power][(int)kind]);
+        Power power = obj.GetComponent<Power>();
+        power.Game = this;
+        power.IsPlayer = player;
+        return power;
     }
 
     /// <summary>Creates a new instance of a panel</summary>
