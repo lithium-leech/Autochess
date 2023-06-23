@@ -36,24 +36,25 @@ public class UpgradeStage : IStage
             highscore.Value = GameState.HighScore;
         }
 
-        // Display new level choices
-        if (GameState.Level % 20 == 1)
-        {
-            // Reset pieces
+        //// Display new level choices
+        //if (GameState.Level % 20 == 1)
+        //{
+        //    // Reset pieces
             
-            // and award a new power
-            Choices = new PowerChoices(Game);
-        }
-        else if (GameState.Level % 5 == 0)
-        {
-            // Award a new power
-            Choices = new PowerChoices(Game);
-        }
-        else
-        {
-            // Award a new piece
-            Choices = new PieceChoices(Game);
-        }
+        //    // and award a new power
+        //    Choices = new PowerChoices(Game);
+        //}
+        //else if (GameState.Level % 5 == 0)
+        //{
+        //    // Award a new power
+        //    Choices = new PowerChoices(Game);
+        //}
+        //else
+        //{
+        //    // Award a new piece
+        //    Choices = new PieceChoices(Game);
+        //}
+        Choices = new PieceChoices(Game);
         Choices.Show();
         Game.ChoiceButtons.SelectButton(-1);
         MenuManager.AddActiveMenu(Game.UpgradeMenu);
