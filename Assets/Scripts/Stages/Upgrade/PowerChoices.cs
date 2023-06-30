@@ -21,6 +21,8 @@ public class PowerChoices : UpgradeChoices
         }
     }
 
+    public override string TitleText { get; } = "ChoosePower";
+
     /// <summary>The available powers for the player</summary>
     public AssetGroup.Power[] PlayerPowers { get; }
 

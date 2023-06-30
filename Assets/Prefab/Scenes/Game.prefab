@@ -2387,6 +2387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelText: {fileID: 2871266139693474435}
+  UpgradeMenuTitleText: {fileID: 2871266138096822601}
   PlayerChoiceNameText: {fileID: 3137057401621526746}
   PlayerChoiceInfoText: {fileID: 808543661709512458}
   EnemyChoiceNameText: {fileID: 638630899291532662}

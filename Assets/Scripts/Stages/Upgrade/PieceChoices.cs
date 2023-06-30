@@ -21,6 +21,8 @@ public class PieceChoices : UpgradeChoices
         }
     }
 
+    public override string TitleText { get; } = "ChoosePiece";
+
     /// <summary>The available powers for the player</summary>
     public AssetGroup.Piece[] PlayerPieces { get; }
 

@@ -16,8 +16,11 @@ public abstract class UpgradeChoices
         NumberOfChoices = game.ChoiceButtons.Buttons.Length;
     }
 
+    /// <summary>The localization key for the title text to show along with this choice</summary>
+    public abstract string TitleText { get; }
+
     /// <summary>The game to show the choices in</summary>
-     protected Game Game { get; }
+    protected Game Game { get; }
 
     /// <summary>The number of available choices</summary>
     protected int NumberOfChoices { get; }
@@ -87,7 +90,7 @@ public abstract class UpgradeChoices
     /// <returns>A new panel</returns>
     private GameObject CreatePanel(int choice, bool player, bool info, bool text)
     {
-        GameObject panel = Game.CreatePanel(!player, text);
+        GameObject panel = Game.CreatePanel(!(GameState.IsPlayerWhite ^ player), text);
         if (text)
         {
             panel.transform.SetParent(Game.InfoMenu.transform);

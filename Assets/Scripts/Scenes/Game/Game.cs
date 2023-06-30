@@ -13,6 +13,7 @@ public class Game : MonoBehaviour
 {
     /// Properties to set using Unity interface
     public TextMeshProUGUI LevelText;
+    public TextLocalizer UpgradeMenuTitleText;
     public TextLocalizer PlayerChoiceNameText;
     public TextLocalizer PlayerChoiceInfoText;
     public TextLocalizer EnemyChoiceNameText;
