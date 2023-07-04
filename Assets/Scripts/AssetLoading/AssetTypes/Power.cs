@@ -7,9 +7,13 @@ namespace AssetGroup
     {
         None = 0,
         First,
-        ExtraRow,
+        Row,
+        RemoveRow,
         Mine,
-        Walls,
-        Shield
+        RemoveMine,
+        Wall,
+        RemoveWall,
+        Shield,
+        RemoveShield
     }
 }

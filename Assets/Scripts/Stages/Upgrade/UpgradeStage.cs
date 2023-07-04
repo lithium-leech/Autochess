@@ -45,7 +45,7 @@ public class UpgradeStage : IStage
            // and award a new power
            Choices = new PowerChoices(Game);
         }
-        else if (GameState.Level % 5 == 0)
+        else if (GameState.Level % 1 == 0)
         {
            // Award a new power
            Choices = new PowerChoices(Game);

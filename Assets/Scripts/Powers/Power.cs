@@ -14,11 +14,14 @@ public abstract class Power : MonoBehaviour
     /// <summary>The kind of power this is</summary>
     public abstract AssetGroup.Power Kind { get; }
 
+    /// <summary>The kind of power that removes this power</summary>
+    public abstract AssetGroup.Power RemoveKind { get; }
+
     /// <summary>Applies the power to the current game</summary>
     public abstract void Activate();
 
-    /// <summary>Unapplies the power from the current game</summary>
-    // public abstract void Deactivate();
+    /// <summary>Unapplies this power from the current game</summary>
+    public abstract void Deactivate();
 
     /// <summary>Warps the piece to the specified location</summary>
     /// <param name="space">The world coordinates to warp to</param>

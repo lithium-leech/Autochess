@@ -39,14 +39,20 @@ public class Game : MonoBehaviour
     /// <remarks>null when the current stage should keep running</remarks>
     public IStage NextStage { get; set; } = null;
 
-    /// <summary>The enemies roster of pieces (indexes to prefabs)</summary>
-    public IList<AssetGroup.Piece> EnemyPieces { get; set; }
+    /// <summary>The enemy's roster of pieces (indexes to prefabs)</summary>
+    public IList<AssetGroup.Piece> EnemyPieces { get; } = new List<AssetGroup.Piece>();
+
+    /// <summary>The enemy's accumulated power ups</summary>
+    public IList<Power> EnemyPowers { get; } = new List<Power>();
 
     /// <summary>The player's pieces on the game board</summary>
-    public IList<PositionRecord> PlayerGameBoard { get; set; }
+    public IList<PositionRecord> PlayerGameBoard { get; } = new List<PositionRecord>();
 
     /// <summary>The player's pieces on the side board</summary>
-    public IList<PositionRecord> PlayerSideBoard { get; set; }
+    public IList<PositionRecord> PlayerSideBoard { get; } = new List<PositionRecord>();
+
+    /// <summary>The player's accumulated power ups</summary>
+    public IList<Power> PlayerPowers { get; } = new List<Power>();
 
     /// <summary>The board that fights take place on</summary>
     public Board GameBoard { get; set; }
@@ -80,9 +86,6 @@ public class Game : MonoBehaviour
         TrashBoard = new Board(this, 1, 1, 1, 0, new Vector2(-3.0f, -8.5f));
 
         // Create a sample setup;
-        EnemyPieces = new List<AssetGroup.Piece>();
-        PlayerGameBoard = new List<PositionRecord>();
-        PlayerSideBoard = new List<PositionRecord>();
         EnemyPieces.Add(AssetGroup.Piece.Pawn);
         PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, null));
 

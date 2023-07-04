@@ -53,8 +53,10 @@
         "Temp/":true
     },
     "cSpell.words": [
+        "Addressables",
         "Behaviour",
         "highscore",
-        "UGUI"
+        "UGUI",
+        "Unapplies"
     ]
 }

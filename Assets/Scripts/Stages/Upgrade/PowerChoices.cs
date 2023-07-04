@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -91,17 +92,31 @@ public class PowerChoices : UpgradeChoices
         playerKind = PlayerPowers[Game.ChoiceButtons.SelectedIndex];
         enemyKind = EnemyPowers[Game.ChoiceButtons.SelectedIndex];
 
-        // Create temporary power objects
-        Power playerPower = Game.CreatePower(playerKind, true);
-        Power enemyPower = Game.CreatePower(enemyKind, false);
+        // Apply the player's new power
+        if (playerKind.ToString().Contains("Remove"))
+        {
+            Power power = Game.EnemyPowers.First(p => p.RemoveKind == playerKind);
+            power.Deactivate();
+        }
+        else
+        {
+            Power power = Game.CreatePower(playerKind, true);
+            Powers.Remove(power);
+            power.Activate();
+        }
 
-        // Apply the powers
-        playerPower.Activate();
-        enemyPower.Activate();
-
-        // Delete the powers
-        Game.Destroy(playerPower.gameObject);
-        Game.Destroy(enemyPower.gameObject);
+        // Apply the enemy's new power
+        if (enemyKind.ToString().Contains("Remove"))
+        {
+            Power power = Game.PlayerPowers.First(p => p.RemoveKind == enemyKind);
+            power.Deactivate();
+        }
+        else
+        {
+            Power power = Game.CreatePower(enemyKind, false);
+            Powers.Remove(power);
+            power.Activate();
+        }
     }
 
     /// <summary>Create a power sprite</summary>
@@ -136,16 +151,29 @@ public class PowerChoices : UpgradeChoices
     /// <returns>A Power type</returns>
     private AssetGroup.Power GetRandomPower(bool player)
     {
+        // Determine who is gaining a power
+        IList<Power> myPowers = player ? Game.PlayerPowers : Game.EnemyPowers;
+        IList<Power> theirPowers = player ? Game.EnemyPowers : Game.PlayerPowers;
+
+        // Roll to remove a power
+        if (theirPowers.Count > 0 && Random.Range(1,6) == 5)
+        {
+            int removeIndex = Random.Range(0, theirPowers.Count);
+            return theirPowers[removeIndex].RemoveKind;
+        }
+
         // Determine the available powers
         IList<AssetGroup.Power> availablePowers = new List<AssetGroup.Power>();
         
-        // Only offer this power to the black player
-        if (player && !GameState.IsPlayerWhite) availablePowers.Add(AssetGroup.Power.First);
-        else if (!player && GameState.IsPlayerWhite) availablePowers.Add(AssetGroup.Power.First);
+        // Only offer First to the black player
+        if (player ^ GameState.IsPlayerWhite) availablePowers.Add(AssetGroup.Power.First);
 
-        availablePowers.Add(AssetGroup.Power.ExtraRow);
+        // Only offer Row if there are available rows
+        if (Game.GameBoard.PlayerRows + Game.GameBoard.EnemyRows < Game.GameBoard.Height) availablePowers.Add(AssetGroup.Power.Row);
+        
+        // Offer the remaining powers
         availablePowers.Add(AssetGroup.Power.Mine);
-        availablePowers.Add(AssetGroup.Power.Walls);
+        availablePowers.Add(AssetGroup.Power.Wall);
         availablePowers.Add(AssetGroup.Power.Shield);
 
         // Randomly return one of the available powers
