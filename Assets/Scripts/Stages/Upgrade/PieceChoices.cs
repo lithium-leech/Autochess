@@ -62,14 +62,14 @@ public class PieceChoices : UpgradeChoices
 
     protected override void RemoveChoices()
     {
-        foreach (Piece piece in Pieces) piece.IsCaptured = true;
+        foreach (Piece piece in Pieces) piece.Destroy();
         Pieces.Clear();
     }
 
     protected override void RemoveInfo()
     {
         // Remove sprites
-        foreach (Piece piece in InfoPieces) piece.IsCaptured = true;
+        foreach (Piece piece in InfoPieces) piece.Destroy();
         InfoPieces.Clear();
 
         // Remove text
@@ -96,7 +96,7 @@ public class PieceChoices : UpgradeChoices
         if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
 
         // Add the player piece as long a sideboard space is empty
-        if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(new PositionRecord(playerPiece, null));
+        if (Game.PlayerSideBoard.Count < 24) Game.PlayerSideBoard.Add(new PiecePositionRecord(playerPiece, null));
     }
 
     /// <summary>Create a piece sprite</summary>

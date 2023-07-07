@@ -49,7 +49,7 @@ public class CombatStage : IStage
         for (int x = 0; x < Game.GameBoard.Width; x++)
         for (int y = 0; y < Game.GameBoard.Height; y++)
         {
-            Piece piece = Game.GameBoard.Spaces[x, y];
+            Piece piece = Game.GameBoard.GetPiece(new Vector2Int(x, y));
             if (piece != null)
                 positions.Append($" {ControlString(piece)}{piece.Kind}[{x},{y}]");
         }
@@ -82,7 +82,7 @@ public class CombatStage : IStage
         
         // Start the fight music when the first move is taken
         GameState.MusicBox.PlayMusic(SongName.Battle);
-
+        
         // Move the current player's pieces
         List<Piece> pieces;
         string actor;

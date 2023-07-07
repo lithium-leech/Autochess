@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -17,7 +18,7 @@ public class Board
     public int Height { get; }
 
     /// <summary>The board spaces and the pieces occupying them</summary>
-    public Piece[,] Spaces { get; }
+    public IList<ChessObject>[,] Spaces { get; }
 
     /// <summary>The number of rows (starting at the bottom) that the player can use</summary>
     public int PlayerRows { get; set; }
@@ -49,7 +50,10 @@ public class Board
         Game = game;
         Width = width;
         Height = height;
-        Spaces = new Piece[width,height];
+        Spaces = new IList<ChessObject>[width,height];
+        for (int x = 0; x < Width; x++)
+        for (int y = 0; y < Height; y++)
+            Spaces[x, y] = new List<ChessObject>();
         PlayerRows = playerRows;
         EnemyRows = enemyRows;
         PlayerPieces = new List<Piece>();
@@ -80,28 +84,16 @@ public class Board
     /// <param name="space">The space to place the piece at</param>
     public void AddPiece(Piece piece, Vector2Int space)
     {
-        // Ensure that the space is on the board
-        if (space.x < 0) space.x = 0;
-        if (space.x >= Width) space.x = Width - 1;
-        if (space.y < 0) space.y = 0;
-        if (space.y >= Height) space.y = Height - 1;
+        // Don't add the piece if the space is invalid
+        if (!OnBoard(space)) return;
+        if (Spaces[space.x,space.y].Count() > 0) return;
         
         // Update the piece
         piece.Board = this;
         piece.Space = space;
 
-        // Remove any piece on the specified space (if present)
-        Piece existing = Spaces[space.x,space.y];
-        if (existing != null)
-        {
-            Spaces[space.x,space.y] = null;
-            PlayerPieces.Remove(existing);
-            EnemyPieces.Remove(existing);
-            CapturePiece(existing);
-        }
-
         // Add the piece to the appropriate collections
-        Spaces[space.x,space.y] = piece;
+        Spaces[space.x,space.y].Add(piece);
         if (piece.IsPlayer) PlayerPieces.Add(piece);
         else EnemyPieces.Add(piece);
 
@@ -109,42 +101,29 @@ public class Board
         piece.WarpTo(space);
     }
 
-    /// <summary>Removes a piece from this board</summary>
-    /// <param name="piece">The piece to remove</param>
-    public void RemovePiece(Piece piece)
-    {
-        if (Spaces[piece.Space.x, piece.Space.y] == piece) Spaces[piece.Space.x, piece.Space.y] = null;
-        if (piece.IsPlayer) PlayerPieces.Remove(piece);
-        else EnemyPieces.Remove(piece);
-    }
-
-    /// <summary>Deletes a piece from existence</summary>
-    /// <param name="piece">The piece to capture</param>
-    public void CapturePiece(Piece piece)
-    {
-        RemovePiece(piece);
-        piece.IsCaptured = true;
-    }
-
-    /// <summary>Removes all pieces from the board</summary>
+    /// <summary>Destroys all objects on the board</summary>
     public void Clear()
     {
+        IList<ChessObject> leftovers = new List<ChessObject>();
         for (int x = 0; x < Width; x++)
         for (int y = 0; y < Height; y++)
-            if (HasPiece(new Vector2Int(x, y))) CapturePiece(Spaces[x, y]);
+        {
+            foreach(ChessObject obj in Spaces[x,y])
+                leftovers.Add(obj);
+            Spaces[x,y].Clear();
+        }
+        foreach(ChessObject obj in leftovers) obj.Destroy();
     }
 
     /// <summary>Gets the first empty space on the board</summary>
     /// <returns>A board space</returns>
+    /// <remarks>Returns (-1, -1) if there is no empty space</remarks>
     public Vector2Int GetFirstEmptySpace()
     {
-        Vector2Int space = new Vector2Int(0, 0);
+        Vector2Int space = new Vector2Int(-1, -1);
         for (int j = Height - 1; j >= 0; j--)
         for (int i = 0; i < Width; i++)
-        {
-            space = new Vector2Int(i, j);
-            if (!HasPiece(space)) return space;
-        }
+            if (Spaces[i,j].Count() <= 0) return new Vector2Int(i, j);
         return space;
     }
 
@@ -155,34 +134,58 @@ public class Board
 
     /// <summary>Checks if a space has a piece on it</summary>
     /// <param name="space">The space to check</param>
-    /// <returns>True if the space has a piece on it</returns>
-    public bool HasPiece(Vector2Int space)
+    /// <returns>The piece if it's present, or null if it is not</returns>
+    public Piece GetPiece(Vector2Int space)
     {
         if (OnBoard(space))
-            if (Spaces[space.x, space.y] != null)
-                return true;
-        return false;
+            return (Piece) Spaces[space.x, space.y].FirstOrDefault(o => o is Piece);
+        else
+            return null;
     }
 
     /// <summary>Checks if a space has an enemy piece on it</summary>
-    /// <param name="isPlayerPiece">True if non-player pieces are enemies</param>
+    /// <param name="player">True if non-player pieces are enemies</param>
     /// <param name="space">The space to check</param>
     /// <returns>True if the space has an enemy piece on it</returns>
-    public bool HasEnemy(bool isPlayerPiece, Vector2Int space)
+    public bool HasEnemy(bool player, Vector2Int space)
     {
-        if (!HasPiece(space)) return false;
-        else if (Spaces[space.x, space.y].IsPlayer == isPlayerPiece) return false;
+        Piece piece = GetPiece(space);
+        if (piece == null) return false;
+        else if (piece.IsPlayer == player) return false;
         else return true;
     }
 
-    /// <summary>Checks if a space is usable by the player</summary>
+    /// <summary>Checks if a space is in the player zone</summary>
     /// <param name="space">The space to check</param>
-    /// <returns>True if the space is usable by the player</returns>
-    public bool IsPlayerSpace(Vector2Int space)
+    /// <returns>True if the space is in the player zone</returns>
+    public bool IsPlayerZone(Vector2Int space)
     {
         if (OnBoard(space))
             return space.y < PlayerRows;
-        return false;
+        else
+            return false;
+    }
+
+    /// <summary>Checks if a space is in the enemy zone</summary>
+    /// <param name="space">The space to check</param>
+    /// <returns>True if the space is in the enemy zone</returns>
+    public bool IsEnemyZone(Vector2Int space)
+    {
+        if (OnBoard(space))
+            return Height - space.y < EnemyRows;
+        else
+            return false;
+    }
+
+    /// <summary>Checks if a space is in the neutral zone</summary>
+    /// <param name="space">The space to check</param>
+    /// <returns>True if the space is in the neutral zone</returns>
+    public bool IsNeutralZone(Vector2Int space)
+    {
+        if (OnBoard(space))
+            return (space.y >= PlayerRows) && (Height - space.y >= EnemyRows);
+        else
+            return false;
     }
 
     /// <summary>Gets a board space from a given world position</summary>

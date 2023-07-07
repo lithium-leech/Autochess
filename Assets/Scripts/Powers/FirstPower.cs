@@ -1,7 +1,7 @@
 /// <summary>
 /// A power which steals the first turn
 /// </summary>
-public class First : Power
+public class FirstPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.First; } }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// A power which gives an additional row for placing pieces
 /// </summary>
-public class Row : Power
+public class RowPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Row; } }
     

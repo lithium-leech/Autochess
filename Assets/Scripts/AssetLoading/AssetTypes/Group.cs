@@ -11,6 +11,8 @@ namespace AssetGroup
         BlackPiece,
         Highlight,
         Panel,
-        Power
+        Power,
+        WhiteObject,
+        BlackObject
     }
 }

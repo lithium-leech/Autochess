@@ -70,11 +70,11 @@ public class PlanningStage : IStage
         // Pick up a piece when the screen is clicked/pressed
         if (Input.GetMouseButtonDown(0) && board != null)
         {
-            HeldPiece = board.Spaces[space.x, space.y];
+            HeldPiece = board.GetPiece(space);
             if (HeldPiece != null)
                 if (HeldPiece.IsPlayer)
                 {
-                    board.RemovePiece(HeldPiece);
+                    HeldPiece.Remove();
                     HeldPiece.transform.position = position - (Vector3.forward * 10);
                 }
                 else HeldPiece = null;
@@ -89,7 +89,7 @@ public class PlanningStage : IStage
         // Drop the piece in a new space (Or the old one)
         else if (Input.GetMouseButtonUp(0) && HeldPiece != null)
         {
-            if (board != null && board.IsPlayerSpace(space) && !board.HasPiece(space)) board.AddPiece(HeldPiece, space);
+            if (board != null && board.IsPlayerZone(space) && !board.GetPiece(space)) board.AddPiece(HeldPiece, space);
             else HeldPiece.Board.AddPiece(HeldPiece, HeldPiece.Space);
             HeldPiece = null;
         }
@@ -109,9 +109,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PositionRecord(piece.Kind, piece.Space));
+            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PositionRecord(piece.Kind, piece.Space));
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -143,11 +143,11 @@ public class PlanningStage : IStage
         }
 
         // Place the player's pieces on the game board
-        foreach (PositionRecord record in Game.PlayerGameBoard)
+        foreach (PiecePositionRecord record in Game.PlayerGameBoard)
         {
             if (record.Space == null)
             {
-                if (Game.PlayerSideBoard.Count < 16) Game.PlayerSideBoard.Add(record);
+                if (Game.PlayerSideBoard.Count < 24) Game.PlayerSideBoard.Add(record);
             }
             else
             {
@@ -156,7 +156,7 @@ public class PlanningStage : IStage
         }
 
         // Place the player's pieces on the side board
-        foreach (PositionRecord record in Game.PlayerSideBoard)
+        foreach (PiecePositionRecord record in Game.PlayerSideBoard)
         {
             if (record.Space == null)
                 Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite);
@@ -207,7 +207,7 @@ public class PlanningStage : IStage
             for (int y = Game.GameBoard.Height - Game.GameBoard.EnemyRows; y < Game.GameBoard.Height; y++)
             {
                 Vector2Int space = new Vector2Int(x, y);
-                if (!Game.GameBoard.HasPiece(space)) emptySpaces.Add(space);
+                if (!Game.GameBoard.GetPiece(space)) emptySpaces.Add(space);
             }
         return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
     }

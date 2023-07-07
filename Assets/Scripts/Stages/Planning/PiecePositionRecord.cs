@@ -1,12 +1,12 @@
 using UnityEngine;
 
 /// <summary>An object for recording the position of a piece</summary>
-public class PositionRecord
+public class PiecePositionRecord
 {
-    /// <summary>Creates a new instance of a PositionRecord</summary>
+    /// <summary>Creates a new instance of a PiecePositionRecord</summary>
     /// <param name="kind">The kind of piece</param>
     /// <param name="space">The piece's position</param>
-    public PositionRecord(AssetGroup.Piece kind, Vector2Int? space)
+    public PiecePositionRecord(AssetGroup.Piece kind, Vector2Int? space)
     {
         Kind = kind;
         Space = space;

@@ -29,7 +29,7 @@ public class Pawn : Piece
         else
         {
             // Otherwise move if possible
-            if (!Board.HasPiece(move) && Board.OnBoard(move)) newSpace = move;
+            if (!Board.GetPiece(move) && Board.OnBoard(move)) newSpace = move;
         }
 
         // Move to the new space

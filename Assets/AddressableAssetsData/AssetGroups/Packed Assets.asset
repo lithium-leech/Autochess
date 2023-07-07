@@ -43,6 +43,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Packed
+  - m_GUID: f43264d34a9eaea438a4a0ef1022eb7e
+    m_Address: Assets/Prefab/Objects
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Packed
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:

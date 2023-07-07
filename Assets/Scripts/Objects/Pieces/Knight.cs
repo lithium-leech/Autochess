@@ -32,7 +32,7 @@ public class Knight : Piece
             if (Board.OnBoard(space))
             {
                 if (Board.HasEnemy(IsPlayer, space)) possibleCaptures.Add(space);
-                else if (!Board.HasPiece(space)) possibleMoves.Add(space);
+                else if (!Board.GetPiece(space)) possibleMoves.Add(space);
             }
         }
 

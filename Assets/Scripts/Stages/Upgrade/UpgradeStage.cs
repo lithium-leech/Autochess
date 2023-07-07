@@ -45,7 +45,7 @@ public class UpgradeStage : IStage
            // and award a new power
            Choices = new PowerChoices(Game);
         }
-        else if (GameState.Level % 1 == 0)
+        else if (GameState.Level % 2 == 0)
         {
            // Award a new power
            Choices = new PowerChoices(Game);
@@ -61,7 +61,7 @@ public class UpgradeStage : IStage
         MenuManager.AddActiveMenu(Game.UpgradeMenu);
 
         // Delete any pieces in the trash
-        foreach (Piece piece in Game.TrashBoard.PlayerPieces) piece.IsCaptured= true;
+        foreach (Piece piece in Game.TrashBoard.PlayerPieces) piece.Destroy();
 
         // Add button listeners
         Game.ConfirmChoiceButton.onClick.AddListener(Confirm);

@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// A power which protects a selected piece at the start of each battle
 /// </summary>
-public class Shield : Power
+public class ShieldPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Shield; } }
 

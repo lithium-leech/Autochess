@@ -42,14 +42,20 @@ public class Game : MonoBehaviour
     /// <summary>The enemy's roster of pieces (indexes to prefabs)</summary>
     public IList<AssetGroup.Piece> EnemyPieces { get; } = new List<AssetGroup.Piece>();
 
+    /// <summary>The enemy's collection of miscellaneous objects</summary>
+    public IList<AssetGroup.Object> EnemyObjects { get; } = new List<AssetGroup.Object>();
+
     /// <summary>The enemy's accumulated power ups</summary>
     public IList<Power> EnemyPowers { get; } = new List<Power>();
 
     /// <summary>The player's pieces on the game board</summary>
-    public IList<PositionRecord> PlayerGameBoard { get; } = new List<PositionRecord>();
+    public IList<PiecePositionRecord> PlayerGameBoard { get; } = new List<PiecePositionRecord>();
 
     /// <summary>The player's pieces on the side board</summary>
-    public IList<PositionRecord> PlayerSideBoard { get; } = new List<PositionRecord>();
+    public IList<PiecePositionRecord> PlayerSideBoard { get; } = new List<PiecePositionRecord>();
+
+    /// <summary>The players's collection of miscellaneous objects</summary>
+    public IList<AssetGroup.Object> PlayerObjects { get; } = new List<AssetGroup.Object>();
 
     /// <summary>The player's accumulated power ups</summary>
     public IList<Power> PlayerPowers { get; } = new List<Power>();
@@ -87,7 +93,7 @@ public class Game : MonoBehaviour
 
         // Create a sample setup;
         EnemyPieces.Add(AssetGroup.Piece.Pawn);
-        PlayerSideBoard.Add(new PositionRecord(AssetGroup.Piece.Pawn, null));
+        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);
