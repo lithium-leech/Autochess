@@ -1,0 +1,229 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// A single space on the game board
+/// </summary>
+public class Space
+{
+    /// <summary>The board that this space is a part of</summary>
+    public Board Board { get; }
+
+    /// <summary>This space's x position</summary>
+    public int X { get; }
+
+    /// <summary>This space's y position</summary>
+    public int Y { get; }
+
+    /// <summary>The piece on this space (null when there is none)</summary>
+    private Piece Piece { get; set; }
+
+    /// <summary>The terrain affecting this space</summary>
+    private IList<Terrain> Terrain { get; } = new List<Terrain>();
+
+    /// <summary>Creates a new instance of a Space</summary>
+    /// <param name="board">The board that this space is a part of</param>
+    /// <param name="x">The x position of this space</param>
+    /// <param name="y">The y position of this space</param>
+    public Space(Board board, int x, int y)
+    {
+        Board = board;
+        X = x;
+        Y = y;
+    }
+
+    /// <summary>Picks up an object from this space</summary>
+    /// <returns>The first grabable object, or null if there are none</returns>
+    public ChessObject Grab()
+    {
+        // Grab any possible pieces
+        if (Piece != null && Piece.IsGrabable)
+        {
+            Piece grabbedPiece = Piece;
+            Piece = null;
+            Board.PlayerPieces.Remove(grabbedPiece);
+            return grabbedPiece;
+        }
+
+        // Grab any possible terrain
+        Terrain grabbedTerrain = null;
+        foreach (Terrain terrain in Terrain)
+        {
+            if (terrain.IsGrabable)
+            {
+                grabbedTerrain = terrain;
+                break;
+            }
+        }
+        if (grabbedTerrain != null)
+        {
+            Terrain.Remove(grabbedTerrain);
+            return grabbedTerrain;
+        }
+
+        // Nothing was grabable
+        return null;
+    }
+
+    /// <summary>Moves a piece into this space</summary>
+    /// <param name="piece">The piece moving onto this space</param>
+    public void MoveOnto(Piece piece)
+    {
+        // Do nothing if this piece is already on this space
+        if (Piece == piece) return;
+
+        // Destroy the captured piece if there is one
+        if (Piece != null) Piece.Destroy();
+
+        // Update the location
+        piece.Space.RemoveObject(piece);
+        AddToSpace(piece);
+
+        // Move to the new location
+        piece.MoveTo(new Vector2Int(X, Y));
+    }
+
+    /// <summary>Adds an object to this space</summary>
+    /// <param name="obj">The object to add</param>
+    /// <returns>True if the object was added successfully</returns>
+    public bool AddObject(ChessObject obj)
+    {
+        // Check if the object can be added
+        if (!IsPassable()) return false;
+
+        // Add the object to the space
+        AddToSpace(obj);
+
+        // Warp the piece to its new location
+        obj.WarpTo(new Vector2Int(X, Y));
+
+        // The object was successfully added
+        return true;
+    }
+
+    private void AddToSpace(ChessObject obj)
+    {
+        // Update the object
+        obj.Board = Board;
+        obj.Space = this;
+
+        // Add a piece
+        if (obj is Piece)
+        {
+            Piece piece = (Piece)obj;
+            if (piece.IsPlayer) Board.PlayerPieces.Add(piece);
+            else Board.EnemyPieces.Add(piece);
+            Piece = piece;
+        }
+
+        // Add a terrain
+        if (obj is Terrain) Terrain.Add((Terrain)obj);
+    }
+
+    /// <summary>Removes an object from this space</summary>
+    /// <param name="obj">The object to remove</param>
+    /// <returns>True if the object was removed successfully</returns>
+    public bool RemoveObject(ChessObject obj)
+    {
+        // Remove a piece
+        if (obj is Piece)
+        {
+            Piece piece = (Piece)obj;
+            if (piece != Piece) return false;
+            if (piece.IsPlayer) Board.PlayerPieces.Remove(piece);
+            else Board.EnemyPieces.Remove(piece);
+            Piece = null;
+            return true;
+        }
+
+        // Remove a terrain
+        if (obj is Terrain)
+        {
+            Terrain terrain = (Terrain)obj;
+            if (!Terrain.Contains(terrain)) return false;
+            Terrain.Remove(terrain);
+            return true;
+        }
+
+        // Failed to remove anything
+        return false;
+    }
+
+    /// <summary>Destroys all objects on this space</summary>
+    public void Clear()
+    {
+        // Clear pieces
+        if (Piece != null) Piece.Destroy();
+        Piece = null;
+
+        // Clear terrain
+        foreach (Terrain terrain in Terrain) terrain.Destroy();
+        Terrain.Clear();
+    }
+
+    /// <summary>Checks if this space is empty</summary>
+    /// <returns>True if this space is empty</returns>
+    public bool IsEmpty() => Piece == null && Terrain.Count < 1;
+
+    /// <summary>Checks if this space is passable</summary>
+    /// <returns>True if this space is passable</returns>
+    public bool IsPassable()
+    {
+        if (Piece != null) return false;
+        foreach (Terrain terrain in Terrain)
+            if (!terrain.Passable) return false;
+        return true;
+    }
+
+    /// <summary>Checks if this space has a piece on it</summary>
+    /// <returns>True if this space has a piece on it</returns>
+    public bool HasPiece()
+    {
+        if (Piece == null) return false;
+        else return true;
+    }
+
+    /// <summary>Checks if this space has an ally piece on it</summary>
+    /// <param name="player">True if player pieces are allies</param>
+    /// <returns>True if this space has an ally piece on it</returns>
+    public bool HasAlly(bool player)
+    {
+        if (Piece == null) return false;
+        else if (Piece.IsPlayer == player) return true;
+        else return false;
+    }
+
+    /// <summary>Checks if this space has an enemy piece on it</summary>
+    /// <param name="player">True if non-player pieces are enemies</param>
+    /// <returns>True if this space has an enemy piece on it</returns>
+    public bool HasEnemy(bool player)
+    {
+        if (Piece == null) return false;
+        else if (Piece.IsPlayer == player) return false;
+        else return true;
+    }
+
+    /// <summary>Checks if this space is in the player zone</summary>
+    /// <returns>True if this space is in the player zone</returns>
+    public bool InPlayerZone() => Y < Board.PlayerRows;
+
+    /// <summary>Checks if this space is in the enemy zone</summary>
+    /// <returns>True if this space is in the enemy zone</returns>
+    public bool InEnemyZone() => Board.Height - Y < Board.EnemyRows;
+
+    /// <summary>Checks if this space is in the neutral zone</summary>
+    /// <returns>True if this space is in the neutral zone</returns>
+    public bool InNeutralZone() => Y >= Board.PlayerRows && Board.Height - Y >= Board.EnemyRows;
+
+    /// <summary>Returns the log display message for this space</summary>
+    /// <returns>A string with notable information, or an empty string if there is nothing notable</returns>
+    public string LogDisplay()
+    {
+        if (Piece != null)
+        {
+            string controller = Piece.IsPlayer ? "Player" : "Enemy";
+            return $" {controller}{Piece.Kind}[{X},{Y}]";
+        }
+        else return null;
+    }
+}

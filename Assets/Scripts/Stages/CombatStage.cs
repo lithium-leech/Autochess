@@ -49,9 +49,12 @@ public class CombatStage : IStage
         for (int x = 0; x < Game.GameBoard.Width; x++)
         for (int y = 0; y < Game.GameBoard.Height; y++)
         {
-            Piece piece = Game.GameBoard.GetPiece(new Vector2Int(x, y));
-            if (piece != null)
-                positions.Append($" {ControlString(piece)}{piece.Kind}[{x},{y}]");
+            Space space = Game.GameBoard.GetSpace(new Vector2Int(x, y));
+            if (space !=  null)
+            {
+                string msg = space.LogDisplay();
+                if (!string.IsNullOrEmpty(msg)) positions.Append(msg);
+            }
         }
         positions.Append(" )");
         Debug.Log($"Starting Positions: {positions}");
@@ -88,12 +91,12 @@ public class CombatStage : IStage
         string actor;
         if (IsPlayerTurn)
         {
-            pieces = Game.GameBoard.PlayerPieces;
+            pieces = new List<Piece>(Game.GameBoard.PlayerPieces);
             actor = "Player";
         }
         else
         {
-            pieces = Game.GameBoard.EnemyPieces;
+            pieces = new List<Piece>(Game.GameBoard.EnemyPieces);
             actor = "Enemy";
         }
         RunRound(pieces);
@@ -101,7 +104,7 @@ public class CombatStage : IStage
         // Log the moves
         StringBuilder moves = new StringBuilder("(");
         foreach (Piece piece in pieces)
-            moves.Append($" {piece.Kind}[{piece.Space.x},{piece.Space.y}]");
+            moves.Append($" {piece.Kind}[{piece.Space.X},{piece.Space.Y}]");
         moves.Append(" )");
         Debug.Log($"{actor} Moves: {moves}");
 
@@ -136,7 +139,7 @@ public class CombatStage : IStage
             if (pieceMoved) piece.TakeTurn();
             else
             {
-                Vector2Int space = piece.Space;
+                Space space = piece.Space;
                 piece.TakeTurn();
                 if (space != piece.Space) pieceMoved = true;
             }

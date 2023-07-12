@@ -11,11 +11,11 @@ public class Rook : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Vector2Int newSpace = new Vector2Int(Space.x, Space.y);
+        Space newSpace = Space;
 
         // Get the possible moves this piece can make
-        List<Vector2Int> possibleMoves = new List<Vector2Int>();
-        List<Vector2Int> possibleCaptures = new List<Vector2Int>();
+        List<Space> possibleMoves = new List<Space>();
+        List<Space> possibleCaptures = new List<Space>();
         GetChoicesInDirection(0, 1, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(1, 0, 100, possibleMoves, possibleCaptures);
         GetChoicesInDirection(0, -1, 100, possibleMoves, possibleCaptures);
@@ -28,6 +28,6 @@ public class Rook : Piece
         else if (possibleMoves.Count > 0) newSpace = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
         // Move to the new space
-        EnactTurn(newSpace);
+        newSpace.MoveOnto(this);
     }
 }

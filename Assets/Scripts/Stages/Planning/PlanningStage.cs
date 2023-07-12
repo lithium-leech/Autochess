@@ -13,8 +13,8 @@ public class PlanningStage : IStage
     /// <summary>The Game this is being run in</summary>
     private Game Game { get; set; }
 
-    /// <summary>The Piece currently being moved around by the player</summary>
-    public Piece HeldPiece { get; set; }
+    /// <summary>The object currently being held by the player</summary>
+    public ChessObject HeldObject { get; set; }
 
     /// <summary>Space highlights displayed during the planning phase</summary>
     public IEnumerable<GameObject> Highlights { get; set; }
@@ -25,7 +25,10 @@ public class PlanningStage : IStage
         GameState.MusicBox.PlayMusic(SongName.Planning);
 
         // Set up the boards
+        Game.GameBoard.Clear();
+        Game.SideBoard.Clear();
         PlacePieces();
+        PlaceObjects();
 
         // Add highlights around spaces that the player can put pieces
         List<GameObject> highlights = new List<GameObject>();
@@ -63,35 +66,33 @@ public class PlanningStage : IStage
             position.y <= Game.TrashBoard.CornerTR.y)
             board = Game.TrashBoard;
 
-        // If it is inside a board, get the space/piece
-        Vector2Int space = new Vector2Int(-1, -1);
-        if (board != null) space = board.ToSpace(position);
+        // If it is inside a board, get the space
+        Space space = null;
+        if (board != null) space = board.GetSpace(board.ToSpace(position));
 
-        // Pick up a piece when the screen is clicked/pressed
-        if (Input.GetMouseButtonDown(0) && board != null)
+        // Pick up an object when the screen is clicked/pressed
+        if (Input.GetMouseButtonDown(0) && board != null && HeldObject == null)
         {
-            HeldPiece = board.GetPiece(space);
-            if (HeldPiece != null)
-                if (HeldPiece.IsPlayer)
-                {
-                    HeldPiece.Remove();
-                    HeldPiece.transform.position = position - (Vector3.forward * 10);
-                }
-                else HeldPiece = null;
+            HeldObject = space.Grab();
+            if (HeldObject != null)
+                HeldObject.transform.position = position - (Vector3.forward * 10);
         }
 
-        // Drag the selected piece as the pointer moves
-        else if (Input.GetMouseButton(0) && HeldPiece != null)
+        // Drag the selected object as the pointer moves
+        else if (Input.GetMouseButton(0) && HeldObject != null)
         {
-            HeldPiece.transform.position = position - (Vector3.forward * 10);
+            HeldObject.transform.position = position - (Vector3.forward * 10);
         }
 
-        // Drop the piece in a new space (Or the old one)
-        else if (Input.GetMouseButtonUp(0) && HeldPiece != null)
+        // Drop the object in a new space (Or the old one)
+        else if (Input.GetMouseButtonUp(0) && HeldObject != null)
         {
-            if (board != null && board.IsPlayerZone(space) && !board.GetPiece(space)) board.AddPiece(HeldPiece, space);
-            else HeldPiece.Board.AddPiece(HeldPiece, HeldPiece.Space);
-            HeldPiece = null;
+            bool placed = false;
+            if (board != null && space != null && space.InPlayerZone())
+                placed = space.AddObject(HeldObject);
+            if (!placed)
+                HeldObject.Space.AddObject(HeldObject);
+            HeldObject = null;
         }
     }
 
@@ -109,9 +110,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
+            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, new Vector2Int(piece.Space.X, piece.Space.Y)));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, new Vector2Int(piece.Space.X, piece.Space.Y)));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -129,13 +130,9 @@ public class PlanningStage : IStage
     }
 
     /// <summary>Sets up the pieces on the game board and side board</summary>
-    public void PlacePieces()
+    private void PlacePieces()
     {
-        // Clear both boards
-        Game.GameBoard.Clear();
-        Game.SideBoard.Clear();
-
-        // Place the enemies pieces on the game board
+        // Place the enemy's pieces on the game board
         foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
         {
             Vector2Int space = GetRandomEmptySpace();
@@ -165,10 +162,27 @@ public class PlanningStage : IStage
         }
     }
 
+    /// <summary>Sets up the pieces on the game board and side board</summary>
+    private void PlaceObjects()
+    {
+        // Place the enemy's objects on the game board
+        foreach (AssetGroup.Object objectType in Game.EnemyObjects)
+        {
+            Vector2Int space = GetRandomEmptySpace();
+            Game.GameBoard.AddObject(objectType, false, !GameState.IsPlayerWhite, space);
+        }
+
+        // Place the player's objects on the side board
+        foreach (AssetGroup.Object objectType in Game.PlayerObjects)
+        {
+            Game.SideBoard.AddObject(objectType, true, GameState.IsPlayerWhite);
+        }
+    }
+
     /// <summary>Add highlights around the player rows of the given board</summary>
     /// <param name="board">The board to add highlights to</param>
     /// <returns>The created highlight objects</returns>
-    public IEnumerable<GameObject> AddHighlights(Board board)
+    private IEnumerable<GameObject> AddHighlights(Board board)
     {
         // Start with an empty list
         IList<GameObject> highlights = new List<GameObject>();
@@ -200,15 +214,16 @@ public class PlanningStage : IStage
 
     /// <summary>Gets a random empty space on the enemy's side of the game board</summary>
     /// <returns>An empty space on the game board</returns>
-    public Vector2Int GetRandomEmptySpace()
+    private Vector2Int GetRandomEmptySpace()
     {
-        IList<Vector2Int> emptySpaces = new List<Vector2Int>();
+        IList<Space> emptySpaces = new List<Space>();
         for (int x = 0; x < Game.GameBoard.Width; x++)
             for (int y = Game.GameBoard.Height - Game.GameBoard.EnemyRows; y < Game.GameBoard.Height; y++)
             {
-                Vector2Int space = new Vector2Int(x, y);
-                if (!Game.GameBoard.GetPiece(space)) emptySpaces.Add(space);
+                Space space = Game.GameBoard.GetSpace(new Vector2Int(x, y));
+                if (space.IsEmpty()) emptySpaces.Add(space);
             }
-        return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
+        Space randomSpace = emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
+        return new Vector2Int(randomSpace.X, randomSpace.Y);
     }
 }

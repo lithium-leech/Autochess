@@ -8,11 +8,11 @@ public abstract class ChessObject : MonoBehaviour
     /// <summary>The board this object is on</summary>
     public Board Board { get; set; }
 
-    /// <summary>The object's coordinates on the board</summary>
-    public Vector2Int Space { get; set; }
+    /// <summary>The object's space on the board</summary>
+    public Space Space { get; set; }
 
-    /// <summary>True if this object can be moved by the player</summary>
-    public bool IsMovable { get; protected set; }
+    /// <summary>True if this object can be picked up by the player</summary>
+    public bool IsGrabable { get; set; } = false;
 
     /// <summary>True if the object is moving towards a target location</summary>
     protected bool IsMoving { get; set; } = false;
@@ -40,15 +40,8 @@ public abstract class ChessObject : MonoBehaviour
     /// <summary>A continuation of the Update method for classes inheriting ChessObject</summary>
     protected abstract void Update2();
 
-    /// <summary>Removes this object from its current board</summary>
-    public abstract void Remove();
-
-    /// <summary>Remove this object from the entire game</summary>
-    public void Destroy()
-    {
-        Remove();
-        GameObject.Destroy(gameObject);
-    }
+    /// <summary>Removes this object from the entire game</summary>
+    public abstract void Destroy();
 
     /// <summary>Warps the object to the specified location</summary>
     /// <param name="space">The space to warp to</param>

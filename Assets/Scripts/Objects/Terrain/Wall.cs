@@ -4,4 +4,6 @@
 public class Wall : Terrain
 {
     public override AssetGroup.Object Kind => AssetGroup.Object.Wall;
+
+    public override bool Passable { get; } = false;
 }

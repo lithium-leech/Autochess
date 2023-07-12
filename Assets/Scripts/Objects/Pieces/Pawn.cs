@@ -10,60 +10,63 @@ public class Pawn : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Vector2Int newSpace = new Vector2Int(Space.x, Space.y);
+        Space newSpace = Space;
 
         // Get the possible moves this piece can make
-        Vector2Int move = GetMoveSpace();
-        Vector2Int leftAttack = GetLeftAttackSpace();
-        Vector2Int rightAttack = GetRightAttackSpace();
+        Space move = GetMoveSpace();
+        Space leftAttack = GetLeftAttackSpace();
+        Space rightAttack = GetRightAttackSpace();
 
         // Capture a piece if possible
-        if (Board.HasEnemy(IsPlayer, leftAttack) && Board.HasEnemy(IsPlayer, rightAttack))
+        if ((leftAttack != null && leftAttack.HasEnemy(IsPlayer)) && (rightAttack != null && rightAttack.HasEnemy(IsPlayer)))
         {
             // Choose randomly if both options are available
             if (Random.Range(0, 2) == 1) newSpace = leftAttack;
             else newSpace = rightAttack;
         }
-        else if (Board.HasEnemy(IsPlayer, leftAttack)) newSpace = leftAttack;
-        else if (Board.HasEnemy(IsPlayer, rightAttack)) newSpace = rightAttack;
+        else if (leftAttack != null && leftAttack.HasEnemy(IsPlayer)) newSpace = leftAttack;
+        else if (rightAttack != null && rightAttack.HasEnemy(IsPlayer)) newSpace = rightAttack;
         else
         {
             // Otherwise move if possible
-            if (!Board.GetPiece(move) && Board.OnBoard(move)) newSpace = move;
+            if (move != null && move.IsPassable()) newSpace = move;
         }
 
         // Move to the new space
-        EnactTurn(newSpace);
+        newSpace.MoveOnto(this);
 
         // If the new space is at the board edge, upgrade to a queen
         int edge = IsPlayer ? Board.Height - 1 : 0;
-        if (newSpace.y == edge)
-        {
-            Transform = AssetGroup.Piece.Queen;
-        }
+        if (newSpace.Y == edge) Transform = AssetGroup.Piece.Queen;
     }
 
     /// <summary>Gets the space in front of the Pawn</summary>
     /// <returns>The space's coordinates</returns>
-    private Vector2Int GetMoveSpace()
+    private Space GetMoveSpace()
     {
-        if (IsPlayer) return new Vector2Int(Space.x, Space.y + 1);
-        else return new Vector2Int(Space.x, Space.y - 1);
+        Vector2Int position;
+        if (IsPlayer) position = new Vector2Int(Space.X, Space.Y + 1);
+        else position = new Vector2Int(Space.X, Space.Y - 1);
+        return Board.GetSpace(position);
     }
 
     /// <summary>Gets the left-diagonal space in front of the Pawn</summary>
     /// <returns>The space's coordinates</returns>
-    private Vector2Int GetLeftAttackSpace()
+    private Space GetLeftAttackSpace()
     {
-        if (IsPlayer) return new Vector2Int(Space.x - 1, Space.y + 1);
-        else return new Vector2Int(Space.x - 1, Space.y - 1);
+        Vector2Int position;
+        if (IsPlayer) position = new Vector2Int(Space.X - 1, Space.Y + 1);
+        else position = new Vector2Int(Space.X - 1, Space.Y - 1);
+        return Board.GetSpace(position);
     }
 
     /// <summary>Gets the right-diagonal space in front of the Pawn</summary>
     /// <returns>The space's coordinates</returns>
-    private Vector2Int GetRightAttackSpace()
+    private Space GetRightAttackSpace()
     {
-        if (IsPlayer) return new Vector2Int(Space.x + 1, Space.y + 1);
-        else return new Vector2Int(Space.x + 1, Space.y - 1);
+        Vector2Int position;
+        if (IsPlayer) position = new Vector2Int(Space.X + 1, Space.Y + 1);
+        else position = new Vector2Int(Space.X + 1, Space.Y - 1);
+        return Board.GetSpace(position);
     }
 }

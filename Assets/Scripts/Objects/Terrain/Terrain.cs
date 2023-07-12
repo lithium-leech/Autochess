@@ -8,15 +8,15 @@ public abstract class Terrain : ChessObject
     /// <summary>The kind of terrain this is</summary>
     public abstract AssetGroup.Object Kind { get; }
 
+    /// <summary>True if this terrain can be passed through</summary>
+    public abstract bool Passable { get; }
+
     protected override void Update2() { }
 
-    public override void Remove()
+    public override void Destroy()
     {
-        if (Board != null)
-        {
-            Board.Spaces[Space.x, Space.y].Remove(this);
-            Board = null;
-            Space = new Vector2Int(-1, -1);
-        }
+        if (Space != null) 
+            Space.RemoveObject(this);
+        GameObject.Destroy(gameObject);
     }
 }
