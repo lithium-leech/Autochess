@@ -5,9 +5,7 @@ public class Wall : Terrain
 {
     public override AssetGroup.Object Kind => AssetGroup.Object.Wall;
 
-    public override bool IsPassable(ChessObject obj) => false;
-
-    public override void OnPass(Piece piece) { }
+    public override bool IsEnterable(ChessObject obj) => false;
 
     public override void OnEnter(Piece piece) { }
 

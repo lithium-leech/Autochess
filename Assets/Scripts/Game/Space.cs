@@ -15,6 +15,10 @@ public class Space
     /// <summary>This space's y position</summary>
     public int Y { get; }
 
+    public Vector2Int Coordinates { get { return new Vector2Int(X, Y); } }
+
+    public Vector3 Position { get { return Board.ToPosition(Coordinates); } }
+
     /// <summary>The piece on this space (null when there is none)</summary>
     private Piece Piece { get; set; }
 
@@ -30,6 +34,31 @@ public class Space
         Board = board;
         X = x;
         Y = y;
+    }
+
+    public void Exit(Piece piece)
+    {
+        // Remove the piece from the space
+        RemoveObject(piece);
+    }
+
+    public void Enter(Piece piece)
+    {
+        // Do nothing if this piece is already on this space
+        if (Piece == piece) return;
+
+        // Check for existing pieces
+        if (Piece != null)
+        {
+            // Make ally pieces exit before entering
+            if (piece.IsPlayer == Piece.IsPlayer) Exit(Piece);
+            
+            // Capture enemy pieces
+            else Piece.Destroy();
+        }
+
+        // Add the piece to the space
+        AddToSpace(piece);
     }
 
     /// <summary>Picks up an object from this space</summary>
@@ -65,37 +94,19 @@ public class Space
         return null;
     }
 
-    /// <summary>Moves a piece into this space</summary>
-    /// <param name="piece">The piece moving onto this space</param>
-    public void MoveOnto(Piece piece)
-    {
-        // Do nothing if this piece is already on this space
-        if (Piece == piece) return;
-
-        // Destroy the captured piece if there is one
-        if (Piece != null) Piece.Destroy();
-
-        // Update the location
-        piece.Space.RemoveObject(piece);
-        AddToSpace(piece);
-
-        // Move to the new location
-        piece.MoveTo(new Vector2Int(X, Y));
-    }
-
     /// <summary>Adds an object to this space</summary>
     /// <param name="obj">The object to add</param>
     /// <returns>True if the object was added successfully</returns>
     public bool AddObject(ChessObject obj)
     {
         // Check if the object can be added
-        if (!IsPassable(obj)) return false;
+        if (!IsEnterable(obj)) return false;
 
         // Add the object to the space
         AddToSpace(obj);
 
         // Warp the piece to its new location
-        obj.WarpTo(new Vector2Int(X, Y));
+        obj.WarpTo(Coordinates);
 
         // The object was successfully added
         return true;
@@ -166,13 +177,13 @@ public class Space
     /// <returns>True if this space is empty</returns>
     public bool IsEmpty() => Piece == null && Terrain.Count < 1;
 
-    /// <summary>Checks if this space is passable</summary>
-    /// <returns>True if this space is passable</returns>
-    public bool IsPassable(ChessObject obj)
+    /// <summary>Checks if this space is enterable</summary>
+    /// <returns>True if this space is enterable</returns>
+    public bool IsEnterable(ChessObject obj)
     {
         if (Piece != null) return false;
         foreach (Terrain terrain in Terrain)
-            if (!terrain.IsPassable(obj)) return false;
+            if (!terrain.IsEnterable(obj)) return false;
         return true;
     }
 
@@ -215,6 +226,12 @@ public class Space
     /// <summary>Checks if this space is in the neutral zone</summary>
     /// <returns>True if this space is in the neutral zone</returns>
     public bool InNeutralZone() => Y >= Board.PlayerRows && Board.Height - Y >= Board.EnemyRows;
+
+    /// <summary>Gets a space in a position relative to this one</summary>
+    /// <param name="x">The relative horizontal distance</param>
+    /// <param name="y">The relative vertical distance</param>
+    /// <returns>A space relative to this one on the same board</returns>
+    public Space GetRelativeSpace(int x, int y) => Board.GetSpace(Coordinates + new Vector2Int(x, y));
 
     /// <summary>Returns the log display message for this space</summary>
     /// <returns>A string with notable information, or an empty string if there is nothing notable</returns>

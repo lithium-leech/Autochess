@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -11,38 +12,39 @@ public class Knight : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        Space newSpace = Space;
+        IList<Space> path = new List<Space>() { Space };
 
-        // Get the spaces this piece can move
-        List<Space> possibleSpaces = new List<Space>();
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X + 1, Space.Y + 2)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X + 2, Space.Y + 1)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X + 2, Space.Y - 1)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X + 1, Space.Y - 2)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X - 1, Space.Y - 2)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X - 2, Space.Y - 1)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X - 2, Space.Y + 1)));
-        possibleSpaces.Add(Board.GetSpace(new Vector2Int(Space.X - 1, Space.Y + 2)));
+        // Get all the paths this piece can make
+        IList<IList<Space>> allPaths = new List<IList<Space>>();
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(1, 2) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, 1) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, -1) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(1, -2) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(-1, -2) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, -1) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, 1) });
+        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(-1, 2) });
 
-        // Get the possible moves this piece can make
-        List<Space> possibleMoves = new List<Space>();
-        List<Space> possibleCaptures = new List<Space>();
-        foreach (Space space in possibleSpaces)
+        // Determine which paths are possible
+        IList<IList<Space>> possibleMoves = new List<IList<Space>>();
+        IList<IList<Space>> possibleCaptures = new List<IList<Space>>();
+        foreach (IList<Space> option in allPaths)
         {
+            Space space = option.Last();
             if (space != null)
             {
-                if (space.HasEnemy(IsPlayer)) possibleCaptures.Add(space);
-                else if (space.IsPassable(this)) possibleMoves.Add(space);
+                if (space.HasEnemy(IsPlayer)) possibleCaptures.Add(option);
+                else if (space.IsEnterable(this)) possibleMoves.Add(option);
             }
         }
 
         // Capture a new piece if possible
-        if (possibleCaptures.Count > 0) newSpace = possibleCaptures[Random.Range(0, possibleCaptures.Count)];
+        if (possibleCaptures.Count > 0) path = possibleCaptures[Random.Range(0, possibleCaptures.Count)];
 
         // Otherwise move if possible
-        else if (possibleMoves.Count > 0) newSpace = possibleMoves[Random.Range(0, possibleMoves.Count)];
+        else if (possibleMoves.Count > 0) path = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
         // Move to the new space
-        newSpace.MoveOnto(this);
+        StartMove(path);
     }
 }

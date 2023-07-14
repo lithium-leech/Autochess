@@ -58,6 +58,7 @@
         "Grabable",
         "highscore",
         "Lerp",
+        "Mathf",
         "UGUI",
         "Unapplies"
     ]

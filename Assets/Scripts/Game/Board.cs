@@ -114,6 +114,15 @@ public class Board
             Spaces[x,y].Clear();
     }
 
+    /// <summary>Checks if there are any moving pieces on the board</summary>
+    /// <returns>True if any pieces on the board are actively moving</returns>
+    public bool ArePiecesMoving()
+    {
+        foreach (Piece piece in PlayerPieces) if (piece.IsMoving) return true;
+        foreach (Piece piece in EnemyPieces) if (piece.IsMoving) return true;
+        return false;
+    }
+
     /// <summary>Gets the first empty space on the board</summary>
     /// <returns>A board space</returns>
     /// <remarks>The top-left is "first" and right of that is "second"</remarks>

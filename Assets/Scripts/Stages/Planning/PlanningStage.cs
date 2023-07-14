@@ -110,9 +110,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, new Vector2Int(piece.Space.X, piece.Space.Y)));
+            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space.Coordinates));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, new Vector2Int(piece.Space.X, piece.Space.Y)));
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space.Coordinates));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -224,6 +224,6 @@ public class PlanningStage : IStage
                 if (space.IsEmpty()) emptySpaces.Add(space);
             }
         Space randomSpace = emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
-        return new Vector2Int(randomSpace.X, randomSpace.Y);
+        return randomSpace.Coordinates;
     }
 }

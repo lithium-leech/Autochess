@@ -25,4 +25,7 @@ public static class GameState
 
     /// <summary>True if the player's color is white</summary>
     public static bool IsPlayerWhite { get; set; } = false;
+
+    /// <summary>True during rounds where at least one piece has moved</summary>
+    public static bool IsActiveRound { get; set; }
 }

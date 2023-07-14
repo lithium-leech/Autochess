@@ -20,11 +20,11 @@ public class CombatStage : IStage
     /// <summary>The time elapsed so far, in between turns</summary>
     private float TimeWaited { get; set; }
 
-    /// <summary>The time to wait before the next turn</summary>
-    private float TurnPause { get; set; }
-
-    /// <summary>True if it is currently white's turn</summary>
+    /// <summary>True if it is currently the player's turn</summary>
     private bool IsPlayerTurn { get; set; }
+    
+    /// <summary>True until the first turn has been taken</summary>
+    private bool IsFirstTurn { get; set; } = true;
 
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
     private int RoundsToConcede { get; set; }
@@ -40,7 +40,6 @@ public class CombatStage : IStage
         // Initialize battle start
         GameState.MusicBox.StopMusic();
         TimeWaited = 0;
-        TurnPause = GameState.TurnPause;
         IsPlayerTurn = GameState.IsPlayerWhite;
         EndConcede();
 
@@ -66,8 +65,17 @@ public class CombatStage : IStage
     {
         // Pause between turns
         TimeWaited += Time.deltaTime;
-        if (TimeWaited < TurnPause) return;
-        TurnPause = GameState.TurnPause;
+        if (TimeWaited < GameState.TurnPause) return;
+        if (Game.GameBoard.ArePiecesMoving()) return;
+        
+        // Start the fight music before the first move is taken
+        if (IsFirstTurn)
+        {
+            IsFirstTurn = false;
+            GameState.MusicBox.PlayMusic(SongName.Battle);
+            TimeWaited = GameState.TurnPause - 0.15f;
+            return;
+        }
 
         // Check if the battle is over
         if (Game.GameBoard.PlayerPieces.Count < 1)
@@ -83,9 +91,6 @@ public class CombatStage : IStage
             return;
         }
         
-        // Start the fight music when the first move is taken
-        GameState.MusicBox.PlayMusic(SongName.Battle);
-        
         // Move the current player's pieces
         List<Piece> pieces;
         string actor;
@@ -99,7 +104,9 @@ public class CombatStage : IStage
             pieces = new List<Piece>(Game.GameBoard.EnemyPieces);
             actor = "Enemy";
         }
+        GameState.IsActiveRound = false;
         RunRound(pieces);
+        if (!GameState.IsActiveRound) RoundsStatic++;
 
         // Log the moves
         StringBuilder moves = new StringBuilder("(");
@@ -133,19 +140,7 @@ public class CombatStage : IStage
     /// <param name="pieces">The pieces to move</param>
     private void RunRound(List<Piece> pieces)
     {
-        bool pieceMoved = false;
-        foreach (Piece piece in pieces)
-        {
-            if (pieceMoved) piece.TakeTurn();
-            else
-            {
-                Space space = piece.Space;
-                piece.TakeTurn();
-                if (space != piece.Space) pieceMoved = true;
-            }
-        }
-        if (pieceMoved) RoundsStatic = 0;
-        else RoundsStatic++;
+        foreach (Piece piece in pieces) piece.TakeTurn();
     }
 
     /// <summary>Displays the concede menu to the player</summary>
