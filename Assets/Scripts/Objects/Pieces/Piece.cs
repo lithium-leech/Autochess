@@ -6,12 +6,6 @@ using UnityEngine;
 /// </summary>
 public abstract class Piece : ChessObject
 {
-    /// <summary>True if this piece is controlled by the player</summary>
-    public bool IsPlayer { get; set; }
-    
-    /// <summary>True if the piece is white</summary>
-    public bool IsWhite { get; set; }
-
     /// <summary>A piece to transform into</summary>
     public AssetGroup.Piece Transform { get; set; } = AssetGroup.Piece.None;
 
@@ -59,7 +53,7 @@ public abstract class Piece : ChessObject
             if (!Board.OnBoard(pointer)) break;
             Space space = Board.Spaces[pointer.x, pointer.y];
             if (space.HasEnemy(IsPlayer)) { possibleCaptures.Add(space); break; }
-            if (!space.IsPassable()) break;
+            if (!space.IsPassable(this)) break;
             possibleMoves.Add(space);
         }
     }

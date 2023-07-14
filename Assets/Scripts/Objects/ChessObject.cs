@@ -11,6 +11,12 @@ public abstract class ChessObject : MonoBehaviour
     /// <summary>The object's space on the board</summary>
     public Space Space { get; set; }
 
+/// <summary>True if the object is controlled by the player</summary>
+    public bool IsPlayer { get; set; }
+    
+    /// <summary>True if the object is white</summary>
+    public bool IsWhite { get; set; }
+
     /// <summary>True if this object can be picked up by the player</summary>
     public bool IsGrabable { get; set; } = false;
 

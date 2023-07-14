@@ -29,7 +29,7 @@ public class Pawn : Piece
         else
         {
             // Otherwise move if possible
-            if (move != null && move.IsPassable()) newSpace = move;
+            if (move != null && move.IsPassable(this)) newSpace = move;
         }
 
         // Move to the new space

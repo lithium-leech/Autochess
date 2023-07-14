@@ -89,7 +89,7 @@ public class Space
     public bool AddObject(ChessObject obj)
     {
         // Check if the object can be added
-        if (!IsPassable()) return false;
+        if (!IsPassable(obj)) return false;
 
         // Add the object to the space
         AddToSpace(obj);
@@ -157,7 +157,8 @@ public class Space
         Piece = null;
 
         // Clear terrain
-        foreach (Terrain terrain in Terrain) terrain.Destroy();
+        IList<Terrain> terrainToClear = new List<Terrain>(Terrain);
+        foreach (Terrain terrain in terrainToClear) terrain.Destroy();
         Terrain.Clear();
     }
 
@@ -167,11 +168,11 @@ public class Space
 
     /// <summary>Checks if this space is passable</summary>
     /// <returns>True if this space is passable</returns>
-    public bool IsPassable()
+    public bool IsPassable(ChessObject obj)
     {
         if (Piece != null) return false;
         foreach (Terrain terrain in Terrain)
-            if (!terrain.Passable) return false;
+            if (!terrain.IsPassable(obj)) return false;
         return true;
     }
 

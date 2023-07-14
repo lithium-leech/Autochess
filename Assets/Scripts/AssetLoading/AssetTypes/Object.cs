@@ -6,6 +6,7 @@ namespace AssetGroup
     public enum Object
     {
         None = 0,
-        Wall
+        Wall,
+        Mine
     }
 }
