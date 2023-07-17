@@ -35,7 +35,7 @@ public class Pawn : Piece
         }
 
         // Move to the new space
-        StartMove(path);
+        EnactTurn(path);
 
         // If the new space is at the board edge, upgrade to a queen
         int edge = IsPlayer ? Board.Height - 1 : 0;

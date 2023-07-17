@@ -106,7 +106,8 @@ public class CombatStage : IStage
         }
         GameState.IsActiveRound = false;
         RunRound(pieces);
-        if (!GameState.IsActiveRound) RoundsStatic++;
+        if (GameState.IsActiveRound) RoundsStatic = 0;
+        else RoundsStatic++;
 
         // Log the moves
         StringBuilder moves = new StringBuilder("(");

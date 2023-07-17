@@ -13,11 +13,14 @@ public abstract class Piece : ChessObject
     /// <summary>The kind of piece this is</summary>
     public abstract AssetGroup.Piece Kind { get; }
 
+    /// <summary>A captured piece waiting to be destroyed</summary>
+    public Piece Captured { get; set; }
+
     /// <summary>True if the object is moving towards a target location</summary>
     public bool IsMoving { get; private set; } = false;
 
     /// <summary>True in the frame immediately following a finished move</summary>
-    private bool doneMoving { get; set; } = false;
+    public bool IsDoneMoving { get; set; } = false;
 
     /// <summary>A sequence of spaces to move through</summary>
     private IList<Space> Path { get; set; }
@@ -36,31 +39,34 @@ public abstract class Piece : ChessObject
             LerpIncrement = Mathf.Clamp01(LerpIncrement + (Time.deltaTime * 2.0f / GameState.TurnPause));
             if (LerpIncrement == 1.0f)
             {
-                transform.position = Path.Last().Position;
+                transform.position = Path.Last().Position + GameState.PieceZTop;
             }
             else
             {
                 int segment = Mathf.FloorToInt(LerpIncrement * (Path.Count - 1));
                 float segmentIncrement = (LerpIncrement * (Path.Count - 1)) - segment;
-                transform.position = Vector3.Lerp(Path[segment].Position, Path[segment+1].Position, segmentIncrement);
+                transform.position = Vector3.Lerp(Path[segment].Position + GameState.PieceZTop, Path[segment+1].Position + GameState.PieceZTop, segmentIncrement);
             }
-            if (Vector3.Distance(transform.position, Path.Last().Position) < 0.001f) doneMoving = true;
+            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.PieceZTop) < 0.001f) IsDoneMoving = true;
         }
 
         // Finish moving once the move is done
-        if (doneMoving)
+        if (IsDoneMoving)
         {
             IsMoving = false;
-            doneMoving = false;
+            IsDoneMoving = false;
 
-            // Enter the new space
-            Path.Last().Enter(this);
+            // Destroy the captured piece
+            if (Captured != null) Captured.Destroy();
+
+            // Move back to the stationary layer
+            transform.position = Board.ToPosition(Space.Coordinates) + GameState.PieceZBottom;
 
             // Transform if possible
             if (Transform != AssetGroup.Piece.None)
             {
                 Space.Exit(this);
-                Board.AddPiece(Transform, IsPlayer, IsWhite, Space.Coordinates);
+                Board.AddPiece(Transform, IsPlayer, IsWhite, Space);
                 Destroy();
             }
         }
@@ -100,17 +106,19 @@ public abstract class Piece : ChessObject
         }
     }
 
-    /// <summary>The object moves along the specified path</summary>
+    /// <summary>The piece carries out its turn</summary>
     /// <param name="path">The path to move through</param>
-    public void StartMove(IList<Space> path)
+    public void EnactTurn(IList<Space> path)
     {
         Path = path;
-        if (path.Last() != Space)
+        Space destination = path.Last();
+        if (destination != Space)
         {
             GameState.IsActiveRound = true;
             IsMoving = true;
             LerpIncrement = 0;
             Space.Exit(this);
+            destination.Enter(this);
         }
     }
 }

@@ -32,6 +32,6 @@ public class King : Piece
         else if (possibleMoves.Count > 0) path = possibleMoves[Random.Range(0, possibleMoves.Count)];
 
         // Move to the new space
-        StartMove(path);
+        EnactTurn(path);
     }
 }

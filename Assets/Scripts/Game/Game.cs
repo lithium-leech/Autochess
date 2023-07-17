@@ -75,6 +75,7 @@ public class Game : MonoBehaviour
         MenuManager.Initialize(InGameMenu);
 
         // Go to the first level
+        GameState.IsPlayerWhite = false;
         GameState.Level = 1;
         LevelText.text = GameState.Level.ToString();
         PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();

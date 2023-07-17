@@ -46,7 +46,7 @@ public class PlanningStage : IStage
     {
         // Get the current mouse position
         Vector3 position = GameState.Camera.ScreenToWorldPoint(Input.mousePosition);
-        position.z = GameState.PieceZ;
+        position.z = GameState.PieceZBottom.z;
 
         // Check if the position is inside a board
         Board board = null;
@@ -110,9 +110,9 @@ public class PlanningStage : IStage
         Game.PlayerGameBoard.Clear();
         Game.PlayerSideBoard.Clear();
         foreach (Piece piece in Game.GameBoard.PlayerPieces)
-            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space.Coordinates));
+            Game.PlayerGameBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
         foreach (Piece piece in Game.SideBoard.PlayerPieces)
-            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space.Coordinates));
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(piece.Kind, piece.Space));
     }
 
     /// <summary>Starts the fight sequence</summary>
@@ -134,10 +134,7 @@ public class PlanningStage : IStage
     {
         // Place the enemy's pieces on the game board
         foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
-        {
-            Vector2Int space = GetRandomEmptySpace();
-            Game.GameBoard.AddPiece(pieceType, false, !GameState.IsPlayerWhite, space);
-        }
+            Game.GameBoard.AddPiece(pieceType, false, !GameState.IsPlayerWhite, GetRandomEmptySpace());
 
         // Place the player's pieces on the game board
         foreach (PiecePositionRecord record in Game.PlayerGameBoard)
@@ -148,7 +145,7 @@ public class PlanningStage : IStage
             }
             else
             {
-                Game.GameBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space.Value);
+                Game.GameBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space);
             }
         }
 
@@ -158,7 +155,7 @@ public class PlanningStage : IStage
             if (record.Space == null)
                 Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite);
             else
-                Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space.Value);
+                Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space);
         }
     }
 
@@ -167,16 +164,11 @@ public class PlanningStage : IStage
     {
         // Place the enemy's objects on the game board
         foreach (AssetGroup.Object objectType in Game.EnemyObjects)
-        {
-            Vector2Int space = GetRandomEmptySpace();
-            Game.GameBoard.AddObject(objectType, false, !GameState.IsPlayerWhite, space);
-        }
+            Game.GameBoard.AddObject(objectType, false, !GameState.IsPlayerWhite, GetRandomEmptySpace());
 
         // Place the player's objects on the side board
         foreach (AssetGroup.Object objectType in Game.PlayerObjects)
-        {
             Game.SideBoard.AddObject(objectType, true, GameState.IsPlayerWhite);
-        }
     }
 
     /// <summary>Add highlights around the player rows of the given board</summary>
@@ -214,7 +206,7 @@ public class PlanningStage : IStage
 
     /// <summary>Gets a random empty space on the enemy's side of the game board</summary>
     /// <returns>An empty space on the game board</returns>
-    private Vector2Int GetRandomEmptySpace()
+    private Space GetRandomEmptySpace()
     {
         IList<Space> emptySpaces = new List<Space>();
         for (int x = 0; x < Game.GameBoard.Width; x++)
@@ -223,7 +215,7 @@ public class PlanningStage : IStage
                 Space space = Game.GameBoard.GetSpace(new Vector2Int(x, y));
                 if (space.IsEmpty()) emptySpaces.Add(space);
             }
-        Space randomSpace = emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
-        return randomSpace.Coordinates;
+        if (emptySpaces.Count < 1) return null;
+        else return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
     }
 }

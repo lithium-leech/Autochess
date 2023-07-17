@@ -26,14 +26,6 @@ public abstract class ChessObject : MonoBehaviour
     public abstract void Destroy();
 
     /// <summary>Warps the object to the specified location</summary>
-    /// <param name="coordinates">The coordinates to warp to</param>
-    public void WarpTo(Vector2Int coordinates)
-    {
-        Vector3 position = Board.ToPosition(coordinates);
-        transform.position = position;
-    }
-
-    /// <summary>Warps the object to the specified location</summary>
     /// <param name="space">The world coordinates to warp to</param>
     public void WarpTo(Vector3 position) => transform.position = position;
 }

@@ -15,8 +15,10 @@ public class Space
     /// <summary>This space's y position</summary>
     public int Y { get; }
 
+    /// <summary>This space's coordinates</summary>
     public Vector2Int Coordinates { get { return new Vector2Int(X, Y); } }
 
+    /// <summary>This space's world position (z is 0)</summary>
     public Vector3 Position { get { return Board.ToPosition(Coordinates); } }
 
     /// <summary>The piece on this space (null when there is none)</summary>
@@ -47,15 +49,8 @@ public class Space
         // Do nothing if this piece is already on this space
         if (Piece == piece) return;
 
-        // Check for existing pieces
-        if (Piece != null)
-        {
-            // Make ally pieces exit before entering
-            if (piece.IsPlayer == Piece.IsPlayer) Exit(Piece);
-            
-            // Capture enemy pieces
-            else Piece.Destroy();
-        }
+        // Capture the existing pieces
+        if (Piece != null) piece.Captured = Piece;
 
         // Add the piece to the space
         AddToSpace(piece);
@@ -106,7 +101,6 @@ public class Space
         AddToSpace(obj);
 
         // Warp the piece to its new location
-        obj.WarpTo(Coordinates);
 
         // The object was successfully added
         return true;
@@ -125,10 +119,16 @@ public class Space
             if (piece.IsPlayer) Board.PlayerPieces.Add(piece);
             else Board.EnemyPieces.Add(piece);
             Piece = piece;
+            piece.WarpTo(Board.ToPosition(Coordinates) + GameState.PieceZBottom);
         }
 
         // Add a terrain
-        if (obj is Terrain) Terrain.Add((Terrain)obj);
+        if (obj is Terrain)
+        {
+            Terrain terrain = (Terrain)obj;
+            Terrain.Add(terrain);
+            terrain.WarpTo(Board.ToPosition(Coordinates) + GameState.TerrainZ);
+        }
     }
 
     /// <summary>Removes an object from this space</summary>

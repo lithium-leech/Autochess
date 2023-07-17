@@ -14,9 +14,6 @@ public static class GameState
     /// <summary>The time in between turns (seconds)</summary>
     public static float TurnPause { get; set; } = 2.0f;
 
-    /// <summary>The Z-plane that pieces exist on</summary>
-    public static float PieceZ { get; } = -5.0f;
-
     /// <summary>The player's current level</summary>
     public static int Level { get; set; } = 0;
 
@@ -28,4 +25,13 @@ public static class GameState
 
     /// <summary>True during rounds where at least one piece has moved</summary>
     public static bool IsActiveRound { get; set; }
+    
+    /// <summary>The Z-plane that terrain exists on</summary>
+    public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -4.0f);
+
+    /// <summary>The Z-plane that stationary pieces exist on</summary>
+    public static Vector3 PieceZBottom { get; } = new Vector3(0.0f, 0.0f, -5.0f);
+
+    /// <summary>The Z-plane that moving pieces exist on</summary>
+    public static Vector3 PieceZTop { get; } = new Vector3(0.0f, 0.0f, -6.0f);
 }

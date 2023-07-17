@@ -75,7 +75,7 @@ public static class GameExtensions
     {
         AssetGroup.Group groupKey = AssetGroup.Group.Highlight;
         GameObject highlight = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
-        highlight.transform.position = board.ToPosition(space);
+        highlight.transform.position = board.ToPosition(space) + GameState.PieceZBottom;
         return highlight;
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -73,7 +72,7 @@ public class Board
     /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
-    public bool AddPiece(AssetGroup.Piece kind, bool player, bool white, Vector2Int space) => AddPiece(Game.CreatePiece(kind, player, white), space);
+    public bool AddPiece(AssetGroup.Piece kind, bool player, bool white, Space space) => AddPiece(Game.CreatePiece(kind, player, white), space);
 
     /// <summary>Adds a piece to the board in the first empty space</summary>
     /// <param name="piece">The piece to add</param>
@@ -82,7 +81,7 @@ public class Board
     /// <summary>Adds a piece to the board</summary>
     /// <param name="piece">The piece to add</param>
     /// <param name="space">The space to place the piece at</param>
-    public bool AddPiece(Piece piece, Vector2Int space) => AddObject(piece, space);
+    public bool AddPiece(Piece piece, Space space) => AddObject(piece, space);
 
     /// <summary>Adds a new object to the board in the last empty space</summary>
     /// <param name="kind">The kind of object to add</param>
@@ -95,7 +94,7 @@ public class Board
     /// <param name="player">True if the object is for the player</param>
     /// <param name="white">True if the object is white</param>
     /// <param name="space">The space to place the object at</param>
-    public bool AddObject(AssetGroup.Object kind, bool player, bool white, Vector2Int space) => AddObject(Game.CreateObject(kind, player, white), space);
+    public bool AddObject(AssetGroup.Object kind, bool player, bool white, Space space) => AddObject(Game.CreateObject(kind, player, white), space);
 
     /// <summary>Adds an object to the board in the last empty space</summary>
     /// <param name="obj">The object to add</param>
@@ -104,7 +103,11 @@ public class Board
     /// <summary>Adds an object to the board</summary>
     /// <param name="obj">The object to add</param>
     /// <param name="space">The space to place the object at</param>
-    public bool AddObject(ChessObject obj, Vector2Int space) => Spaces[space.x,space.y].AddObject(obj);
+    public bool AddObject(ChessObject obj, Space space)
+    {
+        if (space == null) return false;
+        else return space.AddObject(obj);
+    }
 
     /// <summary>Destroys all objects on the board</summary>
     public void Clear()
@@ -126,50 +129,48 @@ public class Board
     /// <summary>Gets the first empty space on the board</summary>
     /// <returns>A board space</returns>
     /// <remarks>The top-left is "first" and right of that is "second"</remarks>
-    /// <remarks>Returns (-1, -1) if there is no empty space</remarks>
-    public Vector2Int GetFirstEmptySpace()
+    /// <remarks>Returns null if there is no empty space</remarks>
+    public Space GetFirstEmptySpace()
     {
-        Vector2Int space = new Vector2Int(-1, -1);
         for (int j = Height - 1; j >= 0; j--)
         for (int i = 0; i < Width; i++)
-            if (Spaces[i,j].IsEmpty()) return new Vector2Int(i, j);
-        return space;
+            if (Spaces[i,j].IsEmpty()) return Spaces[i,j];
+        return null;
     }
 
     /// <summary>Gets the last empty space on the board</summary>
     /// <returns>A board space</returns>
     /// <remarks>The bottom-right is "last" and left of that is "second last"</remarks>
-    /// <remarks>Returns (-1, -1) if there is no empty space</remarks>
-    public Vector2Int GetLastEmptySpace()
+    /// <remarks>Returns null if there is no empty space</remarks>
+    public Space GetLastEmptySpace()
     {
-        Vector2Int space = new Vector2Int(-1, -1);
         for (int j = 0; j < Height; j++)
         for (int i = Width - 1; i >= 0; i--)
-            if (Spaces[i,j].IsEmpty()) return new Vector2Int(i, j);
-        return space;
+            if (Spaces[i,j].IsEmpty()) return Spaces[i,j];
+        return null;
     }
 
-    /// <summary>Checks if a space is on the board</summary>
-    /// <param name="space">The space to check</param>
-    /// <returns>True if the space is on the board</returns>
-    public bool OnBoard(Vector2Int space) => space.x >= 0 && space.x < Width && space.y >= 0 && space.y < Height;
+    /// <summary>Checks if a set of coordinates is on the board</summary>
+    /// <param name="coordinates">The coordinates to check</param>
+    /// <returns>True if the coordinates are on the board</returns>
+    public bool OnBoard(Vector2Int coordinates) => coordinates.x >= 0 && coordinates.x < Width && coordinates.y >= 0 && coordinates.y < Height;
 
     /// <summary>Gets a space on the board</summary>
-    /// <param name="space">The space to get</param>
-    /// <returns>The desired space, or null if the target space was invalid</returns>
-    public Space GetSpace(Vector2Int space)
+    /// <param name="coordinates">The desired board space's coordinates</param>
+    /// <returns>The desired space, or null if the coordinates are invalid</returns>
+    public Space GetSpace(Vector2Int coordinates)
     {
-        if (OnBoard(space)) return Spaces[space.x,space.y];
+        if (OnBoard(coordinates)) return Spaces[coordinates.x,coordinates.y];
         else return null;
     }
 
-    /// <summary>Gets a board space from a given world position</summary>
-    /// <param name="position">The world position to get a space for</param>
-    /// <returns>A board space</returns>
+    /// <summary>Gets a board space's coordinates from a given world position</summary>
+    /// <param name="position">The world position to get coordinates for</param>
+    /// <returns>A board space's coordinates</returns>
     public Vector2Int ToSpace(Vector3 position) => new Vector2Int((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
 
-    /// <summary>Gets the world coordinates for a given space</summary>
-    /// <param name="space">The space to get coordinated for</param>
-    /// <returns>World-space coordinates</returns>
-    public Vector3 ToPosition(Vector2Int space) => new Vector3(CornerBL.x + space.x + 0.5f, CornerBL.y + space.y + 0.5f, GameState.PieceZ);
+    /// <summary>Gets the world position for a given board space's coordinates</summary>
+    /// <param name="coordinates">The board space's coordinates to get a position for</param>
+    /// <returns>A world position (z is 0)</returns>
+    public Vector3 ToPosition(Vector2Int coordinates) => new Vector3(CornerBL.x + coordinates.x + 0.5f, CornerBL.y + coordinates.y + 0.5f, 0.0f);
 }

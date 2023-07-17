@@ -40,20 +40,27 @@ public class UpgradeStage : IStage
         // Display new level choices
         if (GameState.Level % 20 == 1)
         {
-           // Reset pieces
+            // Reset pieces
+            Game.EnemyPieces.Clear();
+            Game.PlayerGameBoard.Clear();
+            Game.PlayerSideBoard.Clear();
+            Game.EnemyPieces.Add(AssetGroup.Piece.Pawn);
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
             
-           // and award a new power
-           Choices = new PowerChoices(Game);
+            // Choose the next map
+            Choices = new NullChoices(Game);
+            Game.NextStage = new PlanningStage(Game);
+            // TODO: MAPS
         }
-        else if (GameState.Level % 2 == 0)
+        else if (GameState.Level % 5 == 0)
         {
-           // Award a new power
-           Choices = new PowerChoices(Game);
+            // Award a new power
+            Choices = new PowerChoices(Game);
         }
         else
         {
-           // Award a new piece
-           Choices = new PieceChoices(Game);
+            // Award a new piece
+            Choices = new PieceChoices(Game);
         }
         Game.UpgradeMenuTitleText.StringReference = new LocalizedString("Text", Choices.TitleText);
         Choices.Show();
