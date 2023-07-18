@@ -40,6 +40,9 @@ public class Space
 
     public void Exit(Piece piece)
     {
+        // Exit terrain
+        foreach (Terrain terrain in Terrain) terrain.OnExit(piece);
+
         // Remove the piece from the space
         RemoveObject(piece);
     }
@@ -51,6 +54,9 @@ public class Space
 
         // Capture the existing pieces
         if (Piece != null) piece.Captured = Piece;
+
+        // Enter terrain
+        foreach (Terrain terrain in Terrain) terrain.OnEnter(piece);
 
         // Add the piece to the space
         AddToSpace(piece);

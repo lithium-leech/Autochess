@@ -22,6 +22,11 @@ public abstract class ChessObject : MonoBehaviour
 
     public abstract void Update();
 
+    /// <summary>Determines if this object can be placed in a given space</summary>
+    /// <param name="space">The space to check</param>
+    /// <returns>True if this object can be placed in the given space</returns>
+    public abstract bool IsPlaceable(Space space);
+
     /// <summary>Removes this object from the entire game</summary>
     public abstract void Destroy();
 

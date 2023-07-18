@@ -20,7 +20,7 @@ public abstract class Piece : ChessObject
     public bool IsMoving { get; private set; } = false;
 
     /// <summary>True in the frame immediately following a finished move</summary>
-    public bool IsDoneMoving { get; set; } = false;
+    private bool IsDoneMoving { get; set; } = false;
 
     /// <summary>A sequence of spaces to move through</summary>
     private IList<Space> Path { get; set; }
@@ -71,6 +71,8 @@ public abstract class Piece : ChessObject
             }
         }
     }
+
+    public override bool IsPlaceable(Space space) => space.InPlayerZone();
 
     public override void Destroy()
     {

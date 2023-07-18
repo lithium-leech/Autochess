@@ -88,7 +88,7 @@ public class PlanningStage : IStage
         else if (Input.GetMouseButtonUp(0) && HeldObject != null)
         {
             bool placed = false;
-            if (board != null && space != null && space.InPlayerZone())
+            if (board != null && space != null && HeldObject.IsPlaceable(space))
                 placed = space.AddObject(HeldObject);
             if (!placed)
                 HeldObject.Space.AddObject(HeldObject);

@@ -8,8 +8,6 @@ public abstract class Terrain : ChessObject
     /// <summary>The kind of terrain this is</summary>
     public abstract AssetGroup.Object Kind { get; }
 
-    public override void Update() { }
-
     public override void Destroy()
     {
         if (Space != null) 
