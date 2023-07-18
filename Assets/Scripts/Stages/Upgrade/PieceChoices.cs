@@ -24,10 +24,10 @@ public class PieceChoices : UpgradeChoices
     public override string TitleText { get; } = "ChoosePiece";
 
     /// <summary>The available powers for the player</summary>
-    public AssetGroup.Piece[] PlayerPieces { get; }
+    private AssetGroup.Piece[] PlayerPieces { get; }
 
     /// <summary>The available powers for the enemy</summary>
-    public AssetGroup.Piece[] EnemyPieces { get; }
+    private AssetGroup.Piece[] EnemyPieces { get; }
 
     /// <summary>Instantiated pieces shown in the upgrade menu</summary>
     private IList<Piece> Pieces { get; set; } = new List<Piece>();

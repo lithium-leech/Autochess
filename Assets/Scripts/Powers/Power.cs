@@ -11,11 +11,11 @@ public abstract class Power : MonoBehaviour
     /// <summary>True if this power is for the player</summary>
     public bool IsPlayer { get; set; }
 
+    /// <summary>The group that this power belongs to (normal or remove)</summary>
+    public AssetGroup.Group Group { get; set; }
+
     /// <summary>The kind of power this is</summary>
     public abstract AssetGroup.Power Kind { get; }
-
-    /// <summary>The kind of power that removes this power</summary>
-    public abstract AssetGroup.Power RemoveKind { get; }
 
     /// <summary>Applies the power to the current game</summary>
     public abstract void Activate();
@@ -25,8 +25,5 @@ public abstract class Power : MonoBehaviour
 
     /// <summary>Warps the piece to the specified location</summary>
     /// <param name="space">The world coordinates to warp to</param>
-    public void WarpTo(Vector3 position)
-    {
-        transform.position = position;
-    }
+    public void WarpTo(Vector3 position) => transform.position = position;
 }

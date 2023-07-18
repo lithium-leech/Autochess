@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4758143728585336857}
   - component: {fileID: 8129147503253350512}
   m_Layer: 0
-  m_Name: HighlightTop
+  m_Name: HighlightGreenT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

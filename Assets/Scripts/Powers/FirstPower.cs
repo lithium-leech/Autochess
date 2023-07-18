@@ -5,8 +5,6 @@ public class FirstPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.First; } }
 
-    public override AssetGroup.Power RemoveKind { get { throw new System.Exception("The First power has no remove kind."); } }
-
     public override void Activate()
     {
         // Switch player colors

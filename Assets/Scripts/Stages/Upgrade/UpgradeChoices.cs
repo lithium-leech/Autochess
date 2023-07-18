@@ -85,8 +85,8 @@ public abstract class UpgradeChoices
     /// <summary>Create a panel sprite</summary>
     /// <param name="choice">The choice to create the sprite for</param>
     /// <param name="player">True if this is the player's half of the choice</param>
-    /// <param name="player">True if this is an info panel</param>
-    /// <param name="player">True if this the text panel</param>
+    /// <param name="info">True if this is an info panel</param>
+    /// <param name="text">True if this the text panel</param>
     /// <returns>A new panel</returns>
     private GameObject CreatePanel(int choice, bool player, bool info, bool text)
     {

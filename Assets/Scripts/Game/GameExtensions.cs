@@ -6,6 +6,7 @@ using UnityEngine;
 public static class GameExtensions
 {
     /// <summary>Creates a new instance of a piece</summary>
+    /// <param name="game">The game to create a piece in</param>
     /// <param name="kind">The kind of piece to create</param>
     /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
@@ -22,6 +23,7 @@ public static class GameExtensions
     }
 
     /// <summary>Creates a new instance of a chess object</summary>
+    /// <param name="game">The game to create a chess object in</param>
     /// <param name="kind">The kind of object to create</param>
     /// <param name="player">True if the object is for the player</param>
     /// <param name="white">True if the object is white</param>
@@ -38,12 +40,15 @@ public static class GameExtensions
     }
 
     /// <summary>Creates a new instance of a power</summary>
+    /// <param name="game">The game to create a power in</param>
     /// <param name="kind">The kind of power to create</param>
     /// <param name="player">True if the power is for the player</param>
+    /// <param name="remove">True if this is a power remover</param>
     /// <returns>A Power</returns>
-    public static Power CreatePower(this Game game, AssetGroup.Power kind, bool player)
+    public static Power CreatePower(this Game game, AssetGroup.Power kind, bool player, bool remove)
     {
-        GameObject obj = Game.Instantiate(AssetManager.Prefabs[AssetGroup.Group.Power][(int)kind]);
+        AssetGroup.Group groupKey = remove ? AssetGroup.Group.RemovePower : AssetGroup.Group.Power;
+        GameObject obj = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         Power power = obj.GetComponent<Power>();
         power.Game = game;
         power.IsPlayer = player;
@@ -51,7 +56,9 @@ public static class GameExtensions
     }
 
     /// <summary>Creates a new instance of a panel</summary>
-    /// <param name="kind">The kind of panel to create</param>
+    /// <param name="game">The game to create a panel in</param>
+    /// <param name="white">True if the panel is white</param>
+    /// <param name="info">True if the panel is an info panel</param>
     /// <returns>A Panel</returns>
     public static GameObject CreatePanel(this Game game, bool white, bool info)
     {
@@ -67,13 +74,15 @@ public static class GameExtensions
     }
 
     /// <summary>Creates a new instance of a single highlight object</summary>
+    /// <param name="game">The game to create a highlight in</param>
     /// <param name="kind">The kind of highlight to create</param>
+    /// <param name="green">True if the highlight is green</param>
     /// <param name="board">The board to load the highlight on</param>
     /// <param name="space">The space to place the highlight on</param>
     /// <returns>A new highlight object</returns>
-    public static GameObject CreateHighlight(this Game game, AssetGroup.Highlight kind, Board board, Vector2Int space)
+    public static GameObject CreateHighlight(this Game game, AssetGroup.Highlight kind, bool green, Board board, Vector2Int space)
     {
-        AssetGroup.Group groupKey = AssetGroup.Group.Highlight;
+        AssetGroup.Group groupKey = green ? AssetGroup.Group.GreenHighlight : AssetGroup.Group.RedHighlight;
         GameObject highlight = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         highlight.transform.position = board.ToPosition(space) + GameState.PieceZBottom;
         return highlight;

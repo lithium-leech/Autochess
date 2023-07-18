@@ -8,12 +8,8 @@ namespace AssetGroup
         None = 0,
         First,
         Row,
-        RemoveRow,
         Mine,
-        RemoveMine,
         Wall,
-        RemoveWall,
-        Shield,
-        RemoveShield
+        Shield
     }
 }

@@ -7,8 +7,6 @@ public class WallPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Wall; } }
 
-    public override AssetGroup.Power RemoveKind { get { return AssetGroup.Power.RemoveWall; } }
-
     public override void Activate()
     {
         // Create two new walls

@@ -7,8 +7,6 @@ public class MinePower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Mine; } }
 
-    public override AssetGroup.Power RemoveKind { get { return AssetGroup.Power.RemoveMine; } }
-
     public override void Activate()
     {
         // Create two new walls

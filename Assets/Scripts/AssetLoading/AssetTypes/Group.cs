@@ -9,9 +9,11 @@ namespace AssetGroup
         Scene,
         WhitePiece,
         BlackPiece,
-        Highlight,
+        GreenHighlight,
+        RedHighlight,
         Panel,
         Power,
+        RemovePower,
         WhiteObject,
         BlackObject
     }

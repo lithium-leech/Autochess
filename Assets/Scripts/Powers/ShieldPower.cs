@@ -7,8 +7,6 @@ public class ShieldPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Shield; } }
 
-    public override AssetGroup.Power RemoveKind { get { return AssetGroup.Power.RemoveShield; } }
-
     public override void Activate()
     {
         // TODO:

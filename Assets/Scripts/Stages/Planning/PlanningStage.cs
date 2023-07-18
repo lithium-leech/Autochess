@@ -179,29 +179,54 @@ public class PlanningStage : IStage
         // Start with an empty list
         IList<GameObject> highlights = new List<GameObject>();
 
-        // No highlights needed if there are 0 player rows
-        if (board.PlayerRows > 0)
-        {
-            // Create the bottom row
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomLeft, board, new Vector2Int(-1, -1)));
-            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Bottom, board, new Vector2Int(i, -1)));
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomRight, board, new Vector2Int(board.Width, -1)));
+        // Add player zone highlights
+        if (board.PlayerRows > 0) AddHighlightZone(board, highlights, true);
 
-            // Create the left and right columns
-            for (int i = 0; i < board.PlayerRows; i++)
-            {
-                highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Left, board, new Vector2Int(-1, i)));
-                highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Right, board, new Vector2Int(board.Width, i)));
-            }
-
-            // Create the top row
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopLeft, board, new Vector2Int(-1, board.PlayerRows)));
-            for (int i = 0; i < board.Width; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Top, board, new Vector2Int(i, board.PlayerRows)));
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopRight, board, new Vector2Int(board.Width, board.PlayerRows)));
-        }
+        // Add enemy zone highlights
+        if (board.EnemyRows > 0) AddHighlightZone(board, highlights, false);
 
         // Return the generated highlights
         return highlights;
+    }
+
+    /// <summary>Adds a single zone of highlights</summary>
+    /// <param name="board">The board to add highlights to</param>
+    /// <param name="highlights">The collection of highlights to add to</param>
+    /// <param name="player">True if this is a player zone</param>
+    private void AddHighlightZone(Board board, IList<GameObject> highlights, bool player)
+    {
+        // Get the zone coordinates
+        int top;
+        int bottom;
+        int right = board.Width;
+        int left = -1;
+        if (player)
+        {
+            top = board.PlayerRows;
+            bottom = -1;
+        }
+        else
+        {
+            top = board.Height;
+            bottom = (board.Height - board.EnemyRows) - 1;
+        }
+
+        // Create the bottom row
+        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomLeft, player, board, new Vector2Int(left, bottom)));
+        for (int i = left + 1; i < right; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Bottom, player, board, new Vector2Int(i, bottom)));
+        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomRight, player, board, new Vector2Int(right, bottom)));
+
+        // Create the left and right columns
+        for (int i = bottom + 1; i < top; i++)
+        {
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Left, player, board, new Vector2Int(left, i)));
+            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Right, player, board, new Vector2Int(right, i)));
+        }
+
+        // Create the top row
+        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopLeft, player, board, new Vector2Int(left, top)));
+        for (int i = left + 1; i < right; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Top, player, board, new Vector2Int(i, top)));
+        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopRight, player, board, new Vector2Int(right, top)));
     }
 
     /// <summary>Gets a random empty space on the enemy's side of the game board</summary>

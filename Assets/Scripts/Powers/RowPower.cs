@@ -7,8 +7,6 @@ public class RowPower : Power
 {
     public override AssetGroup.Power Kind { get { return AssetGroup.Power.Row; } }
     
-    public override AssetGroup.Power RemoveKind { get { return AssetGroup.Power.RemoveRow; } }
-
     public override void Activate()
     {
         // The power doesn't work if there are no more available rows
