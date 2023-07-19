@@ -24,7 +24,7 @@ public class WallPower : Power
         // Add this power to the accumulated powers list
         if (IsPlayer) Game.PlayerPowers.Add(this);
         else Game.EnemyPowers.Add(this);
-        WarpTo(new Vector3(100, 100, 100));
+        WarpTo(GameState.ShadowZone);
     }
     
     public override void Deactivate()

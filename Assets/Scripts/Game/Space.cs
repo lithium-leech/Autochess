@@ -24,6 +24,9 @@ public class Space
     /// <summary>The piece on this space (null when there is none)</summary>
     private Piece Piece { get; set; }
 
+    /// <summary>The equipment on this space (null when there is none)</summary>
+    private Equipment Equipment { get; set; }
+
     /// <summary>The terrain affecting this space</summary>
     private IList<Terrain> Terrain { get; } = new List<Terrain>();
 
@@ -40,7 +43,7 @@ public class Space
 
     public void Exit(Piece piece)
     {
-        // Exit terrain
+        // Exit any terrain
         foreach (Terrain terrain in Terrain) terrain.OnExit(piece);
 
         // Remove the piece from the space
@@ -49,13 +52,10 @@ public class Space
 
     public void Enter(Piece piece)
     {
-        // Do nothing if this piece is already on this space
-        if (Piece == piece) return;
-
-        // Capture the existing pieces
+        // Capture the existing piece
         if (Piece != null) piece.Captured = Piece;
 
-        // Enter terrain
+        // Enter any terrain
         foreach (Terrain terrain in Terrain) terrain.OnEnter(piece);
 
         // Add the piece to the space
@@ -73,6 +73,14 @@ public class Space
             Piece = null;
             Board.PlayerPieces.Remove(grabbedPiece);
             return grabbedPiece;
+        }
+
+        // Grab any possible equipment
+        if (Equipment != null && Equipment.IsGrabable)
+        {
+            Equipment grabbedEquipment = Equipment;
+            Equipment = null;
+            return grabbedEquipment;
         }
 
         // Grab any possible terrain
@@ -106,8 +114,6 @@ public class Space
         // Add the object to the space
         AddToSpace(obj);
 
-        // Warp the piece to its new location
-
         // The object was successfully added
         return true;
     }
@@ -125,7 +131,20 @@ public class Space
             if (piece.IsPlayer) Board.PlayerPieces.Add(piece);
             else Board.EnemyPieces.Add(piece);
             Piece = piece;
-            piece.WarpTo(Board.ToPosition(Coordinates) + GameState.PieceZBottom);
+            piece.WarpTo(Board.ToPosition(Coordinates) + GameState.StillPieceZ);
+        }
+
+        // Add an equipment
+        if (obj is Equipment)
+        {
+            Equipment equipment = (Equipment)obj;
+            if (Piece == null)
+            {
+                Equipment = equipment;
+                equipment.WarpTo(Board.ToPosition(Coordinates) + GameState.StillPieceZ);   
+            }
+            else if (Piece.Equipment == null) equipment.Equip(Piece);
+            else throw new System.Exception("Equipment was placed on an invalid space");
         }
 
         // Add a terrain
@@ -153,6 +172,15 @@ public class Space
             return true;
         }
 
+        // Remove an equipment
+        if (obj is Equipment)
+        {
+            Equipment equipment = (Equipment)obj;
+            if (Equipment != equipment) return false;
+            Equipment = null;
+            return true;
+        }
+
         // Remove a terrain
         if (obj is Terrain)
         {
@@ -173,6 +201,10 @@ public class Space
         if (Piece != null) Piece.Destroy();
         Piece = null;
 
+        // Clear equipment
+        if (Equipment != null) Equipment.Destroy();
+        Equipment = null;
+
         // Clear terrain
         IList<Terrain> terrainToClear = new List<Terrain>(Terrain);
         foreach (Terrain terrain in terrainToClear) terrain.Destroy();
@@ -181,13 +213,14 @@ public class Space
 
     /// <summary>Checks if this space is empty</summary>
     /// <returns>True if this space is empty</returns>
-    public bool IsEmpty() => Piece == null && Terrain.Count < 1;
+    public bool IsEmpty() => Piece == null && Equipment == null && Terrain.Count < 1;
 
     /// <summary>Checks if this space is enterable</summary>
     /// <returns>True if this space is enterable</returns>
     public bool IsEnterable(ChessObject obj)
     {
-        if (Piece != null) return false;
+        if (Piece != null && obj is Equipment && Piece.Equipment == null) return true;
+        if (Piece != null || Equipment != null) return false;
         foreach (Terrain terrain in Terrain)
             if (!terrain.IsEnterable(obj)) return false;
         return true;

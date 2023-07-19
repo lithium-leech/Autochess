@@ -9,19 +9,19 @@ public class MinePower : Power
 
     public override void Activate()
     {
-        // Create two new walls
+        // Create a mine
         if (IsPlayer) Game.PlayerObjects.Add(AssetGroup.Object.Mine);
         else Game.EnemyObjects.Add(AssetGroup.Object.Mine);
 
         // Add this power to the accumulated powers list
         if (IsPlayer) Game.PlayerPowers.Add(this);
         else Game.EnemyPowers.Add(this);
-        WarpTo(new Vector3(100, 100, 100));
+        WarpTo(GameState.ShadowZone);
     }
     
     public override void Deactivate()
     {
-        // Take away two walls
+        // Take away a mine
         if (IsPlayer) Game.PlayerObjects.Remove(AssetGroup.Object.Mine);
         else Game.EnemyObjects.Remove(AssetGroup.Object.Mine);
 

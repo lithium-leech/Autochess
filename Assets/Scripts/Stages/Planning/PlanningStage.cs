@@ -46,7 +46,7 @@ public class PlanningStage : IStage
     {
         // Get the current mouse position
         Vector3 position = GameState.Camera.ScreenToWorldPoint(Input.mousePosition);
-        position.z = GameState.PieceZBottom.z;
+        position.z = GameState.StillPieceZ.z;
 
         // Check if the position is inside a board
         Board board = null;

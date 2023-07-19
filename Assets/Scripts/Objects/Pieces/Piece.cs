@@ -13,6 +13,9 @@ public abstract class Piece : ChessObject
     /// <summary>The kind of piece this is</summary>
     public abstract AssetGroup.Piece Kind { get; }
 
+    /// <summary>The equipment this piece is wearing</summary>
+    public Equipment Equipment { get; set; }
+
     /// <summary>A captured piece waiting to be destroyed</summary>
     public Piece Captured { get; set; }
 
@@ -39,15 +42,15 @@ public abstract class Piece : ChessObject
             LerpIncrement = Mathf.Clamp01(LerpIncrement + (Time.deltaTime * 2.0f / GameState.TurnPause));
             if (LerpIncrement == 1.0f)
             {
-                transform.position = Path.Last().Position + GameState.PieceZTop;
+                transform.position = Path.Last().Position + GameState.MovingPieceZ;
             }
             else
             {
                 int segment = Mathf.FloorToInt(LerpIncrement * (Path.Count - 1));
                 float segmentIncrement = (LerpIncrement * (Path.Count - 1)) - segment;
-                transform.position = Vector3.Lerp(Path[segment].Position + GameState.PieceZTop, Path[segment+1].Position + GameState.PieceZTop, segmentIncrement);
+                transform.position = Vector3.Lerp(Path[segment].Position + GameState.MovingPieceZ, Path[segment+1].Position + GameState.MovingPieceZ, segmentIncrement);
             }
-            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.PieceZTop) < 0.001f) IsDoneMoving = true;
+            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.MovingPieceZ) < 0.001f) IsDoneMoving = true;
         }
 
         // Finish moving once the move is done
@@ -60,7 +63,7 @@ public abstract class Piece : ChessObject
             if (Captured != null) Captured.Destroy();
 
             // Move back to the stationary layer
-            transform.position = Board.ToPosition(Space.Coordinates) + GameState.PieceZBottom;
+            transform.position = Board.ToPosition(Space.Coordinates) + GameState.StillPieceZ;
 
             // Transform if possible
             if (Transform != AssetGroup.Piece.None)
@@ -78,10 +81,11 @@ public abstract class Piece : ChessObject
     {
         if (Board != null)
         {
-            Space.RemoveObject(this);
+            if (Space != null) Space.RemoveObject(this);
             if (IsPlayer) Board.PlayerPieces.Remove(this);
             else Board.EnemyPieces.Remove(this);
         }
+        if (Equipment != null) Equipment.Destroy();
         GameObject.Destroy(gameObject);
     }
 
