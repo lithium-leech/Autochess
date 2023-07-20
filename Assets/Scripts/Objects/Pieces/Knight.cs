@@ -33,7 +33,7 @@ public class Knight : Piece
             Space space = option.Last();
             if (space != null)
             {
-                if (space.HasEnemy(IsPlayer)) possibleCaptures.Add(option);
+                if (space.HasCapturable(this)) possibleCaptures.Add(option);
                 else if (space.IsEnterable(this)) possibleMoves.Add(option);
             }
         }

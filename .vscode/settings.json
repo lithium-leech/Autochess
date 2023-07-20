@@ -56,6 +56,7 @@
         "Addressables",
         "Behaviour",
         "Blit",
+        "capturable",
         "Grabable",
         "highscore",
         "Lerp",

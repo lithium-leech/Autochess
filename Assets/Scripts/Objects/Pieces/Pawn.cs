@@ -20,14 +20,14 @@ public class Pawn : Piece
         Space rightAttack = GetRightAttackSpace();
 
         // Capture a piece if possible
-        if ((leftAttack != null && leftAttack.HasEnemy(IsPlayer)) && (rightAttack != null && rightAttack.HasEnemy(IsPlayer)))
+        if ((leftAttack != null && leftAttack.HasCapturable(this)) && (rightAttack != null && rightAttack.HasCapturable(this)))
         {
             // Choose randomly if both options are available
             if (Random.Range(0, 2) == 1) path = new List<Space>() { Space, leftAttack };
             else path = new List<Space>() { Space, rightAttack };
         }
-        else if (leftAttack != null && leftAttack.HasEnemy(IsPlayer)) path = new List<Space>() { Space, leftAttack };
-        else if (rightAttack != null && rightAttack.HasEnemy(IsPlayer)) path = new List<Space>() { Space, rightAttack };
+        else if (leftAttack != null && leftAttack.HasCapturable(this)) path = new List<Space>() { Space, leftAttack };
+        else if (rightAttack != null && rightAttack.HasCapturable(this)) path = new List<Space>() { Space, rightAttack };
         else
         {
             // Otherwise move if possible

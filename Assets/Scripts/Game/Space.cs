@@ -254,6 +254,15 @@ public class Space
         else return true;
     }
 
+    /// <summary>Checks if this space has a capturable piece</summary>
+    /// <param name="player">True if non-player pieces are enemies</param>
+    /// <returns>True if this space has a capturable piece</returns>
+    public bool HasCapturable(Piece piece)
+    {
+        if (Piece == null) return false;
+        else return Piece.IsCapturable(piece);
+    }
+
     /// <summary>Checks if this space is in the player zone</summary>
     /// <returns>True if this space is in the player zone</returns>
     public bool InPlayerZone() => Y < Board.PlayerRows;

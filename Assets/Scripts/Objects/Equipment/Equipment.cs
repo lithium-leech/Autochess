@@ -13,7 +13,10 @@ public abstract class Equipment : ChessObject
     /// <summary>The piece this is equipped to</summary>
     public Piece Piece { get; set; }
 
-    public override void Update() { }
+    /// <summary>Checks if this equipment is protecting it's wearer from an attacking piece</summary>
+    /// <param name="piece">The attacking piece</param>
+    /// <returns>True if this equipment is protecting it's wearer</returns>
+    public virtual bool IsProtected(Piece piece) => false;
 
     public override void Destroy()
     {
@@ -39,13 +42,7 @@ public abstract class Equipment : ChessObject
         SpriteRenderer pieceRender = Piece.GetComponent<SpriteRenderer>();
         IEnumerable<Sprite> sprites = new List<Sprite>() { pieceRender.sprite, EquippedSprite};
         pieceRender.sprite = CreateMergedSprite(sprites);;
-
-        // Apply the equipment's powers
-        EquipPowers();
     }
-
-    /// <summary>Activates the powers of this equipment for the attached piece</summary>
-    protected abstract void EquipPowers();
 
     /// <summary>Creates a new sprite by layering the images of a set of sprites over one another</summary>
     /// <param name="sprites">The set of sprites to merge</param>

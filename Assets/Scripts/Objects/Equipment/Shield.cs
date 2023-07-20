@@ -3,5 +3,25 @@
 /// </summary>
 public class Shield : Equipment
 {
-    protected override void EquipPowers() { }
+    private int TurnsOfProtection = 3;
+    private bool TurnStarted = false;
+
+    public override void Update()
+    {
+        if (TurnsOfProtection > 0 && Piece != null) 
+        {
+            if (!TurnStarted && Piece.IsMoving)
+            {
+                TurnStarted = true;
+            }
+            else if (TurnStarted && !Piece.IsMoving)
+            {
+                TurnStarted = false;
+                TurnsOfProtection--;
+            }
+        }
+    }
+
+    public override bool IsProtected(Piece piece) => TurnsOfProtection > 0;
 }
+ 

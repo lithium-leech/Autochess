@@ -19,7 +19,7 @@ public abstract class Piece : ChessObject
     /// <summary>A captured piece waiting to be destroyed</summary>
     public Piece Captured { get; set; }
 
-    /// <summary>True if the object is moving towards a target location</summary>
+    /// <summary>True if the piece is moving towards a target location</summary>
     public bool IsMoving { get; private set; } = false;
 
     /// <summary>True in the frame immediately following a finished move</summary>
@@ -77,6 +77,13 @@ public abstract class Piece : ChessObject
 
     public override bool IsPlaceable(Space space) => space.InPlayerZone();
 
+    public bool IsCapturable(Piece piece)
+    {
+        if (piece.IsPlayer == IsPlayer) return false;
+        if (Equipment != null && Equipment.IsProtected(piece)) return false;
+        return true;
+    }
+
     public override void Destroy()
     {
         if (Board != null)
@@ -106,7 +113,7 @@ public abstract class Piece : ChessObject
             if (!Board.OnBoard(pointer)) break;
             Space space = Board.GetSpace(pointer);
             path.Add(space);
-            if (space.HasEnemy(IsPlayer)) { possibleCaptures.Add(new List<Space>(path)); break; }
+            if (space.HasCapturable(this)) { possibleCaptures.Add(new List<Space>(path)); break; }
             if (!space.IsEnterable(this)) break;
             possibleMoves.Add(new List<Space>(path));
         }
