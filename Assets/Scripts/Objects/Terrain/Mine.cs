@@ -5,6 +5,7 @@ public class Mine : Terrain
 {
     public override AssetGroup.Object Kind => AssetGroup.Object.Mine;
 
+    /// <summary>A piece that moves onto the mine becomes the victim</summary>
     private Piece Victim { get; set; }
 
     public override void Update()
@@ -20,11 +21,7 @@ public class Mine : Terrain
         }
     }
 
-    public override bool IsPlaceable(Space space) => space.InPlayerZone() || space.InNeutralZone();
-
     public override bool IsEnterable(ChessObject obj) => obj.IsPlayer != IsPlayer;
 
     public override void OnEnter(Piece piece) => Victim = piece;
-
-    public override void OnExit(Piece piece) { }
 }

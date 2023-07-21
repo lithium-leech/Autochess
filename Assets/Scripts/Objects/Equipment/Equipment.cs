@@ -18,13 +18,6 @@ public abstract class Equipment : ChessObject
     /// <returns>True if this equipment is protecting it's wearer</returns>
     public virtual bool IsProtected(Piece piece) => false;
 
-    public override void Destroy()
-    {
-        if (Space != null) 
-            Space.RemoveObject(this);
-        GameObject.Destroy(gameObject);
-    }
-
     public override bool IsPlaceable(Space space) => space.HasAlly(IsPlayer);
 
     /// <summary>Equips this to a given piece</summary>

@@ -142,6 +142,7 @@ public class CombatStage : IStage
     private void RunRound(List<Piece> pieces)
     {
         foreach (Piece piece in pieces) piece.TakeTurn();
+        Game.OnRoundFinish.Invoke();
     }
 
     /// <summary>Displays the concede menu to the player</summary>

@@ -75,8 +75,6 @@ public abstract class Piece : ChessObject
         }
     }
 
-    public override bool IsPlaceable(Space space) => space.InPlayerZone();
-
     public bool IsCapturable(Piece piece)
     {
         if (piece.IsPlayer == IsPlayer) return false;
@@ -121,7 +119,7 @@ public abstract class Piece : ChessObject
 
     /// <summary>The piece carries out its turn</summary>
     /// <param name="path">The path to move through</param>
-    public void EnactTurn(IList<Space> path)
+    protected void EnactTurn(IList<Space> path)
     {
         Path = path;
         Space destination = path.Last();

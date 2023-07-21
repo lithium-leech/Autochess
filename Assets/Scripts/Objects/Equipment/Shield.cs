@@ -3,25 +3,31 @@
 /// </summary>
 public class Shield : Equipment
 {
-    private int TurnsOfProtection = 3;
-    private bool TurnStarted = false;
+    /// <summary>The number of remaining turns that the shield is effective</summary>
+    private int RoundsOfProtection = 6;
 
-    public override void Update()
+    public override void Initialize(Game game, bool player, bool white)
     {
-        if (TurnsOfProtection > 0 && Piece != null) 
-        {
-            if (!TurnStarted && Piece.IsMoving)
-            {
-                TurnStarted = true;
-            }
-            else if (TurnStarted && !Piece.IsMoving)
-            {
-                TurnStarted = false;
-                TurnsOfProtection--;
-            }
-        }
+        base.Initialize(game, player, white);
+        Game.OnRoundFinish.AddListener(LowerProtection);
     }
 
-    public override bool IsProtected(Piece piece) => TurnsOfProtection > 0;
+    public override void Destroy()
+    {
+        Game.OnRoundFinish.RemoveListener(LowerProtection);
+        base.Destroy();
+    }
+
+    public override bool IsProtected(Piece piece) => true;
+
+    /// <summary>Lowers the remaining rounds of protection by one</summary>
+    private void LowerProtection()
+    {
+        if (RoundsOfProtection > 0)
+        {
+            RoundsOfProtection--;
+            if (RoundsOfProtection < 1) Destroy();
+        }
+    }
 }
  

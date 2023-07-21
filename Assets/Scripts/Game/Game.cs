@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.SmartFormat.Extensions;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
@@ -68,6 +69,9 @@ public class Game : MonoBehaviour
 
     /// <summary>The board for discarding unwanted pieces</summary>
     public Board TrashBoard { get; set; }
+
+    /// Subscribable events
+    public UnityEvent OnRoundFinish;
 
     private void Start()
     {

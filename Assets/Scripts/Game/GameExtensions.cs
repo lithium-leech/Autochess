@@ -16,9 +16,7 @@ public static class GameExtensions
         AssetGroup.Group groupKey = white ? AssetGroup.Group.WhitePiece : AssetGroup.Group.BlackPiece;
         GameObject obj = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         Piece piece = obj.GetComponent<Piece>();
-        piece.IsPlayer = player;
-        piece.IsWhite = white;
-        piece.IsGrabable = player;
+        piece.Initialize(game, player, white);
         return piece;
     }
 
@@ -33,9 +31,7 @@ public static class GameExtensions
         AssetGroup.Group groupKey = white ? AssetGroup.Group.WhiteObject : AssetGroup.Group.BlackObject;
         GameObject obj = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
         ChessObject chessObject = obj.GetComponent<ChessObject>();
-        chessObject.IsPlayer = player;
-        chessObject.IsWhite = white;
-        chessObject.IsGrabable = player;
+        chessObject.Initialize(game, player, white);
         return chessObject;
     }
 
