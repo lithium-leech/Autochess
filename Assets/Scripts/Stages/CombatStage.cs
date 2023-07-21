@@ -26,6 +26,9 @@ public class CombatStage : IStage
     /// <summary>True until the first turn has been taken</summary>
     private bool IsFirstTurn { get; set; } = true;
 
+    /// <summary>True while pieces are moving</summary>
+    private bool ArePiecesMoving { get; set; } = false;
+
     /// <summary>The number of rounds until the player should be prompted to concede</summary>
     private int RoundsToConcede { get; set; }
 
@@ -65,17 +68,14 @@ public class CombatStage : IStage
     {
         // Pause between turns
         TimeWaited += Time.deltaTime;
-        if (TimeWaited < GameState.TurnPause) return;
-        if (Game.GameBoard.ArePiecesMoving()) return;
-        
-        // Start the fight music before the first move is taken
-        if (IsFirstTurn)
+        if (TimeWaited < (GameState.TurnPause / 2)) return;
+        else if (ArePiecesMoving && Game.GameBoard.ArePiecesMoving()) return;
+        else if (ArePiecesMoving)
         {
-            IsFirstTurn = false;
-            GameState.MusicBox.PlayMusic(SongName.Battle);
-            TimeWaited = GameState.TurnPause - 0.15f;
-            return;
+            ArePiecesMoving = false;
+            Game.OnMoveFinish.Invoke();
         }
+        if (TimeWaited < GameState.TurnPause) return;
 
         // Check if the battle is over
         if (Game.GameBoard.PlayerPieces.Count < 1)
@@ -89,6 +89,13 @@ public class CombatStage : IStage
             // The player won if there are no enemy pieces left
             Game.NextStage = new UpgradeStage(Game);
             return;
+        }
+
+        // Start the fight music on the first turn
+        if (IsFirstTurn)
+        {
+            IsFirstTurn = false;
+            GameState.MusicBox.PlayMusic(SongName.Battle);
         }
         
         // Move the current player's pieces
@@ -108,6 +115,7 @@ public class CombatStage : IStage
         RunRound(pieces);
         if (GameState.IsActiveRound) RoundsStatic = 0;
         else RoundsStatic++;
+        ArePiecesMoving = true;
 
         // Log the moves
         StringBuilder moves = new StringBuilder("(");

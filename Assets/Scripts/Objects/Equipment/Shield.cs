@@ -15,6 +15,7 @@ public class Shield : Equipment
     public override void Destroy()
     {
         Game.OnRoundFinish.RemoveListener(LowerProtection);
+        Game.OnMoveFinish.RemoveListener(Destroy);
         base.Destroy();
     }
 
@@ -26,7 +27,7 @@ public class Shield : Equipment
         if (RoundsOfProtection > 0)
         {
             RoundsOfProtection--;
-            if (RoundsOfProtection < 1) Destroy();
+            if (RoundsOfProtection < 1) Game.OnMoveFinish.AddListener(Destroy);
         }
     }
 }

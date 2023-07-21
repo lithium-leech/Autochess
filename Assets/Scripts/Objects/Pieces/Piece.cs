@@ -22,9 +22,6 @@ public abstract class Piece : ChessObject
     /// <summary>True if the piece is moving towards a target location</summary>
     public bool IsMoving { get; private set; } = false;
 
-    /// <summary>True in the frame immediately following a finished move</summary>
-    private bool IsDoneMoving { get; set; } = false;
-
     /// <summary>A sequence of spaces to move through</summary>
     private IList<Space> Path { get; set; }
 
@@ -50,36 +47,8 @@ public abstract class Piece : ChessObject
                 float segmentIncrement = (LerpIncrement * (Path.Count - 1)) - segment;
                 transform.position = Vector3.Lerp(Path[segment].Position + GameState.MovingPieceZ, Path[segment+1].Position + GameState.MovingPieceZ, segmentIncrement);
             }
-            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.MovingPieceZ) < 0.001f) IsDoneMoving = true;
+            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.MovingPieceZ) < 0.001f) IsMoving = false;
         }
-
-        // Finish moving once the move is done
-        if (IsDoneMoving)
-        {
-            IsMoving = false;
-            IsDoneMoving = false;
-
-            // Destroy the captured piece
-            if (Captured != null) Captured.Destroy();
-
-            // Move back to the stationary layer
-            transform.position = Board.ToPosition(Space.Coordinates) + GameState.StillPieceZ;
-
-            // Transform if possible
-            if (Transform != AssetGroup.Piece.None)
-            {
-                Space.Exit(this);
-                Board.AddPiece(Transform, IsPlayer, IsWhite, Space);
-                Destroy();
-            }
-        }
-    }
-
-    public bool IsCapturable(Piece piece)
-    {
-        if (piece.IsPlayer == IsPlayer) return false;
-        if (Equipment != null && Equipment.IsProtected(piece)) return false;
-        return true;
     }
 
     public override void Destroy()
@@ -92,6 +61,16 @@ public abstract class Piece : ChessObject
         }
         if (Equipment != null) Equipment.Destroy();
         GameObject.Destroy(gameObject);
+    }
+
+    /// <summary>Checks if this can be captured by a given piece</summary>
+    /// <param name="piece">The piece attempting to capture this</param>
+    /// <returns>True if this can be captured by the given piece</returns>
+    public bool IsCapturable(Piece piece)
+    {
+        if (piece.IsPlayer == IsPlayer) return false;
+        if (Equipment != null && Equipment.IsProtected(piece)) return false;
+        return true;
     }
 
     /// <summary>Searches for possible choices using the given direction increments</summary>
@@ -131,5 +110,27 @@ public abstract class Piece : ChessObject
             Space.Exit(this);
             destination.Enter(this);
         }
+        Game.OnMoveFinish.AddListener(FinishMoving);
+    }
+
+    /// <summary>Carries out final actions once this piece is done moving</summary>
+    private void FinishMoving()
+    {
+        // Destroy the captured piece
+        if (Captured != null) Captured.Destroy();
+
+        // Move back to the stationary layer
+        transform.position = Board.ToPosition(Space.Coordinates) + GameState.StillPieceZ;
+
+        // Transform if possible
+        if (Transform != AssetGroup.Piece.None)
+        {
+            Space.Exit(this);
+            Board.AddPiece(Transform, IsPlayer, IsWhite, Space);
+            Destroy();
+        }
+
+        // Remove the listener for this move
+        Game.OnMoveFinish.RemoveListener(FinishMoving);
     }
 }

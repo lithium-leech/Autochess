@@ -72,6 +72,7 @@ public class Game : MonoBehaviour
 
     /// Subscribable events
     public UnityEvent OnRoundFinish;
+    public UnityEvent OnMoveFinish;
 
     private void Start()
     {
