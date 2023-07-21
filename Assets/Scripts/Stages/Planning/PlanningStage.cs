@@ -27,8 +27,8 @@ public class PlanningStage : IStage
         // Set up the boards
         Game.GameBoard.Clear();
         Game.SideBoard.Clear();
-        PlacePieces();
-        PlaceObjects();
+        SetUpPlayer();
+        PlacementAI.SetUpEnemy(Game);
 
         // Add highlights around spaces that the player can put pieces
         List<GameObject> highlights = new List<GameObject>();
@@ -129,13 +129,9 @@ public class PlanningStage : IStage
         Game.NextStage = new CombatStage(Game);
     }
 
-    /// <summary>Sets up the pieces on the game board and side board</summary>
-    private void PlacePieces()
+    /// <summary>Sets up the player's pieces on the game board and side board</summary>
+    private void SetUpPlayer()
     {
-        // Place the enemy's pieces on the game board
-        foreach (AssetGroup.Piece pieceType in Game.EnemyPieces)
-            Game.GameBoard.AddPiece(pieceType, false, !GameState.IsPlayerWhite, GetRandomEmptySpace());
-
         // Place the player's pieces on the game board
         foreach (PiecePositionRecord record in Game.PlayerGameBoard)
         {
@@ -157,14 +153,6 @@ public class PlanningStage : IStage
             else
                 Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space);
         }
-    }
-
-    /// <summary>Sets up the pieces on the game board and side board</summary>
-    private void PlaceObjects()
-    {
-        // Place the enemy's objects on the game board
-        foreach (AssetGroup.Object objectType in Game.EnemyObjects)
-            Game.GameBoard.AddObject(objectType, false, !GameState.IsPlayerWhite, GetRandomEmptySpace());
 
         // Place the player's objects on the side board
         foreach (AssetGroup.Object objectType in Game.PlayerObjects)
@@ -227,20 +215,5 @@ public class PlanningStage : IStage
         highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopLeft, player, board, new Vector2Int(left, top)));
         for (int i = left + 1; i < right; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Top, player, board, new Vector2Int(i, top)));
         highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopRight, player, board, new Vector2Int(right, top)));
-    }
-
-    /// <summary>Gets a random empty space on the enemy's side of the game board</summary>
-    /// <returns>An empty space on the game board</returns>
-    private Space GetRandomEmptySpace()
-    {
-        IList<Space> emptySpaces = new List<Space>();
-        for (int x = 0; x < Game.GameBoard.Width; x++)
-            for (int y = Game.GameBoard.Height - Game.GameBoard.EnemyRows; y < Game.GameBoard.Height; y++)
-            {
-                Space space = Game.GameBoard.GetSpace(new Vector2Int(x, y));
-                if (space.IsEmpty()) emptySpaces.Add(space);
-            }
-        if (emptySpaces.Count < 1) return null;
-        else return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
     }
 }
