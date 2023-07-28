@@ -17,7 +17,29 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 6e99863eb310a224d91e6503d6bb098b, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 23022579995508736
+    m_Localized: Take the first turn in every fight.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022604863537152
+    m_Localized: Gain an extra row for placing pieces.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022632105541632
+    m_Localized: Can be placed in the neutral zone. Pieces explode when they move
+      onto a land mine.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024896870318080
+    m_Localized: Can be placed in the neutral zone. Pieces cannot move through walls.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024900083154944
+    m_Localized: Can be equipped to a piece. A shielded piece cannot be captured
+      in the first three turns.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

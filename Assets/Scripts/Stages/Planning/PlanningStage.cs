@@ -135,8 +135,9 @@ public class PlanningStage : IStage
         // Place the player's pieces on the game board
         foreach (PiecePositionRecord record in Game.PlayerGameBoard)
         {
-            if (record.Space == null)
+            if (record.Space == null || !record.Space.InPlayerZone())
             {
+                record.Space = null;
                 if (Game.PlayerSideBoard.Count < 24) Game.PlayerSideBoard.Add(record);
             }
             else
@@ -148,7 +149,7 @@ public class PlanningStage : IStage
         // Place the player's pieces on the side board
         foreach (PiecePositionRecord record in Game.PlayerSideBoard)
         {
-            if (record.Space == null)
+            if (record.Space == null || !record.Space.IsEmpty())
                 Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite);
             else
                 Game.SideBoard.AddPiece(record.Kind, true, GameState.IsPlayerWhite, record.Space);

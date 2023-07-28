@@ -17,7 +17,27 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: ebf4d51ff22f2c9468f46d3687247696, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 23022854009389056
+    m_Localized: First
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022860078546944
+    m_Localized: Extra Row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022863492710400
+    m_Localized: Land Mine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024653231587328
+    m_Localized: Shield
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024649800646656
+    m_Localized: Walls
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

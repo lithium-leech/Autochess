@@ -14,7 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: PowerInfo
   m_TableCollectionNameGuidString: 6e99863eb310a224d91e6503d6bb098b
-  m_Entries: []
+  m_Entries:
+  - m_Id: 23022579995508736
+    m_Key: First
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022604863537152
+    m_Key: Row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23022632105541632
+    m_Key: Mine
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024896870318080
+    m_Key: Wall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23024900083154944
+    m_Key: Shield
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

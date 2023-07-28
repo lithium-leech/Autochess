@@ -52,7 +52,7 @@ public class UpgradeStage : IStage
             Game.NextStage = new PlanningStage(Game);
             // TODO: MAPS
         }
-        else if (GameState.Level % 2 == 0)
+        else if (GameState.Level % 5 == 0)
         {
             // Award a new power
             Choices = new PowerChoices(Game);

@@ -155,29 +155,86 @@ public class PowerChoices : UpgradeChoices
         IList<Power> theirPowers = player ? Game.EnemyPowers : Game.PlayerPowers;
 
         // Roll to remove a power
-        if (theirPowers.Count > 0 && Random.Range(1,6) == 5)
-        {
-            int removeIndex = Random.Range(0, theirPowers.Count);
-            return new PowerChoice(theirPowers[removeIndex].Kind, true);
-        }
+        if (theirPowers.Count > 0 && Random.Range(1,6) == 5) return RemoveRandomPower(theirPowers);
 
-        // Determine the available powers
-        IList<AssetGroup.Power> availablePowers = new List<AssetGroup.Power>();
-        
-        // Only offer First to the black player
-        if (player ^ GameState.IsPlayerWhite) availablePowers.Add(AssetGroup.Power.First);
+        // Get the available powers
+        IList<AssetGroup.Power> availablePowers = GetAvailablePowers(player, myPowers);
 
-        // Only offer Row if there are available rows
-        if (Game.GameBoard.PlayerRows + Game.GameBoard.EnemyRows < Game.GameBoard.Height) availablePowers.Add(AssetGroup.Power.Row);
-        
-        // Offer the remaining powers
-        availablePowers.Add(AssetGroup.Power.Mine);
-        availablePowers.Add(AssetGroup.Power.Wall);
-        availablePowers.Add(AssetGroup.Power.Shield);
+        // If there are no available powers, force a power removal
+        if (availablePowers.Count() < 1) return RemoveRandomPower(theirPowers);
 
-        // Randomly return one of the available powers
+        // Randomly return one available powers
         int randomIndex = Random.Range(0, availablePowers.Count);
         return new PowerChoice(availablePowers[randomIndex], false);
+    }
+
+    /// <summary>Gets all of the powers that can be offered</summary>
+    /// <param name="player">True if these are powers for the player</param>
+    /// <param name="myPowers">The powers currently possessed</param>
+    /// <returns>A list of available powers</returns>
+    private IList<AssetGroup.Power> GetAvailablePowers(bool player, IEnumerable<Power> myPowers)
+    {
+        // Create an empty collection of powers
+        IList<AssetGroup.Power> powers = new List<AssetGroup.Power>();
+        
+        // Only offer First to the black player
+        if (player ^ GameState.IsPlayerWhite) powers.Add(AssetGroup.Power.First);
+
+        // Only offer Row if there are available rows
+        if (Game.GameBoard.PlayerRows + Game.GameBoard.EnemyRows < Game.GameBoard.Height - 2) powers.Add(AssetGroup.Power.Row);
+        
+        // Only offer up to 8 obstacles
+        int obstacleCount = 0;
+        foreach (Power power in myPowers)
+        {
+            switch(power.Kind)
+            {
+                case AssetGroup.Power.Mine:
+                    obstacleCount++;
+                    break;
+                case AssetGroup.Power.Wall:
+                    obstacleCount += 2;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (obstacleCount < 8)
+        {
+            powers.Add(AssetGroup.Power.Mine);
+            powers.Add(AssetGroup.Power.Wall);
+        }
+
+        // Only offer up to 8 equipment
+        int equipmentCount = 0;
+        foreach (Power power in myPowers)
+        {
+            switch(power.Kind)
+            {
+                case AssetGroup.Power.Shield:
+                    equipmentCount++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (equipmentCount < 8)
+        {
+            powers.Add(AssetGroup.Power.Shield);
+        }
+
+        // Return the final collection
+        return powers;
+    }
+
+    /// <summary>Gets a random power to be removed</summary>
+    /// <param name="powers">A collection of possible powers to remove</param>
+    /// <returns>A PowerChoice which removes a power</returns>
+    private PowerChoice RemoveRandomPower(IList<Power> powers)
+    {
+        int removeIndex = Random.Range(0, powers.Count);
+        AssetGroup.Power power = powers[removeIndex].Kind;
+        return new PowerChoice(power, true);
     }
 
     /// <summary>A single selectable choice</summary>
