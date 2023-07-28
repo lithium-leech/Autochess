@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Rook : Piece
 {
-    public override AssetGroup.Piece Kind { get { return AssetGroup.Piece.Rook; } }
+    public override AssetGroup.Piece Kind => AssetGroup.Piece.Rook;
     
     public override void TakeTurn()
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Localization;
 
 /// <summary>
@@ -90,6 +91,10 @@ public class PieceChoices : UpgradeChoices
         AssetGroup.Piece enemyPiece;
         playerPiece = PlayerPieces[Game.ChoiceButtons.SelectedIndex];
         enemyPiece = EnemyPieces[Game.ChoiceButtons.SelectedIndex];
+
+        // Log the selected pieces
+        Debug.Log($"Enemy Upgrade: {enemyPiece}");
+        Debug.Log($"Player Upgrade: {playerPiece}");
 
         // Add the enemy piece, removing a lower value piece if necessary
         if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);

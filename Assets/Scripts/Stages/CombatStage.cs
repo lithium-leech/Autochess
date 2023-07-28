@@ -120,7 +120,11 @@ public class CombatStage : IStage
         // Log the moves
         StringBuilder moves = new StringBuilder("(");
         foreach (Piece piece in pieces)
-            moves.Append($" {piece.Kind}[{piece.Space.X},{piece.Space.Y}]");
+        {
+            string equipment = "";
+            if (piece.Equipment != null) equipment = $"({piece.Equipment.Kind})";
+            moves.Append($" {piece.Kind}{equipment}[{piece.Space.X},{piece.Space.Y}]");
+        }
         moves.Append(" )");
         Debug.Log($"{actor} Moves: {moves}");
 

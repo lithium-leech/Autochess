@@ -3,6 +3,8 @@
 /// </summary>
 public class Shield : Equipment
 {
+    public override AssetGroup.Object Kind => AssetGroup.Object.Shield;
+
     /// <summary>The number of remaining turns that the shield is effective</summary>
     private int RoundsOfProtection = 6;
 

@@ -285,11 +285,19 @@ public class Space
     /// <returns>A string with notable information, or an empty string if there is nothing notable</returns>
     public string LogDisplay()
     {
+        string str = "";
         if (Piece != null)
         {
             string controller = Piece.IsPlayer ? "Player" : "Enemy";
-            return $" {controller}{Piece.Kind}[{X},{Y}]";
+            string equipment = "";
+            if (Piece.Equipment != null) equipment = $"({Piece.Equipment.Kind})";
+            str += $" {controller}{Piece.Kind}{equipment}[{X},{Y}]";
         }
-        else return null;
+        foreach (Terrain terrain in Terrain)
+        {
+            string controller = terrain.IsPlayer ? "Player" : "Enemy";
+            str += $" {controller}{terrain.Kind}[{X},{Y}]";
+        }
+        return str;
     }
 }

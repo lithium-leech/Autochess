@@ -1,3 +1,4 @@
+using UnityEngine;
 /// <summary>
 /// A type of terrain that explodes when touched
 /// </summary>
@@ -14,6 +15,8 @@ public class Mine : Terrain
     {
         Victim = piece;
         Game.OnMoveFinish.AddListener(Explode);
+        string controller = piece.IsPlayer ? "Player" : "Enemy";
+        Debug.Log($"{controller}{piece.Kind} activated a land mine at [{Space.X},{Space.Y}]");
     }
 
     /// <summary>The mine explodes and destroys the piece that moved onto it</summary>

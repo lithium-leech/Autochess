@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Pawn : Piece
 {
-    public override AssetGroup.Piece Kind { get { return AssetGroup.Piece.Pawn; } }
+    public override AssetGroup.Piece Kind => AssetGroup.Piece.Pawn;
     
     public override void TakeTurn()
     {

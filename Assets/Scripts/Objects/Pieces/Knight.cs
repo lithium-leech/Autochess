@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Knight : Piece
 {
-    public override AssetGroup.Piece Kind { get { return AssetGroup.Piece.Knight; } }
+    public override AssetGroup.Piece Kind => AssetGroup.Piece.Knight;
 
     public override void TakeTurn()
     {

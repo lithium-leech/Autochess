@@ -7,11 +7,11 @@ using UnityEngine;
 /// </summary>
 public abstract class Piece : ChessObject
 {
-    /// <summary>A piece to transform into</summary>
-    public AssetGroup.Piece Transform { get; set; } = AssetGroup.Piece.None;
-
     /// <summary>The kind of piece this is</summary>
     public abstract AssetGroup.Piece Kind { get; }
+
+    /// <summary>A piece to transform into</summary>
+    public AssetGroup.Piece Transform { get; set; } = AssetGroup.Piece.None;
 
     /// <summary>The equipment this piece is wearing</summary>
     public Equipment Equipment { get; set; }

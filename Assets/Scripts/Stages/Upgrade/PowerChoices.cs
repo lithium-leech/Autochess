@@ -90,6 +90,10 @@ public class PowerChoices : UpgradeChoices
         PowerChoice playerChoice = PlayerPowers[Game.ChoiceButtons.SelectedIndex];
         PowerChoice enemyChoice = EnemyPowers[Game.ChoiceButtons.SelectedIndex];
 
+        // Log the selected pieces
+        Debug.Log($"Enemy Upgrade: {enemyChoice}");
+        Debug.Log($"Player Upgrade: {playerChoice}");
+
         // Apply the player's new power
         if (playerChoice.IsRemove)
         {
@@ -254,5 +258,7 @@ public class PowerChoices : UpgradeChoices
 
         /// <summary>True if this is a power removal</summary>
         public bool IsRemove { get; }
+
+        public override string ToString() => IsRemove ? $"Remove{Kind}" : $"{Kind}";
     }
 }
