@@ -63,5 +63,6 @@
         "Mathf",
         "UGUI",
         "Unapplies"
-    ]
+    ],
+    "dotnet.defaultSolution": "Autochess.sln"
 }
