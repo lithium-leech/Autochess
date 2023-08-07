@@ -15,8 +15,8 @@ public static class SaveSystem
     public static void Save(SaveData data)
     {
         Debug.Log("Saving data...");
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(FilePath, FileMode.Create);
+        BinaryFormatter formatter = new();
+        FileStream stream = new(FilePath, FileMode.Create);
         formatter.Serialize(stream, data);
         stream.Close();
         Debug.Log("Finished saving data.");
@@ -31,8 +31,8 @@ public static class SaveSystem
 
         // Load the saved data
         Debug.Log("Loading saved data...");
-        BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(FilePath, FileMode.Open);
+        BinaryFormatter formatter = new();
+        FileStream stream = new(FilePath, FileMode.Open);
         SaveData data = formatter.Deserialize(stream) as SaveData;
         stream.Close();
         Debug.Log("Finished loading saved data.");

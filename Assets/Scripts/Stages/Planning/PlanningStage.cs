@@ -31,7 +31,7 @@ public class PlanningStage : IStage
         PlacementAI.SetUpEnemy(Game);
 
         // Add highlights around spaces that the player can put pieces
-        List<GameObject> highlights = new List<GameObject>();
+        List<GameObject> highlights = new();
         highlights.AddRange(AddHighlights(Game.GameBoard));
         highlights.AddRange(AddHighlights(Game.SideBoard));
         highlights.AddRange(AddHighlights(Game.TrashBoard));

@@ -46,8 +46,7 @@ public abstract class ChessObject : MonoBehaviour
     /// <summary>Removes this object from the entire game</summary>
     public virtual void Destroy()
     {
-        if (Space != null) 
-            Space.RemoveObject(this);
+        Space?.RemoveObject(this);
         GameObject.Destroy(gameObject);
     }
 

@@ -167,10 +167,10 @@ public class Board
     /// <summary>Gets a board space's coordinates from a given world position</summary>
     /// <param name="position">The world position to get coordinates for</param>
     /// <returns>A board space's coordinates</returns>
-    public Vector2Int ToSpace(Vector3 position) => new Vector2Int((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
+    public Vector2Int ToSpace(Vector3 position) => new((int)Math.Floor(position.x - CornerBL.x), (int)Math.Floor(position.y - CornerBL.y));
 
     /// <summary>Gets the world position for a given board space's coordinates</summary>
     /// <param name="coordinates">The board space's coordinates to get a position for</param>
     /// <returns>A world position (z is 0)</returns>
-    public Vector3 ToPosition(Vector2Int coordinates) => new Vector3(CornerBL.x + coordinates.x + 0.5f, CornerBL.y + coordinates.y + 0.5f, 0.0f);
+    public Vector3 ToPosition(Vector2Int coordinates) => new(CornerBL.x + coordinates.x + 0.5f, CornerBL.y + coordinates.y + 0.5f, 0.0f);
 }

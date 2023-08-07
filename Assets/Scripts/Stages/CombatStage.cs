@@ -47,7 +47,7 @@ public class CombatStage : IStage
         EndConcede();
 
         // Log starting board state
-        StringBuilder positions = new StringBuilder("(");
+        StringBuilder positions = new("(");
         for (int x = 0; x < Game.GameBoard.Width; x++)
         for (int y = 0; y < Game.GameBoard.Height; y++)
         {
@@ -61,8 +61,6 @@ public class CombatStage : IStage
         positions.Append(" )");
         Debug.Log($"Starting Positions: {positions}");
     }
-
-    private string ControlString(Piece piece) => piece.IsPlayer ? "Player" : "Enemy";
 
     public void During()
     {
@@ -118,7 +116,7 @@ public class CombatStage : IStage
         ArePiecesMoving = true;
 
         // Log the moves
-        StringBuilder moves = new StringBuilder("(");
+        StringBuilder moves = new("(");
         foreach (Piece piece in pieces)
         {
             string equipment = "";

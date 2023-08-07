@@ -57,10 +57,12 @@
         "Behaviour",
         "Blit",
         "capturable",
+        "gameplay",
         "Grabable",
         "highscore",
         "Lerp",
         "Mathf",
+        "Prefs",
         "UGUI",
         "Unapplies"
     ],

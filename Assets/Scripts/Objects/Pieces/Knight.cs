@@ -15,15 +15,17 @@ public class Knight : Piece
         IList<Space> path = new List<Space>() { Space };
 
         // Get all the paths this piece can make
-        IList<IList<Space>> allPaths = new List<IList<Space>>();
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(1, 2) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, 1) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, -1) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(1, -2) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(-1, -2) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, -1) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, 1) });
-        allPaths.Add(new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(-1, 2) });
+        IList<IList<Space>> allPaths = new List<IList<Space>>
+        {
+            new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(1, 2) },
+            new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, 1) },
+            new List<Space>() { Space, Space.GetRelativeSpace(1, 0), Space.GetRelativeSpace(2, 0), Space.GetRelativeSpace(2, -1) },
+            new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(1, -2) },
+            new List<Space>() { Space, Space.GetRelativeSpace(0, -1), Space.GetRelativeSpace(0, -2), Space.GetRelativeSpace(-1, -2) },
+            new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, -1) },
+            new List<Space>() { Space, Space.GetRelativeSpace(-1, 0), Space.GetRelativeSpace(-2, 0), Space.GetRelativeSpace(-2, 1) },
+            new List<Space>() { Space, Space.GetRelativeSpace(0, 1), Space.GetRelativeSpace(0, 2), Space.GetRelativeSpace(-1, 2) }
+        };
 
         // Determine which paths are possible
         IList<IList<Space>> possibleMoves = new List<IList<Space>>();

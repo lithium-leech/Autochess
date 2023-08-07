@@ -55,7 +55,7 @@ public abstract class Piece : ChessObject
     {
         if (Board != null)
         {
-            if (Space != null) Space.RemoveObject(this);
+            Space?.RemoveObject(this);
             if (IsPlayer) Board.PlayerPieces.Remove(this);
             else Board.EnemyPieces.Remove(this);
         }

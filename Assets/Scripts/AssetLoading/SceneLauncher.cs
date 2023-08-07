@@ -24,9 +24,11 @@ public class SceneLauncher : MonoBehaviour
     void OnDestroy()
     {
         // Create new save data
-        SaveData saveData = new SaveData();
-        saveData.HighScore = GameState.HighScore;
-        saveData.Volume = GameState.MusicBox.Volume;
+        SaveData saveData = new()
+        {
+            HighScore = GameState.HighScore,
+            Volume = GameState.MusicBox.Volume
+        };
 
         // Write the save data to a file
         SaveSystem.Save(saveData);

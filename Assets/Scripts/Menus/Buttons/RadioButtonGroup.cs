@@ -6,7 +6,7 @@ using UnityEngine;
 public class RadioButtonGroup : MonoBehaviour
 {
     /// Properties to set using Unity interface
-    [SerializeField] public RadioButton[] Buttons;
+    public RadioButton[] Buttons;
     public int SelectedIndex = -1;
 
     private void Awake()
