@@ -11,6 +11,12 @@ namespace AssetGroup
         Knight,
         Pawn,
         Queen,
-        Rook
+        Rook,
+        Private,
+        Sergeant,
+        Lieutenant,
+        Captain,
+        Colonel,
+        General
     }
 }

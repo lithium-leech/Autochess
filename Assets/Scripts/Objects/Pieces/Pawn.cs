@@ -14,7 +14,7 @@ public class Pawn : Piece
         // Assume initially that the piece cannot move
         IList<Space> path = new List<Space>() { Space };
 
-        // Get the possible moves this piece can make
+        // Get the spaces in front of this piece
         Space move = GetMoveSpace();
         Space leftAttack = GetLeftAttackSpace();
         Space rightAttack = GetRightAttackSpace();

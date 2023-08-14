@@ -140,12 +140,12 @@ public class PieceChoices : UpgradeChoices
     {
         return UnityEngine.Random.Range(1, 7) switch
         {
-            1 => AssetGroup.Piece.Pawn,
-            2 => AssetGroup.Piece.Rook,
-            3 => AssetGroup.Piece.Knight,
-            4 => AssetGroup.Piece.Bishop,
-            5 => AssetGroup.Piece.Queen,
-            6 => AssetGroup.Piece.King,
+            1 => AssetGroup.Piece.Private,
+            2 => AssetGroup.Piece.Captain,
+            3 => AssetGroup.Piece.Sergeant,
+            4 => AssetGroup.Piece.Lieutenant,
+            5 => AssetGroup.Piece.Colonel,
+            6 => AssetGroup.Piece.General,
             _ => throw new Exception($"A random selection in PieceChoices was not implemented")
         }; ;
     }
@@ -174,11 +174,17 @@ public class PieceChoices : UpgradeChoices
         return kind switch
         {
             AssetGroup.Piece.Pawn => 0,
-            AssetGroup.Piece.Knight => 1,
-            AssetGroup.Piece.King => 2,
-            AssetGroup.Piece.Bishop => 3,
-            AssetGroup.Piece.Rook => 4,
-            AssetGroup.Piece.Queen => 5,
+            AssetGroup.Piece.Private => 1,
+            AssetGroup.Piece.Knight => 2,
+            AssetGroup.Piece.Sergeant => 3,
+            AssetGroup.Piece.King => 4,
+            AssetGroup.Piece.General => 5,
+            AssetGroup.Piece.Bishop => 6,
+            AssetGroup.Piece.Lieutenant => 7,
+            AssetGroup.Piece.Captain => 8,
+            AssetGroup.Piece.Rook => 9,
+            AssetGroup.Piece.Colonel => 10,
+            AssetGroup.Piece.Queen => 11,
             _ => throw new Exception($"Piece kind {kind} not recognized")
         };
     }

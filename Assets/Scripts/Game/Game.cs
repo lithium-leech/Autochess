@@ -98,8 +98,8 @@ public class Game : MonoBehaviour
         TrashBoard = new Board(this, 1, 1, 1, 0, new Vector2(-3.0f, -8.5f));
 
         // Create a sample setup;
-        EnemyPieces.Add(AssetGroup.Piece.Pawn);
-        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
+        EnemyPieces.Add(AssetGroup.Piece.Private);
+        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);

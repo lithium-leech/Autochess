@@ -1,23 +1,25 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// A chess king
+/// A custom chess piece
 /// </summary>
-public class King : Piece
+public class Lieutenant : Piece
 {
-    public override AssetGroup.Piece Kind => AssetGroup.Piece.King;
+    public override AssetGroup.Piece Kind => AssetGroup.Piece.Lieutenant;
     
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
         IList<Space> path = new List<Space>() { Space };
 
-        // Get the possible moves and captures this piece can make
+        // Get the possible moves this piece can make
         IList<IList<Space>> moves = new List<IList<Space>>();
+        AddRookPaths(1, 100, false, moves, new List<IList<Space>>());
+
+        // Get the possible captures this piece can make
         IList<IList<Space>> captures = new List<IList<Space>>();
-        AddRookPaths(1, 1, false, moves, captures);
-        AddBishopPaths(1, 1, false, moves, captures);
+        AddBishopPaths(1, 100, false, new List<IList<Space>>(), captures);
 
         // Capture a piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];
