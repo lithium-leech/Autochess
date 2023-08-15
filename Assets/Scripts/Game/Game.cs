@@ -31,7 +31,6 @@ public class Game : MonoBehaviour
     public GameObject UpgradeMenu;
     public GameObject InfoMenu;
     public GameObject GameOverMenu;
-    public GameObject SettingsMenu;
 
     /// <summary>The current stage of the game being run</summary>
     public IStage CurrentStage { get; set; } = null;
@@ -78,6 +77,7 @@ public class Game : MonoBehaviour
     {
         // Initialize the menu manager
         MenuManager.Initialize(InGameMenu);
+        GameState.TurnPause = 2.0f;
 
         // Go to the first level
         GameState.IsPlayerWhite = false;
@@ -123,7 +123,4 @@ public class Game : MonoBehaviour
             CurrentStage?.During();
         }
     }
-
-    /// <summary>Opens the settings</summary>
-    public void OpenSettings() => MenuManager.OpenOverlay(SettingsMenu);
 }
