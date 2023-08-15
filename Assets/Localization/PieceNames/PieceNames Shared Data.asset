@@ -39,6 +39,30 @@ MonoBehaviour:
     m_Key: King
     m_Metadata:
       m_Items: []
+  - m_Id: 32034349774929920
+    m_Key: Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034377553805312
+    m_Key: Captain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034509431111680
+    m_Key: Sergeant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034543681798144
+    m_Key: Lieutenant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034580088356864
+    m_Key: Colonel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034602859233280
+    m_Key: General
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

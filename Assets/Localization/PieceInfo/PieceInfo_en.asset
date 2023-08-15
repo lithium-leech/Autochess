@@ -19,29 +19,55 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 894970281984
-    m_Localized: Moves one space forward, or captures one space diagonally. Becomes
-      a queen if it reaches the other side.
+    m_Localized: Moves 1 space forward. Captures 1 space diagonally. Becomes a queen
+      if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 904663318528
-    m_Localized: Moves horizontally or vertically.
+    m_Localized: Moves and captures horizontally or vertically.
     m_Metadata:
       m_Items: []
   - m_Id: 934325436416
-    m_Localized: Moves in an L shape (2 out, 1 across) jumping over pieces in the
-      way.
+    m_Localized: Moves and captures in an L shape (2 out, 1 across). Jumps over pieces
+      in the way.
     m_Metadata:
       m_Items: []
   - m_Id: 951438196736
-    m_Localized: Moves diagonally.
+    m_Localized: Moves and captures diagonally.
     m_Metadata:
       m_Items: []
   - m_Id: 969410789376
-    m_Localized: Moves horizontally, vertically, or diagonally.
+    m_Localized: Moves and captures horizontally, vertically, or diagonally.
     m_Metadata:
       m_Items: []
   - m_Id: 987047837696
-    m_Localized: Moves one space in any direction.
+    m_Localized: Moves and captures 1 space in any direction.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034295139926016
+    m_Localized: Moves and captures 1 space forward.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034320100229120
+    m_Localized: Moves diagonally. Captures horizontally or vertically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034358851403776
+    m_Localized: Moves and captures up to 3 spaces horizontally or vertically. Jumps
+      over pieces in the way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034396193292288
+    m_Localized: Moves horizontally or vertically. Captures diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034571833966592
+    m_Localized: Moves up to 4 spaces in any direction.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034596026712064
+    m_Localized: Moves up to 2 spaces horizonally, vertically, or diagonally. Captures
+      1 space in any direction.
     m_Metadata:
       m_Items: []
   references:

@@ -42,6 +42,30 @@ MonoBehaviour:
     m_Localized: King
     m_Metadata:
       m_Items: []
+  - m_Id: 32034349774929920
+    m_Localized: Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034377553805312
+    m_Localized: Captain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034509431111680
+    m_Localized: Sergeant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034543681798144
+    m_Localized: Lieutenant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034580088356864
+    m_Localized: Colonel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32034602859233280
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
