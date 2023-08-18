@@ -24,6 +24,7 @@ public class DefeatStage : IStage
         MenuManager.AddActiveMenu(Game.GameOverMenu);
 
         // Add button listeners
+        Game.NewGameButton.onClick.AddListener(NewGame);
         Game.EndGameButton.onClick.AddListener(EndGame);
         Game.RetryButton.onReward += RetryLevel;
     }
@@ -33,6 +34,7 @@ public class DefeatStage : IStage
     public void End()
     {
         // Remove button Listeners
+        Game.NewGameButton.onClick.RemoveAllListeners();
         Game.EndGameButton.onClick.RemoveAllListeners();
         Game.RetryButton.onReward -= RetryLevel;
 
@@ -44,5 +46,8 @@ public class DefeatStage : IStage
     public void RetryLevel() => Game.NextStage = new PlanningStage(Game);
 
     /// <summary>Starts the game over</summary>
+    public void NewGame() => SceneManager.LoadScene("Game");
+     
+    /// <summary>Returns to the main menu</summary>
     public void EndGame() => SceneManager.LoadScene("MainMenu");
 }

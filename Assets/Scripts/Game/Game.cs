@@ -26,6 +26,7 @@ public class Game : MonoBehaviour
     public RadioButtonGroup ChoiceButtons;
     public BasicButton ConfirmChoiceButton;
     public RewardedAdsButton RetryButton;
+    public BasicButton NewGameButton;
     public BasicButton EndGameButton;
     public GameObject InGameMenu;
     public GameObject ConcedeMenu;
@@ -92,7 +93,7 @@ public class Game : MonoBehaviour
 
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, 2, new Vector2(-4.0f, -1.0f));
-        SideBoard = new Board(this, 8, 3, 3, 0, new Vector2(-4.0f, -5.75f));
+        SideBoard = new Board(this, 8, 2, 2, 0, new Vector2(-4.0f, -6.0f));
 
         // Create a sample setup;
         EnemyPieces.Add(AssetGroup.Piece.Private);

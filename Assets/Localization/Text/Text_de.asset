@@ -105,6 +105,10 @@ MonoBehaviour:
     m_Localized: "Kr\xE4fte W\xE4hlen"
     m_Metadata:
       m_Items: []
+  - m_Id: 57248769782185984
+    m_Localized: Neues Spiel
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

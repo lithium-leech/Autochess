@@ -136,7 +136,7 @@ public abstract class UpgradeChoices
     {
         float dx = text ? 2.0f : 0.5f;
         float x = player ? -dx : dx;
-        float y = text ? -5.625f : -3.875f;
+        float y = text ? -5.75f : -4.0f;
         float z = text ? -31.0f : panel ? -33.0f : -34.0f;
         return new Vector3(x, y, z);
     }

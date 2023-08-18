@@ -99,6 +99,10 @@ MonoBehaviour:
     m_Key: ChoosePower
     m_Metadata:
       m_Items: []
+  - m_Id: 57248769782185984
+    m_Key: New Game
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
