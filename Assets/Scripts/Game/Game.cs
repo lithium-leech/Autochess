@@ -20,6 +20,7 @@ public class Game : MonoBehaviour
     public TextLocalizer EnemyChoiceNameText;
     public TextLocalizer EnemyChoiceInfoText;
     public BasicButton FightButton;
+    public BasicButton ConcedeButton;
     public BasicButton CancelConcedeButton;
     public BasicButton ConfirmConcedeButton;
     public RadioButtonGroup ChoiceButtons;
@@ -66,9 +67,6 @@ public class Game : MonoBehaviour
     /// <summary>The board that holds the player's available pieces</summary>
     public Board SideBoard { get; set; }
 
-    /// <summary>The board for discarding unwanted pieces</summary>
-    public Board TrashBoard { get; set; }
-
     /// Subscribable events
     public UnityEvent OnRoundFinish;
     public UnityEvent OnMoveFinish;
@@ -95,7 +93,6 @@ public class Game : MonoBehaviour
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, 2, new Vector2(-4.0f, -1.0f));
         SideBoard = new Board(this, 8, 3, 3, 0, new Vector2(-4.0f, -5.75f));
-        TrashBoard = new Board(this, 1, 1, 1, 0, new Vector2(-3.0f, -8.5f));
 
         // Create a sample setup;
         EnemyPieces.Add(AssetGroup.Piece.Private);

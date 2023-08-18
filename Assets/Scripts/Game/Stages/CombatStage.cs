@@ -44,7 +44,6 @@ public class CombatStage : IStage
         GameState.MusicBox.StopMusic();
         TimeWaited = 0;
         IsPlayerTurn = GameState.IsPlayerWhite;
-        EndConcede();
 
         // Log starting board state
         StringBuilder positions = new("(");
@@ -60,6 +59,11 @@ public class CombatStage : IStage
         }
         positions.Append(" )");
         Debug.Log($"Starting Positions: {positions}");
+
+        // Activate the concede button
+        EndConcede();
+        Game.ConcedeButton.SetEnabled(true);
+        Game.ConcedeButton.onClick.AddListener(StartConcede);
     }
 
     public void During()
@@ -143,7 +147,9 @@ public class CombatStage : IStage
         Game.GameBoard.Clear();
         Game.SideBoard.Clear();
 
-        // Remove the concede menu
+        // De-activate the concede button
+        Game.ConcedeButton.onClick.RemoveAllListeners();
+        Game.ConcedeButton.SetEnabled(false);
         EndConcede();
     }
 

@@ -13,16 +13,9 @@ public class SettingsMenu : MonoBehaviour
     /// Properties to set using Unity interface
     public Game Game;
     public TextMeshProUGUI VolumeValue;
-    public TextMeshProUGUI SpeedValue;
 
     /// <summary>The available locale identifiers</summary>
     private IList<Locale> Locales { get; set; }
-
-    /// <summary>The available game speeds</summary>
-    private float[] Speeds { get; } = new float[3] { 1.0f, 2.0f, 4.0f };
-    
-    /// <summary>The index of the speed currently being used</summary>
-    private int SpeedIndex { get; set; } = 0;
 
     /// <summary>The index of the currently selected locale</summary>
     private int LocaleIndex;
@@ -88,39 +81,6 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.SetString("PreferredLocale", Locales[LocaleIndex].Identifier.Code);
         LocalizationSettings.SelectedLocale = Locales[LocaleIndex];
         Debug.Log($"Changed locale to {LocalizationSettings.SelectedLocale.LocaleName}.");
-    }
-
-    /// <summary>Decreases the game speed</summary>
-    public void SpeedDown()
-    {
-        SpeedIndex--;
-        if (SpeedIndex < 0) SpeedIndex = 0;
-        Debug.Log($"Lowered speed to {Speeds[SpeedIndex]}.");
-        UpdateSpeed();
-    }
-
-    /// <summary>Increases the game speed</summary>
-    public void SpeedUp()
-    {
-        SpeedIndex++;
-        if (SpeedIndex >= Speeds.Length) SpeedIndex = Speeds.Length - 1;
-        Debug.Log($"Raised speed to {Speeds[SpeedIndex]}.");
-        UpdateSpeed();
-    }
-
-    /// <summary>Updates game speed to the speed value</summary>
-    private void UpdateSpeed()
-    {
-        GameState.TurnPause = 2.0f / Speeds[SpeedIndex];
-        SpeedValue.text = $"{Speeds[SpeedIndex]}x";
-    }
-
-    /// <summary>Concedes the stage, taking the player straight to defeat</summary>
-    public void Concede()
-    {
-        Debug.Log($"Conceding...");
-        MenuManager.CloseOverlay();
-        Game.NextStage = new DefeatStage(Game);
     }
 
     /// <summary>Closes the settings menu</summary>

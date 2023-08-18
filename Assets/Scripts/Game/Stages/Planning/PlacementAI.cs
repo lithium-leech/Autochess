@@ -10,14 +10,14 @@ public static class PlacementAI
     /// <param name="game">The game to set up the enemy's pieces in</param>
     public static void SetUpEnemy(Game game)
     {
-        foreach (AssetGroup.Piece pieceType in game.EnemyPieces) PlacePiece(game.GameBoard, pieceType);
-        foreach (AssetGroup.Object objectType in game.EnemyObjects) PlaceObject(game.GameBoard, objectType);   
+        foreach (AssetGroup.Piece pieceType in game.EnemyPieces) PlacePieceRandomly(game.GameBoard, pieceType);
+        foreach (AssetGroup.Object objectType in game.EnemyObjects) PlaceObjectRandomly(game.GameBoard, objectType);   
     }
 
     /// <summary>Places a single piece</summary>
     /// <param name="board">The board to place the piece on</param>
     /// <param name="pieceType">The type of piece to place</param>
-    private static void PlacePiece(Board board, AssetGroup.Piece pieceType)
+    private static void PlacePieceRandomly(Board board, AssetGroup.Piece pieceType)
     {
         board.AddPiece(pieceType, false, !GameState.IsPlayerWhite, RandomEnemyZone(board));
     }
@@ -25,7 +25,7 @@ public static class PlacementAI
     /// <summary>Places a single object</summary>
     /// <param name="board">The board to place the object on</param>
     /// <param name="objectType">The type of object to place</param>
-    private static void PlaceObject(Board board, AssetGroup.Object objectType)
+    private static void PlaceObjectRandomly(Board board, AssetGroup.Object objectType)
     {
         Space space = objectType switch
         {

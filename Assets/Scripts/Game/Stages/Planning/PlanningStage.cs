@@ -34,12 +34,16 @@ public class PlanningStage : IStage
         List<GameObject> highlights = new();
         highlights.AddRange(AddHighlights(Game.GameBoard));
         highlights.AddRange(AddHighlights(Game.SideBoard));
-        highlights.AddRange(AddHighlights(Game.TrashBoard));
         Highlights = highlights;
+        
+        // Activate the concede button
+        EndConcede();
+        Game.ConcedeButton.SetEnabled(true);
+        Game.ConcedeButton.onClick.AddListener(StartConcede);
 
         // Activate the fight button
         Game.FightButton.onClick.AddListener(StartFight);
-        Game.FightButton.SetEnabled(true);
+        if (Game.GameBoard.PlayerPieces.Count > 0) Game.FightButton.SetEnabled(true);
     }
 
     public void During()
@@ -60,11 +64,6 @@ public class PlanningStage : IStage
             Game.SideBoard.CornerBL.y <= position.y &&
             position.y <= Game.SideBoard.CornerTR.y)
             board = Game.SideBoard;
-        else if (Game.TrashBoard.CornerBL.x <= position.x &&
-            position.x <= Game.TrashBoard.CornerTR.x &&
-            Game.TrashBoard.CornerBL.y <= position.y &&
-            position.y <= Game.TrashBoard.CornerTR.y)
-            board = Game.TrashBoard;
 
         // If it is inside a board, get the space
         Space space = null;
@@ -93,6 +92,10 @@ public class PlanningStage : IStage
             if (!placed)
                 HeldObject.Space.AddObject(HeldObject);
             HeldObject = null;
+
+            // De-activate the fight button when there are no pieces on the board
+            if (Game.GameBoard.PlayerPieces.Count > 0) Game.FightButton.SetEnabled(true);
+            else Game.FightButton.SetEnabled(false);
         }
     }
 
@@ -101,6 +104,11 @@ public class PlanningStage : IStage
         // De-activate the fight button
         Game.FightButton.onClick.RemoveAllListeners();
         Game.FightButton.SetEnabled(false);
+
+        // De-activate the concede button
+        Game.ConcedeButton.onClick.RemoveAllListeners();
+        Game.ConcedeButton.SetEnabled(false);
+        EndConcede();
 
         // Remove highlights loaded in planning start
         foreach (GameObject highlight in Highlights) UnityEngine.Object.Destroy(highlight);
@@ -127,6 +135,29 @@ public class PlanningStage : IStage
 
         // Queue the combat stage
         Game.NextStage = new CombatStage(Game);
+    }
+
+    /// <summary>Displays the concede menu to the player</summary>
+    private void StartConcede()
+    {
+        MenuManager.AddActiveMenu(Game.ConcedeMenu);
+        Game.CancelConcedeButton.onClick.AddListener(EndConcede);
+        Game.ConfirmConcedeButton.onClick.AddListener(ConfirmConcede);
+    }
+
+    /// <summary>The player concedes and the fight is lost</summary>
+    private void ConfirmConcede()
+    {
+        Game.NextStage = new DefeatStage(Game);
+        EndConcede();
+    }
+
+    /// <summary>Removes the concede menu and resets concede logic</summary>
+    private void EndConcede()
+    {
+        MenuManager.RemoveActiveMenu(Game.ConcedeMenu);
+        Game.CancelConcedeButton.onClick.RemoveAllListeners();
+        Game.ConfirmConcedeButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>Sets up the player's pieces on the game board and side board</summary>
