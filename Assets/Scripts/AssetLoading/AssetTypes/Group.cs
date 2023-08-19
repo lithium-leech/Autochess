@@ -13,7 +13,6 @@ namespace AssetGroup
         RedHighlight,
         Panel,
         Power,
-        RemovePower,
         WhiteObject,
         BlackObject
     }

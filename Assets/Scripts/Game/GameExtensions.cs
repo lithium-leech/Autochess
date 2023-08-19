@@ -39,12 +39,10 @@ public static class GameExtensions
     /// <param name="game">The game to create a power in</param>
     /// <param name="kind">The kind of power to create</param>
     /// <param name="player">True if the power is for the player</param>
-    /// <param name="remove">True if this is a power remover</param>
     /// <returns>A Power</returns>
-    public static Power CreatePower(this Game game, AssetGroup.Power kind, bool player, bool remove)
+    public static Power CreatePower(this Game game, AssetGroup.Power kind, bool player)
     {
-        AssetGroup.Group groupKey = remove ? AssetGroup.Group.RemovePower : AssetGroup.Group.Power;
-        GameObject obj = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
+        GameObject obj = Game.Instantiate(AssetManager.Prefabs[AssetGroup.Group.Power][(int)kind]);
         Power power = obj.GetComponent<Power>();
         power.Game = game;
         power.IsPlayer = player;

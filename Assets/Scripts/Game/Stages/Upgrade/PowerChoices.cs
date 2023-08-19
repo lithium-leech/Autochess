@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -13,8 +12,8 @@ public class PowerChoices : UpgradeChoices
     public PowerChoices(Game game) : base(game)
     {
         // Pick random powers
-        PlayerPowers = new PowerChoice[NumberOfChoices];
-        EnemyPowers = new PowerChoice[NumberOfChoices];
+        PlayerPowers = new AssetGroup.Power[NumberOfChoices];
+        EnemyPowers = new AssetGroup.Power[NumberOfChoices];
         for (int i = 0; i < NumberOfChoices; i++)
         {
             PlayerPowers[i] = GetRandomPower(true);
@@ -25,10 +24,10 @@ public class PowerChoices : UpgradeChoices
     public override string TitleText { get; } = "ChoosePower";
 
     /// <summary>The available powers for the player</summary>
-    private PowerChoice[] PlayerPowers { get; }
+    private AssetGroup.Power[] PlayerPowers { get; }
 
     /// <summary>The available powers for the enemy</summary>
-    private PowerChoice[] EnemyPowers { get; }
+    private AssetGroup.Power[] EnemyPowers { get; }
 
     /// <summary>Instantiated powers shown in the upgrade menu</summary>
     private IList<Power> Powers { get; set; } = new List<Power>();
@@ -87,38 +86,22 @@ public class PowerChoices : UpgradeChoices
     public override void ApplyChoice(int choice)
     {
         // Get the powers corresponding to the selected option
-        PowerChoice playerChoice = PlayerPowers[Game.ChoiceButtons.SelectedIndex];
-        PowerChoice enemyChoice = EnemyPowers[Game.ChoiceButtons.SelectedIndex];
+        AssetGroup.Power playerChoice = PlayerPowers[Game.ChoiceButtons.SelectedIndex];
+        AssetGroup.Power enemyChoice = EnemyPowers[Game.ChoiceButtons.SelectedIndex];
 
         // Log the selected pieces
         Debug.Log($"Enemy Upgrade: {enemyChoice}");
         Debug.Log($"Player Upgrade: {playerChoice}");
 
         // Apply the player's new power
-        if (playerChoice.IsRemove)
-        {
-            Power power = Game.EnemyPowers.First(p => p.Kind == playerChoice.Kind);
-            power.Deactivate();
-        }
-        else
-        {
-            Power power = Game.CreatePower(playerChoice.Kind, true, false);
-            Powers.Remove(power);
-            power.Activate();
-        }
+        Power playerPower = Game.CreatePower(playerChoice, true);
+        Powers.Remove(playerPower);
+        playerPower.Activate();
 
         // Apply the enemy's new power
-        if (enemyChoice.IsRemove)
-        {
-            Power power = Game.PlayerPowers.First(p => p.Kind == enemyChoice.Kind);
-            power.Deactivate();
-        }
-        else
-        {
-            Power power = Game.CreatePower(enemyChoice.Kind, false, false);
-            Powers.Remove(power);
-            power.Activate();
-        }
+        Power enemyPower = Game.CreatePower(enemyChoice, false);
+        Powers.Remove(enemyPower);
+        enemyPower.Activate();
     }
 
     /// <summary>Create a power sprite</summary>
@@ -128,15 +111,12 @@ public class PowerChoices : UpgradeChoices
     /// <returns>A new Piece</returns>
     private Power CreatePower(int choice, bool player, bool info)
     {
+        // Create the new power
         Power power;
-        if (player)
-        {
-            power = Game.CreatePower(PlayerPowers[choice].Kind, true, PlayerPowers[choice].IsRemove);
-        }
-        else
-        {
-            power = Game.CreatePower(EnemyPowers[choice].Kind, false, EnemyPowers[choice].IsRemove);
-        }
+        if (player) power = Game.CreatePower(PlayerPowers[choice], true);
+        else power = Game.CreatePower(EnemyPowers[choice], false);
+        
+        // Move it to the desired location
         if (info)
         {
             power.WarpTo(InfoPosition(player, false, false));
@@ -147,29 +127,25 @@ public class PowerChoices : UpgradeChoices
             power.WarpTo(ChoicePosition(choice, player, false));
             Powers.Add(power);
         }
+
+        // Return the new power
         return power;
     }
 
     /// <summary>Returns a random choice of power</summary>
     /// <returns>A power choice</returns>
-    private PowerChoice GetRandomPower(bool player)
+    private AssetGroup.Power GetRandomPower(bool player)
     {
         // Determine who is gaining a power
         IList<Power> myPowers = player ? Game.PlayerPowers : Game.EnemyPowers;
         IList<Power> theirPowers = player ? Game.EnemyPowers : Game.PlayerPowers;
 
-        // Roll to remove a power
-        if (theirPowers.Count > 0 && Random.Range(1,6) == 5) return RemoveRandomPower(theirPowers);
-
         // Get the available powers
         IList<AssetGroup.Power> availablePowers = GetAvailablePowers(player, myPowers);
 
-        // If there are no available powers, force a power removal
-        if (availablePowers.Count() < 1) return RemoveRandomPower(theirPowers);
-
-        // Randomly return one available powers
+        // Randomly return one available power
         int randomIndex = Random.Range(0, availablePowers.Count);
-        return new PowerChoice(availablePowers[randomIndex], false);
+        return availablePowers[randomIndex];
     }
 
     /// <summary>Gets all of the powers that can be offered</summary>
@@ -229,36 +205,5 @@ public class PowerChoices : UpgradeChoices
 
         // Return the final collection
         return powers;
-    }
-
-    /// <summary>Gets a random power to be removed</summary>
-    /// <param name="powers">A collection of possible powers to remove</param>
-    /// <returns>A PowerChoice which removes a power</returns>
-    private PowerChoice RemoveRandomPower(IList<Power> powers)
-    {
-        int removeIndex = Random.Range(0, powers.Count);
-        AssetGroup.Power power = powers[removeIndex].Kind;
-        return new PowerChoice(power, true);
-    }
-
-    /// <summary>A single selectable choice</summary>
-    private class PowerChoice
-    {
-        /// <summary>Creates a new instance of a PowerChoice</summary>
-        /// <param name="kind">The kind of power</param>
-        /// <param name="remove">True if this is a power removal</param>
-        public PowerChoice(AssetGroup.Power kind, bool remove)
-        {
-            Kind = kind;
-            IsRemove = remove;
-        }
-
-        /// <summary>The kind of power</summary>
-        public AssetGroup.Power Kind { get; }
-
-        /// <summary>True if this is a power removal</summary>
-        public bool IsRemove { get; }
-
-        public override string ToString() => IsRemove ? $"Remove{Kind}" : $"{Kind}";
     }
 }
