@@ -100,6 +100,10 @@ public class Board
     /// <param name="obj">The object to add</param>
     public bool AddObject(ChessObject obj) => AddObject(obj, GetLastEmptySpace());
 
+    /// <summary>Adds a power to the board in the first empty space</summary>
+    /// <param name="power">The power to add</param>
+    public bool AddPower(Power power) => AddObject(power, GetFirstEmptySpace());
+
     /// <summary>Adds an object to the board</summary>
     /// <param name="obj">The object to add</param>
     /// <param name="space">The space to place the object at</param>

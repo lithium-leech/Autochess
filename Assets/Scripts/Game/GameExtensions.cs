@@ -44,8 +44,7 @@ public static class GameExtensions
     {
         GameObject obj = Game.Instantiate(AssetManager.Prefabs[AssetGroup.Group.Power][(int)kind]);
         Power power = obj.GetComponent<Power>();
-        power.Game = game;
-        power.IsPlayer = player;
+        power.Initialize(game, player, true);
         return power;
     }
 

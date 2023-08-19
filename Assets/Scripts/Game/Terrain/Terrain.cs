@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// An object which takes up space on the chess board, but is not controlled by either player
 /// </summary>

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// A power which gives an additional row for placing pieces
 /// </summary>
@@ -16,10 +14,8 @@ public class RowPower : Power
         if (IsPlayer) Game.GameBoard.PlayerRows += 1;
         else Game.GameBoard.EnemyRows += 1;
 
-        // Add this power to the accumulated powers list
-        if (IsPlayer) Game.PlayerPowers.Add(this);
-        else Game.EnemyPowers.Add(this);
-        WarpTo(GameState.ShadowZone);
+        // Base activation
+        base.Activate();
     }
     
     public override void Deactivate()
@@ -32,11 +28,7 @@ public class RowPower : Power
         if (IsPlayer) Game.GameBoard.PlayerRows -= 1;
         else Game.GameBoard.EnemyRows -= 1;
 
-        // Remove this power from the accumulated powers list
-        if (IsPlayer) Game.PlayerPowers.Remove(this);
-        else Game.EnemyPowers.Remove(this);
-
-        // Destroy this power
-        Game.Destroy(this.gameObject);
+        // Base deactivation
+        base.Deactivate();
     }
 }

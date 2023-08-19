@@ -8,15 +8,18 @@ public class FirstPower : Power
     public override void Activate()
     {
         // Switch player colors
-        if (IsPlayer) GameState.IsPlayerWhite = true;
-        else GameState.IsPlayerWhite = false;
-
-        // Destroy this power
-        Game.Destroy(this.gameObject);
+        GameState.IsPlayerWhite = !GameState.IsPlayerWhite;
+        
+        // Base activation
+        base.Activate();
     }
 
     public override void Deactivate()
     {
-        throw new System.Exception("The First power cannot be deactivated.");
+        // Switch player colors
+        GameState.IsPlayerWhite = !GameState.IsPlayerWhite;
+        
+        // Base deactivation
+        base.Deactivate();
     }
 }

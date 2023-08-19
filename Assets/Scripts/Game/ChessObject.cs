@@ -5,19 +5,6 @@ using UnityEngine;
 /// </summary>
 public abstract class ChessObject : MonoBehaviour
 {
-    /// <summary>Initializes the ChessObject</summary>
-    /// <param name="game">The game this object is a part of</param>
-    /// <param name="player">True if the object is controlled by the player</param>
-    /// <param name="white">True if the object is white</param>
-    /// <remarks>Should be called as close to creation as possible</remarks>
-    public virtual void Initialize(Game game, bool player, bool white)
-    {
-        Game = game;
-        IsPlayer = player;
-        IsWhite = white;
-        IsGrabable = player;
-    }
-
     /// <summary>The game this object is a part of</summary>
     public Game Game { get; set; }
 
@@ -27,14 +14,26 @@ public abstract class ChessObject : MonoBehaviour
     /// <summary>The object's space on the board</summary>
     public Space Space { get; set; }
 
-/// <summary>True if the object is controlled by the player</summary>
+    /// <summary>True if the object is controlled by the player</summary>
     public bool IsPlayer { get; set; }
-    
+
     /// <summary>True if the object is white</summary>
     public bool IsWhite { get; set; }
 
     /// <summary>True if this object can be picked up by the player</summary>
     public bool IsGrabable { get; set; }
+
+    /// <summary>Initializes the chess object following creation</summary>
+    /// <param name="game">The game the object is a part of</param>
+    /// <param name="player">True if the object is controlled by the player</param>
+    /// <param name="white">True if the object is white</param>
+    public virtual void Initialize(Game game, bool player, bool white)
+    {
+        Game = game;
+        IsWhite = white;
+        IsPlayer = player;
+        IsGrabable = player;
+    }
 
     public virtual void Update() { }
 

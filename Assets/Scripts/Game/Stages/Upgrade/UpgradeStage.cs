@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -47,6 +48,12 @@ public class UpgradeStage : IStage
             Game.EnemyPieces.Add(AssetGroup.Piece.Pawn);
             Game.PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
             
+            // Reset powers
+            IList<Power> powers = new List<Power>();
+            foreach (Power power in Game.EnemyPowers) powers.Add(power);
+            foreach (Power power in Game.PlayerPowers) powers.Add(power);
+            foreach (Power power in powers) power.Deactivate();
+
             // Choose the next map
             Choices = new NullChoices(Game);
             Game.NextStage = new PlanningStage(Game);

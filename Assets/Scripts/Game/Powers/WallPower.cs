@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// A power which gives the player walls to be placed on the map
 /// </summary>
@@ -21,10 +19,8 @@ public class WallPower : Power
             Game.EnemyObjects.Add(AssetGroup.Object.Wall);
         }
 
-        // Add this power to the accumulated powers list
-        if (IsPlayer) Game.PlayerPowers.Add(this);
-        else Game.EnemyPowers.Add(this);
-        WarpTo(GameState.ShadowZone);
+        // Base activation
+        base.Activate();
     }
     
     public override void Deactivate()
@@ -41,11 +37,7 @@ public class WallPower : Power
             Game.EnemyObjects.Remove(AssetGroup.Object.Wall);
         }
 
-        // Remove this power from the accumulated powers list
-        if (IsPlayer) Game.PlayerPowers.Remove(this);
-        else Game.EnemyPowers.Remove(this);
-
-        // Destroy this power
-        Game.Destroy(this.gameObject);
+        // Base deactivation
+        base.Deactivate();
     }
 }

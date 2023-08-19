@@ -27,13 +27,13 @@ public static class GameState
     public static bool IsActiveRound { get; set; }
     
     /// <summary>The Z-plane that terrain exists on</summary>
-    public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -4.0f);
+    public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -6.0f);
 
     /// <summary>The Z-plane that stationary pieces exist on</summary>
-    public static Vector3 StillPieceZ { get; } = new Vector3(0.0f, 0.0f, -5.0f);
+    public static Vector3 StillPieceZ { get; } = new Vector3(0.0f, 0.0f, -7.0f);
 
     /// <summary>The Z-plane that moving pieces exist on</summary>
-    public static Vector3 MovingPieceZ { get; } = new Vector3(0.0f, 0.0f, -6.0f);
+    public static Vector3 MovingPieceZ { get; } = new Vector3(0.0f, 0.0f, -8.0f);
 
     public static Vector3 ShadowZone { get; } = new Vector3(100.0f, 100.0f, 100.0f);
 }

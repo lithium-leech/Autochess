@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +7,7 @@ public abstract class Equipment : ChessObject
 {
     /// <summary>The kind of equipment this is</summary>
     public abstract AssetGroup.Object Kind { get; }
-
+    
     /// Properties to set using Unity interface
     public Sprite EquippedSprite;
 

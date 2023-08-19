@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
     /// <summary>The enemy's collection of miscellaneous objects</summary>
     public IList<AssetGroup.Object> EnemyObjects { get; } = new List<AssetGroup.Object>();
 
-    /// <summary>The enemy's accumulated power ups</summary>
+    /// <summary>The enemy's power ups</summary>
     public IList<Power> EnemyPowers { get; } = new List<Power>();
 
     /// <summary>The player's pieces on the game board</summary>
@@ -59,7 +59,7 @@ public class Game : MonoBehaviour
     /// <summary>The players's collection of miscellaneous objects</summary>
     public IList<AssetGroup.Object> PlayerObjects { get; } = new List<AssetGroup.Object>();
 
-    /// <summary>The player's accumulated power ups</summary>
+    /// <summary>The player's power ups</summary>
     public IList<Power> PlayerPowers { get; } = new List<Power>();
 
     /// <summary>The board that fights take place on</summary>
@@ -67,6 +67,12 @@ public class Game : MonoBehaviour
 
     /// <summary>The board that holds the player's available pieces</summary>
     public Board SideBoard { get; set; }
+
+    /// <summary>The board that displays the enemy's powers</summary>
+    public Board EnemyPowerBoard { get; set; }
+
+    /// <summary>The board that displays the player's powers</summary>
+    public Board PlayerPowerBoard { get; set; }
 
     /// Subscribable events
     public UnityEvent OnRoundFinish;
@@ -94,10 +100,12 @@ public class Game : MonoBehaviour
         // Create the game boards
         GameBoard = new Board(this, 8, 8, 2, 2, new Vector2(-4.0f, -1.0f));
         SideBoard = new Board(this, 8, 2, 2, 0, new Vector2(-4.0f, -6.0f));
+        EnemyPowerBoard = new Board(this, 4, 1, 1, 0, new Vector2(-2.0f, 7.5f));
+        PlayerPowerBoard = new Board(this, 4, 1, 1, 0, new Vector2(-2.0f, -2.5f));
 
         // Create a sample setup;
-        EnemyPieces.Add(AssetGroup.Piece.Private);
-        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
+        EnemyPieces.Add(AssetGroup.Piece.Pawn);
+        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);

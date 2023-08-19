@@ -136,12 +136,11 @@ public class PowerChoices : UpgradeChoices
     /// <returns>A power choice</returns>
     private AssetGroup.Power GetRandomPower(bool player)
     {
-        // Determine who is gaining a power
-        IList<Power> myPowers = player ? Game.PlayerPowers : Game.EnemyPowers;
-        IList<Power> theirPowers = player ? Game.EnemyPowers : Game.PlayerPowers;
+        // Get the powers currently possessed
+        IList<Power> currentPowers = player ? Game.PlayerPowers : Game.EnemyPowers;
 
         // Get the available powers
-        IList<AssetGroup.Power> availablePowers = GetAvailablePowers(player, myPowers);
+        IList<AssetGroup.Power> availablePowers = GetAvailablePowers(player, currentPowers);
 
         // Randomly return one available power
         int randomIndex = Random.Range(0, availablePowers.Count);

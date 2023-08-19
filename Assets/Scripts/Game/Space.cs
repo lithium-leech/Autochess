@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -24,11 +23,14 @@ public class Space
     /// <summary>The piece on this space (null when there is none)</summary>
     private Piece Piece { get; set; }
 
+    /// <summary>The terrain on this space (null when there is none)</summary>
+    private Terrain Terrain { get; set; }
+
     /// <summary>The equipment on this space (null when there is none)</summary>
     private Equipment Equipment { get; set; }
 
-    /// <summary>The terrain on this space (null when there is none)</summary>
-    private Terrain Terrain { get; set; }
+    /// <summary>The power on this space (null when there is none)</summary>
+    private Power Power { get; set;}
 
     /// <summary>Creates a new instance of a Space</summary>
     /// <param name="board">The board that this space is a part of</param>
@@ -143,6 +145,13 @@ public class Space
             Terrain = terrain;
             terrain.WarpTo(Board.ToPosition(Coordinates) + GameState.TerrainZ);
         }
+
+        // Add a power
+        if (obj is Power power)
+        {
+            Power = power;
+            power.WarpTo(Board.ToPosition(Coordinates) + GameState.StillPieceZ);
+        }
     }
 
     /// <summary>Removes an object from this space</summary>
@@ -176,6 +185,14 @@ public class Space
             return true;
         }
 
+        // Remove a power
+        if (obj is Power power)
+        {
+            if (Power != power) return false;
+            Power = null;
+            return true;
+        }
+
         // Failed to remove anything
         return false;
     }
@@ -194,18 +211,22 @@ public class Space
         // Clear terrain
         if (Terrain != null) Terrain.Destroy();
         Terrain = null;
+
+        // Clear powers
+        if (Power != null) Power.Destroy();
+        Power = null;
     }
 
     /// <summary>Checks if this space is empty</summary>
     /// <returns>True if this space is empty</returns>
-    public bool IsEmpty() => Piece == null && Equipment == null && Terrain == null;
+    public bool IsEmpty() => Piece == null && Equipment == null && Terrain == null && Power == null;
 
     /// <summary>Checks if this space is enterable</summary>
     /// <returns>True if this space is enterable</returns>
     public bool IsEnterable(ChessObject obj)
     {
         if (Piece != null && obj is Equipment && Piece.Equipment == null) return true;
-        if (Piece != null || Equipment != null) return false;
+        if (Piece != null || Equipment != null || Power != null) return false;
         if (Terrain != null && obj is Terrain) return false;
         if (Terrain != null && !Terrain.IsEnterable(obj)) return false;
         return true;

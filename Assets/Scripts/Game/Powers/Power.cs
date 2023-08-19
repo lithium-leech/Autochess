@@ -1,29 +1,53 @@
-using UnityEngine;
-
 /// <summary>
 /// A single game power
 /// </summary>
-public abstract class Power : MonoBehaviour
+public abstract class Power : ChessObject
 {
-    /// <summary>The game this power is being used in</summary>
-    public Game Game { get; set; }
-
-    /// <summary>True if this power is for the player</summary>
-    public bool IsPlayer { get; set; }
-
     /// <summary>The group that this power belongs to (normal or remove)</summary>
     public AssetGroup.Group Group { get; set; }
 
     /// <summary>The kind of power this is</summary>
     public abstract AssetGroup.Power Kind { get; }
 
+    public override void Initialize(Game game, bool player, bool white)
+    {
+        Game = game;
+        IsWhite = white;
+        IsPlayer = player;
+        IsGrabable = false;
+    }
+
     /// <summary>Applies the power to the current game</summary>
-    public abstract void Activate();
+    public virtual void Activate()
+    {
+        // Add this power to the game
+        if (IsPlayer)
+        {
+            Game.PlayerPowers.Add(this);
+            Game.PlayerPowerBoard.AddPower(this);
+        }
+        else
+        {
+            Game.EnemyPowers.Add(this);
+            Game.EnemyPowerBoard.AddPower(this);
+        }
+    }
 
     /// <summary>Unapplies this power from the current game</summary>
-    public abstract void Deactivate();
+    public virtual void Deactivate()
+    {
+        // Remove this power from the game
+        if (IsPlayer)
+        {
+            Game.PlayerPowers.Remove(this);
+        }
+        else
+        {
+            Game.EnemyPowers.Remove(this);
+        }
+        Space.RemoveObject(this);
 
-    /// <summary>Warps the piece to the specified location</summary>
-    /// <param name="space">The world coordinates to warp to</param>
-    public void WarpTo(Vector3 position) => transform.position = position;
+        // Destroy this power
+        Game.Destroy(this.gameObject);
+    }
 }
