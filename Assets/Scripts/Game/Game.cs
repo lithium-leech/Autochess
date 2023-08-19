@@ -104,8 +104,8 @@ public class Game : MonoBehaviour
         PlayerPowerBoard = new Board(this, 4, 1, 1, 0, new Vector2(-2.0f, -2.5f));
 
         // Create a sample setup;
-        EnemyPieces.Add(AssetGroup.Piece.Pawn);
-        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
+        EnemyPieces.Add(AssetGroup.Piece.Private);
+        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
 
         // Start the planning phase
         NextStage = new PlanningStage(this);

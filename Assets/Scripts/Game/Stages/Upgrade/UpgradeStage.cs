@@ -45,8 +45,8 @@ public class UpgradeStage : IStage
             Game.EnemyPieces.Clear();
             Game.PlayerGameBoard.Clear();
             Game.PlayerSideBoard.Clear();
-            Game.EnemyPieces.Add(AssetGroup.Piece.Pawn);
-            Game.PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Pawn, null));
+            Game.EnemyPieces.Add(AssetGroup.Piece.Private);
+            Game.PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
             
             // Reset powers
             IList<Power> powers = new List<Power>();
