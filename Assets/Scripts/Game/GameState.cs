@@ -26,6 +26,9 @@ public static class GameState
     /// <summary>True during rounds where at least one piece has moved</summary>
     public static bool IsActiveRound { get; set; }
     
+    /// <summary>The Z-plane that board tiles exist on</summary>
+    public static Vector3 BoardZ { get; } = new Vector3(0.0f, 0.0f, -5.0f); // Old board was located at (0, 3, -5)
+
     /// <summary>The Z-plane that terrain exists on</summary>
     public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -6.0f);
 
