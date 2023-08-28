@@ -44,18 +44,24 @@ public abstract class UpgradeChoices
     /// <summary>Creates all of the background panels in the upgrade menu</summary>
     private void ShowPanels()
     {
-        // Create choice panels
+        // Create choice backgrounds
+        AssetGroup.Tile topTile = GameState.IsPlayerWhite ? AssetGroup.Tile.TrueBlackSpace : AssetGroup.Tile.TrueWhiteSpace;
+        AssetGroup.Tile bottomTile = GameState.IsPlayerWhite ? AssetGroup.Tile.TrueWhiteSpace : AssetGroup.Tile.TrueBlackSpace;
         for (int i = 0; i < NumberOfChoices; i++)
         {
-            CreatePanel(i, true, false, false);
-            CreatePanel(i, false, false, false);
+            Panels.Add(Game.CreateTile(topTile, ChoicePosition(i, false, true)));
+            Panels.Add(Game.CreateTile(bottomTile, ChoicePosition(i, true, true)));
         }
 
-        // Create info panels
-        CreatePanel(-1, true, true, false);
-        CreatePanel(-1, false, true, false);
-        CreatePanel(-1, true, true, true);
-        CreatePanel(-1, false, true, true);
+        // Create info backgrounds
+        AssetGroup.Tile rightTile = GameState.IsPlayerWhite ? AssetGroup.Tile.TrueBlackSpace : AssetGroup.Tile.TrueWhiteSpace;
+        AssetGroup.Tile leftTile = GameState.IsPlayerWhite ? AssetGroup.Tile.TrueWhiteSpace : AssetGroup.Tile.TrueBlackSpace;
+        AssetGroup.Panel rightPanel = GameState.IsPlayerWhite ? AssetGroup.Panel.BlackInfo : AssetGroup.Panel.WhiteInfo;
+        AssetGroup.Panel leftPanel = GameState.IsPlayerWhite ? AssetGroup.Panel.WhiteInfo : AssetGroup.Panel.BlackInfo;
+        Panels.Add(Game.CreateTile(rightTile, InfoPosition(false, true, false)));
+        Panels.Add(Game.CreateTile(leftTile, InfoPosition(true, true, false)));
+        Panels.Add(Game.CreatePanel(rightPanel, InfoPosition(false, true, true), Game.InfoMenu.transform));
+        Panels.Add(Game.CreatePanel(leftPanel, InfoPosition(true, true, true), Game.InfoMenu.transform));
     }
 
     /// <summary>Creates sprites for the choices in the upgrade menu</summary>
@@ -82,62 +88,36 @@ public abstract class UpgradeChoices
     /// <param name="choice">The choice to apply</param>
     public abstract void ApplyChoice(int choice);
 
-    /// <summary>Create a panel sprite</summary>
-    /// <param name="choice">The choice to create the sprite for</param>
-    /// <param name="player">True if this is the player's half of the choice</param>
-    /// <param name="info">True if this is an info panel</param>
-    /// <param name="text">True if this the text panel</param>
-    /// <returns>A new panel</returns>
-    private GameObject CreatePanel(int choice, bool player, bool info, bool text)
-    {
-        GameObject panel = Game.CreatePanel(!(GameState.IsPlayerWhite ^ player), text);
-        if (text)
-        {
-            panel.transform.SetParent(Game.InfoMenu.transform);
-            panel.transform.SetAsFirstSibling();
-        }
-        if (info)
-        {
-            panel.transform.position = InfoPosition(player, true, text);
-        }
-        else
-        {
-            panel.transform.position = ChoicePosition(choice, player, true);
-        }
-        Panels.Add(panel);
-        return panel;
-    }
-
     /// <summary>Gets the position of the desired choice display</summary>
     /// <param name="choice">The choice index</param>
     /// <param name="player">True if this is the player half of the choice</param>
-    /// <param name="panel">True if this is the background panel</param>
+    /// <param name="back">True if this is the backdrop</param>
     /// <returns>A Vector3</returns>
-    protected Vector3 ChoicePosition(int choice, bool player, bool panel)
+    protected Vector3 ChoicePosition(int choice, bool player, bool back)
     {
         float x = choice switch
         {
             0 => -2.125f,
             1 => 0.0f,
             2 => 2.125f,
-            _ => throw new Exception("A choice index was not implemented in PieceChoices")
+            _ => throw new Exception("A choice index was not implemented in ChoicePosition")
         };
         float y = player ? 2.25f : 3.25f;
-        float z = panel ? -32.0f : -33.0f;
+        float z = back ? -32.0f : -33.0f;
         return new Vector3(x, y, z);
     }
 
     /// <summary>Gets the position of the desired info display</summary>
     /// <param name="player">True if this is the player half of the info</param>
-    /// <param name="panel">True if this is the background panel</param>
+    /// <param name="back">True if this is the backdrop</param>
     /// <param name="text">True if this is the text panel</param>
     /// <returns>A Vector3</returns>
-    protected Vector3 InfoPosition(bool player, bool panel, bool text)
+    protected Vector3 InfoPosition(bool player, bool back, bool text)
     {
         float dx = text ? 2.0f : 0.5f;
         float x = player ? -dx : dx;
         float y = text ? -5.75f : -4.0f;
-        float z = text ? -31.0f : panel ? -33.0f : -34.0f;
+        float z = text ? -31.0f : back ? -33.0f : -34.0f;
         return new Vector3(x, y, z);
     }
 }

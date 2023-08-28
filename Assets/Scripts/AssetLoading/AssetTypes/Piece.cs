@@ -6,17 +6,17 @@ namespace AssetGroup
     public enum Piece
     {
         None = 0,
-        Bishop,
-        King,
-        Knight,
         Pawn,
-        Queen,
         Rook,
+        Knight,
+        Bishop,
+        Queen,
+        King,
         Private,
+        Captain,
         Sergeant,
         Lieutenant,
-        Captain,
         Colonel,
-        General
+        General,
     }
 }

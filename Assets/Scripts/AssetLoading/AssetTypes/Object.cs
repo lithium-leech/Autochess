@@ -8,6 +8,6 @@ namespace AssetGroup
         None = 0,
         Wall,
         Mine,
-        Shield
+        Shield,
     }
 }

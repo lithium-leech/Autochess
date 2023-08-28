@@ -10,6 +10,6 @@ namespace AssetGroup
         Row,
         Mine,
         Wall,
-        Shield
+        Shield,
     }
 }

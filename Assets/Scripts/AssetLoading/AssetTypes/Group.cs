@@ -7,13 +7,14 @@ namespace AssetGroup
     {
         None = 0,
         Scene,
-        WhitePiece,
-        BlackPiece,
+        Tile,
+        Panel,
         GreenHighlight,
         RedHighlight,
-        Panel,
-        Power,
+        WhitePiece,
+        BlackPiece,
         WhiteObject,
-        BlackObject
+        BlackObject,
+        Power,
     }
 }

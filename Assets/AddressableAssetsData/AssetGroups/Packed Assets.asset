@@ -33,11 +33,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Packed
-  - m_GUID: f2ee57e21a2ad8240a4f55e34c92c638
-    m_Address: Assets/Prefab/Panels
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Packed
   - m_GUID: 9333acae715e61c40a81527e99e53be5
     m_Address: Assets/Prefab/Powers
     m_ReadOnly: 0
@@ -45,6 +40,16 @@ MonoBehaviour:
     - Packed
   - m_GUID: f43264d34a9eaea438a4a0ef1022eb7e
     m_Address: Assets/Prefab/Objects
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Packed
+  - m_GUID: 8e54e064989261f4abd299ebe70eaf54
+    m_Address: Assets/Prefab/Tiles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Packed
+  - m_GUID: b8847f2e06908214ab413fa3e7bdcaae
+    m_Address: Assets/Prefab/Panels
     m_ReadOnly: 0
     m_SerializedLabels:
     - Packed

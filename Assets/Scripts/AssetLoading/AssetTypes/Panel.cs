@@ -6,9 +6,7 @@
     public enum Panel
     {
         None = 0,
-        WhiteTile,
-        BlackTile,
         WhiteInfo,
-        BlackInfo
+        BlackInfo,
     }
 }

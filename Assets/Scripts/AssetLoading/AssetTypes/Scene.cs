@@ -7,6 +7,6 @@ namespace AssetGroup
     {
         None = 0,
         MainMenu,
-        Game
+        Game,
     }
 }

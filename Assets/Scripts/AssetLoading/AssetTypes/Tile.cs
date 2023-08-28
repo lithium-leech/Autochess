@@ -1,0 +1,53 @@
+namespace AssetGroup
+{
+    /// <summary>
+    /// An enumeration containing each kind of tile
+    /// </summary>
+    public enum Tile
+    {
+        None = 0,
+        WhiteSpace,
+        BlackSpace,
+        TrueWhiteSpace,
+        TrueBlackSpace,
+        BoarderT,
+        BoarderTR,
+        BoarderTL,
+        BoarderPT,
+        BoarderB,
+        BoarderBR,
+        BoarderBL,
+        BoarderPB,
+        BoarderR,
+        BoarderL,
+        InsideBorderTR,
+        InsideBorderTL,
+        InsideBorderTRL,
+        InsideBorderPTR,
+        InsideBorderPTL,
+        InsideBorderPTRL,
+        InsideBorderBR,
+        InsideBorderBL,
+        InsideBorderBRL,
+        InsideBorderPBR,
+        InsideBorderPBL,
+        InsideBorderPBRL,
+        InsideBorderTB,
+        InsideBorderTBR,
+        InsideBorderTBL,
+        InsideBorderTBRL,
+        InsideBorderPTB,
+        InsideBorderPTBR,
+        InsideBorderPTBL,
+        InsideBorderPTBRL,
+        InsideBorderTPB,
+        InsideBorderTPBR,
+        InsideBorderTPBL,
+        InsideBorderTPBRL,
+        InsideBorderPTPB,
+        InsideBorderPTPBR,
+        InsideBorderPTPBL,
+        InsideBorderPTPBRL,
+        InsideBorderRL,
+    }
+}

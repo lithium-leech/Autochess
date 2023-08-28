@@ -6,13 +6,13 @@ namespace AssetGroup
     public enum Highlight
     {
         None = 0,
-        Bottom,
-        BottomLeft,
-        BottomRight,
-        Left,
-        Right,
         Top,
+        TopRight,
         TopLeft,
-        TopRight
+        Bottom,
+        BottomRight,
+        BottomLeft,
+        Right,
+        Left,
     }
 }
