@@ -267,10 +267,21 @@ public class PlanningStage : IStage
         // Check the bordering sides
         AssetGroup.Highlight kind = sKey switch
         {
-            1 => AssetGroup.Highlight.Top,
-            2 => AssetGroup.Highlight.Bottom,
-            4 => AssetGroup.Highlight.Right,
-            8 => AssetGroup.Highlight.Left,
+            1 => AssetGroup.Highlight.T,
+            2 => AssetGroup.Highlight.B,
+            3 => AssetGroup.Highlight.ITB,
+            4 => AssetGroup.Highlight.R,
+            5 => AssetGroup.Highlight.ITR,
+            6 => AssetGroup.Highlight.IBR,
+            7 => AssetGroup.Highlight.ITBR,
+            8 => AssetGroup.Highlight.L,
+            9 => AssetGroup.Highlight.ITL,
+            10 => AssetGroup.Highlight.IBL,
+            11 => AssetGroup.Highlight.ITBL,
+            12 => AssetGroup.Highlight.IRL,
+            13 => AssetGroup.Highlight.ITRL,
+            14 => AssetGroup.Highlight.IBRL,
+            15 => AssetGroup.Highlight.ITBRL,
             _ => AssetGroup.Highlight.None
         };
         if (kind != AssetGroup.Highlight.None) return kind;
@@ -278,10 +289,21 @@ public class PlanningStage : IStage
         // Check the bordering corners
         return cKey switch
         {
-            1 => AssetGroup.Highlight.TopRight,
-            2 => AssetGroup.Highlight.TopLeft,
-            4 => AssetGroup.Highlight.BottomRight,
-            8 => AssetGroup.Highlight.BottomLeft,
+            1 => AssetGroup.Highlight.TR,
+            2 => AssetGroup.Highlight.TL,
+            3 => AssetGroup.Highlight.TRTL,
+            4 => AssetGroup.Highlight.BR,
+            5 => AssetGroup.Highlight.TRBR,
+            6 => AssetGroup.Highlight.TLBR,
+            7 => AssetGroup.Highlight.TRTLBR,
+            8 => AssetGroup.Highlight.BL,
+            9 => AssetGroup.Highlight.TRBL,
+            10 => AssetGroup.Highlight.TLBL,
+            11 => AssetGroup.Highlight.TRTLBL,
+            12 => AssetGroup.Highlight.BRBL,
+            13 => AssetGroup.Highlight.TRBRBL,
+            14 => AssetGroup.Highlight.TLBRBL,
+            15 => AssetGroup.Highlight.TRTLBRBL,
             _ => AssetGroup.Highlight.None,
         };       
     }
