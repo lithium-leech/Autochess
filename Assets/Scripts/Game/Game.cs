@@ -98,10 +98,10 @@ public class Game : MonoBehaviour
         }
 
         // Create the game boards
-        GameBoard = new Board(this, 8, 8, 2, 2, new Vector2(-4.0f, -1.0f));
-        SideBoard = new Board(this, 8, 2, 2, 0, new Vector2(-4.0f, -6.0f));
-        EnemyPowerBoard = new Board(this, 4, 1, 1, 0, new Vector2(-2.0f, 7.5f));
-        PlayerPowerBoard = new Board(this, 4, 1, 1, 0, new Vector2(-2.0f, -2.5f));
+        GameBoard = new TestBoardBuilder(this).Build();
+        SideBoard = new SideBoardBuilder(this).Build();
+        EnemyPowerBoard = new PowerBoardBuilder(this, false).Build();
+        PlayerPowerBoard = new PowerBoardBuilder(this, true).Build();
 
         // Create a sample setup;
         EnemyPieces.Add(AssetGroup.Piece.Private);

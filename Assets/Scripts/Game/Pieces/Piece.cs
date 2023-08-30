@@ -99,7 +99,8 @@ public abstract class Piece : ChessObject
                 else { xj--; yj--; pointer.x += Math.Abs(xi) / xi; pointer.y += Math.Abs(yi) / yi; }
                 if (!Board.OnBoard(pointer)) break;
                 else space = Board.GetSpace(pointer);
-                path.Add(space);
+                if (space != null) path.Add(space);
+                if (!jump && space == null) break;
                 if (!jump && !space.IsEnterable(this)) break;
             }
 
@@ -108,6 +109,8 @@ public abstract class Piece : ChessObject
 
             // Determine possible paths for this step
             if (!Board.OnBoard(pointer)) break;
+            if (!jump && space == null) break;
+            if (jump && space == null) continue;
             if (space.HasCapturable(this)) { captures.Add(new List<Space>(path)); break; }
             if (!jump && !space.IsEnterable(this)) break;
             if (jump && !space.IsEnterable(this)) continue;

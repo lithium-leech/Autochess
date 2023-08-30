@@ -20,6 +20,12 @@ public class Space
     /// <summary>This space's world position (z is 0)</summary>
     public Vector3 Position { get { return Board.ToPosition(Coordinates); } }
 
+    /// <summary>True if enemy pieces can be promoted on this space</summary>
+    public bool IsEnemyPromotion { get; set; } = false;
+
+    /// <summary>True if player pieces can be promoted on this space</summary>
+    public bool IsPlayerPromotion { get; set; } = false;
+
     /// <summary>The piece on this space (null when there is none)</summary>
     private Piece Piece { get; set; }
 

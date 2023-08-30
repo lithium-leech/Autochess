@@ -39,13 +39,13 @@ public static class GameExtensions
     /// <param name="kind">The kind of highlight to create</param>
     /// <param name="green">True if the highlight is green</param>
     /// <param name="board">The board to load the highlight on</param>
-    /// <param name="space">The space to place the highlight on</param>
+    /// <param name="coordinates">The coordinates to place the highlight at</param>
     /// <returns>A new highlight object</returns>
-    public static GameObject CreateHighlight(this Game game, AssetGroup.Highlight kind, bool green, Board board, Vector2Int space)
+    public static GameObject CreateHighlight(this Game game, AssetGroup.Highlight kind, bool green, Board board, Vector2Int coordinates)
     {
         AssetGroup.Group groupKey = green ? AssetGroup.Group.GreenHighlight : AssetGroup.Group.RedHighlight;
         GameObject highlight = Game.Instantiate(AssetManager.Prefabs[groupKey][(int)kind]);
-        highlight.transform.position = board.ToPosition(space) + GameState.StillPieceZ;
+        highlight.transform.position = board.ToPosition(coordinates) + GameState.HighlightZ;
         return highlight;
     }
 

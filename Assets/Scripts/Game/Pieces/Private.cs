@@ -24,8 +24,11 @@ public class Private : Piece
         if (space != null && (space.HasCapturable(this) || space.IsEnterable(this))) path = new List<Space>() { Space, space };
         EnactTurn(path);
 
-        // If the new space is at the board edge, upgrade to a colonel
-        int edge = IsPlayer ? Board.Height - 1 : 0;
-        if (path.Last().Y == edge) Transform = AssetGroup.Piece.Colonel;
+        // Check for promotion
+        if ((IsPlayer && path.Last().IsPlayerPromotion) ||
+            (!IsPlayer && path.Last().IsEnemyPromotion))
+        {
+            Transform = AssetGroup.Piece.Colonel;
+        }
     }
 }

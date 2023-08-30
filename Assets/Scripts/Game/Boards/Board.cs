@@ -8,16 +8,16 @@ using UnityEngine;
 public class Board
 {
     /// <summary>The Game that this board exists in</summary>
-    public Game Game { get; }
+    public Game Game { get; set; }
     
     /// <summary>The number of spaces going horizontally</summary>
-    public int Width { get; }
+    public int Width { get; set; }
 
     /// <summary>The number of spaces going vertically</summary>
-    public int Height { get; }
+    public int Height { get; set; }
 
     /// <summary>The board spaces and the pieces occupying them</summary>
-    public Space[,] Spaces { get; }
+    public Space[,] Spaces { get; set; }
 
     /// <summary>The number of rows (starting at the bottom) that the player can use</summary>
     public int PlayerRows { get; set; }
@@ -26,40 +26,22 @@ public class Board
     public int EnemyRows { get; set; }
 
     /// <summary>The pieces controlled by the player</summary>
-    public List<Piece> PlayerPieces { get; }
+    public List<Piece> PlayerPieces { get; set; }
 
     /// <summary>The pieces controlled by the enemy</summary>
-    public List<Piece> EnemyPieces { get; }
+    public List<Piece> EnemyPieces { get; set; }
 
     /// <summary>The world coordinates for this board's bottom left corner</summary>
-    public Vector2 CornerBL { get; }
+    public Vector2 CornerBL { get; set; }
 
     /// <summary>The world coordinates for this board's top right corner</summary>
-    public Vector2 CornerTR { get; }
+    public Vector2 CornerTR { get; set; }
+
+    /// <summary>The tile sprites that make up the visible parts of the board</summary>
+    public IList<GameObject> Tiles { get; set; }
 
     /// <summary>Creates a new instance of a Board</summary>
-    /// <param name="game">The Game that this board exists in</param>
-    /// <param name="width">The number of horizontal spaces on the board</param>
-    /// <param name="height">The number of vertical spaces on the board</param>
-    /// <param name="playerRows">The number of rows the player can use</param>
-    /// <param name="enemyRows">The number of rows the enemy can use</param>
-    /// <param name="cornerBL">World-space coordinates for the bottom left corner of the board</param>
-    public Board(Game game, int width, int height, int playerRows, int enemyRows, Vector2 cornerBL)
-    {
-        Game = game;
-        Width = width;
-        Height = height;
-        Spaces = new Space[width,height];
-        for (int x = 0; x < Width; x++)
-        for (int y = 0; y < Height; y++)
-            Spaces[x, y] = new Space(this, x, y);
-        PlayerRows = playerRows;
-        EnemyRows = enemyRows;
-        PlayerPieces = new List<Piece>();
-        EnemyPieces = new List<Piece>();
-        CornerBL = cornerBL;
-        CornerTR = cornerBL + new Vector2(width, height);
-    }
+    public Board() { }
 
     /// <summary>Adds a new piece to the board in the first empty space</summary>
     /// <param name="kind">The kind of piece to add</param>
@@ -118,7 +100,7 @@ public class Board
     {
         for (int x = 0; x < Width; x++)
         for (int y = 0; y < Height; y++)
-            Spaces[x,y].Clear();
+            GetSpace(new Vector2Int(x, y))?.Clear();
     }
 
     /// <summary>Checks if there are any moving pieces on the board</summary>
@@ -177,4 +159,11 @@ public class Board
     /// <param name="coordinates">The board space's coordinates to get a position for</param>
     /// <returns>A world position (z is 0)</returns>
     public Vector3 ToPosition(Vector2Int coordinates) => new(CornerBL.x + coordinates.x + 0.5f, CornerBL.y + coordinates.y + 0.5f, 0.0f);
+
+    /// <summary>Destroys this game board</summary>
+    public void Destroy()
+    {
+        Clear();
+        foreach (GameObject tile in Tiles) Game.Destroy(tile);
+    }
 }

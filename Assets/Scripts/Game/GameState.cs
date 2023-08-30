@@ -26,14 +26,20 @@ public static class GameState
     /// <summary>True during rounds where at least one piece has moved</summary>
     public static bool IsActiveRound { get; set; }
     
+    /// <summary>The Z-plane that background board tiles exist on</summary>
+    public static Vector3 BackboardZ { get; } = new Vector3(0.0f, 0.0f, -3.0f);
+
     /// <summary>The Z-plane that board tiles exist on</summary>
-    public static Vector3 BoardZ { get; } = new Vector3(0.0f, 0.0f, -5.0f); // Old board was located at (0, 3, -5)
+    public static Vector3 BoardZ { get; } = new Vector3(0.0f, 0.0f, -4.0f);
 
     /// <summary>The Z-plane that terrain exists on</summary>
-    public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -6.0f);
+    public static Vector3 TerrainZ { get; } = new Vector3(0.0f, 0.0f, -5.0f);
 
     /// <summary>The Z-plane that stationary pieces exist on</summary>
-    public static Vector3 StillPieceZ { get; } = new Vector3(0.0f, 0.0f, -7.0f);
+    public static Vector3 StillPieceZ { get; } = new Vector3(0.0f, 0.0f, -6.0f);
+
+    /// <summary>The Z-plane that highlights exist on</summary>
+    public static Vector3 HighlightZ { get; } = new Vector3(0.0f, 0.0f, -7.0f);
 
     /// <summary>The Z-plane that moving pieces exist on</summary>
     public static Vector3 MovingPieceZ { get; } = new Vector3(0.0f, 0.0f, -8.0f);

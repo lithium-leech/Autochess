@@ -37,9 +37,12 @@ public class Pawn : Piece
         // Move to the new space
         EnactTurn(path);
 
-        // If the new space is at the board edge, upgrade to a queen
-        int edge = IsPlayer ? Board.Height - 1 : 0;
-        if (path.Last().Y == edge) Transform = AssetGroup.Piece.Queen;
+        // Check for promotion
+        if ((IsPlayer && path.Last().IsPlayerPromotion) ||
+            (!IsPlayer && path.Last().IsEnemyPromotion))
+        {
+            Transform = AssetGroup.Piece.Queen;
+        }
     }
 
     /// <summary>Gets the space in front of the Pawn</summary>

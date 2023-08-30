@@ -48,7 +48,7 @@ public static class PlacementAI
         for (int y = board.Height - board.EnemyRows; y < board.Height; y++)
         {
             Space space = board.GetSpace(new Vector2Int(x, y));
-            if (space.IsEmpty()) emptySpaces.Add(space);
+            if (space != null && space.IsEmpty()) emptySpaces.Add(space);
         }
         if (emptySpaces.Count < 1) return null;
         else return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
@@ -64,7 +64,7 @@ public static class PlacementAI
         for (int y = board.PlayerRows; y < board.Height - board.EnemyRows; y++)
         {
             Space space = board.GetSpace(new Vector2Int(x, y));
-            if (space.IsEmpty()) emptySpaces.Add(space);
+            if (space != null && space.IsEmpty()) emptySpaces.Add(space);
         }
         if (emptySpaces.Count < 1) return null;
         else return emptySpaces[UnityEngine.Random.Range(0, emptySpaces.Count - 1)];
@@ -80,7 +80,7 @@ public static class PlacementAI
         for (int y = 0; y < board.Height; y++)
         {
             Space space = board.GetSpace(new Vector2Int(x, y));
-            if (space.HasEnemy(true)) occupiedSpaces.Add(space);
+            if (space != null && space.HasEnemy(true)) occupiedSpaces.Add(space);
         }
         if (occupiedSpaces.Count < 1) return null;
         else return occupiedSpaces[UnityEngine.Random.Range(0, occupiedSpaces.Count - 1)];

@@ -50,7 +50,7 @@ public class PlanningStage : IStage
     {
         // Get the current mouse position
         Vector3 position = GameState.Camera.ScreenToWorldPoint(Input.mousePosition);
-        position.z = GameState.StillPieceZ.z;
+        position.z = GameState.MovingPieceZ.z;
 
         // Check if the position is inside a board
         Board board = null;
@@ -70,7 +70,7 @@ public class PlanningStage : IStage
         if (board != null) space = board.GetSpace(board.ToSpace(position));
 
         // Pick up an object when the screen is clicked/pressed
-        if (Input.GetMouseButtonDown(0) && board != null && HeldObject == null)
+        if (Input.GetMouseButtonDown(0) && board != null && space != null && HeldObject == null)
         {
             HeldObject = space.Grab();
             if (HeldObject != null)
@@ -216,36 +216,84 @@ public class PlanningStage : IStage
     private void AddHighlightZone(Board board, IList<GameObject> highlights, bool player)
     {
         // Get the zone coordinates
-        int top;
-        int bottom;
-        int right = board.Width;
-        int left = -1;
-        if (player)
-        {
-            top = board.PlayerRows;
-            bottom = -1;
-        }
-        else
-        {
-            top = board.Height;
-            bottom = (board.Height - board.EnemyRows) - 1;
-        }
+        int top = player ? board.PlayerRows - 1 : board.Height - 1;
+        int bottom = player ? 0 : board.Height - board.EnemyRows;
+        int right = board.Width - 1;
+        int left = 0;
+        Vector4 zone = new(bottom, left, top, right);
 
-        // Create the bottom row
-        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomLeft, player, board, new Vector2Int(left, bottom)));
-        for (int i = left + 1; i < right; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Bottom, player, board, new Vector2Int(i, bottom)));
-        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.BottomRight, player, board, new Vector2Int(right, bottom)));
-
-        // Create the left and right columns
-        for (int i = bottom + 1; i < top; i++)
+        // Create highlights for all coordinates in the zone
+        for (int x = left - 1; x <= right + 1; x++)
+        for (int y = bottom - 1; y <= top + 1; y++)
         {
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Left, player, board, new Vector2Int(left, i)));
-            highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Right, player, board, new Vector2Int(right, i)));
+            Vector2Int coordinates = new(x, y);
+            Space space = GetZoneSpace(board, zone, coordinates);
+            if (space == null)
+            {
+                AssetGroup.Highlight kind = DetermineHighlightKind(board, zone, coordinates);
+                if (kind != AssetGroup.Highlight.None)
+                    highlights.Add(Game.CreateHighlight(kind, player, board, coordinates));
+            }
         }
+    }
 
-        // Create the top row
-        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopLeft, player, board, new Vector2Int(left, top)));
-        for (int i = left + 1; i < right; i++) highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.Top, player, board, new Vector2Int(i, top)));
-        highlights.Add(Game.CreateHighlight(AssetGroup.Highlight.TopRight, player, board, new Vector2Int(right, top)));
+    /// <summary>Determines the kind of highlight to display at a given set of coordinates</summary>
+    /// <param name="board">The board to display highlights on</param>
+    /// <param name="zone">The zone to display highlights around</param>
+    /// <param name="coordinates">The coordinates to determine highlighting for</param>
+    /// <returns>The kind of highlight that belongs at the given coordinates</returns>
+    private AssetGroup.Highlight DetermineHighlightKind(Board board, Vector4 zone, Vector2Int coordinates)
+    {
+        // Determine which spaces are present
+        bool top = GetZoneSpace(board, zone, coordinates + new Vector2Int(0, 1)) != null;
+        bool bottom = GetZoneSpace(board, zone, coordinates + new Vector2Int(0, -1)) != null;
+        bool right = GetZoneSpace(board, zone, coordinates + new Vector2Int(1, 0)) != null;
+        bool left = GetZoneSpace(board, zone, coordinates + new Vector2Int(-1, 0)) != null;
+        bool topRight = GetZoneSpace(board, zone, coordinates + new Vector2Int(1, 1)) != null;
+        bool topLeft = GetZoneSpace(board, zone, coordinates + new Vector2Int(-1, 1)) != null;
+        bool bottomRight = GetZoneSpace(board, zone, coordinates + new Vector2Int(1, -1)) != null;
+        bool bottomLeft = GetZoneSpace(board, zone, coordinates + new Vector2Int(-1, -1)) != null;
+
+        // Create a key for the discovered information
+        int sKey = (bottom ? 1 : 0) << 0 |
+                   (top ? 1 : 0) << 1 |
+                   (left ? 1 : 0) << 2 |
+                   (right ? 1 : 0) << 3;
+        int cKey = (bottomLeft ? 1 : 0) << 0 |
+                   (bottomRight ? 1 : 0) << 1 |
+                   (topLeft ? 1 : 0) << 2 |
+                   (topRight ? 1 : 0) << 3;
+
+        // Check the bordering sides
+        AssetGroup.Highlight kind = sKey switch
+        {
+            1 => AssetGroup.Highlight.Top,
+            2 => AssetGroup.Highlight.Bottom,
+            4 => AssetGroup.Highlight.Right,
+            8 => AssetGroup.Highlight.Left,
+            _ => AssetGroup.Highlight.None
+        };
+        if (kind != AssetGroup.Highlight.None) return kind;
+
+        // Check the bordering corners
+        return cKey switch
+        {
+            1 => AssetGroup.Highlight.TopRight,
+            2 => AssetGroup.Highlight.TopLeft,
+            4 => AssetGroup.Highlight.BottomRight,
+            8 => AssetGroup.Highlight.BottomLeft,
+            _ => AssetGroup.Highlight.None,
+        };       
+    }
+
+    /// <summary>Gets a space inside of a given zone</summary>
+    /// <param name="board">The board to get a space from</param>
+    /// <param name="top">The zone to get a space within</param>
+    /// <param name="coordinates">The coordinates to get a space for</param>
+    /// <returns>A Space within the zone, or null</returns>
+    private Space GetZoneSpace(Board board, Vector4 zone, Vector2Int coordinates)
+    {
+        if (coordinates.x < zone.y || coordinates.x > zone.w || coordinates.y < zone.x || coordinates.y > zone.z) return null;
+        else return board.GetSpace(coordinates);
     }
 }
