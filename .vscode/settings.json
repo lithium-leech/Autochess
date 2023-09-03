@@ -79,6 +79,7 @@
         "PTPBRL",
         "PTPRL",
         "PTRL",
+        "Shogi",
         "TBRL",
         "TLBL",
         "TLBR",
@@ -94,7 +95,8 @@
         "TRTLBR",
         "TRTLBRBL",
         "UGUI",
-        "Unapplies"
+        "Unapplies",
+        "Xiangqi"
     ],
     "dotnet.defaultSolution": "Autochess.sln"
 }

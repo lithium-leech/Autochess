@@ -16,5 +16,7 @@ namespace AssetGroup
         WhiteObject,
         BlackObject,
         Power,
+        Map,
+        Set,
     }
 }
