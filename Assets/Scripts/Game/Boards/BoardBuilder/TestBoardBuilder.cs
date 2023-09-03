@@ -16,13 +16,13 @@ public class TestBoardBuilder : BoardBuilder
         Board board = new()
         {
             Game = Game,
-            Width = 7,
-            Height = 7,
+            Width = 5,
+            Height = 5,
             PlayerRows = 2,
             EnemyRows = 2,
             PlayerPieces = new List<Piece>(),
             EnemyPieces = new List<Piece>(),
-            CornerBL = new Vector2(-3.5f, -0.5f)
+            CornerBL = new Vector2(-2.5f, 0.5f)
         };
         board.CornerTR = board.CornerBL + new Vector2(board.Width, board.Height);
 
@@ -33,13 +33,6 @@ public class TestBoardBuilder : BoardBuilder
         {
             board.Spaces[x,y] = new Space(board, x, y);
         }
-
-        // Remove spaces in the desired locations
-        board.Spaces[3,3] = null;
-        board.Spaces[2,3] = null;
-        board.Spaces[4,3] = null;
-        board.Spaces[3,2] = null;
-        board.Spaces[3,4] = null;
 
         // Change the top and bottom rows to promotion spaces
         for (int x = 0; x < board.Width; x++)
