@@ -86,7 +86,7 @@ public class Game : MonoBehaviour
 
         // Go to the first level
         GameState.IsPlayerWhite = false;
-        GameState.Level = 1;
+        GameState.Level = 0;
         LevelText.text = GameState.Level.ToString();
         PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
         IntVariable score = pvs["game"]["score"] as IntVariable;
@@ -97,18 +97,13 @@ public class Game : MonoBehaviour
             highscore.Value = GameState.HighScore;
         }
 
-        // Create the game boards
-        GameBoard = new TestBoardBuilder(this).Build();
+        // Create the static boards
         SideBoard = new SideBoardBuilder(this).Build();
         EnemyPowerBoard = new PowerBoardBuilder(this, false).Build();
         PlayerPowerBoard = new PowerBoardBuilder(this, true).Build();
 
-        // Create a sample setup;
-        EnemyPieces.Add(AssetGroup.Piece.Private);
-        PlayerSideBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
-
-        // Start the planning phase
-        NextStage = new PlanningStage(this);
+        // Start the upgrade phase
+        NextStage = new UpgradeStage(this);
     }
 
     private void Update()

@@ -91,4 +91,28 @@ public static class GameExtensions
         power.Initialize(game, player, true);
         return power;
     }
+
+    /// <summary>Creates a new instance of a map</summary>
+    /// <param name="game">The game to create a map in</param>
+    /// <param name="kind">The kind of map to create</param>
+    /// <param name="position">The position to create the map at</param>
+    /// <returns>A map</returns>
+    public static GameObject CreateMap(this Game game, AssetGroup.Map kind, Vector3 position)
+    {
+        GameObject map = Game.Instantiate(AssetManager.Prefabs[AssetGroup.Group.Map][(int)kind]);
+        map.transform.position = position;
+        return map;
+    }
+
+    /// <summary>Creates a new instance of a set</summary>
+    /// <param name="game">The game to create a set in</param>
+    /// <param name="kind">The kind of set to create</param>
+    /// <param name="position">The position to create the set at</param>
+    /// <returns>A set</returns>
+    public static GameObject CreateSet(this Game game, AssetGroup.Set kind, Vector3 position)
+    {
+        GameObject set = Game.Instantiate(AssetManager.Prefabs[AssetGroup.Group.Set][(int)kind]);
+        set.transform.position = position;
+        return set;
+    }
 }
