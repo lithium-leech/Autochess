@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -16,8 +15,9 @@ public class PieceChoices : UpgradeChoices
         EnemyPieces = new AssetGroup.Piece[NumberOfChoices];
         for (int i = 0; i < NumberOfChoices; i++)
         {
-            PlayerPieces[i] = GetRandomPiece();
-            EnemyPieces[i] = GetRandomPiece();
+            PiecePair choice = Game.CurrentSet.GetPieceChoice();
+            PlayerPieces[i] = choice.Player;
+            EnemyPieces[i] = choice.Enemy;
         }
     }
 
@@ -104,58 +104,19 @@ public class PieceChoices : UpgradeChoices
         return piece;
     }
 
-    /// <summary>Returns a random type of piece</summary>
-    /// <returns>A Piece type</returns>
-    private AssetGroup.Piece GetRandomPiece()
-    {
-        return UnityEngine.Random.Range(1, 7) switch
-        {
-            1 => AssetGroup.Piece.Private,
-            2 => AssetGroup.Piece.Captain,
-            3 => AssetGroup.Piece.Sergeant,
-            4 => AssetGroup.Piece.Lieutenant,
-            5 => AssetGroup.Piece.Colonel,
-            6 => AssetGroup.Piece.General,
-            _ => throw new Exception($"A random selection in PieceChoices was not implemented")
-        }; ;
-    }
-
     /// <summary>Remove an enemy piece with lower value than the given kind</summary>
     /// <param name="kind">The kind of piece to make space for</param>
     public void RemoveLowerValue(AssetGroup.Piece kind)
     {
-        int valueToAdd = GetPieceValue(kind);
+        int valueToAdd = Game.CurrentSet.GetPieceValue(kind);
         for (int i = 0; i < Game.EnemyPieces.Count; i++)
         {
-            int valueToRemove = GetPieceValue(Game.EnemyPieces[i]);
+            int valueToRemove = Game.CurrentSet.GetPieceValue(Game.EnemyPieces[i]);
             if (valueToRemove < valueToAdd)
             {
                 Game.EnemyPieces.RemoveAt(i);
                 return;
             }
         }
-    }
-
-    /// <summary>Get the value of a given kind of piece</summary>
-    /// <param name="kind">The kind of piece to evaluate</param>
-    /// <returns>An integer value</returns>
-    public int GetPieceValue(AssetGroup.Piece kind)
-    {
-        return kind switch
-        {
-            AssetGroup.Piece.Pawn => 0,
-            AssetGroup.Piece.Private => 1,
-            AssetGroup.Piece.Knight => 2,
-            AssetGroup.Piece.Sergeant => 3,
-            AssetGroup.Piece.King => 4,
-            AssetGroup.Piece.General => 5,
-            AssetGroup.Piece.Bishop => 6,
-            AssetGroup.Piece.Lieutenant => 7,
-            AssetGroup.Piece.Captain => 8,
-            AssetGroup.Piece.Rook => 9,
-            AssetGroup.Piece.Colonel => 10,
-            AssetGroup.Piece.Queen => 11,
-            _ => throw new Exception($"Piece kind {kind} not recognized")
-        };
     }
 }

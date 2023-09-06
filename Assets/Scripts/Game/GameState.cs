@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -26,6 +27,15 @@ public static class GameState
     /// <summary>True during rounds where at least one piece has moved</summary>
     public static bool IsActiveRound { get; set; }
     
+    /// <summary>The number of rounds to complete for a piece upgrade to be offered</summary>
+    public static int PieceRounds { get; } = 1;
+
+    /// <summary>The number of rounds to complete for a power upgrade to be offered</summary>
+    public static int PowerRounds { get; } = 5;
+
+    /// <summary>The number of rounds to complete for a map upgrade to be offered</summary>
+    public static int MapRounds { get; } = 20;
+
     /// <summary>The Z-plane that background board tiles exist on</summary>
     public static Vector3 BackboardZ { get; } = new Vector3(0.0f, 0.0f, -3.0f);
 

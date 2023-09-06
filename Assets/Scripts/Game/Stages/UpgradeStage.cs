@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -39,32 +38,14 @@ public class UpgradeStage : IStage
         }
 
         // Display new level choices
-        if (GameState.Level % 2 == 1)
-        {
-            // Reset pieces
-            Game.EnemyPieces.Clear();
-            Game.PlayerGameBoard.Clear();
-            Game.PlayerSideBoard.Clear();
-            
-            // Reset powers
-            IList<Power> powers = new List<Power>();
-            foreach (Power power in Game.EnemyPowers) powers.Add(power);
-            foreach (Power power in Game.PlayerPowers) powers.Add(power);
-            foreach (Power power in powers) power.Deactivate();
-
-            // Offer next map
+        if (GameState.Level % GameState.MapRounds == 1)
             Choices = new MapChoices(Game);
-        }
-        else if (GameState.Level % 5 == 0)
-        {
-            // Offer new powers
+        else if (GameState.Level % GameState.PowerRounds == 0)
             Choices = new PowerChoices(Game);
-        }
-        else
-        {
-            // Offer new pieces
+        else if (GameState.Level % GameState.PieceRounds == 0)
             Choices = new PieceChoices(Game);
-        }
+        else
+            Choices = new NullChoices(Game);
         Game.UpgradeMenuTitleText.StringReference = new LocalizedString("Text", Choices.TitleText);
         Choices.Show();
         Game.ChoiceButtons.SelectButton(-1);

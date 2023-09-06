@@ -62,6 +62,9 @@ public class Game : MonoBehaviour
     /// <summary>The player's power ups</summary>
     public IList<Power> PlayerPowers { get; } = new List<Power>();
 
+    /// <summary>The current set of pieces being offered between rounds</summary>
+    public PieceSet CurrentSet { get; set; }
+
     /// <summary>The board that fights take place on</summary>
     public Board GameBoard { get; set; }
 

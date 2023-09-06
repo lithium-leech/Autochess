@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -51,6 +52,17 @@ public class MapChoices : UpgradeChoices
 
     public override void ApplyChoice(int choice)
     {
+        // Reset pieces
+        Game.EnemyPieces.Clear();
+        Game.PlayerGameBoard.Clear();
+        Game.PlayerSideBoard.Clear();
+            
+        // Reset powers
+        IList<Power> powers = new List<Power>();
+        foreach (Power power in Game.EnemyPowers) powers.Add(power);
+        foreach (Power power in Game.PlayerPowers) powers.Add(power);
+        foreach (Power power in powers) power.Deactivate();
+
         // Remove the old map
         Game.GameBoard?.Destroy();
 
@@ -73,10 +85,18 @@ public class MapChoices : UpgradeChoices
         Game.GameBoard = boardBuilder.Build();
 
         // Add the new piece set
+        PieceSet pieceSet = set switch
+        {
+            AssetGroup.Set.Western => new WesternPieceSet(),
+            AssetGroup.Set.Military => new MilitaryPieceSet(),
+            _ => throw new System.Exception("Set kind not recognized")
+        };
+        Game.CurrentSet = pieceSet;
 
         // Add the starting pieces
-        Game.EnemyPieces.Add(AssetGroup.Piece.Private);
-        Game.PlayerGameBoard.Add(new PiecePositionRecord(AssetGroup.Piece.Private, null));
+        PiecePair starters = Game.CurrentSet.GetStartingPieces();
+        Game.EnemyPieces.Add(starters.Enemy);
+        Game.PlayerGameBoard.Add(new PiecePositionRecord(starters.Player, null));
     }
 
     /// <summary>Create a set or map sprite</summary>
