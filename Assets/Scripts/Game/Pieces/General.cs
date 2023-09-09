@@ -11,17 +11,17 @@ public class General : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        IList<Space> path = new List<Space>() { Space };
+        IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
         // Get the possible moves this piece can make
-        IList<IList<Space>> moves = new List<IList<Space>>();
-        AddRookPaths(1, 2, false, moves, new List<IList<Space>>());
-        AddBishopPaths(1, 2, false, moves, new List<IList<Space>>());
+        IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
+        AddOrthogonalPaths(path, 1, 2, false, moves, new List<IList<Vector2Int>>());
+        AddDiagonalPaths(path, 1, 2, false, moves, new List<IList<Vector2Int>>());
 
         // Get the possible captures this piece can make
-        IList<IList<Space>> captures = new List<IList<Space>>();
-        AddRookPaths(1, 1, false, new List<IList<Space>>(), captures);
-        AddBishopPaths(1, 1, false, new List<IList<Space>>(), captures);
+        IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
+        AddOrthogonalPaths(path, 1, 1, false, new List<IList<Vector2Int>>(), captures);
+        AddDiagonalPaths(path, 1, 1, false, new List<IList<Vector2Int>>(), captures);
 
         // Capture a piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];

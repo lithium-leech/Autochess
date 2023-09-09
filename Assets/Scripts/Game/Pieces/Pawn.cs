@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// A chess Pawn
+/// A classic chess piece
 /// </summary>
 public class Pawn : Piece
 {
@@ -12,7 +12,7 @@ public class Pawn : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        IList<Space> path = new List<Space>() { Space };
+        IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
         // Get the spaces in front of this piece
         Space move = GetMoveSpace();
@@ -20,29 +20,27 @@ public class Pawn : Piece
         Space rightAttack = GetRightAttackSpace();
 
         // Capture a piece if possible
-        if ((leftAttack != null && leftAttack.HasCapturable(this)) && (rightAttack != null && rightAttack.HasCapturable(this)))
+        if (leftAttack != null && leftAttack.HasCapturable(this) && rightAttack != null && rightAttack.HasCapturable(this))
         {
             // Choose randomly if both options are available
-            if (Random.Range(0, 2) == 1) path = new List<Space>() { Space, leftAttack };
-            else path = new List<Space>() { Space, rightAttack };
+            if (Random.Range(0, 2) == 1) path = new List<Vector2Int>() { Space.Coordinates, leftAttack.Coordinates };
+            else path = new List<Vector2Int>() { Space.Coordinates, rightAttack.Coordinates };
         }
-        else if (leftAttack != null && leftAttack.HasCapturable(this)) path = new List<Space>() { Space, leftAttack };
-        else if (rightAttack != null && rightAttack.HasCapturable(this)) path = new List<Space>() { Space, rightAttack };
+        else if (leftAttack != null && leftAttack.HasCapturable(this)) path = new List<Vector2Int>() { Space.Coordinates, leftAttack.Coordinates };
+        else if (rightAttack != null && rightAttack.HasCapturable(this)) path = new List<Vector2Int>() { Space.Coordinates, rightAttack.Coordinates };
         else
         {
             // Otherwise move if possible
-            if (move != null && move.IsEnterable(this)) path = new List<Space>() { Space, move };
+            if (move != null && move.IsEnterable(this)) path = new List<Vector2Int>() { Space.Coordinates, move.Coordinates };
         }
 
         // Move to the new space
         EnactTurn(path);
 
         // Check for promotion
-        if ((IsPlayer && path.Last().IsPlayerPromotion) ||
-            (!IsPlayer && path.Last().IsEnemyPromotion))
-        {
+        Space last = Board.GetSpace(path.Last());
+        if ((IsPlayer && last.IsPlayerPromotion) || (!IsPlayer && last.IsEnemyPromotion))
             Transform = AssetGroup.Piece.Queen;
-        }
     }
 
     /// <summary>Gets the space in front of the Pawn</summary>

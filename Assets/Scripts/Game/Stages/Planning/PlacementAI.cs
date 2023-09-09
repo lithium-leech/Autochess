@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +11,8 @@ public static class PlacementAI
     /// <param name="game">The game to set up the enemy's pieces in</param>
     public static void SetUpEnemy(Game game)
     {
-        foreach (AssetGroup.Piece pieceType in game.EnemyPieces) PlacePieceRandomly(game.GameBoard, pieceType);
+        IEnumerable<AssetGroup.Piece> enemyPieces = game.EnemyPieces.Reverse();
+        foreach (AssetGroup.Piece pieceType in enemyPieces) PlacePieceRandomly(game.GameBoard, pieceType);
         foreach (AssetGroup.Object objectType in game.EnemyObjects) PlaceObjectRandomly(game.GameBoard, objectType);   
     }
 

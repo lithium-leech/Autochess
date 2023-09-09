@@ -12,7 +12,7 @@ public class Private : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        IList<Space> path = new List<Space>() { Space };
+        IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
         // Get the space in front of this piece
         Vector2Int coordinate;
@@ -21,14 +21,12 @@ public class Private : Piece
         Space space = Board.GetSpace(coordinate);
 
         // Move or capture if possible
-        if (space != null && (space.HasCapturable(this) || space.IsEnterable(this))) path = new List<Space>() { Space, space };
+        if (space != null && (space.HasCapturable(this) || space.IsEnterable(this))) path = new List<Vector2Int>() { Space.Coordinates, space.Coordinates };
         EnactTurn(path);
 
         // Check for promotion
-        if ((IsPlayer && path.Last().IsPlayerPromotion) ||
-            (!IsPlayer && path.Last().IsEnemyPromotion))
-        {
+        Space last = Board.GetSpace(path.Last());
+        if ((IsPlayer && last.IsPlayerPromotion) || (!IsPlayer && last.IsEnemyPromotion))
             Transform = AssetGroup.Piece.Colonel;
-        }
     }
 }

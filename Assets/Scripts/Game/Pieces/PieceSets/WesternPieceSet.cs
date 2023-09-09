@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 /// <summary>
-/// A set containing the standard pieces seen in the variant of chess
+/// A set containing the pieces seen in the variant of chess
 /// played throughout the "western" world
 /// </summary>
 public class WesternPieceSet : PieceSet

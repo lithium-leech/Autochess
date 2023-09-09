@@ -2,7 +2,7 @@
 using UnityEngine;
 
 /// <summary>
-/// A chess king
+/// A classic chess piece
 /// </summary>
 public class King : Piece
 {
@@ -11,13 +11,13 @@ public class King : Piece
     public override void TakeTurn()
     {
         // Assume initially that the piece cannot move
-        IList<Space> path = new List<Space>() { Space };
+        IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
         // Get the possible moves and captures this piece can make
-        IList<IList<Space>> moves = new List<IList<Space>>();
-        IList<IList<Space>> captures = new List<IList<Space>>();
-        AddRookPaths(1, 1, false, moves, captures);
-        AddBishopPaths(1, 1, false, moves, captures);
+        IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
+        AddOrthogonalPaths(path, 1, 1, false, moves, captures);
+        AddDiagonalPaths(path, 1, 1, false, moves, captures);
 
         // Capture a piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];

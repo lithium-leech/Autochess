@@ -58,6 +58,9 @@
         "Blit",
         "BRBL",
         "capturable",
+        "Dabbaba",
+        "downleft",
+        "Ferz",
         "gameplay",
         "Grabable",
         "highscore",
@@ -80,6 +83,7 @@
         "PTPRL",
         "PTRL",
         "Shogi",
+        "Taliah",
         "TBRL",
         "TLBL",
         "TLBR",
@@ -96,6 +100,8 @@
         "TRTLBRBL",
         "UGUI",
         "Unapplies",
+        "upleft",
+        "Wazir",
         "Xiangqi"
     ],
     "dotnet.defaultSolution": "Autochess.sln"

@@ -18,5 +18,13 @@ namespace AssetGroup
         Lieutenant,
         Colonel,
         General,
+        Ferz,
+        Wazir,
+        Dabbaba,
+        Taliah,
+        Camel,
+        Elephant,
+        Giraffe,
+        Swordsman,
     }
 }

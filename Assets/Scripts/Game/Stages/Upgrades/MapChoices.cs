@@ -89,6 +89,7 @@ public class MapChoices : UpgradeChoices
         {
             AssetGroup.Set.Western => new WesternPieceSet(),
             AssetGroup.Set.Military => new MilitaryPieceSet(),
+            AssetGroup.Set.Tamerlane => new TamerlanePieceSet(),
             _ => throw new System.Exception("Set kind not recognized")
         };
         Game.CurrentSet = pieceSet;

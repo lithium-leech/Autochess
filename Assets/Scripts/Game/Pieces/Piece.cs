@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -23,8 +22,8 @@ public abstract class Piece : ChessObject
     /// <summary>True if the piece is moving towards a target location</summary>
     public bool IsMoving { get; private set; } = false;
 
-    /// <summary>A sequence of spaces to move through</summary>
-    private IList<Space> Path { get; set; }
+    /// <summary>A sequence of coordinates to move through</summary>
+    private IList<Vector2Int> Path { get; set; }
 
     /// <summary>The incrementor used for lerp movement</summary>
     private float LerpIncrement { get; set; } = 0;
@@ -40,15 +39,15 @@ public abstract class Piece : ChessObject
             LerpIncrement = Mathf.Clamp01(LerpIncrement + (Time.deltaTime * 2.0f / GameState.TurnPause));
             if (LerpIncrement == 1.0f)
             {
-                transform.position = Path.Last().Position + GameState.MovingPieceZ;
+                transform.position = Board.ToPosition(Path.Last()) + GameState.MovingPieceZ;
             }
             else
             {
                 int segment = Mathf.FloorToInt(LerpIncrement * (Path.Count - 1));
                 float segmentIncrement = (LerpIncrement * (Path.Count - 1)) - segment;
-                transform.position = Vector3.Lerp(Path[segment].Position + GameState.MovingPieceZ, Path[segment+1].Position + GameState.MovingPieceZ, segmentIncrement);
+                transform.position = Vector3.Lerp(Board.ToPosition(Path[segment]) + GameState.MovingPieceZ, Board.ToPosition(Path[segment+1]) + GameState.MovingPieceZ, segmentIncrement);
             }
-            if (Vector3.Distance(transform.position, Path.Last().Position + GameState.MovingPieceZ) < 0.001f) IsMoving = false;
+            if (Vector3.Distance(transform.position, Board.ToPosition(Path.Last()) + GameState.MovingPieceZ) < 0.001f) IsMoving = false;
         }
     }
 
@@ -74,104 +73,123 @@ public abstract class Piece : ChessObject
         return true;
     }
 
+    /// <summary>Checks if the given path is a valid path this piece can traverse</summary>
+    /// <param name="path">The path to check</param>
+    /// <param name="jump">True if obstacles can be jumped over</param>
+    /// <returns>True if the path is traversable</returns>
+    protected bool IsValidPath(IList<Vector2Int> path, bool jump)
+    {
+        // Check that the path starts from the current location
+        if (path.Count < 1) return false;
+        if (path[0] != Space.Coordinates) return false;
+
+        // Check that the rest of the path is traversable
+        for (int i = 1; i < path.Count; i++)
+        {
+            if (!Board.OnBoard(path[i])) return false;
+            Space space = Board.GetSpace(path[i]);
+            if (!jump && space == null) return false;
+            if (jump && space == null) continue;
+            if (!jump && !space.IsEnterable(this)) return false;
+            if (jump && !space.IsEnterable(this)) continue;
+        }
+
+        // The path is valid if nothing proved it invalid
+        return true;
+    }
+
     /// <summary>Gets possible move and capture paths in the specified direction</summary>
+    /// <param name="start">The starting location to find paths from</param>
     /// <param name="xi">x increment</param>
     /// <param name="yi">y increment</param>
     /// <param name="steps">The number of times to increment</param>
     /// <param name="jump">True if obstacles can be jumped over</param>
     /// <param name="moves">A list of possible move paths to add to</param>
     /// <param name="captures">A list of possible capture paths to add to</param>
-    protected void AddPaths(int xi, int yi, int steps, bool jump, IList<IList<Space>> moves, IList<IList<Space>> captures)
+    protected void AddLinearPaths(IList<Vector2Int> start, int xi, int yi, int steps, bool jump, IList<IList<Vector2Int>> moves, IList<IList<Vector2Int>> captures)
     {
-        // Create a new path to build
-        IList<Space> path = new List<Space>() { Space };
-        Vector2Int pointer = Space.Coordinates;
+        IList<Vector2Int> path = new List<Vector2Int>(start);
+        Vector2Int pointer = path.Last();
         for (int i = 0; i < steps; i++)
         {
             // Take one step using the given increment
-            Space space = Space;
-            int xj = Math.Abs(xi);
-            int yj = Math.Abs(yi);
-            while (xj > 0 || yj > 0)
-            {
-                if (xj > yj) { xj--; pointer.x += Math.Abs(xi) / xi; } 
-                else if (yj > xj) { yj--; pointer.y += Math.Abs(yi) / yi; }
-                else { xj--; yj--; pointer.x += Math.Abs(xi) / xi; pointer.y += Math.Abs(yi) / yi; }
-                if (!Board.OnBoard(pointer)) break;
-                else space = Board.GetSpace(pointer);
-                if (space != null) path.Add(space);
-                if (!jump && space == null) break;
-                if (!jump && !space.IsEnterable(this)) break;
-            }
-
-            // There are no more paths if the step couldn't be finished
-            if (xj > 0 || yj > 0) break;
+            pointer.x += xi;
+            pointer.y += yi;
+            if (!Board.OnBoard(pointer)) break;
+            path.Add(pointer);
 
             // Determine possible paths for this step
-            if (!Board.OnBoard(pointer)) break;
+            Space space = Board.GetSpace(pointer);
             if (!jump && space == null) break;
             if (jump && space == null) continue;
-            if (space.HasCapturable(this)) { captures.Add(new List<Space>(path)); break; }
+            if (space.HasCapturable(this)) { captures.Add(new List<Vector2Int>(path)); }
             if (!jump && !space.IsEnterable(this)) break;
             if (jump && !space.IsEnterable(this)) continue;
-            moves.Add(new List<Space>(path));
+            moves.Add(new List<Vector2Int>(path));
         }
     }
 
-    /// <summary>Gets possible vertical and horizontal paths</summary>
+    /// <summary>Gets possible horizontal paths</summary>
+    /// <param name="start">The starting location to find paths from</param>
     /// <param name="i">The size of each step</param>
     /// <param name="steps">The number of steps to take</param>
     /// <param name="jump">True if obstacles can be jumped over</param>
     /// <param name="moves">A list of possible move paths to add to</param>
     /// <param name="captures">A list of possible capture paths to add to</param>
-    protected void AddRookPaths(int i, int steps, bool jump, IList<IList<Space>> moves, IList<IList<Space>> captures)
+    protected void AddHorizontalPaths(IList<Vector2Int> start, int i, int steps, bool jump, IList<IList<Vector2Int>> moves, IList<IList<Vector2Int>> captures)
     {
-        AddPaths(i, 0, steps, jump, moves, captures);
-        AddPaths(0, -i, steps, jump, moves, captures);
-        AddPaths(-i, 0, steps, jump, moves, captures);
-        AddPaths(0, i, steps, jump, moves, captures);
+        AddLinearPaths(start, i, 0, steps, jump, moves, captures);
+        AddLinearPaths(start, -i, 0, steps, jump, moves, captures);
+    }
+
+    /// <summary>Gets possible vertical paths</summary>
+    /// <param name="start">The starting location to find paths from</param>
+    /// <param name="i">The size of each step</param>
+    /// <param name="steps">The number of steps to take</param>
+    /// <param name="jump">True if obstacles can be jumped over</param>
+    /// <param name="moves">A list of possible move paths to add to</param>
+    /// <param name="captures">A list of possible capture paths to add to</param>
+    protected void AddVerticalPaths(IList<Vector2Int> start, int i, int steps, bool jump, IList<IList<Vector2Int>> moves, IList<IList<Vector2Int>> captures)
+    {
+        AddLinearPaths(start, 0, i, steps, jump, moves, captures);
+        AddLinearPaths(start, 0, -i, steps, jump, moves, captures);
+    }
+
+    /// <summary>Gets possible vertical and horizontal paths</summary>
+    /// <param name="start">The starting location to find paths from</param>
+    /// <param name="i">The size of each step</param>
+    /// <param name="steps">The number of steps to take</param>
+    /// <param name="jump">True if obstacles can be jumped over</param>
+    /// <param name="moves">A list of possible move paths to add to</param>
+    /// <param name="captures">A list of possible capture paths to add to</param>
+    protected void AddOrthogonalPaths(IList<Vector2Int> start, int i, int steps, bool jump, IList<IList<Vector2Int>> moves, IList<IList<Vector2Int>> captures)
+    {
+        AddVerticalPaths(start, i, steps, jump, moves, captures);
+        AddHorizontalPaths(start, i, steps, jump, moves, captures);
     }
 
     /// <summary>Gets possible diagonal paths</summary>
+    /// <param name="start">The starting location to find paths from</param>
     /// <param name="i">The size of each step</param>
     /// <param name="steps">The number of steps to take</param>
     /// <param name="jump">True if obstacles can be jumped over</param>
     /// <param name="moves">A list of possible move paths to add to</param>
     /// <param name="captures">A list of possible capture paths to add to</param>
-    protected void AddBishopPaths(int i, int steps, bool jump, IList<IList<Space>> moves, IList<IList<Space>> captures)
+    protected void AddDiagonalPaths(IList<Vector2Int> start, int i, int steps, bool jump, IList<IList<Vector2Int>> moves, IList<IList<Vector2Int>> captures)
     {
-        AddPaths(i, i, steps, jump, moves, captures);
-        AddPaths(i, -i, steps, jump, moves, captures);
-        AddPaths(-i, -i, steps, jump, moves, captures);
-        AddPaths(-i, i, steps, jump, moves, captures);
-    }
-
-    /// <summary>Gets possible L-shaped paths</summary>
-    /// <param name="x">The length of one L-shaped step</param>
-    /// <param name="y">The height of one L-shaped step</param>
-    /// <param name="steps">The number of steps to take</param>
-    /// <param name="jump">True if obstacles can be jumped over</param>
-    /// <param name="moves">A list of possible move paths to add to</param>
-    /// <param name="captures">A list of possible capture paths to add to</param>
-    protected void AddKnightPaths(int x, int y, int steps, bool jump, IList<IList<Space>> moves, IList<IList<Space>> captures)
-    {
-        AddPaths(y, x, steps, jump, moves, captures);
-        AddPaths(y, -x, steps, jump, moves, captures);
-        AddPaths(x, -y, steps, jump, moves, captures);
-        AddPaths(-x, -y, steps, jump, moves, captures);
-        AddPaths(-y, -x, steps, jump, moves, captures);
-        AddPaths(-y, x, steps, jump, moves, captures);
-        AddPaths(-x, y, steps, jump, moves, captures);
-        AddPaths(x, y, steps, jump, moves, captures);
+        AddLinearPaths(start, i, i, steps, jump, moves, captures);
+        AddLinearPaths(start, i, -i, steps, jump, moves, captures);
+        AddLinearPaths(start, -i, -i, steps, jump, moves, captures);
+        AddLinearPaths(start, -i, i, steps, jump, moves, captures);
     }
 
     /// <summary>The piece carries out its turn</summary>
     /// <param name="path">The path to move through</param>
-    protected void EnactTurn(IList<Space> path)
+    protected void EnactTurn(IList<Vector2Int> path)
     {
         Path = path;
-        Space destination = path.Last();
-        if (destination != Space)
+        Space destination = Board.GetSpace(path.Last());
+        if (destination != null && destination != Space)
         {
             GameState.IsActiveRound = true;
             IsMoving = true;

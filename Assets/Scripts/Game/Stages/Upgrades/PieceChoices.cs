@@ -66,9 +66,8 @@ public class PieceChoices : UpgradeChoices
         Debug.Log($"Enemy Upgrade: {enemyPiece}");
         Debug.Log($"Player Upgrade: {playerPiece}");
 
-        // Add the enemy piece, removing a lower value piece if necessary
-        if (Game.EnemyPieces.Count == 16) RemoveLowerValue(enemyPiece);
-        if (Game.EnemyPieces.Count < 16) Game.EnemyPieces.Add(enemyPiece);
+        // Add the enemy piece
+        Game.EnemyPieces.Add(enemyPiece);
 
         // Add the player piece as long a sideboard space is empty
         if (Game.PlayerSideBoard.Count < 24) Game.PlayerSideBoard.Add(new PiecePositionRecord(playerPiece, null));
