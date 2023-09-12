@@ -6,5 +6,5 @@ public class SetKey : AssetKey
     // Properties to set in unity interface
     public AssetGroup.Set Identity;
 
-    public override int ID => (int)Identity;
+    public override int ID { get => (int)Identity; set => Identity = (AssetGroup.Set)value; }
 }

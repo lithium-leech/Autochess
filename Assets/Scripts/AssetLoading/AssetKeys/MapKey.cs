@@ -6,5 +6,5 @@ public class MapKey : AssetKey
     // Properties to set in unity interface
     public AssetGroup.Map Identity;
 
-    public override int ID => (int)Identity;
+    public override int ID { get => (int)Identity; set => Identity = (AssetGroup.Map)value; }
 }

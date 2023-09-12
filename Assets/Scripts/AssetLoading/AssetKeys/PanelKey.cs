@@ -6,5 +6,5 @@ public class PanelKey : AssetKey
     // Properties to set in unity interface
     public AssetGroup.Panel Identity;
 
-    public override int ID => (int)Identity;
+    public override int ID { get => (int)Identity; set => Identity = (AssetGroup.Panel)value; }
 }

@@ -9,5 +9,5 @@ public abstract class AssetKey : MonoBehaviour
     public AssetGroup.Group Group;
 
     // The secondary key used to identify an asset within its group
-    public abstract int ID { get; }
+    public abstract int ID { get; set; }
 }

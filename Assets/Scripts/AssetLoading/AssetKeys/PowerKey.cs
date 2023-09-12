@@ -6,5 +6,5 @@ public class PowerKey : AssetKey
     // Properties to set in unity interface
     public AssetGroup.Power Identity;
 
-    public override int ID => (int)Identity;
+    public override int ID { get => (int)Identity; set => Identity = (AssetGroup.Power)value; }
 }
