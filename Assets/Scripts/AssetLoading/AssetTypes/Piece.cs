@@ -40,5 +40,12 @@ namespace AssetGroup
         Ginsho,
         Narigin,
         Kinsho,
+        Zu,
+        Ju,
+        Ma,
+        Xiang,
+        Jiang,
+        Shi,
+        Pao,
     }
 }

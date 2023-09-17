@@ -76,6 +76,13 @@ public class Board
             case AssetGroup.Piece.Ryuma:
             case AssetGroup.Piece.Ryuo:
             case AssetGroup.Piece.Tokin:
+            case AssetGroup.Piece.Zu:
+            case AssetGroup.Piece.Ju:
+            case AssetGroup.Piece.Ma:
+            case AssetGroup.Piece.Xiang:
+            case AssetGroup.Piece.Jiang:
+            case AssetGroup.Piece.Shi:
+            case AssetGroup.Piece.Pao:
             if (!player) piece.transform.localScale = new Vector3(piece.transform.localScale.x, -1f, piece.transform.localScale.z);
             break;
             default:
