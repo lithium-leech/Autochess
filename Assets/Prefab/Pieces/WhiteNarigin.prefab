@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1070773358091276158}
   - component: {fileID: 4392055106518787990}
+  - component: {fileID: -505277418286478471}
   - component: {fileID: 466251951366965859}
   m_Layer: 0
   m_Name: WhiteNarigin
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-505277418286478471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3766270959635146383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b01159a92f66e46b152845255050d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &466251951366965859
 MonoBehaviour:
   m_ObjectHideFlags: 0

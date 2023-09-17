@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3498417033870000579}
   - component: {fileID: 1917665308604380588}
+  - component: {fileID: 8182422259937258105}
   - component: {fileID: 5463028066170708724}
   m_Layer: 0
   m_Name: BlackRyuma
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8182422259937258105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697613912791765948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b627d0302281be4a93a1e4d10e9dba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5463028066170708724
 MonoBehaviour:
   m_ObjectHideFlags: 0

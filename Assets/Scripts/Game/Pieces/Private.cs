@@ -14,16 +14,21 @@ public class Private : Piece
         // Assume initially that the piece cannot move
         IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
-        // Get the space in front of this piece
-        Vector2Int coordinate;
-        if (IsPlayer) coordinate = Space.Coordinates + new Vector2Int(0, 1);
-        else coordinate = Space.Coordinates + new Vector2Int(0, -1);
-        Space space = Board.GetSpace(coordinate);
+        // Get the possible moves and captures this piece can make
+        IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
+        int yi = IsPlayer ? 1 : -1;
+        AddLinearPaths(path, 0, yi, 1, false, moves, captures);
 
-        // Move or capture if possible
-        if (space != null && (space.HasCapturable(this) || space.IsEnterable(this))) path = new List<Vector2Int>() { Space.Coordinates, space.Coordinates };
+        // Capture a piece if possible
+        if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];
+
+        // Otherwise move if possible
+        else if (moves.Count > 0) path = moves[Random.Range(0, moves.Count)];
+
+        // Move to the new space
         EnactTurn(path);
-
+        
         // Check for promotion
         Space last = Board.GetSpace(path.Last());
         if ((IsPlayer && last.IsPlayerPromotion) || (!IsPlayer && last.IsEnemyPromotion))

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6482608294915364430}
   - component: {fileID: 183796960857890734}
+  - component: {fileID: 8936018996084589720}
   - component: {fileID: 6732250245719076904}
   m_Layer: 0
   m_Name: WhiteKyosha
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8936018996084589720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9179509306390833857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e83a6efc1cac0f4babc0e9250bcfe91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6732250245719076904
 MonoBehaviour:
   m_ObjectHideFlags: 0

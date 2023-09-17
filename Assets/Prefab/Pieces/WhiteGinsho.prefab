@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 862555920942128287}
   - component: {fileID: 4659705831680945482}
+  - component: {fileID: -1962813199150122621}
   - component: {fileID: 5748914878074510429}
   m_Layer: 0
   m_Name: WhiteGinsho
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1962813199150122621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222867534952720738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d0198dcb95267e4eaeca82a74ca64a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5748914878074510429
 MonoBehaviour:
   m_ObjectHideFlags: 0

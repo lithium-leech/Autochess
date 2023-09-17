@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7122309015822188574}
   - component: {fileID: 6845900861977583710}
+  - component: {fileID: 5589238797879535740}
   - component: {fileID: 5407980643533167857}
   m_Layer: 0
   m_Name: WhiteKakugyo
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5589238797879535740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7689939092384538814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17edfcfa18c989d49ada86cade099f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5407980643533167857
 MonoBehaviour:
   m_ObjectHideFlags: 0

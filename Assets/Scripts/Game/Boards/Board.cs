@@ -54,7 +54,38 @@ public class Board
     /// <param name="player">True if the piece is for the player</param>
     /// <param name="white">True if the piece is white</param>
     /// <param name="space">The space to place the piece at</param>
-    public bool AddPiece(AssetGroup.Piece kind, bool player, bool white, Space space) => AddPiece(Game.CreatePiece(kind, player, white), space);
+    public bool AddPiece(AssetGroup.Piece kind, bool player, bool white, Space space)
+    {
+        // Create the new piece
+        Piece piece = Game.CreatePiece(kind, player, white);
+
+        // Flip pieces with directional sprites
+        switch (kind)
+        {
+            case AssetGroup.Piece.Fuhyo:
+            case AssetGroup.Piece.Ginsho:
+            case AssetGroup.Piece.Hisha:
+            case AssetGroup.Piece.Kakugyo:
+            case AssetGroup.Piece.Keima:
+            case AssetGroup.Piece.Kinsho:
+            case AssetGroup.Piece.Kyosha:
+            case AssetGroup.Piece.Narigin:
+            case AssetGroup.Piece.Narikei:
+            case AssetGroup.Piece.Narikyo:
+            case AssetGroup.Piece.Osho:
+            case AssetGroup.Piece.Ryuma:
+            case AssetGroup.Piece.Ryuo:
+            case AssetGroup.Piece.Tokin:
+            if (!player) piece.transform.localScale = new Vector3(piece.transform.localScale.x, -1f, piece.transform.localScale.z);
+            break;
+            default:
+            // No action required
+            break;
+        }
+
+        // Add the new piece to the board
+        return  AddPiece(piece, space);
+    }
 
     /// <summary>Adds a piece to the board in the first empty space</summary>
     /// <param name="piece">The piece to add</param>

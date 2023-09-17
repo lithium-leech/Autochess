@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4911738026049884930}
   - component: {fileID: 1166181203653594990}
+  - component: {fileID: 2610428395663606467}
   - component: {fileID: 5214355724216612269}
   m_Layer: 0
   m_Name: WhiteTokin
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2610428395663606467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946768347976392755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df94a6f7b29ce040b19e3f7161167f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5214355724216612269
 MonoBehaviour:
   m_ObjectHideFlags: 0

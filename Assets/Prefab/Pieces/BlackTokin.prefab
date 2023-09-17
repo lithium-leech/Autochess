@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6921743462408602905}
   - component: {fileID: 5044095463797454735}
+  - component: {fileID: -1089830361538484524}
   - component: {fileID: 7755004935283787777}
   m_Layer: 0
   m_Name: BlackTokin
@@ -85,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1089830361538484524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130711687459211751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df94a6f7b29ce040b19e3f7161167f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7755004935283787777
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -90,6 +89,7 @@ public class MapChoices : UpgradeChoices
             AssetGroup.Set.Western => new WesternPieceSet(),
             AssetGroup.Set.Military => new MilitaryPieceSet(),
             AssetGroup.Set.Tamerlane => new TamerlanePieceSet(),
+            AssetGroup.Set.Shogi => new ShogiPieceSet(),
             _ => throw new System.Exception("Set kind not recognized")
         };
         Game.CurrentSet = pieceSet;
