@@ -16,7 +16,7 @@ public class Shi : Piece
         // Get the possible moves and captures this piece can make
         IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
         IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
-        // TODO: Add Movement
+        AddDiagonalPaths(path, 1, 1, false, moves, captures);
 
         // Capture a piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];
