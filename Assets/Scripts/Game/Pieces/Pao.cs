@@ -33,8 +33,10 @@ public class Pao : Piece
                 {
                     if (target) { target = false; break; }
                     if (screen && space.HasEnemy(this)) target = true;
-                    if (!screen && space.HasPiece()) screen = true;
+                    if (!screen && !space.IsEnterable(this)) screen = true;
                 }
+                else if (!screen) screen = true;
+                else { target = false; break; }
             }
             if (screen && target) captures.Add(capture);
         }

@@ -19,8 +19,8 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 894970281984
-    m_Localized: Moves 1 space forward. Captures 1 space diagonally. Becomes a queen
-      if it reaches the other side.
+    m_Localized: Moves 1 space forward. Captures in either forward diagonal. Becomes
+      a queen if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 904663318528
@@ -45,7 +45,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 32034295139926016
-    m_Localized: Moves and captures 1 space forward.
+    m_Localized: Moves and captures 1 space forward. Becomes a Colonel if it reaches
+      the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 32034320100229120
@@ -62,12 +63,147 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 32034571833966592
-    m_Localized: Moves up to 4 spaces in any direction.
+    m_Localized: Moves and captures up to 4 spaces in any direction.
     m_Metadata:
       m_Items: []
   - m_Id: 32034596026712064
     m_Localized: Moves up to 2 spaces horizonally, vertically, or diagonally. Captures
       1 space in any direction.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44826892862357504
+    m_Localized: Moves 1 space horizontally or vertically. Captures up to 2 spaces
+      horizontally or vertically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44826910906253312
+    m_Localized: Moves 1 space diagonally. Captures up to 2 spaces diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44826923908595712
+    m_Localized: Moves and captures 2 spaces horizontally or vertically. Jumps over
+      pieces in the way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44826938144063488
+    m_Localized: Moves and captures diagonally going at least 2 spaces.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44826996218396672
+    m_Localized: Moves and captures in an L shape (3 out, 1 across). Jumps over pieces
+      in the way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827012299358208
+    m_Localized: Moves and captures 2 spaces diagonally. Jumps over pieces in the
+      way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827034915045376
+    m_Localized: After going out 1 diagonal space, and then 1 horizontal or vertical
+      space. The giraffe may move or capture in the continuing horizontal or vertical
+      direction.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827068008103936
+    m_Localized: Moves and captures 2 spaces horizontally, vertically, or diagonally.
+      Jumps over pieces in the way,
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827138468216832
+    m_Localized: Moves and captures 1 space forward. Becomes a Gold Soldier if it
+      reaches the other side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827155417399296
+    m_Localized: Moves and captures horizontally, vertically, or in either forward
+      diagonals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827201974173696
+    m_Localized: Moves and captures horizontally or vertically. Becomes a Dragon
+      Chariot if it reaches the other side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827216754900992
+    m_Localized: Moves and captures horizontally, vertically, or 1 space diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827256663703552
+    m_Localized: Moves and capture diagonally. Becomes a Dragon Runner if it reaches
+      the other side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827277324845056
+    m_Localized: Moves and captures diagonally, or 1 space horizontally or vertically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827319305633792
+    m_Localized: Moves and captures in an L shape (2 out, 1 across) going forward.
+      Jumps over pieces in the way. Becomes a Gold Horse if it reaches the other
+      side.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827332702240768
+    m_Localized: Moves and captures horizontally, vertically, or in either forward
+      diagonals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827389413425152
+    m_Localized: Moves and captures horizontally, vertically, or in either forward
+      diagonals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827438646165504
+    m_Localized: Moves and captures horizontally, vertically, or in either forward
+      diagonals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827453082959872
+    m_Localized: Moves and captures horizontally, vertically, or in either forward
+      diagonals.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827359415762944
+    m_Localized: Moves and captures 1 space horizontally, vertically, or diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827372434882560
+    m_Localized: Moves and captures vertically forward.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827424196788224
+    m_Localized: Moves and captures diagonally, or 1 space forward.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827496204599296
+    m_Localized: Moves and capture 1 space forward or 1 space horizontally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827507134955520
+    m_Localized: Moves and capture horizontally or vertically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827518006591488
+    m_Localized: After going out 1 horizontal or vertical space, the Horse may move
+      or capture in either outward diagonal.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827529507373056
+    m_Localized: Moves or captures 2 spaces diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827557156225024
+    m_Localized: Moves or captures 1 space horizontally or vertically.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827586566684672
+    m_Localized: Moves or captures 1 space diagonally.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44827599845851136
+    m_Localized: Moves and captures horizontally or vertically, but must jump over
+      1 obstacle in order to capture.
     m_Metadata:
       m_Items: []
   references:

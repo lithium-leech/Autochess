@@ -66,6 +66,122 @@ MonoBehaviour:
     m_Localized: General
     m_Metadata:
       m_Items: []
+  - m_Id: 44823359530336256
+    m_Localized: Ferz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823376735371264
+    m_Localized: Wazir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823392979910656
+    m_Localized: Dabbaba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823443999424512
+    m_Localized: Taliah
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823462315950080
+    m_Localized: Camel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823492288446464
+    m_Localized: Elephant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823511435444224
+    m_Localized: Giraffe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823543106633728
+    m_Localized: Swordsman
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823575583129600
+    m_Localized: Soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823607443062784
+    m_Localized: Gold Soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823645145661440
+    m_Localized: Chariot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823663944531968
+    m_Localized: Dragon Chariot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823707410104320
+    m_Localized: Runner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823726062174208
+    m_Localized: Dragon Runner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823803967176704
+    m_Localized: Horse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823818051649536
+    m_Localized: Gold Horse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823859206160384
+    m_Localized: King
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823874431483904
+    m_Localized: Lance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823896690655232
+    m_Localized: Gold Lance
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823939262840832
+    m_Localized: Silver General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823955092144128
+    m_Localized: Gilded Silver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44823994053033984
+    m_Localized: Gold General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824120205115392
+    m_Localized: General
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824100575772672
+    m_Localized: Elephant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824066534801408
+    m_Localized: Horse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824143546417152
+    m_Localized: Advisor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824158603968512
+    m_Localized: Cannon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824038957252608
+    m_Localized: Soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44824051938623488
+    m_Localized: Chariot
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
