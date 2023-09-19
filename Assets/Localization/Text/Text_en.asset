@@ -109,6 +109,10 @@ MonoBehaviour:
     m_Localized: New Game
     m_Metadata:
       m_Items: []
+  - m_Id: 68490739494027264
+    m_Localized: Starting Map
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

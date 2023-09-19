@@ -19,7 +19,13 @@ public static class GameState
     public static int Level { get; set; } = 0;
 
     /// <summary>The player's highest score</summary>
-    public static int HighScore { get; set; } = 0;
+    public static int HighScore { get; set; }
+
+    /// <summary>The map to load when a game starts</summary>
+    public static AssetGroup.Map StartMap { get; set; }
+    
+    /// <summary>The set to load when a game starts</summary>
+    public static AssetGroup.Set StartSet { get; set; }
 
     /// <summary>True if the player's color is white</summary>
     public static bool IsPlayerWhite { get; set; } = false;

@@ -19,6 +19,8 @@ public class SceneLauncher : MonoBehaviour
         GameState.MusicBox = MusicBox;
         GameState.MusicBox.Volume = saveData.Volume;
         GameState.HighScore = saveData.HighScore;
+        GameState.StartMap = saveData.StartMap;
+        GameState.StartSet = saveData.StartSet;
     }
 
     void OnDestroy()
@@ -27,7 +29,9 @@ public class SceneLauncher : MonoBehaviour
         SaveData saveData = new()
         {
             HighScore = GameState.HighScore,
-            Volume = GameState.MusicBox.Volume
+            Volume = GameState.MusicBox.Volume,
+            StartMap = GameState.StartMap,
+            StartSet = GameState.StartSet
         };
 
         // Write the save data to a file

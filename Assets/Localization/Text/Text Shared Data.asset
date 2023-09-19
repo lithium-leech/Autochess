@@ -100,7 +100,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 57248769782185984
-    m_Key: New Game
+    m_Key: NewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 68490739494027264
+    m_Key: StartingMap
     m_Metadata:
       m_Items: []
   m_Metadata:

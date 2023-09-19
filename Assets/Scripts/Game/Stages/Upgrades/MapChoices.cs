@@ -16,6 +16,15 @@ public class MapChoices : UpgradeChoices
         Maps = GetRandomMaps(NumberOfChoices);
     }
 
+    /// <summary>Creates a new set of map choices</summary>
+    public MapChoices(Game game, AssetGroup.Map map, AssetGroup.Set set) : base(game)
+    {
+        Sets = new AssetGroup.Set[1];
+        Maps = new AssetGroup.Map[1];
+        Sets[0] = set;
+        Maps[0] = map;
+    }
+
     public override string TitleText { get; } = "ChooseMap";
 
     /// <summary>The available maps</summary>

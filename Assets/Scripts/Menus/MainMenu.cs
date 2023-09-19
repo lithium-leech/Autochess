@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// An object for the main menu's specific behaviors
 /// </summary>
-public class MainMenu : MonoBehaviour
+public class MainMenu : Menu
 {
     /// Properties to set using Unity interface
-    public GameObject Menu;
-    public GameObject SettingsMenu;
+    public Menu Menu;
+    public Menu SettingsMenu;
     
     void Start()
     {
@@ -18,6 +18,10 @@ public class MainMenu : MonoBehaviour
         // Start the main menu music
         GameState.MusicBox.PlayMusic(SongName.Menu);
     }
+
+    protected override void OnOpen() { /*Do nothing*/ }
+
+    protected override void OnClose() { /*Do nothing*/ }
 
     /// <summary>Starts a new game</summary>
     public void Play() => SceneManager.LoadScene("Game");

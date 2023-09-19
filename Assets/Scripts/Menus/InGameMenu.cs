@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameMenu : MonoBehaviour
+public class InGameMenu : Menu
 {
     /// Properties to set using Unity interface
     public Game Game;
@@ -15,6 +15,10 @@ public class InGameMenu : MonoBehaviour
     private int SpeedIndex { get; set; } = 0;
 
     public void Awake() => Image.sprite = SpeedSprites[0];
+
+    protected override void OnOpen() { /*Do nothing*/ }
+
+    protected override void OnClose() { /*Do nothing*/ }
 
     /// <summary>Increases the game speed</summary>
     public void ToggleSpeed()

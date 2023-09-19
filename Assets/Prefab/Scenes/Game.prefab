@@ -1006,6 +1006,7 @@ GameObject:
   - component: {fileID: 2871266137996282604}
   - component: {fileID: 2871266137996282605}
   - component: {fileID: 2871266137996282606}
+  - component: {fileID: 4937736911533770950}
   - component: {fileID: 2871266137996282607}
   m_Layer: 5
   m_Name: GameOverMenu
@@ -1096,6 +1097,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4937736911533770950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871266137996282600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a74e423c4f1a94bbdd3fe05cf6078f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2871266137996282607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2167,11 +2180,11 @@ MonoBehaviour:
   RetryButton: {fileID: 2871266138670477547}
   NewGameButton: {fileID: 6167742336380515911}
   EndGameButton: {fileID: 5873376011158516117}
-  InGameMenu: {fileID: 2871266139055884576}
-  ConcedeMenu: {fileID: 2871266139043004144}
-  UpgradeMenu: {fileID: 2871266139333816660}
-  InfoMenu: {fileID: 8169157816456623561}
-  GameOverMenu: {fileID: 2871266137996282600}
+  InGameMenu: {fileID: 6577209502742023673}
+  ConcedeMenu: {fileID: 1063975995007885018}
+  UpgradeMenu: {fileID: 9141159588853248156}
+  GameOverMenu: {fileID: 4937736911533770950}
+  InfoCover: {fileID: 8169157816456623561}
   OnRoundFinish:
     m_PersistentCalls:
       m_Calls: []
@@ -2393,6 +2406,7 @@ GameObject:
   - component: {fileID: 2871266139043004148}
   - component: {fileID: 2871266139043004149}
   - component: {fileID: 2871266139043004150}
+  - component: {fileID: 1063975995007885018}
   - component: {fileID: 2871266139043004151}
   m_Layer: 5
   m_Name: ConcedeMenu
@@ -2483,6 +2497,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1063975995007885018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871266139043004144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a74e423c4f1a94bbdd3fe05cf6078f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2871266139043004151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3008,6 +3034,7 @@ GameObject:
   - component: {fileID: 2871266139333816664}
   - component: {fileID: 2871266139333816665}
   - component: {fileID: 2871266139333816666}
+  - component: {fileID: 9141159588853248156}
   - component: {fileID: 2871266139333816667}
   m_Layer: 5
   m_Name: ChoiceMenu
@@ -3099,6 +3126,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9141159588853248156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2871266139333816660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a74e423c4f1a94bbdd3fe05cf6078f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2871266139333816667
 MonoBehaviour:
   m_ObjectHideFlags: 0

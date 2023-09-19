@@ -67,8 +67,8 @@ public abstract class UpgradeChoices
         AssetGroup.Panel leftPanel = GameState.IsPlayerWhite ? AssetGroup.Panel.WhiteInfo : AssetGroup.Panel.BlackInfo;
         Panels.Add(Game.CreateTile(rightTile, InfoPosition(false, true, false)));
         Panels.Add(Game.CreateTile(leftTile, InfoPosition(true, true, false)));
-        Panels.Add(Game.CreatePanel(rightPanel, InfoPosition(false, true, true), Game.InfoMenu.transform));
-        Panels.Add(Game.CreatePanel(leftPanel, InfoPosition(true, true, true), Game.InfoMenu.transform));
+        Panels.Add(Game.CreatePanel(rightPanel, InfoPosition(false, true, true), Game.InfoCover.transform));
+        Panels.Add(Game.CreatePanel(leftPanel, InfoPosition(true, true, true), Game.InfoCover.transform));
     }
 
     /// <summary>Creates sprites for the choices in the upgrade menu</summary>

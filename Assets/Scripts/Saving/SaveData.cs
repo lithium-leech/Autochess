@@ -9,4 +9,10 @@ public class SaveData
 
     /// <summary>The player's selected volume level</summary>
     public float Volume = 0.7f;
+
+    /// <summary>The map to load when the game starts</summary>
+    public AssetGroup.Map StartMap = AssetGroup.Map.Classic;
+
+    /// <summary>The set to load when the game starts</summary>
+    public AssetGroup.Set StartSet = AssetGroup.Set.Western;
 }

@@ -28,11 +28,11 @@ public class Game : MonoBehaviour
     public RewardedAdsButton RetryButton;
     public BasicButton NewGameButton;
     public BasicButton EndGameButton;
-    public GameObject InGameMenu;
-    public GameObject ConcedeMenu;
-    public GameObject UpgradeMenu;
-    public GameObject InfoMenu;
-    public GameObject GameOverMenu;
+    public Menu InGameMenu;
+    public Menu ConcedeMenu;
+    public Menu UpgradeMenu;
+    public Menu GameOverMenu;
+    public GameObject InfoCover;
 
     /// <summary>The current stage of the game being run</summary>
     public IStage CurrentStage { get; set; } = null;
@@ -89,7 +89,7 @@ public class Game : MonoBehaviour
 
         // Go to the first level
         GameState.IsPlayerWhite = false;
-        GameState.Level = 0;
+        GameState.Level = 1;
         LevelText.text = GameState.Level.ToString();
         PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
         IntVariable score = pvs["game"]["score"] as IntVariable;
@@ -105,8 +105,12 @@ public class Game : MonoBehaviour
         EnemyPowerBoard = new PowerBoardBuilder(this, false).Build();
         PlayerPowerBoard = new PowerBoardBuilder(this, true).Build();
 
-        // Start the upgrade phase
-        NextStage = new UpgradeStage(this);
+        // Create the starting game board
+        MapChoices choices = new(this, GameState.StartMap, GameState.StartSet);
+        choices.ApplyChoice(0);
+
+        // Start the planning phase
+        NextStage = new PlanningStage(this);
     }
 
     private void Update()
