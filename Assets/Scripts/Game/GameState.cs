@@ -40,7 +40,7 @@ public static class GameState
     public static int PowerRounds { get; } = 5;
 
     /// <summary>The number of rounds to complete for a map upgrade to be offered</summary>
-    public static int MapRounds { get; } = 2;
+    public static int MapRounds { get; } = 20;
 
     /// <summary>The Z-plane that background board tiles exist on</summary>
     public static Vector3 BackboardZ { get; } = new Vector3(0.0f, 0.0f, -3.0f);
