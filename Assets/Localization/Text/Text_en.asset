@@ -113,6 +113,10 @@ MonoBehaviour:
     m_Localized: Starting Map
     m_Metadata:
       m_Items: []
+  - m_Id: 68830624776060928
+    m_Localized: Choose a Map
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

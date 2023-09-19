@@ -37,6 +37,22 @@ MonoBehaviour:
     m_Address: Assets/Localization/PowerInfo/PowerInfo Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
+  - m_GUID: d96b40ae88171a14faa0953da00aab00
+    m_Address: Assets/Localization/MapNames/MapNames Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 0e538f90089a28f44bddd9fe6fdb810c
+    m_Address: Assets/Localization/MapInfo/MapInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: e5c386753b01b8246916e4fb606d455d
+    m_Address: Assets/Localization/SetNames/SetNames Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+  - m_GUID: 1e255844511b3f249b8268c33ef0f67c
+    m_Address: Assets/Localization/SetInfo/SetInfo Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:

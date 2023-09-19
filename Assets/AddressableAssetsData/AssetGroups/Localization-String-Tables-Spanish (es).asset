@@ -47,6 +47,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-es
     - Preload
+  - m_GUID: 5524cc37d6c185f4088824211b1cb4af
+    m_Address: MapNames_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+  - m_GUID: c48a2fa4876ac8140a549cd6609ea8dd
+    m_Address: MapInfo_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+  - m_GUID: 4b2201ab86c024e47a1b3baf50686003
+    m_Address: SetNames_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
+  - m_GUID: 02ce7d80af8874b4fb0d1d796a77261d
+    m_Address: SetInfo_es
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 5b96b9619226af9469c529dcad5a8650, type: 2}
   m_SchemaSet:

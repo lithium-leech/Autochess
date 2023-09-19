@@ -125,7 +125,7 @@ public class SettingsMenu : Menu
     public void UpdateBoard()
     {
         if (MapSprite != null) Destroy(MapSprite);
-        MapSprite = Game.CreateMap(GameState.StartMap, new Vector3(-2.0f, 3.75f, -62.0f));
+        MapSprite = Game.CreateMap(GameState.StartMap, new Vector3(-2.0f, 3.75f, -63.0f));
     }
 
     /// <summary>Switches to the previous set</summary>
@@ -150,7 +150,7 @@ public class SettingsMenu : Menu
     public void UpdateSet()
     {
         if (SetSprite != null) Destroy(SetSprite);
-        SetSprite = Game.CreateSet(GameState.StartSet, new Vector3(2.0f, 3.75f, -62.0f));
+        SetSprite = Game.CreateSet(GameState.StartSet, new Vector3(2.0f, 3.75f, -63.0f));
     }
 
     /// <summary>Closes the settings menu</summary>

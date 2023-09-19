@@ -52,10 +52,10 @@ public class MapChoices : UpgradeChoices
         GameObject set = CreateSprite(choice, false, true);
 
         // Change text
-        Game.PlayerChoiceNameText.StringReference = new LocalizedString("MapNames", $"{set.name}");
-        Game.PlayerChoiceInfoText.StringReference = new LocalizedString("MapInfo", $"{set.name}");
-        Game.EnemyChoiceNameText.StringReference = new LocalizedString("SetNames", $"{map.name}");
-        Game.EnemyChoiceInfoText.StringReference = new LocalizedString("SetInfo", $"{map.name}");
+        Game.PlayerChoiceNameText.StringReference = new LocalizedString("MapNames", $"{Maps[choice]}");
+        Game.PlayerChoiceInfoText.StringReference = new LocalizedString("MapInfo", $"{Maps[choice]}");
+        Game.EnemyChoiceNameText.StringReference = new LocalizedString("SetNames", $"{Sets[choice]}");
+        Game.EnemyChoiceInfoText.StringReference = new LocalizedString("SetInfo", $"{Sets[choice]}");
     }
 
     public override void ApplyChoice(int choice)

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: MapInfo Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: MapInfo
+  m_TableCollectionNameGuidString: 0e538f90089a28f44bddd9fe6fdb810c
+  m_Entries:
+  - m_Id: 822434988032
+    m_Key: Classic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 825597493248
+    m_Key: Hourglass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 828797747200
+    m_Key: ZigZag
+    m_Metadata:
+      m_Items: []
+  - m_Id: 832081887232
+    m_Key: CenterCross
+    m_Metadata:
+      m_Items: []
+  - m_Id: 835680600064
+    m_Key: Small
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 126915975398293505
+  references:
+    version: 2
+    RefIds:
+    - rid: 126915975398293505
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1695147922661

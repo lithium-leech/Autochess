@@ -107,6 +107,10 @@ MonoBehaviour:
     m_Key: StartingMap
     m_Metadata:
       m_Items: []
+  - m_Id: 68830624776060928
+    m_Key: ChooseMap
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
