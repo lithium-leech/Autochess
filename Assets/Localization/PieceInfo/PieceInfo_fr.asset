@@ -44,6 +44,10 @@ MonoBehaviour:
     m_Localized: "Se d\xE9place d'une case dans n'importe quelle direction."
     m_Metadata:
       m_Items: []
+  - m_Id: 44827586566684672
+    m_Localized: 
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

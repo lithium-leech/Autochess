@@ -28,8 +28,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 934325436416
-    m_Localized: Moves or captures in an L shape (2 out, 1 across). Jumps over obstacles
-      in the way.
+    m_Localized: Moves or captures in an L shape (2 out, 1 across). Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 951438196736
@@ -54,8 +53,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 32034358851403776
-    m_Localized: Moves or captures up to 3 spaces orthogonally. Jumps over obstacles
-      in the way.
+    m_Localized: Moves or captures up to 3 spaces orthogonally. Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 32034396193292288
@@ -68,7 +66,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 32034596026712064
     m_Localized: Moves 1 space orthogonally or 1 space diagonally. Captures up to
-      2 spaces orthogonally or 2 spaces diagonally.
+      2 spaces orthogonally or up to 2 spaces diagonally.
     m_Metadata:
       m_Items: []
   - m_Id: 44826892862357504
@@ -80,8 +78,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 44826923908595712
-    m_Localized: Moves or captures 2 spaces orthogonally. Jumps over obstacles in
-      the way.
+    m_Localized: Moves or captures 2 spaces orthogonally. Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 44826938144063488
@@ -89,13 +86,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 44826996218396672
-    m_Localized: Moves or captures in an L shape (3 out, 1 across). Jumps over obstacles
-      in the way.
+    m_Localized: Moves or captures in an L shape (3 out, 1 across). Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 44827012299358208
-    m_Localized: Moves or captures 2 spaces diagonally. Jumps over obstacles in the
-      way.
+    m_Localized: Moves or captures 2 spaces diagonally. Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 44827034915045376
@@ -105,7 +100,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 44827068008103936
     m_Localized: Moves or captures 2 spaces orthogonally or 2 spaces diagonally.
-      Jumps over obstacles in the way.
+      Jumps over obstacles.
     m_Metadata:
       m_Items: []
   - m_Id: 44827138468216832
@@ -137,8 +132,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 44827319305633792
     m_Localized: Moves or captures in an L shape (2 out, 1 across) going forward.
-      Jumps over obstacles in the way. Becomes a Gold Horse if it reaches the other
-      side.
+      Jumps over obstacles. Becomes a Gold Horse if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 44827332702240768
@@ -162,11 +156,13 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 44827372434882560
-    m_Localized: Moves or captures any number of spaces forward.
+    m_Localized: Moves or captures any number of spaces forward. Becomes a Gold Lance
+      if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 44827424196788224
-    m_Localized: Moves or captures 1 space diagonally or 1 space forward.
+    m_Localized: Moves or captures 1 space diagonally or 1 space forward. Becomes
+      a Gilded Silver if it reaches the other side.
     m_Metadata:
       m_Items: []
   - m_Id: 44827496204599296
