@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -14,10 +15,16 @@ public class Colonel : Piece
         IList<Vector2Int> path = new List<Vector2Int>() { Space.Coordinates };
 
         // Get the possible moves and captures this piece can make
-        IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> moves1 = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> moves2 = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> moves3 = new List<IList<Vector2Int>>();
+        IList<IList<Vector2Int>> moves4 = new List<IList<Vector2Int>>();
         IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
-        AddOrthogonalPaths(path, 1, 4, false, moves, captures);
-        AddDiagonalPaths(path, 1, 2, false, moves, captures);
+        AddOrthogonalPaths(path, 1, 1, false, moves1, captures);
+        foreach (IList<Vector2Int> move in moves1) AddOrthogonalPaths(move, 1, 1, false, moves2, captures);
+        foreach (IList<Vector2Int> move in moves2) AddOrthogonalPaths(move, 1, 1, false, moves3, captures);
+        foreach (IList<Vector2Int> move in moves3) AddOrthogonalPaths(move, 1, 1, false, moves4, captures);
+        IList<IList<Vector2Int>> moves = moves1.Concat(moves2).Concat(moves3).Concat(moves4).ToList();
 
         // Capture a new piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];

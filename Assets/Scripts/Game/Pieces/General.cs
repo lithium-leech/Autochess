@@ -15,13 +15,13 @@ public class General : Piece
 
         // Get the possible moves this piece can make
         IList<IList<Vector2Int>> moves = new List<IList<Vector2Int>>();
-        AddOrthogonalPaths(path, 1, 2, false, moves, new List<IList<Vector2Int>>());
-        AddDiagonalPaths(path, 1, 2, false, moves, new List<IList<Vector2Int>>());
+        AddOrthogonalPaths(path, 1, 1, false, moves, new List<IList<Vector2Int>>());
+        AddDiagonalPaths(path, 1, 1, false, moves, new List<IList<Vector2Int>>());
 
         // Get the possible captures this piece can make
         IList<IList<Vector2Int>> captures = new List<IList<Vector2Int>>();
-        AddOrthogonalPaths(path, 1, 1, false, new List<IList<Vector2Int>>(), captures);
-        AddDiagonalPaths(path, 1, 1, false, new List<IList<Vector2Int>>(), captures);
+        AddOrthogonalPaths(path, 1, 2, false, new List<IList<Vector2Int>>(), captures);
+        AddDiagonalPaths(path, 1, 2, false, new List<IList<Vector2Int>>(), captures);
 
         // Capture a piece if possible
         if (captures.Count > 0) path = captures[Random.Range(0, captures.Count)];
