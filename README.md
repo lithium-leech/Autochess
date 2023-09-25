@@ -4,7 +4,9 @@ This is a game created by lithium-leech that is inspired by the autochess genre.
 
 ## prototype-1
 This branch contains the first prototype of this game. It was made in the Unity game engine.
+
 Editor Version: 2021.3.27f1
+
 Platform: Android/iOS
 
 ## prototype-2
