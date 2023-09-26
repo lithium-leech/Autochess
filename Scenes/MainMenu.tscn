@@ -10,10 +10,16 @@
 
 [node name="Camera" type="Camera2D" parent="."]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-100000, -100000, 100000, -100000, 100000, 100000, -100000, 100000)
+
+[node name="BackgroundImage" type="Sprite2D" parent="."]
 texture = ExtResource("1_1cbvo")
 
 [node name="PlayButton" type="TextureButton" parent="."]
+z_index = 1
 offset_left = -104.0
 offset_top = 48.0
 offset_right = 104.0
