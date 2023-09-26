@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfu0tyj5eui7y"
-path="res://.godot/imported/AppIcon+.png-d20303a0f585c5d3b8c655cfd102c88c.ctex"
+uid="uid://bdlv1sfbh0l2s"
+path="res://.godot/imported/AppIconForeground.png-1d9467cea0b7a79c19d5a03303aa5399.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AppIcon+.png"
-dest_files=["res://.godot/imported/AppIcon+.png-d20303a0f585c5d3b8c655cfd102c88c.ctex"]
+source_file="res://Sprites/AppIconForeground.png"
+dest_files=["res://.godot/imported/AppIconForeground.png-1d9467cea0b7a79c19d5a03303aa5399.ctex"]
 
 [params]
 

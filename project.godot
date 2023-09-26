@@ -13,7 +13,12 @@ config_version=5
 config/name="Autochess"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://Sprites/SplashIcon.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://Sprites/AppIcon.png"
+boot_splash/minimum_display_time=500
 
 [display]
 
@@ -30,8 +35,14 @@ window/handheld/orientation=1
 
 project/assembly_name="Autochess"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
