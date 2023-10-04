@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d383jg4y0opno"
-path="res://.godot/imported/AppIcon.png-7a0f8da3765ec13429e075c9f950ba3b.ctex"
+uid="uid://dal5ae0vhph6l"
+path="res://.godot/imported/Icon180x.png-79d49d960aca993667da2d5ed6536516.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AppIcon.png"
-dest_files=["res://.godot/imported/AppIcon.png-7a0f8da3765ec13429e075c9f950ba3b.ctex"]
+source_file="res://Sprites/iOSIcons/Icon180x.png"
+dest_files=["res://.godot/imported/Icon180x.png-79d49d960aca993667da2d5ed6536516.ctex"]
 
 [params]
 

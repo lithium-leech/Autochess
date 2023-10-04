@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqxehn7ertv7p"
-path="res://.godot/imported/AppIconBackground.png-29b08d6d82bf00c0ad1bc1a98b941ceb.ctex"
+uid="uid://dd3fi3j4n4ik1"
+path="res://.godot/imported/Splash2208x1242.png-eebda857ad23cd25d0c6e632fcf1b3ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/AppIconBackground.png"
-dest_files=["res://.godot/imported/AppIconBackground.png-29b08d6d82bf00c0ad1bc1a98b941ceb.ctex"]
+source_file="res://Sprites/iOSIcons/Splash2208x1242.png"
+dest_files=["res://.godot/imported/Splash2208x1242.png-eebda857ad23cd25d0c6e632fcf1b3ec.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lhvxkw6sx2mk"
-path="res://.godot/imported/SplashIcon.png-970dc2de6d9f78af9470b408c2133fd8.ctex"
+uid="uid://d383jg4y0opno"
+path="res://.godot/imported/Icon.png-2c4608eb4ba4a7f36b83d667a8c3c9b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/SplashIcon.png"
-dest_files=["res://.godot/imported/SplashIcon.png-970dc2de6d9f78af9470b408c2133fd8.ctex"]
+source_file="res://Sprites/AndroidIcons/Icon.png"
+dest_files=["res://.godot/imported/Icon.png-2c4608eb4ba4a7f36b83d667a8c3c9b6.ctex"]
 
 [params]
 
