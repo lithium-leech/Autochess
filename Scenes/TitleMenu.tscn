@@ -1,0 +1,356 @@
+[gd_scene load_steps=28 format=3 uid="uid://c0bxbhtgvobvb"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/TitleMenu.gd" id="1_7p77h"]
+[ext_resource type="Texture2D" uid="uid://b4i5b77wm83is" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="1_fevew"]
+[ext_resource type="Texture2D" uid="uid://dn3p25capqptv" path="res://Sprites/Buttons/Button1x6/Button1x6Pressed.png" id="2_m2abs"]
+[ext_resource type="Texture2D" uid="uid://lkni8undshg7" path="res://Sprites/Buttons/Button1x6/Button1x6Highlighted.png" id="3_3bkw6"]
+[ext_resource type="Texture2D" uid="uid://54vtq1o8ufnb" path="res://Sprites/Buttons/Button1x6/Button1x6Disabled.png" id="4_5nlfk"]
+[ext_resource type="Texture2D" uid="uid://b5e5dqcirqcfn" path="res://Sprites/GameIcons/Play.png" id="5_iawtm"]
+[ext_resource type="Texture2D" uid="uid://cujhn7fivn23d" path="res://Sprites/GameIcons/Settings.png" id="6_sfne7"]
+[ext_resource type="Texture2D" uid="uid://cgx810nc2tbxo" path="res://Sprites/GameIcons/Cross.png" id="7_x5jvy"]
+[ext_resource type="Texture2D" uid="uid://do2ava0aymg5k" path="res://Sprites/Panels/ScreenCover.png" id="9_hc8lo"]
+[ext_resource type="Script" path="res://Scripts/Menus/SettingsMenu.gd" id="10_bkcph"]
+[ext_resource type="Texture2D" uid="uid://c1l3356rx4yh2" path="res://Sprites/Buttons/Button1x7/Button1x7Default.png" id="10_yh0gb"]
+[ext_resource type="Texture2D" uid="uid://cmsswpiqcaa1g" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDefault.png" id="11_jhq5t"]
+[ext_resource type="Texture2D" uid="uid://crjpvcake34pd" path="res://Sprites/Buttons/Button1x7/Button1x7Pressed.png" id="11_ngndk"]
+[ext_resource type="Texture2D" uid="uid://bisn8m4nephbn" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftPressed.png" id="12_barrt"]
+[ext_resource type="Texture2D" uid="uid://bjngfnlsso725" path="res://Sprites/Buttons/Button1x7/Button1x7Highlighted.png" id="12_ocri1"]
+[ext_resource type="Texture2D" uid="uid://cexb2yasfdqb7" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftHighlighted.png" id="13_asjx1"]
+[ext_resource type="Texture2D" uid="uid://pr5x0wytcl84" path="res://Sprites/Buttons/Button1x7/Button1x7Disabled.png" id="13_etoir"]
+[ext_resource type="Texture2D" uid="uid://cumm05rdsb4jb" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDisabled.png" id="14_3fyan"]
+[ext_resource type="Texture2D" uid="uid://i5hj7x4dt3a0" path="res://Sprites/Buttons/Button1x1/Button1x1Disabled.png" id="15_tb1hm"]
+[ext_resource type="Texture2D" uid="uid://crhjbfcnb3lj0" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDefault.png" id="16_l4h04"]
+[ext_resource type="Texture2D" uid="uid://6f57gtwgxef4" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightPressed.png" id="17_o677q"]
+[ext_resource type="Texture2D" uid="uid://bowifvwujxjvq" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightHighlighted.png" id="18_gmtew"]
+[ext_resource type="Texture2D" uid="uid://uk1argu2bry" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDisabled.png" id="19_r251e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_208kx"]
+font_size = 41
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xukcg"]
+font_size = 27
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2sdav"]
+font_size = 27
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gs77d"]
+font_size = 27
+font_color = Color(0, 0, 0, 1)
+
+[node name="TitleMenu" type="Node2D"]
+z_index = 10
+position = Vector2(144, 320)
+script = ExtResource("1_7p77h")
+
+[node name="Title" type="Label" parent="."]
+offset_left = -128.0
+offset_top = -80.0
+offset_right = 128.0
+offset_bottom = -16.0
+text = "GAME_TITLE"
+label_settings = SubResource("LabelSettings_208kx")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="PlayButton" type="TextureButton" parent="."]
+offset_left = -104.0
+offset_top = 16.0
+offset_right = 104.0
+offset_bottom = 64.0
+texture_normal = ExtResource("1_fevew")
+texture_pressed = ExtResource("2_m2abs")
+texture_hover = ExtResource("3_3bkw6")
+texture_disabled = ExtResource("4_5nlfk")
+
+[node name="Icon" type="Sprite2D" parent="PlayButton"]
+position = Vector2(24, 24)
+texture = ExtResource("5_iawtm")
+
+[node name="Text" type="Label" parent="PlayButton"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Play"
+label_settings = SubResource("LabelSettings_xukcg")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+offset_left = -104.0
+offset_top = 80.0
+offset_right = 104.0
+offset_bottom = 128.0
+texture_normal = ExtResource("1_fevew")
+texture_pressed = ExtResource("2_m2abs")
+texture_hover = ExtResource("3_3bkw6")
+texture_disabled = ExtResource("4_5nlfk")
+
+[node name="Icon" type="Sprite2D" parent="SettingsButton"]
+position = Vector2(24, 24)
+texture = ExtResource("6_sfne7")
+
+[node name="Text" type="Label" parent="SettingsButton"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Settings"
+label_settings = SubResource("LabelSettings_2sdav")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="QuitButton" type="TextureButton" parent="."]
+offset_left = -104.0
+offset_top = 144.0
+offset_right = 104.0
+offset_bottom = 192.0
+texture_normal = ExtResource("1_fevew")
+texture_pressed = ExtResource("2_m2abs")
+texture_hover = ExtResource("3_3bkw6")
+texture_disabled = ExtResource("4_5nlfk")
+
+[node name="Icon" type="Sprite2D" parent="QuitButton"]
+position = Vector2(24, 24)
+texture = ExtResource("7_x5jvy")
+
+[node name="Text" type="Label" parent="QuitButton"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Quit"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="SettingsMenu" type="Sprite2D" parent="."]
+visible = false
+z_index = 20
+texture = ExtResource("9_hc8lo")
+script = ExtResource("10_bkcph")
+
+[node name="Text" type="Label" parent="SettingsMenu"]
+offset_left = -128.0
+offset_top = -272.0
+offset_right = 128.0
+offset_bottom = -208.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_208kx")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="StartingMap" type="Node2D" parent="SettingsMenu"]
+position = Vector2(0, -140)
+
+[node name="Text" type="Label" parent="SettingsMenu/StartingMap"]
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Starting Map"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Board" type="Node2D" parent="SettingsMenu/StartingMap"]
+position = Vector2(-64, 48)
+
+[node name="Left" type="TextureButton" parent="SettingsMenu/StartingMap/Board"]
+offset_left = -60.0
+offset_top = -16.0
+offset_right = -28.0
+offset_bottom = 16.0
+texture_normal = ExtResource("11_jhq5t")
+texture_pressed = ExtResource("12_barrt")
+texture_hover = ExtResource("13_asjx1")
+texture_disabled = ExtResource("14_3fyan")
+
+[node name="Socket" type="Sprite2D" parent="SettingsMenu/StartingMap/Board"]
+texture = ExtResource("15_tb1hm")
+
+[node name="Right" type="TextureButton" parent="SettingsMenu/StartingMap/Board"]
+offset_left = 28.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = 16.0
+texture_normal = ExtResource("16_l4h04")
+texture_pressed = ExtResource("17_o677q")
+texture_hover = ExtResource("18_gmtew")
+texture_disabled = ExtResource("19_r251e")
+
+[node name="Set" type="Node2D" parent="SettingsMenu/StartingMap"]
+position = Vector2(64, 48)
+
+[node name="Left" type="TextureButton" parent="SettingsMenu/StartingMap/Set"]
+offset_left = -60.0
+offset_top = -16.0
+offset_right = -28.0
+offset_bottom = 16.0
+texture_normal = ExtResource("11_jhq5t")
+texture_pressed = ExtResource("12_barrt")
+texture_hover = ExtResource("13_asjx1")
+texture_disabled = ExtResource("14_3fyan")
+
+[node name="Socket" type="Sprite2D" parent="SettingsMenu/StartingMap/Set"]
+texture = ExtResource("15_tb1hm")
+
+[node name="Right" type="TextureButton" parent="SettingsMenu/StartingMap/Set"]
+offset_left = 28.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = 16.0
+texture_normal = ExtResource("16_l4h04")
+texture_pressed = ExtResource("17_o677q")
+texture_hover = ExtResource("18_gmtew")
+texture_disabled = ExtResource("19_r251e")
+
+[node name="Volume" type="Node2D" parent="SettingsMenu"]
+position = Vector2(0, -16)
+
+[node name="Text" type="Label" parent="SettingsMenu/Volume"]
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Volume"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Left" type="TextureButton" parent="SettingsMenu/Volume"]
+offset_left = -68.0
+offset_top = 24.0
+offset_right = -36.0
+offset_bottom = 56.0
+texture_normal = ExtResource("11_jhq5t")
+texture_pressed = ExtResource("12_barrt")
+texture_hover = ExtResource("13_asjx1")
+texture_disabled = ExtResource("14_3fyan")
+
+[node name="Value" type="Label" parent="SettingsMenu/Volume"]
+offset_left = -32.0
+offset_top = 20.0
+offset_right = 32.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "70%"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Right" type="TextureButton" parent="SettingsMenu/Volume"]
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 68.0
+offset_bottom = 56.0
+texture_normal = ExtResource("16_l4h04")
+texture_pressed = ExtResource("17_o677q")
+texture_hover = ExtResource("18_gmtew")
+texture_disabled = ExtResource("19_r251e")
+
+[node name="Language" type="Node2D" parent="SettingsMenu"]
+position = Vector2(0, 86)
+
+[node name="Text" type="Label" parent="SettingsMenu/Language"]
+offset_left = -128.0
+offset_top = -20.0
+offset_right = 128.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "LANGUAGE"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Left" type="TextureButton" parent="SettingsMenu/Language"]
+offset_left = -100.0
+offset_top = 24.0
+offset_right = -68.0
+offset_bottom = 56.0
+texture_normal = ExtResource("11_jhq5t")
+texture_pressed = ExtResource("12_barrt")
+texture_hover = ExtResource("13_asjx1")
+texture_disabled = ExtResource("14_3fyan")
+
+[node name="Value" type="Label" parent="SettingsMenu/Language"]
+offset_left = -64.0
+offset_top = 20.0
+offset_right = 64.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "LANGUAGE_NAME"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Right" type="TextureButton" parent="SettingsMenu/Language"]
+offset_left = 68.0
+offset_top = 24.0
+offset_right = 100.0
+offset_bottom = 56.0
+texture_normal = ExtResource("16_l4h04")
+texture_pressed = ExtResource("17_o677q")
+texture_hover = ExtResource("18_gmtew")
+texture_disabled = ExtResource("19_r251e")
+
+[node name="ExitButton" type="TextureButton" parent="SettingsMenu"]
+offset_left = -120.0
+offset_top = 216.0
+offset_right = 120.0
+offset_bottom = 264.0
+texture_normal = ExtResource("10_yh0gb")
+texture_pressed = ExtResource("11_ngndk")
+texture_hover = ExtResource("12_ocri1")
+texture_disabled = ExtResource("13_etoir")
+
+[node name="Icon" type="Sprite2D" parent="SettingsMenu/ExitButton"]
+position = Vector2(24, 24)
+texture = ExtResource("7_x5jvy")
+
+[node name="Text" type="Label" parent="SettingsMenu/ExitButton"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 4.0
+offset_right = 232.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Exit"
+label_settings = SubResource("LabelSettings_gs77d")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsMenu/StartingMap/Board/Left" to="SettingsMenu" method="_on_board_left_pressed"]
+[connection signal="pressed" from="SettingsMenu/StartingMap/Board/Right" to="SettingsMenu" method="_on_board_right_pressed"]
+[connection signal="pressed" from="SettingsMenu/StartingMap/Set/Left" to="SettingsMenu" method="_on_set_left_pressed"]
+[connection signal="pressed" from="SettingsMenu/StartingMap/Set/Right" to="SettingsMenu" method="_on_set_right_pressed"]
+[connection signal="pressed" from="SettingsMenu/Volume/Left" to="SettingsMenu" method="_on_volume_left_pressed"]
+[connection signal="pressed" from="SettingsMenu/Volume/Right" to="SettingsMenu" method="_on_volume_right_pressed"]
+[connection signal="pressed" from="SettingsMenu/Language/Left" to="SettingsMenu" method="_on_language_left_pressed"]
+[connection signal="pressed" from="SettingsMenu/Language/Right" to="SettingsMenu" method="_on_language_right_pressed"]
+[connection signal="pressed" from="SettingsMenu/ExitButton" to="SettingsMenu" method="_on_exit_button_pressed"]

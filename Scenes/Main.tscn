@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq85npp5p7yyw"]
+
+[ext_resource type="Texture2D" uid="uid://cualp4dwrcrur" path="res://Sprites/Panels/Background.png" id="1_36t5t"]
+[ext_resource type="Script" path="res://Scripts/Loading/Main.gd" id="1_mr56q"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(144, 320)
+script = ExtResource("1_mr56q")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="BackgroundColor" type="Polygon2D" parent="."]
+z_index = -1
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-100000, -100000, 100000, -100000, 100000, 100000, -100000, 100000)
+
+[node name="BackgroundImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_36t5t")

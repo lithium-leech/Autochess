@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Autochess"
-run/main_scene="res://Scenes/MainMenu.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Sprites/AndroidIcons/Splash.png"
@@ -37,6 +37,14 @@ project/assembly_name="Autochess"
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom_font="res://Fonts/Pixel Musketeer.tres"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/Text/Text.ar.translation", "res://Localization/Text/Text.de.translation", "res://Localization/Text/Text.en.translation", "res://Localization/Text/Text.es.translation", "res://Localization/Text/Text.fr.translation", "res://Localization/Text/Text.hi.translation", "res://Localization/Text/Text.id.translation", "res://Localization/Text/Text.ja.translation", "res://Localization/Text/Text.ko.translation", "res://Localization/Text/Text.pt.translation", "res://Localization/Text/Text.ru.translation", "res://Localization/Text/Text.zh.translation")
 
 [rendering]
 
