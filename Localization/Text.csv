@@ -1,0 +1,137 @@
+KEY,ar,de,en,es,fr,hi,id,ja,ko,pt,ru,zh
+Text.LanguageName,العربية,Deutsch,English,Español,Français,हिन्दी,Indonesia,日本語,한국어,Portugês,Русский,中文
+Text.GameTitle,آلي شطرنج,Autoschach,Autochess,Auto-Ajedrez,Auto-Échecs,ऑटोशतरंज,Otocatur,オートチェス,자동 체스,Auto-Xadrez,Автошахматы,自动棋类
+Text.Play,يلعب,Spielen,Play,Play,Jouer,खेल,Bermain,プレイ,재생,Reproduzir,Играть,播放
+Text.Settings,إعدادات,Einstellungen,Settings,Ajustes,Paramètres,सेटिंग्स,Pengaturan,設定,설정,Ajustes,Настройки,设置
+Text.Quit,الخروج,Verlassen,Quit,Salir,Quitter,छोड़ना,Keluar,やめる,종료하,Saída,Выйти,退出
+Text.StartingMap,,,Starting Map,,,,,,,,,
+Text.Volume,مقدار,Lautstärke,Volume,Volumen,Volume,आयतन,Volume,音量,볼륨,Volume,Объем,音量
+Text.Language,لغة,Sprache,Language,Idioma,Langue,भाषा,Bahasa,言語,언어,Língua,Язык,语言
+Text.Speed,سرعة,Geschwindigkeit,Speed,Velocidad,Vitesse,गति,Kecepatan,速度,속도,Velocidade,быстрота,速度
+Text.Close,يغلق,Schließen,Close,Cerrar,Fermer,बंद करना,Menutup,閉じる,닫기,Fechar,Закрыть,关闭
+Text.NextLevel,المرحلة التالية,Nächstes Level,Next Level,Nivel Siguiente,Niveau Suivant,अगला स्तर,Tingkat Berikutnya,次のレベル,다음 레벨,Próximo Nível,Следующий Уровень,下一个层次
+Text.ChoosePiece,إختر قطعة,Figuren Wählen,Choose Pieces,Elija Piezas,Choisir Pièces,टुकड़े चुनें,Pilih Potongan,チェスの駒選択,체스 말 선택,Seleccionar Peças,Выберите Фигуры,选择棋子
+Text.ChoosePower,إختر القدرة,Kräfte Wählen,Choose Powers,Elija Poderes,Choisir Pouvoirs,शक्तियाँ चुनें,Pilih Kekuatan,能力選択,능력을 선택,Seleccionar  Poderes,Выберите Способности,选择能力
+Text.ChooseMap,,,Choose a Map,,,,,,,,,
+Text.GameOver,انتهت اللعبة,Spielende,Game Over,Game Over,Terminé,खेल खत्म,Permainan Telah Berakhir,ゲームオーバー,게임 오버,Fim do Jogo,Игра Окончена,游戏结束了
+Text.Score,الدرجة,Punktzahl,Score,Puntaje,Score,स्कोर,Skor,得点,득점,Pontuação,Оценка,得分
+Text.Highscore,درجة عالية,Highscore,High Score,Puntaje Alto,Meilleur Score,उच्च स्कोर,Skor Tinggi,高得点,고득점,Pontuação Máxima,Высокий Балл,高分
+Text.Retry,حاول ثانية,Nochmal Versuchen,Try Again,Reintentarlo,Réessayer,पुनः प्रयास करें,Coba Lagi,再試行,재시도,Tente Novamente,Попробуйте Еще Раз,重试
+Text.NewGame,لعبة جديدة,Neues Spiel,New Game,Nuevo Juego,Nouveau Jeu,नया खेल,Permainan Baru,ニューゲーム,새로운 게임,Novo Jogo,Новая Игра,新游戏
+Text.End,الخروج من اللعبة,Spiel Beenden,End Game,Salir del Juego,Quitter le Jeu,खेल से बाहर जाएं,Keluar Permainan,ゲーム終了,게임 종료,Sair do Jogo,Выход из Игры,结束游戏
+Text.Concede,يستسلم,Aufgeben,Concede,Ríndete,Renoncer,हार मान लो,Menyerah,あきらめる,포기하다,Rendição,Сдаваться,放弃
+Text.AskConcede,يستسلم؟,Aufgeben?,Concede?,¿Rendirse?,Renoncer ?,हार मान लो ?,Menyerah?,あきらめる？,포기?,Rendição?,Сдаться?,放弃？
+Text.Loading,تحميل...,Wird geladen...,Loading...,Cargando...,Chargement...,लोड हो रहा है...,Memuat...,読み込んでいます...,로드 중...,Carregando...,Загрузка...,加载中...
+Text.Confirm,تأكيد,Bestätigen,Confirm,Confirmar,Confirmer,पुष्टि करें,Konfirmasi,確認,확인,Confirmar,Подтвердить,确认
+PieceName.Pawn,البيدق,Bauer,Pawn,Peón,Pion,मोहरा,Bidak,ポーン,폰,Peão,Пешка,卒
+PieceName.Rook,الرخ,Turm,Rook,Torre,Tour,किश्ती,Benteng,ルーク,루크,Torre,Ладья,车
+PieceName.Knight,الفارس,Springer,Knight,Caballo,Cavalier,शूरवीर,Ksatria,ナイト,기사,Cavalo,Конь,马
+PieceName.Bishop,الأسقف,Läufer,Bishop,Alfil,Fou,बिशप,Uskup,ビショップ,비숍,Bispo,Слон,主教
+PieceName.Queen,الملكة,Dame,Queen,Dama,Dame,रानी,Ratu,クイーン,여왕,Dama,Ферзь,皇后
+PieceName.King,الملك,König,King,Rey,Roi,राजा,Raja,キング,왕,Rei,Король,国王
+PieceName.Private,,,Private,,,,,,,,,
+PieceName.Captain,,,Captain,,,,,,,,,
+PieceName.Sergeant,,,Sergeant,,,,,,,,,
+PieceName.Lieutenant,,,Lieutenant,,,,,,,,,
+PieceName.Colonel,,,Colonel,,,,,,,,,
+PieceName.General,,,General,,,,,,,,,
+PieceName.Ferz,,,Counseller,,,,,,,,,
+PieceName.Wazir,,,Governor,,,,,,,,,
+PieceName.Dabbaba,,,War Engine,,,,,,,,,
+PieceName.Taliah,,,Picket,,,,,,,,,
+PieceName.Camel,,,Camel,,,,,,,,,
+PieceName.Elephant,,,Elephant,,,,,,,,,
+PieceName.Giraffe,,,Giraffe,,,,,,,,,
+PieceName.Swordsman,,,Swordsman,,,,,,,,,
+PieceName.Fuhyo,,,Soldier,,,,,,,,,
+PieceName.Tokin,,,Gold Soldier,,,,,,,,,
+PieceName.Hisha,,,Chariot,,,,,,,,,
+PieceName.Ryuo,,,Dragon Chariot,,,,,,,,,
+PieceName.Kakugyo,,,Runner,,,,,,,,,
+PieceName.Ryuma,,,Dragon Runner,,,,,,,,,
+PieceName.Keima,,,Horse,,,,,,,,,
+PieceName.Narikei,,,Gold Horse,,,,,,,,,
+PieceName.Osho,,,King,,,,,,,,,
+PieceName.Kyosha,,,Lance,,,,,,,,,
+PieceName.Narikyo,,,Gold Lance,,,,,,,,,
+PieceName.Ginsho,,,Silver General,,,,,,,,,
+PieceName.Narigin,,,Gilded Silver,,,,,,,,,
+PieceName.Kinsho,,,Gold General,,,,,,,,,
+PieceName.Zu,,,Soldier,,,,,,,,,
+PieceName.Ju,,,Chariot,,,,,,,,,
+PieceName.Ma,,,Horse,,,,,,,,,
+PieceName.Xiang,,,Elephant,,,,,,,,,
+PieceName.Jiang,,,General,,,,,,,,,
+PieceName.Shi,,,Advisor,,,,,,,,,
+PieceName.Pao,,,Cannon,,,,,,,,,
+PieceInfo.Pawn,ينقل مسافة واحدة للأمام ، أو يلتقط قطعة مسافة واحدة قطريًا. تصبح ملكة إذا وصلت إلى الجانب الآخر.,"Zieht ein Feld vorwärts oder schlägt ein Feld diagonal. Wird zur Dame, wenn er die andere Seite erreicht.",Moves 1 space forward. Captures 1 space diagonally forward. Becomes a queen if it reaches the other side.,Avanza una casilla o captura una casilla en diagonal. Se convierte en dama si llega al otro lado.,Avance d'une case ou capture une case en diagonalement. Devient une dame lorsqu'il atteint l'autre côté.,"एक स्थान को आगे ले जाता है, या एक स्थान को तिरछे तरीके से कैप्चर करता है। उस पार पहुँचे तो रानी बन जाती है।","Bergerak satu ruang ke depan, atau menangkap satu ruang secara diagonal. Menjadi ratu jika mencapai sisi lain.",1スペース進むか、対角線上にある駒を取る。 反対側に到達すればクイーンになる。,한 칸 앞으로 이동하거나 대각선으로 한 조각을 가져갑니다. 반대편에 도착하면 여왕이 됩니다.,Move-se uma casa para a frente ou captura uma casa na diagonal. Torna-se uma dama se chegar ao outro lado.,"Перемещается на одно полей вперед или захватывает одно полей по диагонали. Становится ферзь, если переходит на другую сторону.",向前移动一个空间，或在对角线上带走一个棋子。如果到达另一边就会成为皇后。
+PieceInfo.Rook,يتحرك أفقيًا أو رأسيًا.,Zieht horizontal oder vertikal.,Moves or captures orthogonally.,Se mueve en horizontal o vertical.,Se déplace horizontalement ou verticalement.,क्षैतिज या लंबवत गति करता है।,Bergerak secara horizontal atau vertikal.,水平または垂直に移動する。,수평 또는 수직으로 이동합니다.,Move-se na horizontal ou na vertical.,Перемещается по горизонтали или вертикали.,在水平或垂直移动。
+PieceInfo.Knight,يتحرك في شكل L (2 من الخارج ، 1 عبر) يقفز فوق القطع في الطريق.,"Zieht L-förmig (2 raus, 1 rüber) und springt über Figuren, die ihm im Weg stehen.","Moves or captures in an L shape (2 out, 1 across). Jumps over obstacles.","Se mueve en forma de L (2 fuera, 1 a través) y salta por encima de las piezas que se interponen en su camino.","Se déplace en forme de L (2 sortent, 1 traverse) et saute par-dessus les pièces qui se trouvent sur son chemin.","एक एल आकार में चलता है (2 बाहर, 1 पार) रास्ते में टुकड़ों पर कूदता है।","Bergerak dalam bentuk L (2 keluar, 1 melintang) melompati potongan-potongan yang menghalangi.",L字型に移動し、邪魔な駒を飛び越える。,"L자 모양(2칸 밖으로, 1칸 가로로)으로 이동하면서 가로막는 조각을 뛰어넘어 이동합니다.","Move-se em forma de L (2 para fora, 1 para o outro lado) e salta sobre as peças que se atravessam no seu caminho.","Перемещается в форме буквы L (2 наружу, 1 поперек), перепрыгивая через фигуры на пути.",以L形移动（2出1进），跳过挡路的棋子。
+PieceInfo.Bishop,يتحرك قطريا.,Zieht diagonal.,Moves or captures diagonally.,Se mueve en diagonal.,Se déplace diagonalement.,तिरछा गति करता है।,Bergerak secara diagonal.,対角線上に移動する。,대각선으로 이동합니다.,Move-se na diagonal.,Перемещается по диагонали.,在对角移动。
+PieceInfo.Queen,يتحرك أفقيًا أو رأسيًا أو قطريًا.,"Zieht horizontal, vertikal oder diagonal.",Moves or captures orthogonally or diagonally.,"Se mueve en horizontal, vertical o diagonal.","Se déplace horizontalement, verticalement ou en diagonalement.","क्षैतिज, लंबवत या तिरछे गति करता है।","Bergerak secara horizontal, vertikal, atau diagonal.",水平方向、垂直方向、斜め方向に移動する。,가로 또는 세로 또는 대각선으로 이동합니다.,"Move-se na horizontal, na vertical ou na diagonal.","Перемещается по горизонтали, вертикали или диагонали.",在水平或垂直或对角移动。
+PieceInfo.King,ينقل مسافة واحدة في أي اتجاه.,Zieht ein Feld in eine beliebige Richtung.,Moves or captures 1 space orthogonally or 1 space diagonally.,Se mueve una casilla en cualquier dirección.,Se déplace d'une case dans n'importe quelle direction.,एक स्थान को किसी भी दिशा में ले जाता है।,Bergerak satu ruang ke segala arah.,任意の方向に1スペース移動する。,원하는 방향으로 한 칸 이동하기.,Move-se uma casa em qualquer direcção.,Перемещает на одно полей в любом направлении.,任何方向移动一个空间。
+PieceInfo.Private,,,Moves 1 space forward. Captures up to 2 spaces forward. Becomes a Colonel if it reaches the other side.,,,,,,,,,
+PieceInfo.Captain,,,Moves diagonally. Captures orthogonally.,,,,,,,,,
+PieceInfo.Sergeant,,,Moves or captures up to 3 spaces orthogonally. Jumps over obstacles.,,,,,,,,,
+PieceInfo.Lieutenant,,,Moves orthogonally. Captures diagonally.,,,,,,,,,
+PieceInfo.Colonel,,,Moves or captures in any combination of up to 4 orthogonal steps.,,,,,,,,,
+PieceInfo.General,,,Moves 1 space orthogonally or 1 space diagonally. Captures up to 2 spaces orthogonally or up to 2 spaces diagonally.,,,,,,,,,
+PieceInfo.Ferz,,,Moves 1 space orthogonally. Captures up to 2 spaces orthogonally.,,,,,,,,,
+PieceInfo.Wazir,,,Moves 1 space diagonally. Captures up to 2 spaces diagonally.,,,,,,,,,
+PieceInfo.Dabbaba,,,Moves or captures 2 spaces orthogonally. Jumps over obstacles.,,,,,,,,,
+PieceInfo.Taliah,,,Moves or captures at least 2 spaces diagonally.,,,,,,,,,
+PieceInfo.Camel,,,"Moves or captures in an L shape (3 out, 1 across). Jumps over obstacles.",,,,,,,,,
+PieceInfo.Elephant,,,Moves or captures 2 spaces diagonally. Jumps over obstacles.,,,,,,,,,
+PieceInfo.Giraffe,,,"Goes out 1 space diagonally, then moves or captures continuing out at least 2 spaces orthogonally.",,,,,,,,,
+PieceInfo.Swordsman,,,Moves or captures 2 spaces orthogonally or 2 spaces diagonally. Jumps over obstacles.,,,,,,,,,
+PieceInfo.Fuhyo,,,Moves or captures 1 space forward. Becomes a Gold Soldier if it reaches the other side.,,,,,,,,,
+PieceInfo.Tokin,,,Moves or captures 1 space orthogonally or 1 space diagonally forward.,,,,,,,,,
+PieceInfo.Hisha,,,Moves or captures orthogonally. Becomes a Dragon Chariot if it reaches the other side.,,,,,,,,,
+PieceInfo.Ryuo,,,Moves or captures orthogonally or 1 space diagonally.,,,,,,,,,
+PieceInfo.Kakugyo,,,Moves or captures diagonally. Becomes a Dragon Runner if it reaches the other side.,,,,,,,,,
+PieceInfo.Ryuma,,,Moves or captures diagonally or 1 space orthogonally.,,,,,,,,,
+PieceInfo.Keima,,,"Moves or captures in an L shape (2 out, 1 across) going forward. Jumps over obstacles. Becomes a Gold Horse if it reaches the other side.",,,,,,,,,
+PieceInfo.Narikei,,,Moves or captures 1 space orthogonally or 1 space diagonally forward.,,,,,,,,,
+PieceInfo.Osho,,,Moves or captures 1 space orthogonally or 1 space diagonally.,,,,,,,,,
+PieceInfo.Kyosha,,,Moves or captures any number of spaces forward. Becomes a Gold Lance if it reaches the other side.,,,,,,,,,
+PieceInfo.Narikyo,,,Moves or captures 1 space orthogonally or 1 space diagonally forward.,,,,,,,,,
+PieceInfo.Ginsho,,,Moves or captures 1 space diagonally or 1 space forward. Becomes a Gilded Silver if it reaches the other side.,,,,,,,,,
+PieceInfo.Narigin,,,Moves or captures 1 space orthogonally or 1 space diagonally forward.,,,,,,,,,
+PieceInfo.Kinsho,,,Moves or captures 1 space orthogonally or 1 space diagonally forward.,,,,,,,,,
+PieceInfo.Zu,,,Moves or captures 1 space forward or 1 space horizontally.,,,,,,,,,
+PieceInfo.Ju,,,Moves or captures orthogonally.,,,,,,,,,
+PieceInfo.Ma,,,"Goes out 1 orthogonal space, then moves or captures continuing out 1 space diagonally.",,,,,,,,,
+PieceInfo.Xiang,,,Moves or captures 2 spaces diagonally.,,,,,,,,,
+PieceInfo.Jiang,,,Moves or captures 1 space orthogonally.,,,,,,,,,
+PieceInfo.Shi,,,Moves or captures 1 space diagonally.,,,,,,,,,
+PieceInfo.Pao,,,"Moves or captures orthogonally, but must jump over 1 obstacle for a capture.",,,,,,,,,
+PowerName.First,,,First,,,,,,,,,
+PowerName.ExtraRow,,,Extra Row,,,,,,,,,
+PowerName.LandMine,,,Land Mine,,,,,,,,,
+PowerName.Wall,,,Walls,,,,,,,,,
+PowerName.Shield,,,Shield,,,,,,,,,
+PowerInfo.First,,,Take the first turn in every fight.,,,,,,,,,
+PowerInfo.ExtraRow,,,Gain an extra row for placing pieces.,,,,,,,,,
+PowerInfo.LandMine,,,Can be placed in the neutral zone. Pieces explode when they move onto a land mine.,,,,,,,,,
+PowerInfo.Wall,,,Can be placed in the neutral zone. Pieces cannot move through walls.,,,,,,,,,
+PowerInfo.Shield,,,Can be equipped to a piece. A shielded piece cannot be captured in the first three turns.,,,,,,,,,
+BoardName.Classic,,,Classic,,,,,,,,,
+BoardName.Hourglass,,,Hourglass,,,,,,,,,
+BoardName.ZigZag,,,Zig Zag,,,,,,,,,
+BoardName.CenterCross,,,Center Cross,,,,,,,,,
+BoardName.Small,,,Small,,,,,,,,,
+BoardInfo.Classic,,,An 8x8 board.,,,,,,,,,
+BoardInfo.Hourglass,,,An 8x8 board with sections missing from the left and right sides.,,,,,,,,,
+BoardInfo.ZigZag,,,An 8x8 board with sections missing from the top-left and bottom-right.,,,,,,,,,
+BoardInfo.CenterCross,,,A 7x7 board with a cross shaped obstacle in the center.,,,,,,,,,
+BoardInfo.Small,,,A 5x5 board.,,,,,,,,,
+SetName.Western,,,Western,,,,,,,,,
+SetName.Xiangqi,,,Xiangqi,,,,,,,,,
+SetName.Shogi,,,Shogi,,,,,,,,,
+SetName.Tamerlane,,,Tamerlane,,,,,,,,,
+SetName.Military,,,Military,,,,,,,,,
+SetInfo.Western,,,The standard pieces used to play chess throught the western world.,,,,,,,,,
+SetInfo.Xiangqi,,,The pieces used to play a chess variation made popular in China.,,,,,,,,,
+SetInfo.Shogi,,,The pieces used to play a chess variation made popular in Japan.,,,,,,,,,
+SetInfo.Tamerlane,,,The pieces used to play a chess variation which originates from Central Asia.,,,,,,,,,
+SetInfo.Military,,,Custom pieces named after U.S. military ranks.,,,,,,,,,

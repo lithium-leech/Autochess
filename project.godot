@@ -44,7 +44,7 @@ theme/custom_font="res://Fonts/Pixel Musketeer.tres"
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Localization/Text/Text.ar.translation", "res://Localization/Text/Text.de.translation", "res://Localization/Text/Text.en.translation", "res://Localization/Text/Text.es.translation", "res://Localization/Text/Text.fr.translation", "res://Localization/Text/Text.hi.translation", "res://Localization/Text/Text.id.translation", "res://Localization/Text/Text.ja.translation", "res://Localization/Text/Text.ko.translation", "res://Localization/Text/Text.pt.translation", "res://Localization/Text/Text.ru.translation", "res://Localization/Text/Text.zh.translation")
+locale/translations=PackedStringArray("res://Localization/Text.ar.translation", "res://Localization/Text.de.translation", "res://Localization/Text.en.translation", "res://Localization/Text.es.translation", "res://Localization/Text.fr.translation", "res://Localization/Text.hi.translation", "res://Localization/Text.id.translation", "res://Localization/Text.ja.translation", "res://Localization/Text.ko.translation", "res://Localization/Text.pt.translation", "res://Localization/Text.ru.translation", "res://Localization/Text.zh.translation")
 
 [rendering]
 
