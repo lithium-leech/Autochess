@@ -1,5 +1,5 @@
-# This script is attached to the Main node
-extends Node2D
+# This script is attached to the Main node.
+extends Node
 
 
 # Called when the node enters the scene tree for the first time.

@@ -11,6 +11,20 @@ config_version=5
 [application]
 
 config/name="Autochess"
+config/name_localized={
+"ar": "آلي شطرنج",
+"de": "Autoschach",
+"en": "Autochess",
+"es": "Auto-Ajedrez",
+"fr": "Auto-Échecs",
+"hi": "ऑटोशतरंज",
+"id": "Otocatur",
+"ja": "オートチェス",
+"ko": "자동 체스",
+"pt": "Auto-Xadrez",
+"ru": "Автошахматы",
+"zh": "自动棋类"
+}
 run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 boot_splash/bg_color=Color(0, 0, 0, 1)
