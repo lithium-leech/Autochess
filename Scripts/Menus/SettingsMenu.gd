@@ -38,7 +38,7 @@ func _on_language_left_pressed():
 	var index : int = GameState.available_locales.find(GameState.current_locale) - 1
 	if index < 0 : index = GameState.available_locales.size() - 1
 	# Set the new locale
-	_set_locale(index)
+	set_locale(index)
 
 
 # Called when the right language button is pressed.
@@ -47,12 +47,12 @@ func _on_language_right_pressed():
 	var index : int = GameState.available_locales.find(GameState.current_locale) + 1
 	if index >= GameState.available_locales.size() : index = 0
 	# Set the new locale
-	_set_locale(index)
+	set_locale(index)
 
 
 # Sets the current locale to the given index.
 #	index: The index to switch to
-func _set_locale(index: int):
+func set_locale(index: int):
 	GameState.current_locale = GameState.available_locales[index]
 	TranslationServer.set_locale(GameState.current_locale)
 

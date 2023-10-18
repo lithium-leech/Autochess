@@ -2,6 +2,12 @@
 class_name GameState
 
 
+# The world space containing game objects
+static var game_world : Node
+
+# The world space containing text
+static var text_world : Node
+
 # Current locale being used by the player.
 static var current_locale : String = ""
 

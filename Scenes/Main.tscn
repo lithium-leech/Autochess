@@ -4,15 +4,72 @@
 [ext_resource type="Script" path="res://Scripts/Loading/Main.gd" id="1_mr56q"]
 
 [node name="Main" type="Node2D"]
-position = Vector2(144, 320)
 script = ExtResource("1_mr56q")
-
-[node name="Camera" type="Camera2D" parent="."]
 
 [node name="BackgroundColor" type="Polygon2D" parent="."]
 z_index = -1
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-100000, -100000, 100000, -100000, 100000, 100000, -100000, 100000)
 
-[node name="BackgroundImage" type="Sprite2D" parent="."]
+[node name="GameWindow" type="SubViewportContainer" parent="."]
+layout_direction = 2
+offset_left = -496.0
+offset_top = -352.0
+offset_right = 784.0
+offset_bottom = 928.0
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 0
+
+[node name="GameViewport" type="SubViewport" parent="GameWindow"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(1280, 1280)
+render_target_update_mode = 4
+
+[node name="BackgroundImage" type="Sprite2D" parent="GameWindow/GameViewport"]
+position = Vector2(640, 640)
 texture = ExtResource("1_36t5t")
+
+[node name="GameWorld" type="Control" parent="GameWindow/GameViewport"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 640.0
+offset_right = 640.0
+offset_bottom = 640.0
+
+[node name="TextWindow" type="SubViewportContainer" parent="."]
+layout_direction = 2
+offset_left = -496.0
+offset_top = -352.0
+offset_right = 4624.0
+offset_bottom = 4768.0
+scale = Vector2(0.25, 0.25)
+auto_translate = false
+localize_numeral_system = false
+mouse_filter = 2
+
+[node name="TextViewport" type="SubViewport" parent="TextWindow"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
+gui_disable_input = true
+size = Vector2i(5120, 5120)
+render_target_update_mode = 4
+
+[node name="TextWorld" type="Control" parent="TextWindow/TextViewport"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2560.0
+offset_top = 2560.0
+offset_right = 2560.0
+offset_bottom = 2560.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c0bxbhtgvobvb"]
+[gd_scene load_steps=30 format=3 uid="uid://c0bxbhtgvobvb"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/TitleMenu.gd" id="1_7p77h"]
 [ext_resource type="Texture2D" uid="uid://b4i5b77wm83is" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="1_fevew"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://54vtq1o8ufnb" path="res://Sprites/Buttons/Button1x6/Button1x6Disabled.png" id="4_5nlfk"]
 [ext_resource type="Texture2D" uid="uid://b5e5dqcirqcfn" path="res://Sprites/GameIcons/Play.png" id="5_iawtm"]
 [ext_resource type="Texture2D" uid="uid://cujhn7fivn23d" path="res://Sprites/GameIcons/Settings.png" id="6_sfne7"]
+[ext_resource type="Script" path="res://Scripts/Localization/TextureFlipper.gd" id="7_i6iei"]
 [ext_resource type="Texture2D" uid="uid://cgx810nc2tbxo" path="res://Sprites/GameIcons/Cross.png" id="7_x5jvy"]
 [ext_resource type="Texture2D" uid="uid://do2ava0aymg5k" path="res://Sprites/Panels/ScreenCover.png" id="9_hc8lo"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenu.gd" id="10_bkcph"]
@@ -42,9 +43,13 @@ font_color = Color(0, 0, 0, 1)
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="TitleMenu" type="Node2D"]
-z_index = 10
-position = Vector2(144, 320)
+[node name="TitleMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_7p77h")
 
 [node name="Title" type="Label" parent="."]
@@ -75,6 +80,7 @@ offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("5_iawtm")
+script = ExtResource("7_i6iei")
 
 [node name="Text" type="Label" parent="PlayButton"]
 layout_mode = 0
