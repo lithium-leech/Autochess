@@ -3,7 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://cualp4dwrcrur" path="res://Sprites/Panels/Background.png" id="1_36t5t"]
 [ext_resource type="Script" path="res://Scripts/Loading/Main.gd" id="1_mr56q"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_mr56q")
 
 [node name="BackgroundColor" type="Polygon2D" parent="."]
@@ -13,6 +19,7 @@ polygon = PackedVector2Array(-100000, -100000, 100000, -100000, 100000, 100000, 
 
 [node name="GameWindow" type="SubViewportContainer" parent="."]
 layout_direction = 2
+layout_mode = 0
 offset_left = -496.0
 offset_top = -352.0
 offset_right = 784.0
@@ -46,6 +53,7 @@ offset_bottom = 640.0
 
 [node name="TextWindow" type="SubViewportContainer" parent="."]
 layout_direction = 2
+layout_mode = 0
 offset_left = -496.0
 offset_top = -352.0
 offset_right = 4624.0

@@ -1,3 +1,8 @@
 {
-    "godot_tools.editor_path": "d:\\Programme\\Godot\\Godot.exe"
+    "godot_tools.editor_path": "d:\\Programme\\Godot\\Godot.exe",
+    "cSpell.words": [
+        "roundf",
+        "viewports",
+        "worldspace"
+    ]
 }
