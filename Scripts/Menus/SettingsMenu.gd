@@ -24,12 +24,12 @@ func _on_set_right_pressed():
 
 # Called when the left volume button is pressed.
 func _on_volume_left_pressed():
-	pass # Replace with function body.
+	set_volume(GameState.music_box.volume - 1)
 
 
 # Called when the right volume button is pressed.
 func _on_volume_right_pressed():
-	pass # Replace with function body.
+	set_volume(GameState.music_box.volume + 1)
 
 
 # Called when the left language button is pressed.
@@ -56,6 +56,17 @@ func _on_exit_button_pressed():
 	self.visible = false
 	$"../../FrontGroup".visible_text = true
 
+
+# Sets the volume level.
+# 	level: The level to set the volume to [0:10].
+func set_volume(level: int):
+	# Set the music volume.
+	GameState.music_box.set_volume(level)
+	# Update the volume text.
+	$Volume/Value.text = "{volume}%".format({
+		"volume": level * 10
+	})
+	
 
 # Sets the current locale to the given index.
 # 	index: The index to switch to.

@@ -8,6 +8,9 @@ static var game_world: Node
 # The world space containing text.
 static var text_world: Node
 
+# A tool for managing the music.
+static var music_box: Node
+
 # The current locale being used by the player.
 static var current_locale: String = ""
 

@@ -6,6 +6,7 @@ extends Node
 func _ready():
 	GameState.game_world = $GameWindow/GameViewport/GameWorld
 	GameState.text_world = $TextWindow/TextViewport/TextWorld
+	GameState.music_box = $MusicBox
 	load_display()
 	load_locale()
 	load_title_scene()
@@ -47,3 +48,4 @@ func load_locale():
 func load_title_scene():
 	var title_scene: Node = preload("res://Scenes/Title.tscn").instantiate()
 	GameState.game_world.add_child(title_scene)
+	GameState.music_box.play_music(GameState.music_box.Music.MENU)

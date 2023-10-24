@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq85npp5p7yyw"]
+[gd_scene load_steps=7 format=3 uid="uid://bq85npp5p7yyw"]
 
 [ext_resource type="Texture2D" uid="uid://cualp4dwrcrur" path="res://Sprites/Panels/Background.png" id="1_36t5t"]
 [ext_resource type="Script" path="res://Scripts/Loading/Main.gd" id="1_mr56q"]
+[ext_resource type="Script" path="res://Scripts/Audio/MusicBox.gd" id="3_beopw"]
+[ext_resource type="AudioStream" uid="uid://dqg12x7g3sufj" path="res://Audio/Music/MenuMusic.ogg" id="4_4681i"]
+[ext_resource type="AudioStream" uid="uid://wmgy1od2h222" path="res://Audio/Music/PlanningMusic.ogg" id="5_vl7hr"]
+[ext_resource type="AudioStream" uid="uid://tr746w375w6i" path="res://Audio/Music/BattleMusic.ogg" id="6_rv6du"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -81,3 +85,16 @@ offset_left = 2560.0
 offset_top = 2560.0
 offset_right = 2560.0
 offset_bottom = 2560.0
+
+[node name="MusicBox" type="Node" parent="." node_paths=PackedStringArray("music_players")]
+script = ExtResource("3_beopw")
+music_players = [NodePath("MenuMusic"), NodePath("PlanningMusic"), NodePath("BattleMusic")]
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="MusicBox"]
+stream = ExtResource("4_4681i")
+
+[node name="PlanningMusic" type="AudioStreamPlayer2D" parent="MusicBox"]
+stream = ExtResource("5_vl7hr")
+
+[node name="BattleMusic" type="AudioStreamPlayer2D" parent="MusicBox"]
+stream = ExtResource("6_rv6du")
