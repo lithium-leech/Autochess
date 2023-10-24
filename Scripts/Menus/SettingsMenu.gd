@@ -61,9 +61,10 @@ func _on_exit_button_pressed():
 # 	level: The level to set the volume to [0:10].
 func set_volume(level: int):
 	# Set the music volume.
+	level = clamp(level, 0, 10)
 	GameState.music_box.set_volume(level)
 	# Update the volume text.
-	$Volume/Value.text = "{volume}%".format({
+	$"..".labels[$Volume/Value].text = "{volume}%".format({
 		"volume": level * 10
 	})
 	

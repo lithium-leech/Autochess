@@ -54,7 +54,7 @@ import/blender/enabled=false
 
 [gui]
 
-theme/custom_font="res://Fonts/Pixel Musketeer.tres"
+theme/custom_font="res://Fonts/DefaultFonts.tres"
 
 [internationalization]
 

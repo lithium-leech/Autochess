@@ -7,11 +7,12 @@ extends Control
 # True if the text in this group is presently visible.
 @export var visible_text: bool = true:
 	set(value):
-		for label in labels:
+		for label in labels.values():
 			label.visible = value
 
 # The labels belonging to this group.
-var labels: Array[Label]
+# Maps game world labels to text world labels
+var labels: Dictionary
 
 # The root node generated in the text world space.
 var text_tree: Control
@@ -41,7 +42,7 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 	if (game_node is Label):
 		# Create a new label and add it to the label collection.
 		text_node = Label.new()
-		labels.append(text_node)
+		labels[game_node] = text_node
 		# Copy the properties of the original label.
 		text_node.visible = game_node.is_visible_in_tree()
 		text_node.layout_direction = game_node.layout_direction
@@ -49,6 +50,7 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 		text_node.localize_numeral_system = game_node.localize_numeral_system
 		text_node.horizontal_alignment = game_node.horizontal_alignment
 		text_node.vertical_alignment = game_node.vertical_alignment
+		text_node.clip_text = true
 		text_node.label_settings = game_node.label_settings
 		text_node.label_settings.font_size *= 4
 		text_node.text = game_node.text
