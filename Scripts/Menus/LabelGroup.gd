@@ -11,7 +11,7 @@ extends Control
 			label.visible = value
 
 # The labels belonging to this group.
-# Maps game world labels to text world labels
+# Maps game world labels to text world labels.
 var labels: Dictionary
 
 # The root node generated in the text world space.
@@ -22,7 +22,7 @@ var text_tree: Control
 func _ready():
 	# Create the text tree.
 	text_tree = Control.new()
-	GameState.text_world.add_child(text_tree)
+	Main.text_world.add_child(text_tree)
 	# Grow the text tree.
 	for child in get_children():
 		grow_text_tree(child, text_tree)

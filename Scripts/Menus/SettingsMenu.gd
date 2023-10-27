@@ -24,19 +24,19 @@ func _on_set_right_pressed():
 
 # Called when the left volume button is pressed.
 func _on_volume_left_pressed():
-	set_volume(GameState.music_box.volume - 1)
+	set_volume(Main.music_box.volume - 1)
 
 
 # Called when the right volume button is pressed.
 func _on_volume_right_pressed():
-	set_volume(GameState.music_box.volume + 1)
+	set_volume(Main.music_box.volume + 1)
 
 
 # Called when the left language button is pressed.
 func _on_language_left_pressed():
 	# Get the index of the previous locale.
-	var index: int = GameState.available_locales.find(GameState.current_locale) - 1
-	if (index < 0): index = GameState.available_locales.size() - 1
+	var index: int = Main.atlas.available_locales.find(Main.atlas.current_locale) - 1
+	if (index < 0): index = Main.atlas.available_locales.size() - 1
 	# Set the new locale.
 	set_locale(index)
 
@@ -44,8 +44,8 @@ func _on_language_left_pressed():
 # Called when the right language button is pressed.
 func _on_language_right_pressed():
 	# Get the index of the next locale.
-	var index: int = GameState.available_locales.find(GameState.current_locale) + 1
-	if (index >= GameState.available_locales.size()): index = 0
+	var index: int = Main.atlas.available_locales.find(Main.atlas.current_locale) + 1
+	if (index >= Main.atlas.available_locales.size()): index = 0
 	# Set the new locale.
 	set_locale(index)
 
@@ -62,7 +62,7 @@ func _on_exit_button_pressed():
 func set_volume(level: int):
 	# Set the music volume.
 	level = clamp(level, 0, 10)
-	GameState.music_box.set_volume(level)
+	Main.music_box.set_volume(level)
 	# Update the volume text.
 	$"..".labels[$Volume/Value].text = "{volume}%".format({
 		"volume": level * 10
@@ -72,5 +72,6 @@ func set_volume(level: int):
 # Sets the current locale to the given index.
 # 	index: The index to switch to.
 func set_locale(index: int):
-	GameState.current_locale = GameState.available_locales[index]
-	TranslationServer.set_locale(GameState.current_locale)
+	Main.atlas.current_locale = Main.atlas.available_locales[index]
+	TranslationServer.set_locale(Main.atlas.current_locale)
+	Main.atlas.on_locale_change.emit()

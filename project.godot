@@ -36,7 +36,7 @@ boot_splash/minimum_display_time=500
 
 [display]
 
-window/size/viewport_width=288
+window/size/viewport_width=264
 window/size/viewport_height=576
 window/size/resizable=false
 window/size/window_width_override=540
@@ -54,7 +54,7 @@ import/blender/enabled=false
 
 [gui]
 
-theme/custom_font="res://Fonts/DefaultFonts.tres"
+theme/custom_font="res://Fonts/Pixel Musketeer.otf"
 
 [internationalization]
 

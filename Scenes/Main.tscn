@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq85npp5p7yyw"]
+[gd_scene load_steps=8 format=3 uid="uid://bq85npp5p7yyw"]
 
 [ext_resource type="Texture2D" uid="uid://cualp4dwrcrur" path="res://Sprites/Panels/Background.png" id="1_36t5t"]
-[ext_resource type="Script" path="res://Scripts/Loading/Main.gd" id="1_mr56q"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_ykrf7"]
 [ext_resource type="Script" path="res://Scripts/Audio/MusicBox.gd" id="3_beopw"]
+[ext_resource type="Script" path="res://Scripts/Localization/Atlas.gd" id="4_2jjvr"]
 [ext_resource type="AudioStream" uid="uid://dqg12x7g3sufj" path="res://Audio/Music/MenuMusic.ogg" id="4_4681i"]
 [ext_resource type="AudioStream" uid="uid://wmgy1od2h222" path="res://Audio/Music/PlanningMusic.ogg" id="5_vl7hr"]
 [ext_resource type="AudioStream" uid="uid://tr746w375w6i" path="res://Audio/Music/BattleMusic.ogg" id="6_rv6du"]
@@ -14,7 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_mr56q")
+script = ExtResource("1_ykrf7")
 
 [node name="BackgroundColor" type="Polygon2D" parent="."]
 z_index = -1
@@ -24,9 +25,9 @@ polygon = PackedVector2Array(-100000, -100000, 100000, -100000, 100000, 100000, 
 [node name="GameWindow" type="SubViewportContainer" parent="."]
 layout_direction = 2
 layout_mode = 0
-offset_left = -496.0
+offset_left = -508.0
 offset_top = -352.0
-offset_right = 784.0
+offset_right = 772.0
 offset_bottom = 928.0
 auto_translate = false
 localize_numeral_system = false
@@ -58,9 +59,9 @@ offset_bottom = 640.0
 [node name="TextWindow" type="SubViewportContainer" parent="."]
 layout_direction = 2
 layout_mode = 0
-offset_left = -496.0
+offset_left = -508.0
 offset_top = -352.0
-offset_right = 4624.0
+offset_right = 4612.0
 offset_bottom = 4768.0
 scale = Vector2(0.25, 0.25)
 auto_translate = false
@@ -98,3 +99,6 @@ stream = ExtResource("5_vl7hr")
 
 [node name="BattleMusic" type="AudioStreamPlayer2D" parent="MusicBox"]
 stream = ExtResource("6_rv6du")
+
+[node name="Atlas" type="Node" parent="."]
+script = ExtResource("4_2jjvr")

@@ -1,5 +1,14 @@
-# This script is attached to the audio manager node.
-extends Node
+# A class for managing music.
+class_name MusicBox extends Node
+
+
+# An enumeration of the available music tracks.
+enum Music {
+	NONE = -1,
+	MENU = 0,
+	PLANNING = 1,
+	BATTLE = 2
+}
 
 
 # The available music players.
@@ -29,12 +38,3 @@ func set_volume(level: int):
 	for player in music_players:
 		player.volume_db = db
 	volume = level
-
-
-# An enumeration of the available music tracks.
-enum Music {
-	NONE = -1,
-	MENU = 0,
-	PLANNING = 1,
-	BATTLE = 2
-}

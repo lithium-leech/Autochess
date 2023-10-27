@@ -10,8 +10,8 @@ var detected_locale: String = ""
 # 	delta: The elapsed time since the previous frame.
 func _process(_delta: float):
 	# Check if the locale has changed.
-	if (detected_locale != GameState.current_locale):
-		detected_locale = GameState.current_locale
+	if (detected_locale != Main.atlas.current_locale):
+		detected_locale = Main.atlas.current_locale
 		if (detected_locale == "ar"):
 			# Modify image for right-to-left.
 			flip_h = true
