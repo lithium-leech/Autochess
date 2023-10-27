@@ -4,7 +4,7 @@ Text.GameTitle,آلي شطرنج,Autoschach,Autochess,Auto-Ajedrez,Auto-Échecs,
 Text.Play,يلعب,Spielen,Play,Play,Jouer,खेल,Bermain,プレイ,재생,Reproduzir,Играть,播放
 Text.Settings,إعدادات,Einstellungen,Settings,Ajustes,Paramètres,सेटिंग्स,Pengaturan,設定,설정,Ajustes,Настройки,设置
 Text.Quit,الخروج,Verlassen,Quit,Salir,Quitter,छोड़ना,Keluar,やめる,종료하,Saída,Выйти,退出
-Text.StartingMap,,,Starting Map,,,,,,,,,
+Text.StartingMap,خريطة البداية,Startkarte,Starting Map,Mapa de Inicio,Carte de Départ,प्रारंभ मानचित्र,Mulai Peta,スタートマップ,시작 지도,Mapa Inicial,Стартовая Карта,开始地图
 Text.Volume,مقدار,Lautstärke,Volume,Volumen,Volume,आयतन,Volume,音量,볼륨,Volume,Объем,音量
 Text.Language,لغة,Sprache,Language,Idioma,Langue,भाषा,Bahasa,言語,언어,Língua,Язык,语言
 Text.Speed,سرعة,Geschwindigkeit,Speed,Velocidad,Vitesse,गति,Kecepatan,速度,속도,Velocidade,быстрота,速度
@@ -12,7 +12,7 @@ Text.Close,يغلق,Schließen,Close,Cerrar,Fermer,बंद करना,Menutu
 Text.NextLevel,المرحلة التالية,Nächstes Level,Next Level,Nivel Siguiente,Niveau Suivant,अगला स्तर,Tingkat Berikutnya,次のレベル,다음 레벨,Próximo Nível,Следующий Уровень,下一个层次
 Text.ChoosePiece,إختر قطعة,Figuren Wählen,Choose Pieces,Elija Piezas,Choisir Pièces,टुकड़े चुनें,Pilih Potongan,チェスの駒選択,체스 말 선택,Seleccionar Peças,Выберите Фигуры,选择棋子
 Text.ChoosePower,إختر القدرة,Kräfte Wählen,Choose Powers,Elija Poderes,Choisir Pouvoirs,शक्तियाँ चुनें,Pilih Kekuatan,能力選択,능력을 선택,Seleccionar  Poderes,Выберите Способности,选择能力
-Text.ChooseMap,,,Choose a Map,,,,,,,,,
+Text.ChooseMap,اختر خريطة,Eine Karte Wählen,Choose a Map,Elija un Mapa,Choisir une Carte,एक मानचित्र चुनें,Pilih Peta,マップを選択,지도 선택,Selecionar um Mapa,Выберите Карта,选择地图
 Text.GameOver,انتهت اللعبة,Spielende,Game Over,Game Over,Terminé,खेल खत्म,Permainan Telah Berakhir,ゲームオーバー,게임 오버,Fim do Jogo,Игра Окончена,游戏结束了
 Text.Score,الدرجة,Punktzahl,Score,Puntaje,Score,स्कोर,Skor,得点,득점,Pontuação,Оценка,得分
 Text.Highscore,درجة عالية,Highscore,High Score,Puntaje Alto,Meilleur Score,उच्च स्कोर,Skor Tinggi,高得点,고득점,Pontuação Máxima,Высокий Балл,高分

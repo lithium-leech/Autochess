@@ -1,6 +1,7 @@
 # This script is attached to the main node.
 class_name Main extends Control
 
+
 # The world space containing game objects.
 static var game_world: Node
 
@@ -16,6 +17,7 @@ static var atlas: Atlas
 # The current state of the game.
 static var game_state: GameState = GameState.new()
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_world = $GameWindow/GameViewport/GameWorld
@@ -23,7 +25,6 @@ func _ready():
 	music_box = $MusicBox
 	atlas = $Atlas
 	load_display()
-	load_locale()
 	load_title_scene()
 
 
@@ -51,12 +52,6 @@ func load_display():
 	game_window.position.y = roundf((-352 * game_min_scale) + (screen_size.y - display_size.y) / 2.0)
 	text_window.position.x = game_window.position.x
 	text_window.position.y = game_window.position.y
-
-
-# Loads the locale of the local environment.
-func load_locale():
-	atlas.current_locale = TranslationServer.get_locale().split("_")[0]
-	atlas.available_locales = TranslationServer.get_loaded_locales()
 
 
 # Loads and displays the title scene.

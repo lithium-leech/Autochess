@@ -26,11 +26,19 @@ func _ready():
 	# Grow the text tree.
 	for child in get_children():
 		grow_text_tree(child, text_tree)
+	# Connect to the locale change event
+	Main.atlas.on_locale_change.connect(_on_locale_change)
 
 
 # Called when the node is about to leave the scene tree.
 func _exit_tree():
 	text_tree.queue_free()
+
+
+# Called when the locale is changed
+func _on_locale_change():
+	for label in labels.values():
+			label.label_settings.font = Main.atlas.fonts[Main.atlas.current_locale]
 
 
 # Grows a node from the text world space into a tree.
@@ -52,6 +60,7 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 		text_node.vertical_alignment = game_node.vertical_alignment
 		text_node.clip_text = true
 		text_node.label_settings = game_node.label_settings
+		text_node.label_settings.font = Main.atlas.fonts[Main.atlas.current_locale]
 		text_node.label_settings.font_size *= 4
 		text_node.text = game_node.text
 		# Erase the text in the game world space.
