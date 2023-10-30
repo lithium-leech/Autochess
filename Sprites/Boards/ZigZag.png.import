@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwsc3yf533mth"
-path="res://.godot/imported/Small.png-cc568d1c10a44d6f4b93d90b05ffb6b1.ctex"
+uid="uid://bcr4qnjyct3ch"
+path="res://.godot/imported/ZigZag.png-fa9f4cef2713e7cca91390927ddbaac3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Maps/Small.png"
-dest_files=["res://.godot/imported/Small.png-cc568d1c10a44d6f4b93d90b05ffb6b1.ctex"]
+source_file="res://Sprites/Boards/ZigZag.png"
+dest_files=["res://.godot/imported/ZigZag.png-fa9f4cef2713e7cca91390927ddbaac3.ctex"]
 
 [params]
 

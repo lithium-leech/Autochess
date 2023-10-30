@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d175g6nwso7ll"]
+
+[ext_resource type="AudioStream" uid="uid://wmgy1od2h222" path="res://Audio/Music/PlanningMusic.ogg" id="1_esbm4"]
+
+[node name="Planning" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_esbm4")

@@ -2,39 +2,37 @@
 class_name MusicBox extends Node
 
 
-# An enumeration of the available music tracks.
-enum Music {
-	NONE = -1,
-	MENU = 0,
-	PLANNING = 1,
-	BATTLE = 2
-}
-
-
-# The available music players.
-@export var music_players: Array[AudioStreamPlayer2D]
-
-# The music currently being played.
-var current_music: Music = Music.NONE
-
-# The volume level to play the music at.
+# The volume level to play music at.
 var volume: int = 7
+
+# The music player.
+var _player: AudioStreamPlayer2D
+
+# The decibel value to set music players to.
+var _db: int = 0
 
 
 # Plays the requested music.
 # 	music: The music to play.
-func play_music(music: Music):
-	if (current_music != Music.NONE): music_players[current_music].stop()
-	current_music = music
-	if (current_music != Music.NONE): music_players[current_music].play()
+func play_music(music: Music.Kind):
+	# Remove the current music player.
+	if (_player != null):
+		_player.stop()
+		_player.queue_free()
+		_player = null
+	# Create the requested music player.
+	if (music != Music.Kind.NONE):
+		_player = Music.get_music_player(music)
+		Main.node.add_child(_player)
+		_player.volume_db = _db
+		_player.play()
 
 
 # Sets the volume level.
 # 	level: The level to set the volume to [0:10].
 func set_volume(level: int):
 	level = clamp(level, 0, 10)
-	var db: int = (level * 5) - 35
-	if (level == 0): db = -80
-	for player in music_players:
-		player.volume_db = db
+	_db = (level * 5) - 35
+	if (level == 0): _db = -80
+	_player.volume_db = _db
 	volume = level

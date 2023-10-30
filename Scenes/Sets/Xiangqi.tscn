@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d66bi6636xcw"]
+
+[ext_resource type="Texture2D" uid="uid://7yrlxjda5a1j" path="res://Sprites/Sets/Xiangqi.png" id="1_8wfqn"]
+
+[node name="Xiangqi" type="Sprite2D"]
+texture = ExtResource("1_8wfqn")

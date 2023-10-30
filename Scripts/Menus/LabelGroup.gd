@@ -35,7 +35,7 @@ func _exit_tree():
 	text_tree.queue_free()
 
 
-# Called when the locale is changed
+# Called when the locale is changed.
 func _on_locale_change():
 	for label in labels.values():
 			label.label_settings.font = Main.atlas.fonts[Main.atlas.current_locale]
@@ -45,8 +45,8 @@ func _on_locale_change():
 # 	game_node: The node from the game world space to process.
 # 	text_parent: The node from the text tree to create new nodes in.
 func grow_text_tree(game_node: Node, text_parent: Control):
-	# Check if the given game node is a label.
-	var text_node: Control
+	# Check the type of the given game node.
+	var text_node: Node
 	if (game_node is Label):
 		# Create a new label and add it to the label collection.
 		text_node = Label.new()
@@ -63,17 +63,22 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 		text_node.label_settings.font = Main.atlas.fonts[Main.atlas.current_locale]
 		text_node.label_settings.font_size *= 4
 		text_node.text = game_node.text
+		text_node.size = game_node.size * Vector2(4, 4)
+		text_node.position = game_node.position * Vector2(4, 4)
 		# Erase the text in the game world space.
 		game_node.text = ""
-	else:
+	elif (game_node is Control):
 		# Create a new control with the same layout.
 		text_node = Control.new()
 		text_node.layout_direction = game_node.layout_direction
 		text_node.layout_mode = game_node.layout_mode
+		text_node.size = game_node.size * Vector2(4, 4)
+		text_node.position = game_node.position * Vector2(4, 4)
+	else:
+		# Create a new node with no layout.
+		text_node = Node.new()
 	# Add the new node to the text tree.
 	text_parent.add_child(text_node)
-	text_node.size = game_node.size * Vector2(4, 4)
-	text_node.position = game_node.position * Vector2(4, 4)
 	# Grow the remaining branches.
 	for game_child in game_node.get_children():
 		grow_text_tree(game_child, text_node)

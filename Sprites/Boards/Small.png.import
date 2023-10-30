@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3nbvosm3qxy5"
-path="res://.godot/imported/CenterCross.png-32e5c588d0ee245630372ae0ad0d781f.ctex"
+uid="uid://bwsc3yf533mth"
+path="res://.godot/imported/Small.png-649d54609697caf20cd1e55e0577896e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Maps/CenterCross.png"
-dest_files=["res://.godot/imported/CenterCross.png-32e5c588d0ee245630372ae0ad0d781f.ctex"]
+source_file="res://Sprites/Boards/Small.png"
+dest_files=["res://.godot/imported/Small.png-649d54609697caf20cd1e55e0577896e.ctex"]
 
 [params]
 

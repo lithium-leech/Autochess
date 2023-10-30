@@ -1,8 +1,12 @@
 {
     "godot_tools.editor_path": "d:\\Programme\\Godot\\Godot.exe",
     "cSpell.words": [
+        "CENTERCROSS",
+        "elif",
         "roundf",
+        "SHOGI",
         "viewports",
-        "worldspace"
+        "worldspace",
+        "XIANGQI"
     ]
 }

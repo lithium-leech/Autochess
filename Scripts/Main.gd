@@ -1,6 +1,10 @@
-# This script is attached to the main node.
+# The main entryway into the game program
+# and the root of all other nodes.
 class_name Main extends Control
 
+
+# The node that this script is attached to.
+static var node: Control
 
 # The world space containing game objects.
 static var game_world: Node
@@ -9,10 +13,10 @@ static var game_world: Node
 static var text_world: Node
 
 # A tool for managing the music.
-static var music_box: MusicBox
+static var music_box: MusicBox = MusicBox.new()
 
 # A tool for managing the locale.
-static var atlas: Atlas
+static var atlas: Atlas = Atlas.new()
 
 # The current state of the game.
 static var game_state: GameState = GameState.new()
@@ -20,10 +24,9 @@ static var game_state: GameState = GameState.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	node = self
 	game_world = $GameWindow/GameViewport/GameWorld
 	text_world = $TextWindow/TextViewport/TextWorld
-	music_box = $MusicBox
-	atlas = $Atlas
 	load_display()
 	load_title_scene()
 
@@ -58,4 +61,4 @@ func load_display():
 func load_title_scene():
 	var title_scene: Node = preload("res://Scenes/Title.tscn").instantiate()
 	game_world.add_child(title_scene)
-	music_box.play_music(music_box.Music.MENU)
+	music_box.play_music(Music.Kind.MENU)
