@@ -11,7 +11,7 @@ var available_locales: Array = TranslationServer.get_loaded_locales()
 # A signal that triggers when the locale is changed.
 signal on_locale_change
 
-# Fonts mapped to their locales
+# Fonts mapped to their locales.
 var fonts: Dictionary = {
 	"ar": load("res://Fonts/unixel.ttf"),
 	"de": load("res://Fonts/Pixel Musketeer.otf"),
@@ -26,3 +26,11 @@ var fonts: Dictionary = {
 	"ru": load("res://Fonts/Greybeard.ttf"),
 	"zh": load("res://Fonts/NotoSansSC.ttf")
 }
+
+
+# Determines if the given locale uses a right-to-left layout.
+# 	locale: The locale to check.
+static func is_rtl(locale: String) -> bool:
+	match locale:
+		"ar": return true
+		_: return false

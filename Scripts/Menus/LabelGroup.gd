@@ -24,8 +24,9 @@ func _ready():
 	text_tree = Control.new()
 	Main.text_world.add_child(text_tree)
 	# Grow the text tree.
+	var is_rtl: bool = Atlas.is_rtl(Main.atlas.current_locale)
 	for child in get_children():
-		grow_text_tree(child, text_tree)
+		grow_text_tree(child, text_tree, is_rtl)
 	# Connect to the locale change event
 	Main.atlas.on_locale_change.connect(_on_locale_change)
 
@@ -44,7 +45,8 @@ func _on_locale_change():
 # Grows a node from the text world space into a tree.
 # 	game_node: The node from the game world space to process.
 # 	text_parent: The node from the text tree to create new nodes in.
-func grow_text_tree(game_node: Node, text_parent: Control):
+# 	is_rtl: True if the current locale is an rtl locale.
+func grow_text_tree(game_node: Node, text_parent: Control, is_rtl: bool):
 	# Check the type of the given game node.
 	var text_node: Node
 	if (game_node is Label):
@@ -65,6 +67,7 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 		text_node.text = game_node.text
 		text_node.size = game_node.size * Vector2(4, 4)
 		text_node.position = game_node.position * Vector2(4, 4)
+		if (is_rtl): text_node.position.x -= text_parent.size.x
 		# Erase the text in the game world space.
 		game_node.text = ""
 	elif (game_node is Control):
@@ -74,6 +77,7 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 		text_node.layout_mode = game_node.layout_mode
 		text_node.size = game_node.size * Vector2(4, 4)
 		text_node.position = game_node.position * Vector2(4, 4)
+		if (is_rtl): text_node.position.x -= text_parent.size.x
 	else:
 		# Create a new node with no layout.
 		text_node = Node.new()
@@ -81,4 +85,4 @@ func grow_text_tree(game_node: Node, text_parent: Control):
 	text_parent.add_child(text_node)
 	# Grow the remaining branches.
 	for game_child in game_node.get_children():
-		grow_text_tree(game_child, text_node)
+		grow_text_tree(game_child, text_node, is_rtl)
