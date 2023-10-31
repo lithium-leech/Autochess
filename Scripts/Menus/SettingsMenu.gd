@@ -98,6 +98,7 @@ func set_starting_board(index: int):
 	board_icon.position = Vector2i(24, 24)
 	Main.game_state.start_board = index as Board.Kind
 
+
 # Sets the starting set to the given index.
 # 	index: The index to switch to.
 func set_starting_set(index: int):
@@ -118,11 +119,10 @@ func set_volume(level: int):
 	Main.music_box.set_volume(level)
 	# Update the volume text.
 	$"..".labels[$Volume/Value].text = "{volume}%".format({ "volume": level * 10 })
-	
+
 
 # Sets the current locale to the given index.
 # 	index: The index to switch to.
 func set_locale(index: int):
-	Main.atlas.current_locale = Main.atlas.available_locales[index]
-	TranslationServer.set_locale(Main.atlas.current_locale)
-	Main.atlas.on_locale_change.emit()
+	var locale: String = Main.atlas.available_locales[index]
+	Main.atlas.set_locale(locale)

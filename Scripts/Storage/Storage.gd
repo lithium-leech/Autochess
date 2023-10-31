@@ -32,5 +32,4 @@ static func load_version_1(file: FileAccess):
 	Main.game_state.start_set = file.get_var()
 	Main.game_state.high_score = file.get_var()
 	Main.music_box.set_volume(file.get_var())
-	Main.atlas.current_locale = file.get_var()
-	TranslationServer.set_locale(Main.atlas.current_locale)
+	Main.atlas.set_locale(file.get_var())

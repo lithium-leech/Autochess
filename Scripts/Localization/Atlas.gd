@@ -28,6 +28,14 @@ var fonts: Dictionary = {
 }
 
 
+# Sets the current locale.
+# 	locale: The locale to change to.
+func set_locale(locale: String):
+	TranslationServer.set_locale(locale)
+	current_locale = locale
+	on_locale_change.emit()
+
+
 # Determines if the given locale uses a right-to-left layout.
 # 	locale: The locale to check.
 static func is_rtl(locale: String) -> bool:
