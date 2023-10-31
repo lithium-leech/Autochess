@@ -13,6 +13,7 @@ var set_icon: Sprite2D
 func _ready():
 	set_starting_board(Main.game_state.start_board)
 	set_starting_set(Main.game_state.start_set)
+	$Volume/Value.text = "{volume}%".format({ "volume": Main.music_box.volume * 10 })
 
 
 # Called when the left board button is pressed.
@@ -116,9 +117,7 @@ func set_volume(level: int):
 	level = clamp(level, 0, 10)
 	Main.music_box.set_volume(level)
 	# Update the volume text.
-	$"..".labels[$Volume/Value].text = "{volume}%".format({
-		"volume": level * 10
-	})
+	$"..".labels[$Volume/Value].text = "{volume}%".format({ "volume": level * 10 })
 	
 
 # Sets the current locale to the given index.

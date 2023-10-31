@@ -34,5 +34,5 @@ func set_volume(level: int):
 	level = clamp(level, 0, 10)
 	_db = (level * 5) - 35
 	if (level == 0): _db = -80
-	_player.volume_db = _db
+	if (_player != null): _player.volume_db = _db
 	volume = level

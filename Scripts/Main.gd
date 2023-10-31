@@ -27,8 +27,13 @@ func _ready():
 	node = self
 	game_world = $GameWindow/GameViewport/GameWorld
 	text_world = $TextWindow/TextViewport/TextWorld
+	Storage.load_app_data()
 	load_display()
 	load_title_scene()
+
+# Called when the node is about to leave the scene tree.
+func _exit_tree():
+	Storage.save_app_data()
 
 
 # Loads the resolutions and positions of the viewports.
