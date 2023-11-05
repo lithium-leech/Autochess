@@ -1,0 +1,48 @@
+# A single game piece.
+class_name Piece extends GameObject
+
+
+# An enumeration containing each kind of piece.
+enum Kind {
+    PAWN,
+    ROOK,
+    KNIGHT,
+    BISHOP,
+    QUEEN,
+    KING,
+    PRIVATE,
+    CAPTAIN,
+    SERGEANT,
+    LIEUTENANT,
+    COLONEL,
+    GENERAL,
+    FERZ,
+    WAZIR,
+    DABBABA,
+    TALIAH,
+    CAMEL,
+    ELEPHANT,
+    GIRAFFE,
+    SWORDSMAN,
+    FUHYO,
+    TOKIN,
+    HISHA,
+    RYUO,
+    KAKUGYO,
+    RYUMA,
+    KEIMA,
+    NARIKEI,
+    OSHO,
+    KYOSHA,
+    NARIKYO,
+    GINSHO,
+    NARIGIN,
+    KINSHO,
+    ZU,
+    JU,
+    MA,
+    XIANG,
+    JIANG,
+    SHI,
+    PAO
+}

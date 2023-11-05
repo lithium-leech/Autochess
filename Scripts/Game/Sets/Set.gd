@@ -11,7 +11,6 @@ enum Kind {
 	MILITARY
 }
 
-
 # A collection of prefabricated set icons.
 static var _prefabs: Dictionary = {
 	Kind.WESTERN: "res://Scenes/Sets/Western.tscn",
@@ -21,10 +20,9 @@ static var _prefabs: Dictionary = {
 	Kind.MILITARY: "res://Scenes/Sets/Military.tscn"
 }
 
-
-# Gets the icon for a requested set of pieces.
-# 	set_kind: The kind of piece set to get an icon for.
+# Creates a new icon for a requested set of pieces.
+# 	kind: The kind of piece set to create an icon for.
 # 	return: An icon.
-static func get_set_icon(set_kind: Kind) -> Sprite2D:
-	var scene: PackedScene = load(_prefabs[set_kind])
+static func create_set_icon(kind: Kind) -> Sprite2D:
+	var scene: PackedScene = load(_prefabs[kind])
 	return scene.instantiate() as Sprite2D

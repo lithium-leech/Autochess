@@ -20,13 +20,13 @@
 [ext_resource type="Texture2D" uid="uid://i5hj7x4dt3a0" path="res://Sprites/Buttons/Button1x1/Button1x1Disabled.png" id="17_t8im1"]
 [ext_resource type="Texture2D" uid="uid://crhjbfcnb3lj0" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDefault.png" id="18_ig36a"]
 [ext_resource type="Texture2D" uid="uid://6f57gtwgxef4" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightPressed.png" id="19_1rg8y"]
-[ext_resource type="Texture2D" uid="uid://dh27143dktngr" path="res://Sprites/Tiles/TrueBlackSpace.png" id="19_xbpb0"]
+[ext_resource type="Texture2D" uid="uid://dh27143dktngr" path="res://Sprites/Panels/BlackSquareTrue.png" id="19_v4vn3"]
 [ext_resource type="Texture2D" uid="uid://bowifvwujxjvq" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightHighlighted.png" id="20_2yatp"]
 [ext_resource type="Texture2D" uid="uid://uk1argu2bry" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDisabled.png" id="21_p1mr6"]
 [ext_resource type="Texture2D" uid="uid://c1l3356rx4yh2" path="res://Sprites/Buttons/Button1x7/Button1x7Default.png" id="22_oby7b"]
 [ext_resource type="Texture2D" uid="uid://crjpvcake34pd" path="res://Sprites/Buttons/Button1x7/Button1x7Pressed.png" id="23_1oqg4"]
 [ext_resource type="Texture2D" uid="uid://bjngfnlsso725" path="res://Sprites/Buttons/Button1x7/Button1x7Highlighted.png" id="24_fv0ek"]
-[ext_resource type="Texture2D" uid="uid://dj4a4ymsl7kuf" path="res://Sprites/Tiles/TrueWhiteSpace.png" id="24_mwxas"]
+[ext_resource type="Texture2D" uid="uid://dj4a4ymsl7kuf" path="res://Sprites/Panels/WhiteSquareTrue.png" id="24_nlm0l"]
 [ext_resource type="Texture2D" uid="uid://pr5x0wytcl84" path="res://Sprites/Buttons/Button1x7/Button1x7Disabled.png" id="25_ogjf2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46ms0"]
@@ -272,7 +272,7 @@ texture = ExtResource("17_t8im1")
 
 [node name="Background" type="Sprite2D" parent="SettingsGroup/SettingsMenu/StartingMap/Board/Socket"]
 position = Vector2(24, 24)
-texture = ExtResource("19_xbpb0")
+texture = ExtResource("19_v4vn3")
 
 [node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Board"]
 layout_mode = 0
@@ -316,7 +316,7 @@ texture = ExtResource("17_t8im1")
 
 [node name="Background" type="Sprite2D" parent="SettingsGroup/SettingsMenu/StartingMap/Set/Socket"]
 position = Vector2(24, 24)
-texture = ExtResource("24_mwxas")
+texture = ExtResource("24_nlm0l")
 
 [node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Set"]
 layout_mode = 0
@@ -474,6 +474,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
+[connection signal="pressed" from="FrontGroup/FrontMenu/PlayButton" to="FrontGroup/FrontMenu" method="_on_play_button_pressed"]
 [connection signal="pressed" from="FrontGroup/FrontMenu/SettingsButton" to="FrontGroup/FrontMenu" method="_on_settings_button_pressed"]
 [connection signal="pressed" from="FrontGroup/FrontMenu/QuitButton" to="FrontGroup/FrontMenu" method="_on_quit_button_pressed"]
 [connection signal="pressed" from="SettingsGroup/SettingsMenu/StartingMap/Board/Left" to="SettingsGroup/SettingsMenu" method="_on_board_left_pressed"]

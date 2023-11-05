@@ -1,4 +1,4 @@
-# Finds all child labels, and displays them in the text viewport.
+# Manages labels in the game world by moving their text to the text viewport.
 # 	To work properly the node this script is attached
 # 	to must be in the center of the root node.
 extends Control

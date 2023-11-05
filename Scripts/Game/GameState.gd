@@ -16,3 +16,6 @@ var high_score: int = 0
 
 # The amount of time between the player and enemy moving their pieces.
 var turn_pause: float = 2.0
+
+# True if the player is controlling white pieces.
+var is_player_white: bool = false

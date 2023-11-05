@@ -1,4 +1,4 @@
-# This script is attached to the settings menu node.
+# Contains the behaviors of the title menu's setting controls.
 extends Control
 
 
@@ -93,7 +93,7 @@ func set_starting_board(index: int):
 	if (board_icon != null):
 		board_icon.queue_free()
 		board_icon = null
-	board_icon = Board.get_board_icon(index)
+	board_icon = Board.create_board_icon(index)
 	$StartingMap/Board/Socket.add_child(board_icon)
 	board_icon.position = Vector2i(24, 24)
 	Main.game_state.start_board = index as Board.Kind
@@ -105,7 +105,7 @@ func set_starting_set(index: int):
 	if (set_icon != null):
 		set_icon.queue_free()
 		set_icon = null
-	set_icon = Set.get_set_icon(index)
+	set_icon = Set.create_set_icon(index)
 	$StartingMap/Set/Socket.add_child(set_icon)
 	set_icon.position = Vector2i(24, 24)
 	Main.game_state.start_set = index as Set.Kind
