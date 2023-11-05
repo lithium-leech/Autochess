@@ -12,6 +12,9 @@ func build() -> Board:
 # The game to make the board in.
 var game: Game
 
+# True if the top-left corner is a white space
+var start_white: bool = true
+
 
 # Creates tiles for the given board.
 #   board: The board to create tiles for.
@@ -43,7 +46,8 @@ func create_tiles(board: Board):
 #   position: The game world position of the space to create tiles for.
 func create_space_tiles(board: Board, coordinates: Vector2i, position: Vector2i):
     # Determine if this space is black or white
-    var white: bool = ((coordinates.x % 2) + (coordinates.y % 2)) % 2 == 1
+    var start_color: bool = ((coordinates.x % 2) + (coordinates.y % 2)) % 2 == 0
+    var white: bool = (start_color and start_white) or (!start_color and !start_white)
     var kind: Tile.Kind = Tile.Kind.SPACE_WHITE if white else Tile.Kind.SPACE_BLACK
     # Create 4 tiles to fill the board space
     var tile_bl: Sprite2D = Tile.create_tile(kind)

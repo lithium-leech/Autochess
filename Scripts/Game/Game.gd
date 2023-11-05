@@ -67,11 +67,10 @@ func _ready():
 	#    highscore.Value = GameState.HighScore;
 	#}
 	# Create the static boards.
-	#SideBoard = new SideBoardBuilder(this).Build();
+	side_board = SideBoardBuilder.new(self).build()
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
 	# Create the starting game board.
-	#MapChoices choices = new(this, GameState.StartMap, GameState.StartSet);
-	#choices.ApplyChoice(0);
+	game_board = ClassicBoardBuilder.new(self).build()
 	# Start the planning phase
 	#NextStage = new PlanningStage(this);

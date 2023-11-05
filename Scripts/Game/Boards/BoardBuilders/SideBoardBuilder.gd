@@ -1,13 +1,11 @@
-# Makes a small 4x1 board for displaying powers above or below the game board.
-class_name PowerBoardBuilder extends BoardBuilder
+# Makes the 8x2 side board below the game board.
+class_name SideBoardBuilder extends BoardBuilder
 
 
-# Creates a new instance of a power board builder.
+# Creates a new instance of a side board builder.
 #   game: The game to build a board in.
-#   player: True if this is the player's power board.
-func _init(_game: Game, player: bool):
+func _init(_game: Game):
 	game = _game
-	start_white = player
 
 
 # Builds a new game board.
@@ -16,13 +14,13 @@ func build() -> Board:
 	# Create a new board.
 	var board: Board = Board.new()
 	board.game = game
-	board.width = 4
-	board.height = 1
-	board.player_rows = 1
+	board.width = 8
+	board.height = 2
+	board.player_rows = 2
 	board.enemy_rows = 0
 	board.player_pieces = []
 	board.enemy_pieces = []
-	board.corner_tl = Vector2i(-64, 46) if start_white else Vector2i(-64, -272)
+	board.corner_tl = Vector2i(-128, 128)
 	board.corner_br = board.corner_tl + Vector2i(board.width*32, board.height*32)
 	# Create a square array of spaces.
 	board.spaces = []
