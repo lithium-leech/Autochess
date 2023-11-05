@@ -1,5 +1,5 @@
 # Makes the classic 8x8 board.
-class_name ClassicBoardBuilder extends BoardBuilder
+class_name CenterCrossBoardBuilder extends BoardBuilder
 
 
 # Creates a new instance of a classic board builder.
@@ -14,13 +14,13 @@ func build() -> Board:
 	# Create a new board.
 	var board: Board = Board.new()
 	board.game = game
-	board.width = 8
-	board.height = 8
+	board.width = 7
+	board.height = 7
 	board.player_rows = 2
 	board.enemy_rows = 2
 	board.player_pieces = []
 	board.enemy_pieces = []
-	board.corner_tl = Vector2i(-128, -224)
+	board.corner_tl = Vector2i(-112, -208)
 	board.corner_br = board.corner_tl + Vector2i(board.width*32, board.height*32)
 	# Create a square array of spaces.
 	board.spaces = []
@@ -28,6 +28,12 @@ func build() -> Board:
 		board.spaces.append([])
 		for y in range(board.height):
 			board.spaces[x].append(Space.new(board, x, y))
+	# Remove spaces in the desired locations.
+	board.spaces[3][3] = null
+	board.spaces[2][3] = null
+	board.spaces[4][3] = null
+	board.spaces[3][2] = null
+	board.spaces[3][4] = null
 	# Change the top and bottom rows to promotion spaces.
 	for x in range(board.width):
 		board.spaces[x][0].is_player_promotion = true

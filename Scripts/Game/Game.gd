@@ -71,6 +71,6 @@ func _ready():
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
 	# Create the starting game board.
-	game_board = ClassicBoardBuilder.new(self).build()
+	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
 	# Start the planning phase
 	#NextStage = new PlanningStage(this);

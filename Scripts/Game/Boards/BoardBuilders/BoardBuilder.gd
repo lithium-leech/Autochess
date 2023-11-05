@@ -2,6 +2,21 @@
 class_name BoardBuilder
 
 
+# Gets the desired board builder.
+static func get_board_builder(kind: Board.Kind, _game: Game):
+    match (kind):
+        Board.Kind.CLASSIC:
+            return ClassicBoardBuilder.new(_game)
+        Board.Kind.HOURGLASS:
+            return HourglassBoardBuilder.new(_game)
+        Board.Kind.ZIGZAG:
+            return ZigZagBoardBuilder.new(_game)
+        Board.Kind.CENTERCROSS:
+            return CenterCrossBoardBuilder.new(_game)
+        Board.Kind.SMALL:
+            return SmallBoardBuilder.new(_game)
+
+
 # Builds a new game board.
 # Must be implemented by inheriting classes.
 #   return: A new Board.
@@ -94,11 +109,11 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
     var tile_bl: Sprite2D = null
     match (key_bl):
         2, 10:
-            tile_bl = Tile.create_tile(Tile.Kind.SIDE_BL)
+            tile_bl = Tile.create_tile(Tile.Kind.SIDE_TL)
         3, 11:
-            tile_bl = Tile.create_tile(Tile.Kind.SIDE_BLP)
+            tile_bl = Tile.create_tile(Tile.Kind.SIDE_TLP)
         4, 5, 12, 13:
-            tile_bl = Tile.create_tile(Tile.Kind.SIDE_LB)
+            tile_bl = Tile.create_tile(Tile.Kind.SIDE_RB)
         6, 14:
             tile_bl = Tile.create_tile(Tile.Kind.CORNER_BL)
         7, 15:
@@ -116,11 +131,11 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
     var tile_br: Sprite2D = null
     match (key_br):
         2, 10:
-            tile_br = Tile.create_tile(Tile.Kind.SIDE_BR)
+            tile_br = Tile.create_tile(Tile.Kind.SIDE_TR)
         3, 11:
-            tile_br = Tile.create_tile(Tile.Kind.SIDE_BRP)
+            tile_br = Tile.create_tile(Tile.Kind.SIDE_TRP)
         4, 5, 12, 13:
-            tile_br = Tile.create_tile(Tile.Kind.SIDE_RB)
+            tile_br = Tile.create_tile(Tile.Kind.SIDE_LB)
         6, 14:
             tile_br = Tile.create_tile(Tile.Kind.CORNER_BR)
         7, 15:
@@ -138,11 +153,11 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
     var tile_tl: Sprite2D = null
     match (key_tl):
         2, 10:
-            tile_tl = Tile.create_tile(Tile.Kind.SIDE_TL)
+            tile_tl = Tile.create_tile(Tile.Kind.SIDE_BL)
         3, 11:
-            tile_tl = Tile.create_tile(Tile.Kind.SIDE_TLP)
+            tile_tl = Tile.create_tile(Tile.Kind.SIDE_BLP)
         4, 5, 12, 13:
-            tile_tl = Tile.create_tile(Tile.Kind.SIDE_LT)
+            tile_tl = Tile.create_tile(Tile.Kind.SIDE_RT)
         6, 14:
             tile_tl = Tile.create_tile(Tile.Kind.CORNER_TL)
         7, 15:
@@ -160,11 +175,11 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
     var tile_tr: Sprite2D = null
     match (key_tr):
         2, 10:
-            tile_tr = Tile.create_tile(Tile.Kind.SIDE_TR)
+            tile_tr = Tile.create_tile(Tile.Kind.SIDE_BR)
         3, 11:
-            tile_tr = Tile.create_tile(Tile.Kind.SIDE_TRP)
+            tile_tr = Tile.create_tile(Tile.Kind.SIDE_BRP)
         4, 5, 12, 13:
-            tile_tr = Tile.create_tile(Tile.Kind.SIDE_RT)
+            tile_tr = Tile.create_tile(Tile.Kind.SIDE_LT)
         6, 14:
             tile_tr = Tile.create_tile(Tile.Kind.CORNER_TR)
         7, 15:

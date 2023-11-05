@@ -1,5 +1,5 @@
 # Makes the classic 8x8 board.
-class_name ClassicBoardBuilder extends BoardBuilder
+class_name ZigZagBoardBuilder extends BoardBuilder
 
 
 # Creates a new instance of a classic board builder.
@@ -28,10 +28,20 @@ func build() -> Board:
 		board.spaces.append([])
 		for y in range(board.height):
 			board.spaces[x].append(Space.new(board, x, y))
+	# Remove spaces in the desired locations.
+	for y in range(floor(board.height / 2.0)-1):
+		for x in range(floor(board.width / 2.0)):
+			board.spaces[x][y] = null
+	for y in range(floor(board.height / 2.0)+1, board.height):
+		for x in range(floor(board.width / 2.0), board.width):
+			board.spaces[x][y] = null
 	# Change the top and bottom rows to promotion spaces.
-	for x in range(board.width):
-		board.spaces[x][0].is_player_promotion = true
+	for x in range(floor(board.width / 2.0)):
+		board.spaces[x][floor(board.height / 2.0)-1].is_player_promotion = true
 		board.spaces[x][board.height-1].is_enemy_promotion = true
+	for x in range(floor(board.width / 2.0), board.width):
+		board.spaces[x][0].is_player_promotion = true
+		board.spaces[x][floor(board.height / 2.0)].is_enemy_promotion = true
 	# Create tiles for the configured spaces.
 	create_tiles(board)
 	# Return the finished board.

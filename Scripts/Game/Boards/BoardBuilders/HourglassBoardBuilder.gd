@@ -1,8 +1,8 @@
-# Makes the classic 8x8 board.
-class_name ClassicBoardBuilder extends BoardBuilder
+# Makes an 8x8 board with spaces removed on the left and right side.
+class_name HourglassBoardBuilder extends BoardBuilder
 
 
-# Creates a new instance of a classic board builder.
+# Creates a new instance of an hourglass board builder.
 #   game: The game to build a board in.
 func _init(_game: Game):
 	game = _game
@@ -28,6 +28,19 @@ func build() -> Board:
 		board.spaces.append([])
 		for y in range(board.height):
 			board.spaces[x].append(Space.new(board, x, y))
+	# Remove spaces in the desired locations.
+	var r: int = 0
+	for y in range(floor(board.height / 2.0)):
+		for x in range(r):
+			board.spaces[x][y] = null
+			board.spaces[board.width-1-x][y] = null
+		r += 1
+	r -= 1
+	for y in range(floor(board.height / 2.0), board.height):
+		for x in range(r):
+			board.spaces[x][y] = null
+			board.spaces[board.width-1-x][y] = null
+		r -= 1
 	# Change the top and bottom rows to promotion spaces.
 	for x in range(board.width):
 		board.spaces[x][0].is_player_promotion = true
