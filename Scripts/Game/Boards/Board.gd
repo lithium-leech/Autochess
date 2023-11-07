@@ -59,8 +59,8 @@ var corner_tl: Vector2i
 # The game world position for this board's bottom-right corner.
 var corner_br: Vector2i
 
-# A node which contains tile sprites making the board visible.
-var tile_node: Node
+# A node containing tile sprites making the board visible.
+var tile_node: Node2D
 
 
 # Creates and adds a piece at a given space.
