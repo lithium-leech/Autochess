@@ -52,7 +52,7 @@ signal on_move_finish
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Initialize the menu manager.
-	#MenuManager.Initialize(InGameMenu);
+	#MenuManager.Initialize(InGameMenu)
 	# Go to the first level.
 	Main.game_state.turn_pause = 2.0
 	Main.game_state.is_player_white = false
@@ -62,10 +62,8 @@ func _ready():
 	#IntVariable score = pvs["game"]["score"] as IntVariable;
 	#IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
 	#using (PersistentVariablesSource.UpdateScope())
-	#{
 	#    score.Value = GameState.Level;
 	#    highscore.Value = GameState.HighScore;
-	#}
 	# Create the static boards.
 	side_board = SideBoardBuilder.new(self).build()
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()

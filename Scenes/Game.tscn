@@ -1,12 +1,130 @@
-[gd_scene load_steps=2 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=16 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
+[ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
+[ext_resource type="Texture2D" uid="uid://bmqr1cadk01rg" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterDefault.png" id="3_p6nhc"]
+[ext_resource type="Texture2D" uid="uid://ddp1ry8g5jbn0" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterPressed.png" id="4_irdgj"]
+[ext_resource type="Texture2D" uid="uid://btiun3b635i6w" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterHighlighted.png" id="5_78y78"]
+[ext_resource type="Texture2D" uid="uid://ca6ylwi7r4aox" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterDisabled.png" id="6_u22ch"]
+[ext_resource type="Texture2D" uid="uid://o455u5jhdgop" path="res://Sprites/Panels/ScoreBoard.png" id="7_bytkj"]
+[ext_resource type="Texture2D" uid="uid://cdx56mshcnysu" path="res://Sprites/GameIcons/SmallFlag.png" id="7_h5yne"]
+[ext_resource type="Texture2D" uid="uid://bfjnv66yy86sr" path="res://Sprites/GameIcons/SmallSpeed1.png" id="8_cyegd"]
+[ext_resource type="Texture2D" uid="uid://camyrxun3ly3e" path="res://Sprites/Buttons/Button2x2/Button2x2Default.png" id="8_dvoqq"]
+[ext_resource type="Texture2D" uid="uid://cm4hjjs4vljir" path="res://Sprites/Buttons/Button2x2/Button2x2Pressed.png" id="9_7weso"]
+[ext_resource type="Texture2D" uid="uid://kqp6kc5dlidj" path="res://Sprites/Buttons/Button2x2/Button2x2Highlighted.png" id="10_hkhgv"]
+[ext_resource type="Texture2D" uid="uid://cbefo3vli2fy4" path="res://Sprites/Buttons/Button2x2/Button2x2Disabled.png" id="11_s2xw0"]
+[ext_resource type="Texture2D" uid="uid://bxxiomffysas" path="res://Sprites/GameIcons/Fight.png" id="14_22sib"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xdxah"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_2b1we")
+
+[node name="InGame" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_axujq")
+
+[node name="Menu" type="Control" parent="InGame"]
+anchors_preset = 0
+
+[node name="Concede" type="TextureButton" parent="InGame/Menu"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -288.0
+offset_right = -96.0
+offset_bottom = -256.0
+texture_normal = ExtResource("3_p6nhc")
+texture_pressed = ExtResource("4_irdgj")
+texture_hover = ExtResource("5_78y78")
+texture_disabled = ExtResource("6_u22ch")
+
+[node name="Icon" type="TextureRect" parent="InGame/Menu/Concede"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("7_h5yne")
+
+[node name="Speed" type="TextureButton" parent="InGame/Menu"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = -288.0
+offset_right = 128.0
+offset_bottom = -256.0
+texture_normal = ExtResource("3_p6nhc")
+texture_pressed = ExtResource("4_irdgj")
+texture_hover = ExtResource("5_78y78")
+texture_disabled = ExtResource("6_u22ch")
+
+[node name="Icon" type="TextureRect" parent="InGame/Menu/Speed"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("8_cyegd")
+
+[node name="Level" type="TextureRect" parent="InGame/Menu"]
+layout_mode = 0
+offset_left = -96.0
+offset_top = 224.0
+offset_right = -32.0
+offset_bottom = 288.0
+texture = ExtResource("7_bytkj")
+
+[node name="Label" type="Label" parent="InGame/Menu/Level"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+text = "999"
+label_settings = SubResource("LabelSettings_xdxah")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Fight" type="TextureButton" parent="InGame/Menu"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 224.0
+offset_right = 96.0
+offset_bottom = 288.0
+texture_normal = ExtResource("8_dvoqq")
+texture_pressed = ExtResource("9_7weso")
+texture_hover = ExtResource("10_hkhgv")
+texture_disabled = ExtResource("11_s2xw0")
+
+[node name="Icon" type="TextureRect" parent="InGame/Menu/Fight"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("14_22sib")
+
+[node name="Concede" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_axujq")
+visible_text = false
+
+[node name="Menu" type="Control" parent="Concede"]
+anchors_preset = 0
+
+[node name="Choice" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_axujq")
+visible_text = false
+
+[node name="Menu" type="Control" parent="Choice"]
+anchors_preset = 0
+
+[node name="GameOver" type="Control" parent="."]
+anchors_preset = 0
+script = ExtResource("2_axujq")
+visible_text = false
+
+[node name="Menu" type="Control" parent="GameOver"]
+anchors_preset = 0

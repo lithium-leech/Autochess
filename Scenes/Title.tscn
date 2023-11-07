@@ -81,15 +81,15 @@ anchors_preset = 0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FrontGroup" type="Control" parent="."]
+[node name="Front" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("2_w7jqx")
 
-[node name="FrontMenu" type="Control" parent="FrontGroup"]
+[node name="Menu" type="Control" parent="Front"]
 anchors_preset = 0
 script = ExtResource("1_qtiig")
 
-[node name="Text" type="Label" parent="FrontGroup/FrontMenu"]
+[node name="Text" type="Label" parent="Front/Menu"]
 layout_mode = 0
 offset_left = -128.0
 offset_top = -80.0
@@ -101,7 +101,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="PlayButton" type="TextureButton" parent="FrontGroup/FrontMenu"]
+[node name="PlayButton" type="TextureButton" parent="Front/Menu"]
 layout_mode = 0
 offset_left = -104.0
 offset_top = 16.0
@@ -112,7 +112,7 @@ texture_pressed = ExtResource("3_r2rra")
 texture_hover = ExtResource("4_o60lj")
 texture_disabled = ExtResource("5_uy8jr")
 
-[node name="Icon" type="TextureRect" parent="FrontGroup/FrontMenu/PlayButton"]
+[node name="Icon" type="TextureRect" parent="Front/Menu/PlayButton"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -121,7 +121,7 @@ offset_bottom = 40.0
 texture = ExtResource("6_s3pp7")
 script = ExtResource("7_iswyn")
 
-[node name="Text" type="Label" parent="FrontGroup/FrontMenu/PlayButton"]
+[node name="Text" type="Label" parent="Front/Menu/PlayButton"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -134,7 +134,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="SettingsButton" type="TextureButton" parent="FrontGroup/FrontMenu"]
+[node name="SettingsButton" type="TextureButton" parent="Front/Menu"]
 layout_mode = 0
 offset_left = -104.0
 offset_top = 80.0
@@ -145,7 +145,7 @@ texture_pressed = ExtResource("3_r2rra")
 texture_hover = ExtResource("4_o60lj")
 texture_disabled = ExtResource("5_uy8jr")
 
-[node name="Icon" type="TextureRect" parent="FrontGroup/FrontMenu/SettingsButton"]
+[node name="Icon" type="TextureRect" parent="Front/Menu/SettingsButton"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -153,7 +153,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_gn6tb")
 
-[node name="Text" type="Label" parent="FrontGroup/FrontMenu/SettingsButton"]
+[node name="Text" type="Label" parent="Front/Menu/SettingsButton"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -166,7 +166,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="QuitButton" type="TextureButton" parent="FrontGroup/FrontMenu"]
+[node name="QuitButton" type="TextureButton" parent="Front/Menu"]
 layout_mode = 0
 offset_left = -104.0
 offset_top = 144.0
@@ -177,7 +177,7 @@ texture_pressed = ExtResource("3_r2rra")
 texture_hover = ExtResource("4_o60lj")
 texture_disabled = ExtResource("5_uy8jr")
 
-[node name="Icon" type="TextureRect" parent="FrontGroup/FrontMenu/QuitButton"]
+[node name="Icon" type="TextureRect" parent="Front/Menu/QuitButton"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -185,7 +185,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("9_vb3w7")
 
-[node name="Text" type="Label" parent="FrontGroup/FrontMenu/QuitButton"]
+[node name="Text" type="Label" parent="Front/Menu/QuitButton"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -198,12 +198,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="SettingsGroup" type="Control" parent="."]
+[node name="Settings" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("2_w7jqx")
 visible_text = false
 
-[node name="SettingsMenu" type="TextureRect" parent="SettingsGroup"]
+[node name="Menu" type="TextureRect" parent="Settings"]
 visible = false
 layout_mode = 0
 offset_left = -144.0
@@ -213,7 +213,7 @@ offset_bottom = 288.0
 texture = ExtResource("10_pe2ej")
 script = ExtResource("11_hbyl3")
 
-[node name="Text" type="Label" parent="SettingsGroup/SettingsMenu"]
+[node name="Text" type="Label" parent="Settings/Menu"]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
@@ -225,7 +225,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="StartingMap" type="Control" parent="SettingsGroup/SettingsMenu"]
+[node name="StartingMap" type="Control" parent="Settings/Menu"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 16.0
@@ -233,7 +233,7 @@ offset_top = 96.0
 offset_right = 272.0
 offset_bottom = 192.0
 
-[node name="Text" type="Label" parent="SettingsGroup/SettingsMenu/StartingMap"]
+[node name="Text" type="Label" parent="Settings/Menu/StartingMap"]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 32.0
@@ -244,13 +244,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Board" type="Control" parent="SettingsGroup/SettingsMenu/StartingMap"]
+[node name="Board" type="Control" parent="Settings/Menu/StartingMap"]
 anchors_preset = 0
 offset_top = 32.0
 offset_right = 128.0
 offset_bottom = 96.0
 
-[node name="Left" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Board"]
+[node name="Left" type="TextureButton" parent="Settings/Menu/StartingMap/Board"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 16.0
@@ -262,7 +262,7 @@ texture_hover = ExtResource("14_82g1t")
 texture_disabled = ExtResource("15_3yfbi")
 script = ExtResource("16_ghl0t")
 
-[node name="Socket" type="TextureRect" parent="SettingsGroup/SettingsMenu/StartingMap/Board"]
+[node name="Socket" type="TextureRect" parent="Settings/Menu/StartingMap/Board"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -270,11 +270,11 @@ offset_right = 88.0
 offset_bottom = 56.0
 texture = ExtResource("17_t8im1")
 
-[node name="Background" type="Sprite2D" parent="SettingsGroup/SettingsMenu/StartingMap/Board/Socket"]
+[node name="Background" type="Sprite2D" parent="Settings/Menu/StartingMap/Board/Socket"]
 position = Vector2(24, 24)
 texture = ExtResource("19_v4vn3")
 
-[node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Board"]
+[node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Board"]
 layout_mode = 0
 offset_left = 92.0
 offset_top = 16.0
@@ -286,7 +286,7 @@ texture_hover = ExtResource("20_2yatp")
 texture_disabled = ExtResource("21_p1mr6")
 script = ExtResource("16_ghl0t")
 
-[node name="Set" type="Control" parent="SettingsGroup/SettingsMenu/StartingMap"]
+[node name="Set" type="Control" parent="Settings/Menu/StartingMap"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 128.0
@@ -294,7 +294,7 @@ offset_top = 32.0
 offset_right = 256.0
 offset_bottom = 96.0
 
-[node name="Left" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Set"]
+[node name="Left" type="TextureButton" parent="Settings/Menu/StartingMap/Set"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 16.0
@@ -306,7 +306,7 @@ texture_hover = ExtResource("14_82g1t")
 texture_disabled = ExtResource("15_3yfbi")
 script = ExtResource("16_ghl0t")
 
-[node name="Socket" type="TextureRect" parent="SettingsGroup/SettingsMenu/StartingMap/Set"]
+[node name="Socket" type="TextureRect" parent="Settings/Menu/StartingMap/Set"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -314,11 +314,11 @@ offset_right = 88.0
 offset_bottom = 56.0
 texture = ExtResource("17_t8im1")
 
-[node name="Background" type="Sprite2D" parent="SettingsGroup/SettingsMenu/StartingMap/Set/Socket"]
+[node name="Background" type="Sprite2D" parent="Settings/Menu/StartingMap/Set/Socket"]
 position = Vector2(24, 24)
 texture = ExtResource("24_nlm0l")
 
-[node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/StartingMap/Set"]
+[node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Set"]
 layout_mode = 0
 offset_left = 92.0
 offset_top = 16.0
@@ -330,7 +330,7 @@ texture_hover = ExtResource("20_2yatp")
 texture_disabled = ExtResource("21_p1mr6")
 script = ExtResource("16_ghl0t")
 
-[node name="Volume" type="Control" parent="SettingsGroup/SettingsMenu"]
+[node name="Volume" type="Control" parent="Settings/Menu"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 16.0
@@ -338,7 +338,7 @@ offset_top = 224.0
 offset_right = 272.0
 offset_bottom = 296.0
 
-[node name="Text" type="Label" parent="SettingsGroup/SettingsMenu/Volume"]
+[node name="Text" type="Label" parent="Settings/Menu/Volume"]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 32.0
@@ -349,7 +349,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Left" type="TextureButton" parent="SettingsGroup/SettingsMenu/Volume"]
+[node name="Left" type="TextureButton" parent="Settings/Menu/Volume"]
 layout_mode = 0
 offset_left = 60.0
 offset_top = 36.0
@@ -361,7 +361,7 @@ texture_hover = ExtResource("14_82g1t")
 texture_disabled = ExtResource("15_3yfbi")
 script = ExtResource("16_ghl0t")
 
-[node name="Value" type="Label" parent="SettingsGroup/SettingsMenu/Volume"]
+[node name="Value" type="Label" parent="Settings/Menu/Volume"]
 layout_mode = 0
 offset_left = 96.0
 offset_top = 36.0
@@ -374,7 +374,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/Volume"]
+[node name="Right" type="TextureButton" parent="Settings/Menu/Volume"]
 layout_mode = 0
 offset_left = 164.0
 offset_top = 36.0
@@ -386,7 +386,7 @@ texture_hover = ExtResource("20_2yatp")
 texture_disabled = ExtResource("21_p1mr6")
 script = ExtResource("16_ghl0t")
 
-[node name="Language" type="Control" parent="SettingsGroup/SettingsMenu"]
+[node name="Language" type="Control" parent="Settings/Menu"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 16.0
@@ -394,7 +394,7 @@ offset_top = 328.0
 offset_right = 272.0
 offset_bottom = 400.0
 
-[node name="Text" type="Label" parent="SettingsGroup/SettingsMenu/Language"]
+[node name="Text" type="Label" parent="Settings/Menu/Language"]
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 32.0
@@ -405,7 +405,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Left" type="TextureButton" parent="SettingsGroup/SettingsMenu/Language"]
+[node name="Left" type="TextureButton" parent="Settings/Menu/Language"]
 layout_direction = 2
 layout_mode = 0
 offset_left = 28.0
@@ -417,7 +417,7 @@ texture_pressed = ExtResource("13_kkh62")
 texture_hover = ExtResource("14_82g1t")
 texture_disabled = ExtResource("15_3yfbi")
 
-[node name="Value" type="Label" parent="SettingsGroup/SettingsMenu/Language"]
+[node name="Value" type="Label" parent="Settings/Menu/Language"]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 36.0
@@ -430,7 +430,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Right" type="TextureButton" parent="SettingsGroup/SettingsMenu/Language"]
+[node name="Right" type="TextureButton" parent="Settings/Menu/Language"]
 layout_direction = 2
 layout_mode = 0
 offset_left = 196.0
@@ -442,7 +442,7 @@ texture_pressed = ExtResource("19_1rg8y")
 texture_hover = ExtResource("20_2yatp")
 texture_disabled = ExtResource("21_p1mr6")
 
-[node name="ExitButton" type="TextureButton" parent="SettingsGroup/SettingsMenu"]
+[node name="ExitButton" type="TextureButton" parent="Settings/Menu"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 504.0
@@ -453,7 +453,7 @@ texture_pressed = ExtResource("23_1oqg4")
 texture_hover = ExtResource("24_fv0ek")
 texture_disabled = ExtResource("25_ogjf2")
 
-[node name="Icon" type="TextureRect" parent="SettingsGroup/SettingsMenu/ExitButton"]
+[node name="Icon" type="TextureRect" parent="Settings/Menu/ExitButton"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -461,7 +461,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("9_vb3w7")
 
-[node name="Text" type="Label" parent="SettingsGroup/SettingsMenu/ExitButton"]
+[node name="Text" type="Label" parent="Settings/Menu/ExitButton"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -474,15 +474,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[connection signal="pressed" from="FrontGroup/FrontMenu/PlayButton" to="FrontGroup/FrontMenu" method="_on_play_button_pressed"]
-[connection signal="pressed" from="FrontGroup/FrontMenu/SettingsButton" to="FrontGroup/FrontMenu" method="_on_settings_button_pressed"]
-[connection signal="pressed" from="FrontGroup/FrontMenu/QuitButton" to="FrontGroup/FrontMenu" method="_on_quit_button_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/StartingMap/Board/Left" to="SettingsGroup/SettingsMenu" method="_on_board_left_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/StartingMap/Board/Right" to="SettingsGroup/SettingsMenu" method="_on_board_right_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/StartingMap/Set/Left" to="SettingsGroup/SettingsMenu" method="_on_set_left_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/StartingMap/Set/Right" to="SettingsGroup/SettingsMenu" method="_on_set_right_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/Volume/Left" to="SettingsGroup/SettingsMenu" method="_on_volume_left_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/Volume/Right" to="SettingsGroup/SettingsMenu" method="_on_volume_right_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/Language/Left" to="SettingsGroup/SettingsMenu" method="_on_language_left_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/Language/Right" to="SettingsGroup/SettingsMenu" method="_on_language_right_pressed"]
-[connection signal="pressed" from="SettingsGroup/SettingsMenu/ExitButton" to="SettingsGroup/SettingsMenu" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="Front/Menu/PlayButton" to="Front/Menu" method="_on_play_button_pressed"]
+[connection signal="pressed" from="Front/Menu/SettingsButton" to="Front/Menu" method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Front/Menu/QuitButton" to="Front/Menu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Settings/Menu/StartingMap/Board/Left" to="Settings/Menu" method="_on_board_left_pressed"]
+[connection signal="pressed" from="Settings/Menu/StartingMap/Board/Right" to="Settings/Menu" method="_on_board_right_pressed"]
+[connection signal="pressed" from="Settings/Menu/StartingMap/Set/Left" to="Settings/Menu" method="_on_set_left_pressed"]
+[connection signal="pressed" from="Settings/Menu/StartingMap/Set/Right" to="Settings/Menu" method="_on_set_right_pressed"]
+[connection signal="pressed" from="Settings/Menu/Volume/Left" to="Settings/Menu" method="_on_volume_left_pressed"]
+[connection signal="pressed" from="Settings/Menu/Volume/Right" to="Settings/Menu" method="_on_volume_right_pressed"]
+[connection signal="pressed" from="Settings/Menu/Language/Left" to="Settings/Menu" method="_on_language_left_pressed"]
+[connection signal="pressed" from="Settings/Menu/Language/Right" to="Settings/Menu" method="_on_language_right_pressed"]
+[connection signal="pressed" from="Settings/Menu/ExitButton" to="Settings/Menu" method="_on_exit_button_pressed"]

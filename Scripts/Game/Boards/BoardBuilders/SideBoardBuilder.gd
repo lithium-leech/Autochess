@@ -6,6 +6,7 @@ class_name SideBoardBuilder extends BoardBuilder
 #   game: The game to build a board in.
 func _init(_game: Game):
 	game = _game
+	start_white = false
 
 
 # Builds a new game board.
