@@ -71,4 +71,21 @@ func _ready():
 	# Create the starting game board.
 	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
 	# Start the planning phase
-	#NextStage = new PlanningStage(this);
+	next_stage = PlanningStage.new(self)
+
+
+# Called every frame.
+# 	delta: The elapsed time since the previous frame.
+func _process(_delta: float):
+	# Check if a new stage has been queued.
+	if (next_stage != null):
+		# Replace the current stage with the next one.
+		if (current_stage != null):
+			current_stage.end()
+		current_stage = next_stage
+		next_stage = null
+		current_stage.start()
+	else:
+		# Otherwise just run the current stage.
+		if (current_stage != null):
+			current_stage.during()

@@ -62,6 +62,7 @@ texture_hover = ExtResource("5_78y78")
 texture_disabled = ExtResource("6_u22ch")
 
 [node name="Icon" type="TextureRect" parent="InGame/Menu/Speed"]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 24.0

@@ -16,8 +16,8 @@ func _on_play_button_pressed():
 # Called when the settings button is pressed.
 func _on_settings_button_pressed():
 	$"..".visible_text = false
-	$"../../SettingsGroup/SettingsMenu".visible = true
-	$"../../SettingsGroup".visible_text = true
+	$"../../Settings/Menu".visible = true
+	$"../../Settings".visible_text = true
 
 
 # Called when the quit button is pressed.

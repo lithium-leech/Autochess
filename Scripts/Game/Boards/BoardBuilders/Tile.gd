@@ -29,7 +29,7 @@ enum Kind {
 }
 
 # A collection of prefabricated board tiles.
-static var _prefabs: Dictionary = {
+static var prefabs: Dictionary = {
 	Kind.CORNER_BL: "res://Scenes/Tiles/CornerBL.tscn",
 	Kind.CORNER_BLP: "res://Scenes/Tiles/CornerBLP.tscn",
 	Kind.CORNER_BR: "res://Scenes/Tiles/CornerBR.tscn",
@@ -58,5 +58,5 @@ static var _prefabs: Dictionary = {
 # 	kind: The kind of board tile to create.
 # 	return: A tile.
 static func create_tile(kind: Kind) -> Sprite2D:
-	var scene: PackedScene = load(_prefabs[kind])
+	var scene: PackedScene = load(prefabs[kind])
 	return scene.instantiate() as Sprite2D

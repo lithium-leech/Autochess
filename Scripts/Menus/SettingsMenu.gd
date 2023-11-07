@@ -84,7 +84,7 @@ func _on_language_right_pressed():
 func _on_exit_button_pressed():
 	$"..".visible_text = false
 	self.visible = false
-	$"../../FrontGroup".visible_text = true
+	$"../../Front".visible_text = true
 
 
 # Sets the starting board to the given index.

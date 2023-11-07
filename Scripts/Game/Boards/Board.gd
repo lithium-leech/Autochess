@@ -12,7 +12,7 @@ enum Kind {
 }
 
 # A collection of prefabricated game board icons.
-static var _prefabs: Dictionary = {
+static var prefabs: Dictionary = {
 	Kind.CLASSIC: "res://Scenes/Boards/Classic.tscn",
 	Kind.HOURGLASS: "res://Scenes/Boards/Hourglass.tscn",
 	Kind.ZIGZAG: "res://Scenes/Boards/ZigZag.tscn",
@@ -24,7 +24,7 @@ static var _prefabs: Dictionary = {
 # 	kind: The kind of game board to create an icon for.
 # 	return: An icon.
 static func create_board_icon(kind: Kind) -> Sprite2D:
-	var scene: PackedScene = load(_prefabs[kind])
+	var scene: PackedScene = load(prefabs[kind])
 	return scene.instantiate() as Sprite2D
 
 

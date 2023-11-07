@@ -17,8 +17,8 @@ static func get_board_builder(kind: Board.Kind, _game: Game):
 			return SmallBoardBuilder.new(_game)
 
 
-# Builds a new game board.
 # Must be implemented by inheriting classes.
+# Builds a new game board.
 #   return: A new Board.
 func build() -> Board:
 	return null
@@ -65,20 +65,20 @@ func create_space_tiles(board: Board, coordinates: Vector2i, position: Vector2i)
 	var white: bool = (start_color and start_white) or (!start_color and !start_white)
 	var kind: Tile.Kind = Tile.Kind.SPACE_WHITE if white else Tile.Kind.SPACE_BLACK
 	# Create 4 tiles to fill the board space
-	var tile_bl: Sprite2D = Tile.create_tile(kind)
-	var tile_br: Sprite2D = Tile.create_tile(kind)
 	var tile_tl: Sprite2D = Tile.create_tile(kind)
 	var tile_tr: Sprite2D = Tile.create_tile(kind)
+	var tile_bl: Sprite2D = Tile.create_tile(kind)
+	var tile_br: Sprite2D = Tile.create_tile(kind)
 	# Move the 4 tiles to each corner of the space
-	tile_bl.position = position + Vector2i(-8, 8)
-	tile_br.position = position + Vector2i(8, 8)
 	tile_tl.position = position + Vector2i(-8, -8)
 	tile_tr.position = position + Vector2i(8, -8)
+	tile_bl.position = position + Vector2i(-8, 8)
+	tile_br.position = position + Vector2i(8, 8)
 	# Add the 4 tiles to the board's tile node
-	board.tile_node.add_child(tile_bl)
-	board.tile_node.add_child(tile_br)
 	board.tile_node.add_child(tile_tl)
 	board.tile_node.add_child(tile_tr)
+	board.tile_node.add_child(tile_bl)
+	board.tile_node.add_child(tile_br)
 
 
 # Creates tiles for a single space off the board.
@@ -101,50 +101,6 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
 	var top_right: bool = board.get_space(coordinates + Vector2i(1, -1)) != null
 	var bottom_left: bool = board.get_space(coordinates + Vector2i(-1, 1)) != null
 	var bottom_right: bool = board.get_space(coordinates + Vector2i(1, 1)) != null
-	# Create the bottom-left tile of this space
-	var key_bl: int = (1 if bottom_promotion else 0) << 0 | \
-					  (1 if bottom else 0) << 1 | \
-					  (1 if left else 0) << 2 | \
-					  (1 if bottom_left else 0) << 3
-	var tile_bl: Sprite2D = null
-	match (key_bl):
-		2, 10:
-			tile_bl = Tile.create_tile(Tile.Kind.SIDE_TL)
-		3, 11:
-			tile_bl = Tile.create_tile(Tile.Kind.SIDE_TLP)
-		4, 5, 12, 13:
-			tile_bl = Tile.create_tile(Tile.Kind.SIDE_RB)
-		6, 14:
-			tile_bl = Tile.create_tile(Tile.Kind.CORNER_BL)
-		7, 15:
-			tile_bl = Tile.create_tile(Tile.Kind.CORNER_BLP)
-		8, 9:
-			tile_bl = Tile.create_tile(Tile.Kind.CORNER_TR)
-	if (tile_bl != null):
-		tile_bl.position = position + Vector2i(-8, 8)
-		board.tile_node.add_child(tile_bl)
-	# Create the bottom-right tile of this space
-	var key_br: int = (1 if bottom_promotion else 0) << 0 | \
-					  (1 if bottom else 0) << 1 | \
-					  (1 if right else 0) << 2 | \
-					  (1 if bottom_right else 0) << 3
-	var tile_br: Sprite2D = null
-	match (key_br):
-		2, 10:
-			tile_br = Tile.create_tile(Tile.Kind.SIDE_TR)
-		3, 11:
-			tile_br = Tile.create_tile(Tile.Kind.SIDE_TRP)
-		4, 5, 12, 13:
-			tile_br = Tile.create_tile(Tile.Kind.SIDE_LB)
-		6, 14:
-			tile_br = Tile.create_tile(Tile.Kind.CORNER_BR)
-		7, 15:
-			tile_br = Tile.create_tile(Tile.Kind.CORNER_BRP)
-		8, 9:
-			tile_br = Tile.create_tile(Tile.Kind.CORNER_TL)
-	if (tile_br != null):
-		tile_br.position = position + Vector2i(8, 8)
-		board.tile_node.add_child(tile_br)
 	# Create the top-left tile of this space
 	var key_tl: int = (1 if top_promotion else 0) << 0 | \
 					  (1 if top else 0) << 1 | \
@@ -189,3 +145,47 @@ func create_border_tiles(board: Board, coordinates: Vector2i, position: Vector2i
 	if (tile_tr != null):
 		tile_tr.position = position + Vector2i(8, -8)
 		board.tile_node.add_child(tile_tr)
+	# Create the bottom-left tile of this space
+	var key_bl: int = (1 if bottom_promotion else 0) << 0 | \
+					  (1 if bottom else 0) << 1 | \
+					  (1 if left else 0) << 2 | \
+					  (1 if bottom_left else 0) << 3
+	var tile_bl: Sprite2D = null
+	match (key_bl):
+		2, 10:
+			tile_bl = Tile.create_tile(Tile.Kind.SIDE_TL)
+		3, 11:
+			tile_bl = Tile.create_tile(Tile.Kind.SIDE_TLP)
+		4, 5, 12, 13:
+			tile_bl = Tile.create_tile(Tile.Kind.SIDE_RB)
+		6, 14:
+			tile_bl = Tile.create_tile(Tile.Kind.CORNER_BL)
+		7, 15:
+			tile_bl = Tile.create_tile(Tile.Kind.CORNER_BLP)
+		8, 9:
+			tile_bl = Tile.create_tile(Tile.Kind.CORNER_TR)
+	if (tile_bl != null):
+		tile_bl.position = position + Vector2i(-8, 8)
+		board.tile_node.add_child(tile_bl)
+	# Create the bottom-right tile of this space
+	var key_br: int = (1 if bottom_promotion else 0) << 0 | \
+					  (1 if bottom else 0) << 1 | \
+					  (1 if right else 0) << 2 | \
+					  (1 if bottom_right else 0) << 3
+	var tile_br: Sprite2D = null
+	match (key_br):
+		2, 10:
+			tile_br = Tile.create_tile(Tile.Kind.SIDE_TR)
+		3, 11:
+			tile_br = Tile.create_tile(Tile.Kind.SIDE_TRP)
+		4, 5, 12, 13:
+			tile_br = Tile.create_tile(Tile.Kind.SIDE_LB)
+		6, 14:
+			tile_br = Tile.create_tile(Tile.Kind.CORNER_BR)
+		7, 15:
+			tile_br = Tile.create_tile(Tile.Kind.CORNER_BRP)
+		8, 9:
+			tile_br = Tile.create_tile(Tile.Kind.CORNER_TL)
+	if (tile_br != null):
+		tile_br.position = position + Vector2i(8, 8)
+		board.tile_node.add_child(tile_br)
