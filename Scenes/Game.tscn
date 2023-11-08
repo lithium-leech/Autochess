@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=17 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ca6ylwi7r4aox" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterDisabled.png" id="6_u22ch"]
 [ext_resource type="Texture2D" uid="uid://o455u5jhdgop" path="res://Sprites/Panels/ScoreBoard.png" id="7_bytkj"]
 [ext_resource type="Texture2D" uid="uid://cdx56mshcnysu" path="res://Sprites/GameIcons/SmallFlag.png" id="7_h5yne"]
+[ext_resource type="Script" path="res://Scripts/Localization/TextureFlipper.gd" id="8_bwmad"]
 [ext_resource type="Texture2D" uid="uid://bfjnv66yy86sr" path="res://Sprites/GameIcons/SmallSpeed1.png" id="8_cyegd"]
 [ext_resource type="Texture2D" uid="uid://camyrxun3ly3e" path="res://Sprites/Buttons/Button2x2/Button2x2Default.png" id="8_dvoqq"]
 [ext_resource type="Texture2D" uid="uid://cm4hjjs4vljir" path="res://Sprites/Buttons/Button2x2/Button2x2Pressed.png" id="9_7weso"]
@@ -49,6 +50,7 @@ offset_top = 8.0
 offset_right = 24.0
 offset_bottom = 24.0
 texture = ExtResource("7_h5yne")
+script = ExtResource("8_bwmad")
 
 [node name="Speed" type="TextureButton" parent="InGame/Menu"]
 layout_mode = 0
@@ -68,6 +70,7 @@ offset_top = 8.0
 offset_right = 24.0
 offset_bottom = 24.0
 texture = ExtResource("8_cyegd")
+script = ExtResource("8_bwmad")
 
 [node name="Level" type="TextureRect" parent="InGame/Menu"]
 layout_mode = 0
@@ -105,6 +108,7 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("14_22sib")
+script = ExtResource("8_bwmad")
 
 [node name="Concede" type="Control" parent="."]
 anchors_preset = 0

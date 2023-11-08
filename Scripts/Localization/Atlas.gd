@@ -8,6 +8,11 @@ var current_locale: String = TranslationServer.get_locale().split("_")[0]
 # The locales available in game.
 var available_locales: Array = TranslationServer.get_loaded_locales()
 
+# True if the current locale uses a right-to-left layout.
+var in_rtl: bool:
+	get:
+		return Atlas.is_rtl(current_locale)
+
 # A signal that triggers when the locale is changed.
 signal on_locale_change
 

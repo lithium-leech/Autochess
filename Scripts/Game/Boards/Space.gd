@@ -2,6 +2,16 @@
 class_name Space
 
 
+# Creates a new instance of a Space.
+#   board: The board that this space is a part of.
+#   x: The x coordinate of this space.
+#   y: The y coordinate of this space.
+func _init(_board: Board, _x: int, _y: int):
+	board = _board
+	x = _x
+	y = _y
+
+
 # The board that this space is a part of.
 var board: Board
 
@@ -32,16 +42,6 @@ var object: GameObject = null
 
 # The terrain applied to this space (null when there is none).
 var terrain: Terrain = null
-
-
-# Creates a new instance of a Space.
-#   board: The board that this space is a part of.
-#   x: The x coordinate of this space.
-#   y: The y coordinate of this space.
-func _init(_board: Board, _x: int, _y: int):
-	board = _board
-	x = _x
-	y = _y
 
 
 # Goes through the process of a piece entering this space.

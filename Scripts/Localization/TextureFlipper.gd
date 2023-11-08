@@ -4,6 +4,7 @@ extends TextureRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	fix_for_locale()
 	Main.atlas.on_locale_change.connect(fix_for_locale)
 
 
