@@ -24,7 +24,10 @@ func initialize(menu: Menu):
 # Shows a new menu above the active menu.
 # 	menu: The menu to overlay.
 func open_overlay(menu: Menu):
-	active_menu.close()
+	if (overlay_menu != null):
+		overlay_menu.close()
+	else:
+		active_menu.close()
 	overlay_menu = menu
 	overlay_menu.open()
 

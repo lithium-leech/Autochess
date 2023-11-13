@@ -87,9 +87,7 @@ func _on_language_right_pressed():
 
 # Called when the exit button is pressed.
 func _on_exit_button_pressed():
-	$"..".visible_text = false
-	self.visible = false
-	$"../../Front".visible_text = true
+	Main.menu_manager.close_overlay()
 
 
 # Sets the starting board to the given index.

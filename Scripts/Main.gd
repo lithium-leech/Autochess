@@ -75,6 +75,7 @@ func load_display():
 
 # Loads and displays the title scene.
 func load_title_scene():
-	var title_scene: Node = load("res://Scenes/Title.tscn").instantiate()
+	var title_scene: Control = load("res://Scenes/Title.tscn").instantiate()
 	game_world.add_child(title_scene)
+	menu_manager.initialize(title_scene.get_node("Front/Menu"))
 	music_box.play_music(Music.Kind.MENU)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=21 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
+[ext_resource type="Script" path="res://Scripts/Menus/InGameMenu.gd" id="3_j5l3j"]
 [ext_resource type="Texture2D" uid="uid://bmqr1cadk01rg" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterDefault.png" id="3_p6nhc"]
 [ext_resource type="Texture2D" uid="uid://ddp1ry8g5jbn0" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterPressed.png" id="4_irdgj"]
 [ext_resource type="Texture2D" uid="uid://btiun3b635i6w" path="res://Sprites/Buttons/ButtonQuarter/ButtonQuarterHighlighted.png" id="5_78y78"]
@@ -15,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://kqp6kc5dlidj" path="res://Sprites/Buttons/Button2x2/Button2x2Highlighted.png" id="10_hkhgv"]
 [ext_resource type="Texture2D" uid="uid://cbefo3vli2fy4" path="res://Sprites/Buttons/Button2x2/Button2x2Disabled.png" id="11_s2xw0"]
 [ext_resource type="Texture2D" uid="uid://bxxiomffysas" path="res://Sprites/GameIcons/Fight.png" id="14_22sib"]
+[ext_resource type="Script" path="res://Scripts/Menus/ConcedeMenu.gd" id="17_trlgu"]
+[ext_resource type="Script" path="res://Scripts/Menus/ChoiceMenu.gd" id="18_krlcb"]
+[ext_resource type="Script" path="res://Scripts/Menus/GameOverMenu.gd" id="19_ecdp7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xdxah"]
 font_size = 14
@@ -31,6 +35,7 @@ script = ExtResource("2_axujq")
 
 [node name="Menu" type="Control" parent="InGame"]
 anchors_preset = 0
+script = ExtResource("3_j5l3j")
 
 [node name="Concede" type="TextureButton" parent="InGame/Menu"]
 layout_mode = 0
@@ -117,6 +122,7 @@ visible_text = false
 
 [node name="Menu" type="Control" parent="Concede"]
 anchors_preset = 0
+script = ExtResource("17_trlgu")
 
 [node name="Choice" type="Control" parent="."]
 anchors_preset = 0
@@ -125,6 +131,7 @@ visible_text = false
 
 [node name="Menu" type="Control" parent="Choice"]
 anchors_preset = 0
+script = ExtResource("18_krlcb")
 
 [node name="GameOver" type="Control" parent="."]
 anchors_preset = 0
@@ -133,3 +140,4 @@ visible_text = false
 
 [node name="Menu" type="Control" parent="GameOver"]
 anchors_preset = 0
+script = ExtResource("19_ecdp7")
