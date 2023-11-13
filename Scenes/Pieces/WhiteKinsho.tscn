@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cek3e22reldmc"]
+[gd_scene load_steps=3 format=3 uid="uid://cek3e22reldmc"]
 
 [ext_resource type="Texture2D" uid="uid://50mnnetxlstf" path="res://Sprites/Pieces/WhiteKinsho.png" id="1_p85yf"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Kinsho.gd" id="2_b1bsr"]
 
 [node name="WhiteKinsho" type="Sprite2D"]
 texture = ExtResource("1_p85yf")
+script = ExtResource("2_b1bsr")

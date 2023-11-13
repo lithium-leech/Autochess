@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmdlqyapu8h0k"]
+[gd_scene load_steps=3 format=3 uid="uid://dmdlqyapu8h0k"]
 
 [ext_resource type="Texture2D" uid="uid://bp24igfnuk0h8" path="res://Sprites/Pieces/BlackTaliah.png" id="1_kyb03"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Taliah.gd" id="2_bt44g"]
 
 [node name="BlackTaliah" type="Sprite2D"]
 texture = ExtResource("1_kyb03")
+script = ExtResource("2_bt44g")

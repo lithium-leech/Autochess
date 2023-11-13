@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://3s3tr0padvae"]
+[gd_scene load_steps=3 format=3 uid="uid://3s3tr0padvae"]
 
 [ext_resource type="Texture2D" uid="uid://25yx4ettwtsu" path="res://Sprites/Pieces/WhiteElephant.png" id="1_832mm"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Elephant.gd" id="2_wd783"]
 
 [node name="WhiteElephant" type="Sprite2D"]
 texture = ExtResource("1_832mm")
+script = ExtResource("2_wd783")

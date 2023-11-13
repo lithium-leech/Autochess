@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://damq4af0i2x4u"]
+[gd_scene load_steps=3 format=3 uid="uid://damq4af0i2x4u"]
 
 [ext_resource type="Texture2D" uid="uid://booceyiwevpf5" path="res://Sprites/Pieces/WhiteKeima.png" id="1_5twr4"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Keima.gd" id="2_5igr7"]
 
 [node name="WhiteKeima" type="Sprite2D"]
 texture = ExtResource("1_5twr4")
+script = ExtResource("2_5igr7")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv377vge3few6"]
+[gd_scene load_steps=3 format=3 uid="uid://bv377vge3few6"]
 
 [ext_resource type="Texture2D" uid="uid://cjdckfud32cfl" path="res://Sprites/Pieces/BlackOsho.png" id="1_rpqpo"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Osho.gd" id="2_dosqb"]
 
 [node name="BlackOsho" type="Sprite2D"]
 texture = ExtResource("1_rpqpo")
+script = ExtResource("2_dosqb")

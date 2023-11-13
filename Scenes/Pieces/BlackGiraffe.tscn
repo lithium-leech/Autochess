@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://beo8nv7crjddf"]
+[gd_scene load_steps=3 format=3 uid="uid://beo8nv7crjddf"]
 
 [ext_resource type="Texture2D" uid="uid://d3y0osoya5kvi" path="res://Sprites/Pieces/BlackGiraffe.png" id="1_dm2pu"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Giraffe.gd" id="2_3mbn5"]
 
 [node name="BlackGiraffe" type="Sprite2D"]
 texture = ExtResource("1_dm2pu")
+script = ExtResource("2_3mbn5")

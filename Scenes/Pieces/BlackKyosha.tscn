@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://lf6v34o1vek3"]
+[gd_scene load_steps=3 format=3 uid="uid://lf6v34o1vek3"]
 
 [ext_resource type="Texture2D" uid="uid://dcemce4om6hbt" path="res://Sprites/Pieces/BlackKyosha.png" id="1_kprwy"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Kyosha.gd" id="2_utd6d"]
 
 [node name="BlackKyosha" type="Sprite2D"]
 texture = ExtResource("1_kprwy")
+script = ExtResource("2_utd6d")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8fxcoh8gi8v2"]
+[gd_scene load_steps=3 format=3 uid="uid://b8fxcoh8gi8v2"]
 
 [ext_resource type="Texture2D" uid="uid://cwbuxbvf1stmy" path="res://Sprites/Pieces/WhiteFuhyo.png" id="1_etie7"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Fuhyo.gd" id="2_hq5v2"]
 
 [node name="WhiteFuhyo" type="Sprite2D"]
 texture = ExtResource("1_etie7")
+script = ExtResource("2_hq5v2")

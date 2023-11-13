@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnms3518vovwj"]
+[gd_scene load_steps=3 format=3 uid="uid://dnms3518vovwj"]
 
 [ext_resource type="Texture2D" uid="uid://da4iasi87rpgh" path="res://Sprites/Pieces/WhiteKnight.png" id="1_o5oev"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Knight.gd" id="2_6tp7m"]
 
 [node name="WhiteKnight" type="Sprite2D"]
 texture = ExtResource("1_o5oev")
+script = ExtResource("2_6tp7m")

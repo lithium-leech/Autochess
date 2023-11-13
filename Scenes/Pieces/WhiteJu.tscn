@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpoeuxskl5ea2"]
+[gd_scene load_steps=3 format=3 uid="uid://cpoeuxskl5ea2"]
 
 [ext_resource type="Texture2D" uid="uid://dj4a6im4fua0k" path="res://Sprites/Pieces/WhiteJu.png" id="1_0m104"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ju.gd" id="2_3dsbo"]
 
 [node name="WhiteJu" type="Sprite2D"]
 texture = ExtResource("1_0m104")
+script = ExtResource("2_3dsbo")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://p8jsu6rvv00u"]
+[gd_scene load_steps=3 format=3 uid="uid://p8jsu6rvv00u"]
 
 [ext_resource type="Texture2D" uid="uid://d0ltw0xn3eqbe" path="res://Sprites/Pieces/WhiteCaptain.png" id="1_yw4j3"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Captain.gd" id="2_3vkjn"]
 
 [node name="WhiteCaptain" type="Sprite2D"]
 texture = ExtResource("1_yw4j3")
+script = ExtResource("2_3vkjn")

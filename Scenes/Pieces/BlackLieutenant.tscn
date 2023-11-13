@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ba5raa6r6idel"]
+[gd_scene load_steps=3 format=3 uid="uid://ba5raa6r6idel"]
 
 [ext_resource type="Texture2D" uid="uid://dkotipdsbyoy6" path="res://Sprites/Pieces/BlackLieutenant.png" id="1_nd0k3"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Lieutenant.gd" id="2_5i7id"]
 
 [node name="BlackLieutenant" type="Sprite2D"]
 texture = ExtResource("1_nd0k3")
+script = ExtResource("2_5i7id")

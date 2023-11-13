@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://n7pkb1vldvvv"]
+[gd_scene load_steps=3 format=3 uid="uid://n7pkb1vldvvv"]
 
 [ext_resource type="Texture2D" uid="uid://k0fj0bb26d86" path="res://Sprites/Pieces/BlackXiang.png" id="1_mwn2h"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Xiang.gd" id="2_skldy"]
 
 [node name="BlackXiang" type="Sprite2D"]
 texture = ExtResource("1_mwn2h")
+script = ExtResource("2_skldy")

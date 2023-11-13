@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cby3iaf3c4b1d"]
+[gd_scene load_steps=3 format=3 uid="uid://cby3iaf3c4b1d"]
 
 [ext_resource type="Texture2D" uid="uid://c3hxiqqu5l7qx" path="res://Sprites/Pieces/BlackQueen.png" id="1_t6v7b"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Queen.gd" id="2_bgo6t"]
 
 [node name="BlackQueen" type="Sprite2D"]
 texture = ExtResource("1_t6v7b")
+script = ExtResource("2_bgo6t")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cspnhdjv5s2hj"]
+[gd_scene load_steps=3 format=3 uid="uid://cspnhdjv5s2hj"]
 
 [ext_resource type="Texture2D" uid="uid://ia3m5y5tddq2" path="res://Sprites/Pieces/WhitePao.png" id="1_5hqiv"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Pao.gd" id="2_fyi6y"]
 
 [node name="WhitePao" type="Sprite2D"]
 texture = ExtResource("1_5hqiv")
+script = ExtResource("2_fyi6y")

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://1nt5snyar1xc"]
+[gd_scene load_steps=3 format=3 uid="uid://1nt5snyar1xc"]
 
 [ext_resource type="Texture2D" uid="uid://xd2oftlxdqme" path="res://Sprites/Pieces/BlackShi.png" id="1_vwatf"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Shi.gd" id="2_q1vnt"]
 
 [node name="BlackShi" type="Sprite2D"]
 texture = ExtResource("1_vwatf")
+script = ExtResource("2_q1vnt")
