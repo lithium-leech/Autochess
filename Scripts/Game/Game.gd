@@ -2,7 +2,17 @@
 class_name Game extends Control
 
 
-# The 
+# The in-game controls.
+var in_game_menu: InGameMenu
+
+# The concede pop-up.
+var concede_menu: ConcedeMenu
+
+# The level up menu.
+var choice_menu: ChoiceMenu
+
+# The game over menu.
+var game_over_menu: GameOverMenu
 
 # The current stage of the game being run.
 var current_stage: Stage
@@ -54,9 +64,10 @@ signal on_move_finish
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Add nodes from scene.
-
-	# Initialize the menu manager.
-	#MenuManager.Initialize(InGameMenu)
+	in_game_menu = $InGame/Menu
+	concede_menu = $Concede/Menu
+	choice_menu = $Choice/Menu
+	game_over_menu = $GameOver/Menu
 	# Go to the first level.
 	Main.game_state.turn_pause = 2.0
 	Main.game_state.is_player_white = false

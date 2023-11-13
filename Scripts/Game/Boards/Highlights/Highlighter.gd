@@ -4,12 +4,17 @@ class_name Highlighter
 
 # Creates a new instance of a highlighter.
 # 	board: The board to add highlights to.
-func _init(_board: Board):
+# 	container: The node to hold highlights in.
+func _init(_board: Board, _container: Node2D):
 	board = _board
+	container = _container
 
 
 # The board to add highlights to.
 var board: Board
+
+# The node to hold highlights in.
+var container: Node2D
 
 
 # Adds highlights around the different placement zones.
@@ -75,7 +80,7 @@ func add_space_highlights(zone: Vector4i, coordinates: Vector2i, green: bool):
 			tile_tl = Highlight.create_highlight(Highlight.Kind.CORNER_BR, green)
 	if (tile_tl != null):
 		tile_tl.position = position + Vector2i(-8, -8)
-		board.tile_node.add_child(tile_tl)
+		container.add_child(tile_tl)
 	# Add the top-right highlight for this space.
 	var key_tr: int = (1 if top else 0) << 0 | \
 					  (1 if right else 0) << 1 | \
@@ -92,7 +97,7 @@ func add_space_highlights(zone: Vector4i, coordinates: Vector2i, green: bool):
 			tile_tr = Highlight.create_highlight(Highlight.Kind.CORNER_BL, green)
 	if (tile_tr != null):
 		tile_tr.position = position + Vector2i(8, -8)
-		board.tile_node.add_child(tile_tr)
+		container.add_child(tile_tr)
 	# Add the bottom-left highlight for this space.
 	var key_bl: int = (1 if bottom else 0) << 0 | \
 					  (1 if left else 0) << 1 | \
@@ -109,7 +114,7 @@ func add_space_highlights(zone: Vector4i, coordinates: Vector2i, green: bool):
 			tile_bl = Highlight.create_highlight(Highlight.Kind.CORNER_TR, green)
 	if (tile_bl != null):
 		tile_bl.position = position + Vector2i(-8, 8)
-		board.tile_node.add_child(tile_bl)
+		container.add_child(tile_bl)
 	# Add the bottom-right highlight for this space.
 	var key_br: int = (1 if bottom else 0) << 0 | \
 					  (1 if right else 0) << 1 | \
@@ -126,7 +131,7 @@ func add_space_highlights(zone: Vector4i, coordinates: Vector2i, green: bool):
 			tile_br = Highlight.create_highlight(Highlight.Kind.CORNER_TL, green)
 	if (tile_br != null):
 		tile_br.position = position + Vector2i(8, 8)
-		board.tile_node.add_child(tile_br)
+		container.add_child(tile_br)
 
 
 # Gets a space inside of a given zone.

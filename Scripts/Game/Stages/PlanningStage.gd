@@ -28,10 +28,13 @@ func start():
 	set_up_player()
 	PlacementAI.set_up_enemy(game)
 	# Add highlights around the different the placement zones.
-	Highlighter.new(game.game_board).add_highlights()
-	Highlighter.new(game.side_board).add_highlights()
-	# Activate the concede button.
-	# Activate the fight button.
+	highlight_node = Node2D.new()
+	Main.game_world.add_child(highlight_node)
+	Highlighter.new(game.game_board, highlight_node).add_highlights()
+	Highlighter.new(game.side_board, highlight_node).add_highlights()
+	# Activate buttons.
+	game.in_game_menu.concede_button.pressed.connect(start_concede)
+	game.in_game_menu.fight_button.pressed.connect(start_fight)
 	# TEMPORARY: Add starting pieces.
 	var player_space: Space = game.game_board.get_space(Vector2i(6, 6))
 	game.game_board.add_piece(Piece.Kind.PAWN, true, player_space)
@@ -82,27 +85,35 @@ func during():
 		else:
 			held.space.add_object(held)
 		held = null
-	# De-activate the fight button when there are no pieces on the board
+	# Disable the fight button when there are no pieces on the board
 	if (game.game_board.player_pieces.size() > 0):
-		pass
+		game.in_game_menu.fight_button.disabled = false
 	else:
-		pass
+		game.in_game_menu.fight_button.disabled = true
 
 
 # Runs once when the stage ends.
 func end():
-	# Deactivate the fight button.
-	# Deactivate the concede button.
+	# Deactivate buttons.
+	if (game.in_game_menu.concede_button.pressed.is_connected(start_concede)):
+		game.in_game_menu.concede_button.pressed.disconnect(start_concede)
+	if (game.in_game_menu.fight_button.pressed.is_connected(start_fight)):
+		game.in_game_menu.fight_button.pressed.disconnect(start_fight)
+	game.in_game_menu.concede_button.disabled = true
+	game.in_game_menu.fight_button.disabled = true
+	cancel_concede()
 	# Remove highlights.
+	highlight_node.queue_free()
 	# Save the player's placement set up.
 	pass
 
 
 # Starts the fight sequence.
 func start_fight():
-	# Don't start the fight if there are no pieces on the board.
 	# Deactivate the fight button.
+	game.in_game_menu.fight_button.pressed.disconnect(start_fight)
 	# Queue the combat stage.
+	game.next_stage = CombatStage.new(game)
 	pass
 
 
