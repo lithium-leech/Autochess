@@ -183,10 +183,10 @@ func take_turn():
 
 # Called every frame.
 # 	delta: The elapsed time since the previous frame.
-func _process(_delta: float):
+func _process(delta: float):
 	# Move towards the target when moving is activated.
 	if (is_moving):
-		lerp_i = clamp(lerp_i + (_delta * 2.0 / Main.game_state.turn_pause), 0.0, 1.0)
+		lerp_i = clamp(lerp_i + (delta * 2.0 / Main.game_state.turn_pause), 0.0, 1.0)
 		var target: Vector2 = space.board.to_position(path[path.size() - 1])
 		if (lerp_i == 1.0):
 			# Set the position to the target if the lerp is over.

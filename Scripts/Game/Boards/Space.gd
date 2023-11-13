@@ -50,6 +50,7 @@ func enter(piece: Piece):
 	# Capture the existing piece.
 	if (object != null):
 		piece.captured = object
+		remove_object(object)
 	# Enter the terrain.
 	if (terrain != null):
 		terrain.enter(piece)

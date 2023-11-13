@@ -91,7 +91,7 @@ func _ready():
 
 # Called every frame.
 # 	delta: The elapsed time since the previous frame.
-func _process(_delta: float):
+func _process(delta: float):
 	# Check if a new stage has been queued.
 	if (next_stage != null):
 		# Replace the current stage with the next one.
@@ -103,4 +103,4 @@ func _process(_delta: float):
 	else:
 		# Otherwise just run the current stage.
 		if (current_stage != null):
-			current_stage.during()
+			current_stage.during(delta)

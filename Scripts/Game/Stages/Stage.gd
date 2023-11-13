@@ -10,7 +10,8 @@ func start():
 
 # Must be implemented by inheriting classes.
 # Runs repeatedly while the player is in this stage.
-func during():
+# 	delta: The elapsed time since the previous frame.
+func during(_delta: float):
 	pass
 
 

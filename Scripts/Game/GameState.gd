@@ -19,3 +19,6 @@ var turn_pause: float = 2.0
 
 # True if the player is controlling white pieces.
 var is_player_white: bool = false
+
+# True after rounds where at least one piece has moved.
+var is_active_round: bool = false

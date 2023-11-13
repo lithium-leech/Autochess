@@ -43,7 +43,8 @@ func start():
 
 
 # Runs repeatedly while the player is in this stage.
-func during():
+# 	delta: The elapsed time since the previous frame.
+func during(_delta: float):
 	# Get the current mouse position.
 	var pointer = Main.game_port.get_mouse_position()
 	pointer.x -= Main.game_world.position.x

@@ -30,11 +30,11 @@ func take_turn():
 		right_path.append(right_attack.coordinates)
 		captures.append(right_path)
 	# Capture a piece if possible.
-		if (captures.size() > 0):
-			_path = captures[randi_range(0, captures.size() - 1)]
+	if (captures.size() > 0):
+		_path = captures[randi_range(0, captures.size() - 1)]
 	# Otherwise, move if possible.
-		if (moves.size() > 0):
-			_path = moves[randi_range(0, moves.size() - 1)]
+	elif (moves.size() > 0):
+		_path = moves[randi_range(0, moves.size() - 1)]
 	# Move to the new space.
 	start_turn(_path)
 	# Check for promotion.
