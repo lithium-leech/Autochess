@@ -121,6 +121,7 @@ script = ExtResource("2_axujq")
 visible_text = false
 
 [node name="Menu" type="Control" parent="Concede"]
+visible = false
 anchors_preset = 0
 script = ExtResource("17_trlgu")
 
@@ -130,6 +131,7 @@ script = ExtResource("2_axujq")
 visible_text = false
 
 [node name="Menu" type="Control" parent="Choice"]
+visible = false
 anchors_preset = 0
 script = ExtResource("18_krlcb")
 
@@ -139,5 +141,8 @@ script = ExtResource("2_axujq")
 visible_text = false
 
 [node name="Menu" type="Control" parent="GameOver"]
+visible = false
 anchors_preset = 0
 script = ExtResource("19_ecdp7")
+
+[connection signal="pressed" from="InGame/Menu/Speed" to="InGame/Menu" method="_on_speed_pressed"]
