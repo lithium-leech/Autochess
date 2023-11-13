@@ -69,9 +69,15 @@ var tile_node: Node2D
 # 	space: The space to place the piece at.
 func add_piece(kind: Piece.Kind, player: bool, space: Space):
 	# Create a new piece.
-	var piece: Piece = Piece.create_piece(kind, player)
+	var white: bool = (Main.game_state.is_player_white and player) or \
+					  (not Main.game_state.is_player_white and not player)
+	var piece: Piece = Piece.create_piece(kind, white)
+	piece.is_player = player
+	piece.is_white = white
+	piece.is_grabable = player
+	Main.game_world.add_child(piece)
 	# Flip pieces with directional sprites.
-	var flip = func(): if (!player): piece.texture.flip_v = true
+	var flip = func(): if (not player): piece.texture.flip_v = true
 	match kind:
 		Piece.Kind.FUHYO: flip.call()
 		Piece.Kind.GINSHO: flip.call()
@@ -103,7 +109,7 @@ func add_piece(kind: Piece.Kind, player: bool, space: Space):
 # 	space: The space to place the object at.
 func add_object(object: GameObject, space: Space):
 	if (space != null):
-		space.add_object(object);
+		space.add_object(object)
 
 
 # Destroys all objects on the board.
@@ -118,10 +124,10 @@ func clear():
 # 	return: True if any pieces on the board are actively moving.
 func are_pieces_moving() -> bool:
 	for piece in player_pieces:
-		if (piece.is_moving()):
+		if (piece.is_moving):
 			return true
 	for piece in enemy_pieces:
-		if (piece.is_moving()):
+		if (piece.is_moving):
 			return true
 	return false;
 
@@ -180,7 +186,7 @@ func get_space(coordinates: Vector2i) -> Space:
 # Gets a board space's coordinates from a given game world position.
 # 	position: The game world position to get coordinates for.
 # 	return: A board space's coordinates.
-func to_space(position: Vector2i):
+func to_coordinates(position: Vector2i) -> Vector2i:
 	return Vector2i(floor((position.x - corner_tl.x) / 32.0), floor((position.y - corner_tl.y) / 32.0))
 
 

@@ -56,6 +56,14 @@ import/blender/enabled=false
 
 theme/custom_font="res://Fonts/Pixel Musketeer.otf"
 
+[input]
+
+game_select={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://Localization/Text.ar.translation", "res://Localization/Text.de.translation", "res://Localization/Text.en.translation", "res://Localization/Text.es.translation", "res://Localization/Text.fr.translation", "res://Localization/Text.hi.translation", "res://Localization/Text.id.translation", "res://Localization/Text.ja.translation", "res://Localization/Text.ko.translation", "res://Localization/Text.pt.translation", "res://Localization/Text.ru.translation", "res://Localization/Text.zh.translation")

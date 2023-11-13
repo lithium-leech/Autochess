@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbt6kisu81rdd"]
+
+[ext_resource type="Texture2D" uid="uid://bgcq05p2vkcqx" path="res://Sprites/Pieces/BlackRyuo.png" id="1_d7etp"]
+
+[node name="BlackRyuo" type="Sprite2D"]
+texture = ExtResource("1_d7etp")

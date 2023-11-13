@@ -1,5 +1,5 @@
 # A class for managing the locale.
-class_name Atlas extends Node
+class_name Atlas
 
 
 # The current locale being used by the player.

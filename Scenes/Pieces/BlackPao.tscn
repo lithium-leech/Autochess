@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://du6ql40usn31c"]
+
+[ext_resource type="Texture2D" uid="uid://bjmprsyu134v" path="res://Sprites/Pieces/BlackPao.png" id="1_wj8k2"]
+
+[node name="BlackPao" type="Sprite2D"]
+texture = ExtResource("1_wj8k2")

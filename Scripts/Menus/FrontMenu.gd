@@ -1,5 +1,11 @@
-# Contains the behaviors of title menu's front-most controls
-extends Control
+# Contains the behaviors of the title menu's front-most controls
+class_name FrontMenu extends Menu
+
+
+# Gets the label group containing this menu's text.
+# 	return: A label group.
+func get_text() -> LabelGroup:
+	return $".."
 
 
 # Called when the play button is pressed.

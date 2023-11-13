@@ -32,17 +32,61 @@ func start():
 	Highlighter.new(game.side_board).add_highlights()
 	# Activate the concede button.
 	# Activate the fight button.
+	# TEMPORARY: Add starting pieces.
+	var player_space: Space = game.game_board.get_space(Vector2i(6, 6))
+	game.game_board.add_piece(Piece.Kind.PAWN, true, player_space)
+	var enemy_space: Space = game.game_board.get_space(Vector2i(1, 1))
+	game.game_board.add_piece(Piece.Kind.PAWN, false, enemy_space)
 
 
 # Runs repeatedly while the player is in this stage.
 func during():
 	# Get the current mouse position.
-	# Check if the position is inside a board.
+	var pointer = Main.game_port.get_mouse_position()
+	pointer.x -= Main.game_world.position.x
+	pointer.y -= Main.game_world.position.y
+	# Check if the position is inside the game board or side board.
+	var board: Board = null
+	if (game.game_board.corner_tl.x <= pointer.x and \
+		pointer.x <= game.game_board.corner_br.x and \
+		game.game_board.corner_tl.y <= pointer.y and \
+		pointer.y <= game.game_board.corner_br.y):
+		board = game.game_board
+	elif (game.side_board.corner_tl.x <= pointer.x and \
+		pointer.x <= game.side_board.corner_br.x and \
+		game.side_board.corner_tl.y <= pointer.y and \
+		pointer.y <= game.side_board.corner_br.y):
+		board = game.side_board
 	# Get the current space.
+	var space: Space = null
+	if (board != null):
+		space = board.get_space(board.to_coordinates(pointer))
 	# Grab objects on click.
+	if (Input.is_action_just_pressed("game_select") and \
+		board != null and \
+		space != null and \
+		held == null):
+		held = space.grab()
+		if (held != null):
+			held.warp_to(pointer)
 	# Drag grabbed objects.
+	elif (Input.is_action_pressed("game_select") and held != null):
+		held.warp_to(pointer)
 	# Drop objects on release.
-	pass
+	elif (Input.is_action_just_released("game_select") and held != null):
+		if (board != null and \
+			space != null and \
+			held.is_placeable(space) and \
+			space.is_enterable(held)):
+			space.add_object(held)
+		else:
+			held.space.add_object(held)
+		held = null
+	# De-activate the fight button when there are no pieces on the board
+	if (game.game_board.player_pieces.size() > 0):
+		pass
+	else:
+		pass
 
 
 # Runs once when the stage ends.

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6h2od4u1xr45"]
+
+[ext_resource type="Texture2D" uid="uid://ds076xjv4jlce" path="res://Sprites/Pieces/WhiteNarikei.png" id="1_1xm3c"]
+
+[node name="WhiteNarikei" type="Sprite2D"]
+texture = ExtResource("1_1xm3c")

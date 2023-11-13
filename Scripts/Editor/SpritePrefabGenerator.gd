@@ -4,7 +4,7 @@
 
 # Change this property to target different sprites.
 # The folder to find sprite images in.
-var sprites_path: String = "res://Sprites/Highlights/"
+var sprites_path: String = "res://Sprites/Sets/"
 
 # The folder to save scenes in.
 var scenes_path: String = "res://Scenes/"
@@ -29,11 +29,12 @@ func _run():
 	# Create a scene for each sprite.
 	for sprite in sprites:
 		var scene_path: String = scenes_path + group_name + "/" + sprite.name + ".tscn"
-		var scene: PackedScene = PackedScene.new()
-		scene.resource_path = scene_path
-		scene.pack(sprite)
-		var error: Error = ResourceSaver.save(scene)
-		if error != Error.OK:
-			print("Error saving packed scene:", error)
-		else:
-			print("Packed scene saved successfully:", scene.resource_path)
+		if (!FileAccess.file_exists(scene_path)):
+			var scene: PackedScene = PackedScene.new()
+			scene.resource_path = scene_path
+			scene.pack(sprite)
+			var error: Error = ResourceSaver.save(scene)
+			if error != Error.OK:
+				print("Error saving packed scene:", error)
+			else:
+				print("Packed scene saved successfully:", scene.resource_path)

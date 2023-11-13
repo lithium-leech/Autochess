@@ -1,5 +1,5 @@
 # A class for managing music.
-class_name MusicBox extends Node
+class_name MusicBox
 
 
 # The volume level to play music at.

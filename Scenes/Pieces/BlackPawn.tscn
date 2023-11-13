@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck35n74yaqmj"]
+
+[ext_resource type="Texture2D" uid="uid://bmhhawm7h3jox" path="res://Sprites/Pieces/BlackPawn.png" id="1_oq175"]
+[ext_resource type="Script" path="res://Scripts/Game/Pieces/Pawn.gd" id="2_omc3k"]
+
+[node name="BlackPawn" type="Sprite2D"]
+texture = ExtResource("1_oq175")
+script = ExtResource("2_omc3k")

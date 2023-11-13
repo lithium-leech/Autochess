@@ -1,5 +1,5 @@
 # A single game object.
-class_name GameObject extends Node2D
+class_name GameObject extends Sprite2D
 
 
 # The space this object is placed on.

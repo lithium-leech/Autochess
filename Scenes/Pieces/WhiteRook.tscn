@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7v4vsmryhwn0"]
+
+[ext_resource type="Texture2D" uid="uid://c7g3575gsfp30" path="res://Sprites/Pieces/WhiteRook.png" id="1_ffvjo"]
+
+[node name="WhiteRook" type="Sprite2D"]
+texture = ExtResource("1_ffvjo")

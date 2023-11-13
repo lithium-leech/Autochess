@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr4y2dpdyd54c"]
+
+[ext_resource type="Texture2D" uid="uid://de46hr4ee7et2" path="res://Sprites/Pieces/WhiteSwordsman.png" id="1_ympu4"]
+
+[node name="WhiteSwordsman" type="Sprite2D"]
+texture = ExtResource("1_ympu4")

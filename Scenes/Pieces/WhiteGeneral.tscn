@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpu4ruwvsm4wg"]
+
+[ext_resource type="Texture2D" uid="uid://bpaafgb3rrhxr" path="res://Sprites/Pieces/WhiteGeneral.png" id="1_rb0m3"]
+
+[node name="WhiteGeneral" type="Sprite2D"]
+texture = ExtResource("1_rb0m3")

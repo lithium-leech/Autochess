@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0tcxnnrwfjqy"]
+
+[ext_resource type="Texture2D" uid="uid://bcpjduet26ni3" path="res://Sprites/Pieces/WhiteBishop.png" id="1_167d0"]
+
+[node name="WhiteBishop" type="Sprite2D"]
+texture = ExtResource("1_167d0")

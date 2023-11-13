@@ -1,6 +1,11 @@
 # Contains the behaviors of the title menu's setting controls.
-extends Control
+class_name SettingsMenu extends Menu
 
+
+# Gets the label group containing this menu's text.
+# 	return: A label group.
+func get_text() -> LabelGroup:
+	return $".."
 
 # The icon representing the current starting board.
 var board_icon: Sprite2D

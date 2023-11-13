@@ -2,6 +2,8 @@
 class_name Game extends Control
 
 
+# The 
+
 # The current stage of the game being run.
 var current_stage: Stage
 
@@ -51,6 +53,8 @@ signal on_move_finish
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Add nodes from scene.
+
 	# Initialize the menu manager.
 	#MenuManager.Initialize(InGameMenu)
 	# Go to the first level.

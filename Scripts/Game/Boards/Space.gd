@@ -73,22 +73,27 @@ func exit(piece: Piece):
 # Picks up an object from this space.
 #   return: The first grabable object, or null if there is none.
 func grab() -> GameObject:
+	var grabbed: GameObject = null
 	# Grab any equipment.
 	# if (object is Piece and object.equipment != null):
 	#	return object.unequip()
 	# Grab any game object.
 	if (object != null):
-		return object
+		grabbed = object
 	# Grab any terrain.
-	return terrain
+	elif (terrain != null):
+		grabbed = terrain
+	# Remove and return the grabbed object
+	remove_object(grabbed)
+	return grabbed
 
 
 # Adds an object to this space.
 #   object: The object to add.
 func add_object(_object: GameObject):
 	# Check if the object can be added.
-	if (!is_enterable(_object)):
-		return
+	if (not is_enterable(_object)):
+		return false
 	# Update the object.
 	_object.space = self
 	# Add the object as a piece.
@@ -98,18 +103,18 @@ func add_object(_object: GameObject):
 		else:
 			board.enemy_pieces.append(_object)
 		object = _object;
-		_object.warp_to(board.to_position(coordinates))
+		_object.warp_to(position)
 	# Add the object as an equipment.
 	elif (_object is Equipment and object is Piece and object.equipment == null):
 		_object.equip_to(object)
 	# Add the object as a terrain.
 	elif (_object is Terrain):
 		terrain = _object
-		_object.warp_to(board.to_position(coordinates))
+		_object.warp_to(position)
 	# Add the object as is.
 	else:
 		object = _object
-		_object.warp_to(board.to_position(coordinates))
+		_object.warp_to(position)
 
 
 # Removes an object from this space.
@@ -124,7 +129,7 @@ func remove_object(_object: GameObject):
 		else:
 			board.enemy_pieces.erase(_object)
 		object = null
-    # Remove an equipment.
+	# Remove an equipment.
 	elif (_object is Equipment and object is Piece):
 		if (object.equipment != _object):
 			return
@@ -169,7 +174,7 @@ func is_enterable(_object: GameObject):
 		return false
 	elif (terrain != null and _object is Terrain):
 		return false
-	elif (terrain != null and !terrain.is_enterable(_object)):
+	elif (terrain != null and not terrain.is_enterable(_object)):
 		return false
 	else:
 		return true
@@ -190,7 +195,7 @@ func has_piece() -> bool:
 #   player: True if player pieces are allies.
 #   return: True if this space has an ally piece on it.
 func has_ally(player: bool) -> bool:
-	if (!has_piece()):
+	if (not has_piece()):
 		return false
 	elif (object.is_player == player):
 		return true
@@ -202,7 +207,7 @@ func has_ally(player: bool) -> bool:
 #   player: True if non-player pieces are enemies.
 #   return: True if this space has an enemy piece on it.
 func has_enemy(player: bool) -> bool:
-	if (!has_piece()):
+	if (not has_piece()):
 		return false
 	elif (object.is_player == player):
 		return false
@@ -214,7 +219,7 @@ func has_enemy(player: bool) -> bool:
 #   piece: The piece that wants to find a capture.
 #   return: True if this space has a capturable piece.
 func has_capturable(piece: Piece):
-	if (!has_enemy(piece.is_player)):
+	if (not has_enemy(piece.is_player)):
 		return false
 	else:
 		return object.is_capturable(piece)

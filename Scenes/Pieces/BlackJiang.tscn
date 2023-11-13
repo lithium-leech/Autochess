@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dem4wwdeehnuk"]
+
+[ext_resource type="Texture2D" uid="uid://cojj23nds1vi7" path="res://Sprites/Pieces/BlackJiang.png" id="1_36x5u"]
+
+[node name="BlackJiang" type="Sprite2D"]
+texture = ExtResource("1_36x5u")

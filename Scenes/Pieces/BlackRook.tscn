@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crhw4875djedn"]
+
+[ext_resource type="Texture2D" uid="uid://cpfa4nclarvbl" path="res://Sprites/Pieces/BlackRook.png" id="1_5btwm"]
+
+[node name="BlackRook" type="Sprite2D"]
+texture = ExtResource("1_5btwm")

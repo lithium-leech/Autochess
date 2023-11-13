@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rpfo7gikxihb"]
+
+[ext_resource type="Texture2D" uid="uid://b3aa5qc5k0dny" path="res://Sprites/Pieces/BlackDabbaba.png" id="1_fl63o"]
+
+[node name="BlackDabbaba" type="Sprite2D"]
+texture = ExtResource("1_fl63o")

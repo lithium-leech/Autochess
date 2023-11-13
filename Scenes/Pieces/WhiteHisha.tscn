@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://xiviygxv62sa"]
+
+[ext_resource type="Texture2D" uid="uid://cvcgh0biye16g" path="res://Sprites/Pieces/WhiteHisha.png" id="1_ectqy"]
+
+[node name="WhiteHisha" type="Sprite2D"]
+texture = ExtResource("1_ectqy")

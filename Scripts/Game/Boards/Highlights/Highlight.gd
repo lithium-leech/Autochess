@@ -52,11 +52,11 @@ static var red_prefabs: Dictionary = {
 
 # Creates a requested highlight.
 # 	kind: The kind of highlight to create.
-# 	player: True if this is a highlight for the player placement zone.
+# 	player: True if the highlight is green, false if red.
 # 	return: A highlight.
-static func create_highlight(kind: Kind, player: bool) -> Sprite2D:
+static func create_highlight(kind: Kind, green: bool) -> Sprite2D:
 	var scene: PackedScene
-	if (player):
+	if (green):
 		scene = load(green_prefabs[kind])
 	else:
 		scene = load(red_prefabs[kind])

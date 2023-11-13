@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duovj8c5ohwet"]
+
+[ext_resource type="Texture2D" uid="uid://bweo54mbe5hmd" path="res://Sprites/Pieces/WhiteGiraffe.png" id="1_6qq3s"]
+
+[node name="WhiteGiraffe" type="Sprite2D"]
+texture = ExtResource("1_6qq3s")
