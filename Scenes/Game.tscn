@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=57 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
@@ -16,21 +16,66 @@
 [ext_resource type="Texture2D" uid="uid://kqp6kc5dlidj" path="res://Sprites/Buttons/Button2x2/Button2x2Highlighted.png" id="10_hkhgv"]
 [ext_resource type="Texture2D" uid="uid://cbefo3vli2fy4" path="res://Sprites/Buttons/Button2x2/Button2x2Disabled.png" id="11_s2xw0"]
 [ext_resource type="Texture2D" uid="uid://bxxiomffysas" path="res://Sprites/GameIcons/Fight.png" id="14_22sib"]
+[ext_resource type="Texture2D" uid="uid://cwa4njlrxlxao" path="res://Sprites/Panels/ConcedeCover.png" id="17_5p3g0"]
 [ext_resource type="Script" path="res://Scripts/Menus/ConcedeMenu.gd" id="17_trlgu"]
 [ext_resource type="Script" path="res://Scripts/Menus/ChoiceMenu.gd" id="18_krlcb"]
+[ext_resource type="Texture2D" uid="uid://dqr1exj7jrkrw" path="res://Sprites/GameIcons/SmallCheck.png" id="19_a0a7u"]
 [ext_resource type="Script" path="res://Scripts/Menus/GameOverMenu.gd" id="19_ecdp7"]
 [ext_resource type="Texture2D" uid="uid://d3ydii1vnhffc" path="res://Sprites/Panels/GameCover.png" id="19_uounm"]
+[ext_resource type="Texture2D" uid="uid://bmaaeg3ee7mcg" path="res://Sprites/GameIcons/SmallCross.png" id="20_3ja8n"]
 [ext_resource type="Texture2D" uid="uid://b4i5b77wm83is" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="21_43frc"]
 [ext_resource type="Texture2D" uid="uid://dn3p25capqptv" path="res://Sprites/Buttons/Button1x6/Button1x6Pressed.png" id="22_vw7ih"]
+[ext_resource type="Texture2D" uid="uid://ckkrp8jyody7c" path="res://Sprites/Panels/ChoiceCover.png" id="22_xjdor"]
 [ext_resource type="Texture2D" uid="uid://lkni8undshg7" path="res://Sprites/Buttons/Button1x6/Button1x6Highlighted.png" id="23_mg2sn"]
+[ext_resource type="Texture2D" uid="uid://di4v1734o1r5m" path="res://Sprites/Buttons/Button2x1/Button2x1Default.png" id="23_ngk2i"]
+[ext_resource type="Texture2D" uid="uid://c2ggscyauex0f" path="res://Sprites/Buttons/Button2x1/Button2x1Selected.png" id="24_hvhcr"]
 [ext_resource type="Texture2D" uid="uid://54vtq1o8ufnb" path="res://Sprites/Buttons/Button1x6/Button1x6Disabled.png" id="24_yl8it"]
 [ext_resource type="Texture2D" uid="uid://crej0bmtmeuc4" path="res://Sprites/GameIcons/Replay.png" id="25_62yqv"]
 [ext_resource type="Texture2D" uid="uid://b5e5dqcirqcfn" path="res://Sprites/GameIcons/Play.png" id="25_lk2m8"]
+[ext_resource type="Texture2D" uid="uid://b61dngj7ucycc" path="res://Sprites/Buttons/Button2x1/Button2x1Highlighted.png" id="25_u5cv8"]
+[ext_resource type="Texture2D" uid="uid://cxdgqdk0rroye" path="res://Sprites/Buttons/Button2x1/Button2x1Disabled.png" id="26_ifq83"]
 [ext_resource type="Texture2D" uid="uid://cgx810nc2tbxo" path="res://Sprites/GameIcons/Cross.png" id="27_f7xhf"]
+[ext_resource type="Texture2D" uid="uid://cs4d65op5sjpj" path="res://Sprites/GameIcons/Check.png" id="27_n34vl"]
+[ext_resource type="Texture2D" uid="uid://5olegebtkbis" path="res://Sprites/Panels/InfoCover.png" id="28_aosyd"]
+[ext_resource type="Texture2D" uid="uid://cid4oftrgrsc4" path="res://Sprites/Buttons/Button1x2/Button1x2Disabled.png" id="33_wr0x3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xdxah"]
 font_size = 14
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_km4k5"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_yaubp"]
+font_size = 27
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_kf4h8"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_frjva"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ckm5"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_m2nt0"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_0gs6t"]
+font_size = 10
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_r55ot"]
 font_size = 27
@@ -169,11 +214,64 @@ anchors_preset = 0
 script = ExtResource("2_axujq")
 visible_text = false
 
-[node name="Menu" type="Control" parent="Concede"]
+[node name="Menu" type="TextureRect" parent="Concede"]
 visible = false
 z_index = 10
-anchors_preset = 0
+layout_mode = 0
+offset_left = -128.0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 192.0
+texture = ExtResource("17_5p3g0")
 script = ExtResource("17_trlgu")
+
+[node name="Confirm" type="TextureButton" parent="Concede/Menu"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 48.0
+texture_normal = ExtResource("3_p6nhc")
+texture_pressed = ExtResource("4_irdgj")
+texture_hover = ExtResource("5_78y78")
+texture_disabled = ExtResource("6_u22ch")
+
+[node name="Icon" type="TextureRect" parent="Concede/Menu/Confirm"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("19_a0a7u")
+script = ExtResource("8_bwmad")
+
+[node name="Text" type="Label" parent="Concede/Menu"]
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 206.0
+offset_bottom = 49.0
+text = "Text.AskConcede"
+label_settings = SubResource("LabelSettings_km4k5")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Cancel" type="TextureButton" parent="Concede/Menu"]
+offset_left = 208.0
+offset_top = 16.0
+offset_right = 240.0
+offset_bottom = 48.0
+texture_normal = ExtResource("3_p6nhc")
+texture_pressed = ExtResource("4_irdgj")
+texture_hover = ExtResource("5_78y78")
+texture_disabled = ExtResource("6_u22ch")
+
+[node name="Icon" type="TextureRect" parent="Concede/Menu/Cancel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("20_3ja8n")
 
 [node name="Choice" type="Control" parent="."]
 anchors_preset = 0
@@ -186,12 +284,155 @@ z_index = 11
 anchors_preset = 0
 script = ExtResource("18_krlcb")
 
+[node name="Choice" type="TextureRect" parent="Choice/Menu"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -224.0
+offset_right = 128.0
+offset_bottom = 32.0
+texture = ExtResource("22_xjdor")
+
+[node name="Text" type="Label" parent="Choice/Menu/Choice"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 238.0
+offset_bottom = 80.0
+text = "Text.ChoosePiece"
+label_settings = SubResource("LabelSettings_yaubp")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Choice1" type="TextureButton" parent="Choice/Menu/Choice"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 88.0
+offset_right = 88.0
+offset_bottom = 168.0
+toggle_mode = true
+texture_normal = ExtResource("23_ngk2i")
+texture_pressed = ExtResource("24_hvhcr")
+texture_hover = ExtResource("25_u5cv8")
+texture_disabled = ExtResource("26_ifq83")
+
+[node name="Choice2" type="TextureButton" parent="Choice/Menu/Choice"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 88.0
+offset_right = 152.0
+offset_bottom = 168.0
+toggle_mode = true
+texture_normal = ExtResource("23_ngk2i")
+texture_pressed = ExtResource("24_hvhcr")
+texture_hover = ExtResource("25_u5cv8")
+texture_disabled = ExtResource("26_ifq83")
+
+[node name="Choice3" type="TextureButton" parent="Choice/Menu/Choice"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 88.0
+offset_right = 216.0
+offset_bottom = 168.0
+toggle_mode = true
+texture_normal = ExtResource("23_ngk2i")
+texture_pressed = ExtResource("24_hvhcr")
+texture_hover = ExtResource("25_u5cv8")
+texture_disabled = ExtResource("26_ifq83")
+
+[node name="Confirm" type="TextureButton" parent="Choice/Menu/Choice"]
+offset_left = 24.0
+offset_top = 184.0
+offset_right = 232.0
+offset_bottom = 232.0
+texture_normal = ExtResource("21_43frc")
+texture_pressed = ExtResource("22_vw7ih")
+texture_hover = ExtResource("23_mg2sn")
+texture_disabled = ExtResource("24_yl8it")
+
+[node name="Icon" type="TextureRect" parent="Choice/Menu/Choice/Confirm"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("27_n34vl")
+script = ExtResource("8_bwmad")
+
+[node name="Text" type="Label" parent="Choice/Menu/Choice/Confirm"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = 200.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Text.Confirm"
+label_settings = SubResource("LabelSettings_kf4h8")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Info" type="TextureRect" parent="Choice/Menu"]
+offset_left = -144.0
+offset_top = 80.0
+offset_right = 144.0
+offset_bottom = 288.0
+texture = ExtResource("28_aosyd")
+
+[node name="Selected" type="TextureRect" parent="Choice/Menu/Info"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 24.0
+offset_right = 184.0
+offset_bottom = 72.0
+texture = ExtResource("33_wr0x3")
+
+[node name="PlayerName" type="Label" parent="Choice/Menu/Info"]
+offset_left = 16.0
+offset_top = 24.0
+offset_right = 104.0
+offset_bottom = 72.0
+label_settings = SubResource("LabelSettings_frjva")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="PlayerInfo" type="Label" parent="Choice/Menu/Info"]
+offset_left = 20.0
+offset_top = 76.0
+offset_right = 140.0
+offset_bottom = 188.0
+label_settings = SubResource("LabelSettings_4ckm5")
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="EnemyName" type="Label" parent="Choice/Menu/Info"]
+offset_left = 184.0
+offset_top = 24.0
+offset_right = 272.0
+offset_bottom = 72.0
+label_settings = SubResource("LabelSettings_m2nt0")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="EnemyInfo" type="Label" parent="Choice/Menu/Info"]
+offset_left = 148.0
+offset_top = 76.0
+offset_right = 268.0
+offset_bottom = 188.0
+label_settings = SubResource("LabelSettings_0gs6t")
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
 [node name="GameOver" type="Control" parent="."]
 anchors_preset = 0
 script = ExtResource("2_axujq")
 visible_text = false
 
 [node name="Menu" type="TextureRect" parent="GameOver"]
+visible = false
 z_index = 12
 layout_mode = 0
 offset_left = -128.0
@@ -202,6 +443,7 @@ texture = ExtResource("19_uounm")
 script = ExtResource("19_ecdp7")
 
 [node name="Text" type="Label" parent="GameOver/Menu"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 238.0
@@ -220,6 +462,7 @@ offset_right = 238.0
 offset_bottom = 144.0
 
 [node name="Text" type="Label" parent="GameOver/Menu/Score"]
+layout_mode = 0
 offset_right = 146.0
 offset_bottom = 32.0
 text = "Text.Score"
@@ -229,6 +472,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Divider" type="Label" parent="GameOver/Menu/Score"]
+layout_mode = 0
 offset_left = 146.0
 offset_right = 158.0
 offset_bottom = 32.0
@@ -239,6 +483,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Value" type="Label" parent="GameOver/Menu/Score"]
+layout_mode = 0
 offset_left = 158.0
 offset_right = 222.0
 offset_bottom = 32.0
@@ -255,6 +500,7 @@ offset_right = 238.0
 offset_bottom = 176.0
 
 [node name="Text" type="Label" parent="GameOver/Menu/HighScore"]
+layout_mode = 0
 offset_right = 146.0
 offset_bottom = 32.0
 text = "Text.Highscore"
@@ -264,6 +510,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Divider" type="Label" parent="GameOver/Menu/HighScore"]
+layout_mode = 0
 offset_left = 146.0
 offset_right = 158.0
 offset_bottom = 32.0
@@ -274,6 +521,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Value" type="Label" parent="GameOver/Menu/HighScore"]
+layout_mode = 0
 offset_left = 158.0
 offset_right = 222.0
 offset_bottom = 32.0
@@ -282,7 +530,8 @@ label_settings = SubResource("LabelSettings_tba1m")
 vertical_alignment = 1
 clip_text = true
 
-[node name="RetryButton" type="TextureButton" parent="GameOver/Menu"]
+[node name="Retry" type="TextureButton" parent="GameOver/Menu"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 232.0
 offset_right = 232.0
@@ -292,7 +541,7 @@ texture_pressed = ExtResource("22_vw7ih")
 texture_hover = ExtResource("23_mg2sn")
 texture_disabled = ExtResource("24_yl8it")
 
-[node name="Icon" type="TextureRect" parent="GameOver/Menu/RetryButton"]
+[node name="Icon" type="TextureRect" parent="GameOver/Menu/Retry"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -301,7 +550,7 @@ offset_bottom = 40.0
 texture = ExtResource("25_62yqv")
 script = ExtResource("8_bwmad")
 
-[node name="Text" type="Label" parent="GameOver/Menu/RetryButton"]
+[node name="Text" type="Label" parent="GameOver/Menu/Retry"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -314,7 +563,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="NewGameButton" type="TextureButton" parent="GameOver/Menu"]
+[node name="NewGame" type="TextureButton" parent="GameOver/Menu"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 288.0
 offset_right = 232.0
@@ -324,7 +574,7 @@ texture_pressed = ExtResource("22_vw7ih")
 texture_hover = ExtResource("23_mg2sn")
 texture_disabled = ExtResource("24_yl8it")
 
-[node name="Icon" type="TextureRect" parent="GameOver/Menu/NewGameButton"]
+[node name="Icon" type="TextureRect" parent="GameOver/Menu/NewGame"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -333,7 +583,7 @@ offset_bottom = 40.0
 texture = ExtResource("25_lk2m8")
 script = ExtResource("8_bwmad")
 
-[node name="Text" type="Label" parent="GameOver/Menu/NewGameButton"]
+[node name="Text" type="Label" parent="GameOver/Menu/NewGame"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0
@@ -346,7 +596,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="EndGameButton" type="TextureButton" parent="GameOver/Menu"]
+[node name="EndGame" type="TextureButton" parent="GameOver/Menu"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 344.0
 offset_right = 232.0
@@ -356,7 +607,7 @@ texture_pressed = ExtResource("22_vw7ih")
 texture_hover = ExtResource("23_mg2sn")
 texture_disabled = ExtResource("24_yl8it")
 
-[node name="Icon" type="TextureRect" parent="GameOver/Menu/EndGameButton"]
+[node name="Icon" type="TextureRect" parent="GameOver/Menu/EndGame"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
@@ -364,7 +615,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("27_f7xhf")
 
-[node name="Text" type="Label" parent="GameOver/Menu/EndGameButton"]
+[node name="Text" type="Label" parent="GameOver/Menu/EndGame"]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 8.0

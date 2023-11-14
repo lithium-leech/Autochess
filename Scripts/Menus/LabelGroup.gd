@@ -60,6 +60,7 @@ func grow_text_tree(game_node: Node, text_parent: Control, is_rtl: bool):
 		text_node.localize_numeral_system = game_node.localize_numeral_system
 		text_node.horizontal_alignment = game_node.horizontal_alignment
 		text_node.vertical_alignment = game_node.vertical_alignment
+		text_node.autowrap_mode = game_node.autowrap_mode
 		text_node.clip_text = true
 		text_node.label_settings = game_node.label_settings
 		text_node.label_settings.font = Main.atlas.fonts[Main.atlas.current_locale]
