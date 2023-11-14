@@ -73,6 +73,7 @@ func during(_delta: float):
 		held = space.grab()
 		if (held != null):
 			held.warp_to(pointer)
+			held.z_index = GameState.ZIndex.DYNAMIC
 	# Drag grabbed objects.
 	elif (Input.is_action_pressed("game_select") and held != null):
 		held.warp_to(pointer)
@@ -85,6 +86,13 @@ func during(_delta: float):
 			space.add_object(held)
 		else:
 			held.space.add_object(held)
+		match held:
+			Equipment:
+				held.z_index = GameState.ZIndex.EQUIPMENT
+			Piece:
+				held.z_index = GameState.ZIndex.PIECE
+			_:
+				held.z_index = GameState.ZIndex.TERRAIN
 		held = null
 	# Disable the fight button when there are no pieces on the board
 	if (game.game_board.player_pieces.size() > 0):

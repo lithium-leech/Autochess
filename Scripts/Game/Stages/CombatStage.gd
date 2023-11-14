@@ -58,7 +58,7 @@ func during(delta: float):
 		return
 	# Check if the battle is over.
 	if (game.game_board.player_pieces.size() < 1):
-		game.next_stage = DefeatStage.new()
+		game.next_stage = DefeatStage.new(game)
 		return
 	elif (game.game_board.enemy_pieces.size() < 1):
 		game.next_stage = UpgradeStage.new()

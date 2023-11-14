@@ -60,4 +60,6 @@ static func create_highlight(kind: Kind, green: bool) -> Sprite2D:
 		scene = load(green_prefabs[kind])
 	else:
 		scene = load(red_prefabs[kind])
-	return scene.instantiate() as Sprite2D
+	var sprite: Sprite2D = scene.instantiate()
+	sprite.z_index = GameState.ZIndex.HIGHLIGHT
+	return sprite

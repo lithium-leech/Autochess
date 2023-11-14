@@ -148,7 +148,9 @@ static func create_piece(_kind: Kind, white: bool) -> Piece:
 		scene = load(white_prefabs[_kind])
 	else:
 		scene = load(black_prefabs[_kind])
-	return scene.instantiate() as Piece
+	var piece: Piece = scene.instantiate()
+	piece.z_index = GameState.ZIndex.PIECE
+	return piece
 
 
 # Must be implemented by inheriting classes.
@@ -349,6 +351,7 @@ func start_turn(_path: Array[Vector2i]):
 	path = _path
 	var destination: Space = space.board.get_space(path[path.size() - 1])
 	if (destination != null and destination != space):
+		z_index = GameState.ZIndex.DYNAMIC
 		is_moving = true
 		lerp_i = 0.0
 		space.exit(self)
@@ -370,3 +373,5 @@ func finish_moving():
 		_space.exit(self)
 		_space.board.add_piece(promotion, is_player, _space)
 		queue_free()
+	# Return to the stationary z index
+	z_index = GameState.ZIndex.PIECE

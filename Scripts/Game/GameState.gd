@@ -2,6 +2,17 @@
 class_name GameState
 
 
+# An enumeration containing each Z index.
+enum ZIndex {
+	DEFAULT,
+	TERRAIN,
+	PIECE,
+	EQUIPMENT,
+	HIGHLIGHT,
+	DYNAMIC,
+}
+
+
 # The board to load when a game starts.
 var start_board: Board.Kind = Board.Kind.CLASSIC
 
