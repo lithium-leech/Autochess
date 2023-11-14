@@ -25,7 +25,8 @@ func start():
 	# Set up the boards.
 	game.game_board.clear()
 	game.side_board.clear()
-	set_up_player()
+	for record in game.player_placements:
+		record.place_recorded_object(game)
 	PlacementAI.set_up_enemy(game)
 	# Add highlights around the different the placement zones.
 	highlight_node = Node2D.new()
@@ -37,11 +38,6 @@ func start():
 	game.in_game_menu.concede_button.pressed.connect(start_concede)
 	game.in_game_menu.fight_button.disabled = false
 	game.in_game_menu.concede_button.disabled = false
-	# TEMPORARY: Add starting pieces.
-	var player_space: Space = game.game_board.get_space(Vector2i(6, 6))
-	game.game_board.add_piece(Piece.Kind.PAWN, true, player_space)
-	var enemy_space: Space = game.game_board.get_space(Vector2i(1, 1))
-	game.game_board.add_piece(Piece.Kind.PAWN, false, enemy_space)
 
 
 # Runs repeatedly while the player is in this stage.
@@ -116,14 +112,6 @@ func end():
 	# Remove highlights.
 	highlight_node.queue_free()
 	# Save the player's placement set up.
-	pass
-
-
-# Sets up the player's pieces on the game board and side board.
-func set_up_player():
-	# Place the player's pieces on the game board.
-	# Place the player's pieces on the side board.
-	# Place the player's objects on the side board.
 	pass
 
 

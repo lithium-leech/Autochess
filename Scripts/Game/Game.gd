@@ -30,11 +30,8 @@ var enemy_items: Array[Item.Kind] = []
 # The enemy's acquired power ups.
 var enemy_powers: Array[Power] = []
 
-# The player's roster of pieces.
-var player_pieces: Array[PlacementRecord] = []
-
-# The players's collection of items.
-var player_items: Array[PlacementRecord] = []
+# The player's placed pieces and items.
+var player_placements: Array[Placement] = []
 
 # The player's acquired power ups.
 var player_powers: Array[Power] = []
@@ -72,19 +69,20 @@ func _ready():
 	Main.game_state.turn_pause = 2.0
 	Main.game_state.is_player_white = false
 	Main.game_state.level = 1
-	#LevelText.text = GameState.Level.ToString();
-	#PersistentVariablesSource pvs = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
-	#IntVariable score = pvs["game"]["score"] as IntVariable;
-	#IntVariable highscore = pvs["game"]["highscore"] as IntVariable;
-	#using (PersistentVariablesSource.UpdateScope())
-	#    score.Value = GameState.Level;
-	#    highscore.Value = GameState.HighScore;
+	in_game_menu.get_label(in_game_menu.level_text).text = str(Main.game_state.level)
 	# Create the static boards.
 	side_board = SideBoardBuilder.new(self).build()
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
-	# Create the starting game board.
+	# Create the starting map.
 	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
+	# TEMPORARY: Create starting pieces
+	enemy_pieces.append(Piece.Kind.PAWN)
+	var record: Placement = Placement.record_new_piece( \
+		Piece.Kind.PAWN, \
+		side_board.get_first_empty_space().coordinates, \
+		false)
+	player_placements.append(record)
 	# Start the planning phase
 	next_stage = PlanningStage.new(self)
 
