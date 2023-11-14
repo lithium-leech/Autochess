@@ -2,10 +2,23 @@
 class_name GameOverMenu extends Menu
 
 
-# Gets the label group containing this menu's text.
-# 	return: A label group.
-func get_text() -> LabelGroup:
-	return $".."
+# The score text.
+var score_text: Label
+
+# The high score text.
+var high_score_text: Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	score_text = $Score
+	high_score_text = $Highscore
+
+
+# Called when the menu is opened.
+func on_open():
+	get_label(score_text).text = tr("Text.Score").format({score = Main.game_state.level})
+	get_label(high_score_text).text = tr("Text.Highscore").format({score = Main.game_state.high_score})
 
 
 # Called when the retry button is pressed.

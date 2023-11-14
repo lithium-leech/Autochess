@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=53 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
@@ -54,7 +54,7 @@ font_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_kf4h8"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_frjva"]
@@ -82,15 +82,7 @@ font_size = 27
 font_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_1w3vi"]
-font_color = Color(0, 0, 0, 1)
-shadow_size = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_k4i4j"]
-font_color = Color(0, 0, 0, 1)
-shadow_size = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_8cved"]
 font_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
@@ -98,24 +90,16 @@ shadow_size = 0
 font_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_pajfd"]
-font_color = Color(0, 0, 0, 1)
-shadow_size = 0
-
-[sub_resource type="LabelSettings" id="LabelSettings_tba1m"]
-font_color = Color(0, 0, 0, 1)
-shadow_size = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_nak1f"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8yd18"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_odwbs"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Control"]
@@ -226,6 +210,7 @@ texture = ExtResource("17_5p3g0")
 script = ExtResource("17_trlgu")
 
 [node name="Confirm" type="TextureButton" parent="Concede/Menu"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 48.0
@@ -245,6 +230,7 @@ texture = ExtResource("19_a0a7u")
 script = ExtResource("8_bwmad")
 
 [node name="Text" type="Label" parent="Concede/Menu"]
+layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
 offset_right = 206.0
@@ -256,6 +242,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Cancel" type="TextureButton" parent="Concede/Menu"]
+layout_mode = 0
 offset_left = 208.0
 offset_top = 16.0
 offset_right = 240.0
@@ -293,6 +280,7 @@ offset_bottom = 32.0
 texture = ExtResource("22_xjdor")
 
 [node name="Text" type="Label" parent="Choice/Menu/Choice"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 238.0
@@ -340,6 +328,7 @@ texture_hover = ExtResource("25_u5cv8")
 texture_disabled = ExtResource("26_ifq83")
 
 [node name="Confirm" type="TextureButton" parent="Choice/Menu/Choice"]
+layout_mode = 0
 offset_left = 24.0
 offset_top = 184.0
 offset_right = 232.0
@@ -372,6 +361,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="Info" type="TextureRect" parent="Choice/Menu"]
+layout_mode = 0
 offset_left = -144.0
 offset_top = 80.0
 offset_right = 144.0
@@ -387,6 +377,7 @@ offset_bottom = 72.0
 texture = ExtResource("33_wr0x3")
 
 [node name="PlayerName" type="Label" parent="Choice/Menu/Info"]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 24.0
 offset_right = 104.0
@@ -397,6 +388,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="PlayerInfo" type="Label" parent="Choice/Menu/Info"]
+layout_mode = 0
 offset_left = 20.0
 offset_top = 76.0
 offset_right = 140.0
@@ -407,6 +399,7 @@ autowrap_mode = 2
 clip_text = true
 
 [node name="EnemyName" type="Label" parent="Choice/Menu/Info"]
+layout_mode = 0
 offset_left = 184.0
 offset_top = 24.0
 offset_right = 272.0
@@ -417,6 +410,7 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="EnemyInfo" type="Label" parent="Choice/Menu/Info"]
+layout_mode = 0
 offset_left = 148.0
 offset_top = 76.0
 offset_right = 268.0
@@ -447,86 +441,35 @@ layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 238.0
-offset_bottom = 80.0
+offset_bottom = 112.0
 text = "Text.GameOver"
 label_settings = SubResource("LabelSettings_r55ot")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 clip_text = true
 
-[node name="Score" type="Control" parent="GameOver/Menu"]
-anchors_preset = 0
+[node name="Score" type="Label" parent="GameOver/Menu"]
+layout_mode = 0
 offset_left = 16.0
-offset_top = 112.0
+offset_top = 128.0
 offset_right = 238.0
-offset_bottom = 144.0
-
-[node name="Text" type="Label" parent="GameOver/Menu/Score"]
-layout_mode = 0
-offset_right = 146.0
-offset_bottom = 32.0
+offset_bottom = 160.0
 text = "Text.Score"
-label_settings = SubResource("LabelSettings_1w3vi")
-horizontal_alignment = 2
-vertical_alignment = 1
-clip_text = true
-
-[node name="Divider" type="Label" parent="GameOver/Menu/Score"]
-layout_mode = 0
-offset_left = 146.0
-offset_right = 158.0
-offset_bottom = 32.0
-text = ":"
 label_settings = SubResource("LabelSettings_k4i4j")
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="Value" type="Label" parent="GameOver/Menu/Score"]
+[node name="Highscore" type="Label" parent="GameOver/Menu"]
 layout_mode = 0
-offset_left = 158.0
-offset_right = 222.0
-offset_bottom = 32.0
-text = "999"
-label_settings = SubResource("LabelSettings_8cved")
-vertical_alignment = 1
-clip_text = true
-
-[node name="HighScore" type="Control" parent="GameOver/Menu"]
-anchors_preset = 0
 offset_left = 16.0
-offset_top = 144.0
+offset_top = 160.0
 offset_right = 238.0
-offset_bottom = 176.0
-
-[node name="Text" type="Label" parent="GameOver/Menu/HighScore"]
-layout_mode = 0
-offset_right = 146.0
-offset_bottom = 32.0
+offset_bottom = 192.0
 text = "Text.Highscore"
 label_settings = SubResource("LabelSettings_ejqyo")
-horizontal_alignment = 2
-vertical_alignment = 1
-clip_text = true
-
-[node name="Divider" type="Label" parent="GameOver/Menu/HighScore"]
-layout_mode = 0
-offset_left = 146.0
-offset_right = 158.0
-offset_bottom = 32.0
-text = ":"
-label_settings = SubResource("LabelSettings_pajfd")
 horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-
-[node name="Value" type="Label" parent="GameOver/Menu/HighScore"]
-layout_mode = 0
-offset_left = 158.0
-offset_right = 222.0
-offset_bottom = 32.0
-text = "999"
-label_settings = SubResource("LabelSettings_tba1m")
 vertical_alignment = 1
 clip_text = true
 

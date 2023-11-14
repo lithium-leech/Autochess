@@ -35,15 +35,15 @@ font_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_mrith"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_280a7"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dvb2k"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xrbav"]
@@ -72,7 +72,7 @@ font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_r7tdu"]
-font_size = 20
+font_size = 18
 font_color = Color(0, 0, 0, 1)
 
 [node name="Title" type="Control"]

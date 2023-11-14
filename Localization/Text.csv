@@ -14,9 +14,9 @@ Text.ChoosePiece,إختر قطعة,Figuren Wählen,Choose Pieces,Elija Piezas,Ch
 Text.ChoosePower,إختر القدرة,Kräfte Wählen,Choose Powers,Elija Poderes,Choisir Pouvoirs,शक्तियाँ चुनें,Pilih Kekuatan,能力選択,능력을 선택,Seleccionar  Poderes,Выберите Способности,选择能力
 Text.ChooseMap,اختر خريطة,Eine Karte Wählen,Choose a Map,Elija un Mapa,Choisir une Carte,एक मानचित्र चुनें,Pilih Peta,マップを選択,지도 선택,Selecionar um Mapa,Выберите Карта,选择地图
 Text.GameOver,انتهت اللعبة,Spielende,Game Over,Game Over,Terminé,खेल खत्म,Permainan Telah Berakhir,ゲームオーバー,게임 오버,Fim do Jogo,Игра Окончена,游戏结束了
-Text.Score,الدرجة,Punktzahl,Score,Puntaje,Score,स्कोर,Skor,得点,득점,Pontuação,Оценка,得分
-Text.Highscore,درجة عالية,Highscore,High Score,Puntaje Alto,Meilleur Score,उच्च स्कोर,Skor Tinggi,高得点,고득점,Pontuação Máxima,Высокий Балл,高分
-Text.Retry,حاول ثانية,Nochmal Versuchen,Try Again,Reintentarlo,Réessayer,पुनः प्रयास करें,Coba Lagi,再試行,재시도,Tente Novamente,Попробуйте Еще Раз,重试
+Text.Score,الدرجة: {score},Punktzahl: {score},Score: {score},Puntaje: {score},Score: {score},स्कोर: {score},Skor: {score},得点：{score},득점: {score},Pontuação: {score},Оценка: {score},得分：{score}
+Text.Highscore,درجة عالية: {score},Höchste Punktzahl: {score},High Score: {score},Puntaje Alto: {score},Meilleur Score: {score},उच्च स्कोर: {score},Skor Tinggi: {score},高得点：{score},고득점: {score},Pontuação Máxima: {score},Наивысшая Оценка: {score},高分：{score}
+Text.Retry,حاول ثانية,Wiederholung,Try Again,Reintentarlo,Réessayer,पुनः प्रयास करें,Coba Lagi,再試行,재시도,Tente Novamente,Повторение,重试
 Text.NewGame,لعبة جديدة,Neues Spiel,New Game,Nuevo Juego,Nouveau Jeu,नया खेल,Permainan Baru,ニューゲーム,새로운 게임,Novo Jogo,Новая Игра,新游戏
 Text.End,الخروج من اللعبة,Spiel Beenden,End Game,Salir del Juego,Quitter le Jeu,खेल से बाहर जाएं,Keluar Permainan,ゲーム終了,게임 종료,Sair do Jogo,Выход из Игры,结束游戏
 Text.Concede,يستسلم,Aufgeben,Concede,Ríndete,Renoncer,हार मान लो,Menyerah,あきらめる,포기하다,Rendição,Сдаваться,放弃

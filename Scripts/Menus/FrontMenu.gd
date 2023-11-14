@@ -2,12 +2,6 @@
 class_name FrontMenu extends Menu
 
 
-# Gets the label group containing this menu's text.
-# 	return: A label group.
-func get_text() -> LabelGroup:
-	return $".."
-
-
 # Called when the play button is pressed.
 func _on_play_button_pressed():
 	# Delete the current contents of the game world.

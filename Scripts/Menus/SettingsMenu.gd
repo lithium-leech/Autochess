@@ -2,11 +2,6 @@
 class_name SettingsMenu extends Menu
 
 
-# Gets the label group containing this menu's text.
-# 	return: A label group.
-func get_text() -> LabelGroup:
-	return $".."
-
 # The icon representing the current starting board.
 var board_icon: Sprite2D
 
@@ -121,7 +116,7 @@ func set_volume(level: int):
 	level = clamp(level, 0, 10)
 	Main.music_box.set_volume(level)
 	# Update the volume text.
-	$"..".labels[$Volume/Value].text = "{volume}%".format({ "volume": level * 10 })
+	get_label($Volume/Value).text = "{volume}%".format({ "volume": level * 10 })
 
 
 # Sets the current locale to the given index.
