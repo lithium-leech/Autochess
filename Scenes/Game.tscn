@@ -572,3 +572,5 @@ vertical_alignment = 1
 clip_text = true
 
 [connection signal="pressed" from="InGame/Menu/Speed" to="InGame/Menu" method="_on_speed_pressed"]
+[connection signal="pressed" from="GameOver/Menu/NewGame" to="GameOver/Menu" method="_on_new_pressed"]
+[connection signal="pressed" from="GameOver/Menu/EndGame" to="GameOver/Menu" method="_on_end_pressed"]

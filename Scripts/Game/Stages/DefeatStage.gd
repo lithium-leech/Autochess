@@ -18,6 +18,8 @@ func start():
 	Main.music_box.play_music(Music.Kind.NONE)
 	# Show the game over screen.
 	Main.menu_manager.add_active_menu(game.game_over_menu)
+	# Add button signals.
+	game.game_over_menu.retry_button.pressed.connect(_on_retry_pressed)
 
 
 # Runs repeatedly while the player is in this stage.
@@ -28,5 +30,12 @@ func during(_delta: float):
 
 # Runs once when the stage ends.
 func end():
+	# Remove button signals.
+	game.game_over_menu.retry_button.pressed.disconnect(_on_retry_pressed)
 	# Hide the game over menu.
 	Main.menu_manager.remove_active_menu(game.game_over_menu)
+
+
+# Called when the retry button is pressed.
+func _on_retry_pressed():
+	game.next_stage = PlanningStage.new(game)
