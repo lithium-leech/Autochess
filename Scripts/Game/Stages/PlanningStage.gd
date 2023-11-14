@@ -33,8 +33,10 @@ func start():
 	Highlighter.new(game.game_board, highlight_node).add_highlights()
 	Highlighter.new(game.side_board, highlight_node).add_highlights()
 	# Activate buttons.
-	game.in_game_menu.concede_button.pressed.connect(start_concede)
 	game.in_game_menu.fight_button.pressed.connect(start_fight)
+	game.in_game_menu.concede_button.pressed.connect(start_concede)
+	game.in_game_menu.fight_button.disabled = false
+	game.in_game_menu.concede_button.disabled = false
 	# TEMPORARY: Add starting pieces.
 	var player_space: Space = game.game_board.get_space(Vector2i(6, 6))
 	game.game_board.add_piece(Piece.Kind.PAWN, true, player_space)
@@ -104,16 +106,24 @@ func during(_delta: float):
 # Runs once when the stage ends.
 func end():
 	# Deactivate buttons.
-	if (game.in_game_menu.concede_button.pressed.is_connected(start_concede)):
-		game.in_game_menu.concede_button.pressed.disconnect(start_concede)
 	if (game.in_game_menu.fight_button.pressed.is_connected(start_fight)):
 		game.in_game_menu.fight_button.pressed.disconnect(start_fight)
-	game.in_game_menu.concede_button.disabled = true
+	game.in_game_menu.concede_button.pressed.disconnect(start_concede)
 	game.in_game_menu.fight_button.disabled = true
-	cancel_concede()
+	game.in_game_menu.concede_button.disabled = true
+	# Remove the concede menu.
+	end_concede()
 	# Remove highlights.
 	highlight_node.queue_free()
 	# Save the player's placement set up.
+	pass
+
+
+# Sets up the player's pieces on the game board and side board.
+func set_up_player():
+	# Place the player's pieces on the game board.
+	# Place the player's pieces on the side board.
+	# Place the player's objects on the side board.
 	pass
 
 
@@ -128,22 +138,23 @@ func start_fight():
 
 # Displays the concede menu to the player.
 func start_concede():
-	pass
+	Main.menu_manager.add_active_menu(game.concede_menu)
+	if (not game.concede_menu.confirm_button.pressed.is_connected(confirm_concede)):
+		game.concede_menu.confirm_button.pressed.connect(confirm_concede)
+	if (not game.concede_menu.cancel_button.pressed.is_connected(end_concede)):
+		game.concede_menu.cancel_button.pressed.connect(end_concede)
 
 
-# The player concedes and the fight is lost.
+# The player concedes and the game is lost.
 func confirm_concede():
-	pass
+	game.next_stage = DefeatStage.new(game)
+	end_concede()
 
 
-# Removes the concede menu and resets concede logic.
-func cancel_concede():
-	pass
-
-
-# Sets up the player's pieces on the game board and side board.
-func set_up_player():
-	# Place the player's pieces on the game board.
-	# Place the player's pieces on the side board.
-	# Place the player's objects on the side board.
-	pass
+# Removes the concede menu.
+func end_concede():
+	Main.menu_manager.remove_active_menu(game.concede_menu)
+	if (game.concede_menu.confirm_button.pressed.is_connected(confirm_concede)):
+		game.concede_menu.confirm_button.pressed.disconnect(confirm_concede)
+	if (game.concede_menu.cancel_button.pressed.is_connected(end_concede)):
+		game.concede_menu.cancel_button.pressed.disconnect(end_concede)

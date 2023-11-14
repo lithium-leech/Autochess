@@ -15,7 +15,7 @@ func take_turn():
 	var moves: Array = []
 	var captures: Array = []
 	var move_space: Space = get_move_space()
-	if (move_space != null):
+	if (move_space != null and move_space.is_enterable(self)):
 		var move_path: Array[Vector2i] = _path.duplicate()
 		move_path.append(move_space.coordinates)
 		moves.append(move_path)

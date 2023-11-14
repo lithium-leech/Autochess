@@ -40,6 +40,10 @@ func start():
 	time_waited = 0.0
 	is_player_turn = Main.game_state.is_player_white
 	# Activate buttons.
+	game.in_game_menu.concede_button.pressed.connect(start_concede)
+	game.in_game_menu.concede_button.disabled = false
+	# Remove the concede menu.
+	end_concede()
 
 
 # Runs repeatedly while the player is in this stage.
@@ -96,7 +100,10 @@ func end():
 	game.game_board.clear()
 	game.side_board.clear()
 	# Deactivate buttons.
-	cancel_concede()
+	game.in_game_menu.concede_button.pressed.disconnect(start_concede)
+	game.in_game_menu.concede_button.disabled = true
+	# Remove the concede menu.
+	end_concede()
 
 
 # Runs the battle operations for one set of pieces.
@@ -109,14 +116,26 @@ func run_round(pieces: Array[Piece]):
 
 # Displays the concede menu to the player.
 func start_concede():
-	pass
+	Main.menu_manager.add_active_menu(game.concede_menu)
+	if (not game.concede_menu.confirm_button.pressed.is_connected(confirm_concede)):
+		game.concede_menu.confirm_button.pressed.connect(confirm_concede)
+	if (not game.concede_menu.cancel_button.pressed.is_connected(end_concede)):
+		game.concede_menu.cancel_button.pressed.connect(end_concede)
 
 
-# The player concedes and the fight is lost.
+# The player concedes and the game is lost.
 func confirm_concede():
-	pass
+	game.next_stage = DefeatStage.new(game)
+	end_concede()
 
 
-# Removes the concede menu and resets concede logic.
-func cancel_concede():
-	pass
+# Removes the concede menu.
+func end_concede():
+	Main.menu_manager.remove_active_menu(game.concede_menu)
+	if (game.concede_menu.confirm_button.pressed.is_connected(confirm_concede)):
+		game.concede_menu.confirm_button.pressed.disconnect(confirm_concede)
+	if (game.concede_menu.cancel_button.pressed.is_connected(end_concede)):
+		game.concede_menu.cancel_button.pressed.disconnect(end_concede)
+	rounds_to_concede = 40;
+	rounds_static = 0;
+	is_concede_shown = false;

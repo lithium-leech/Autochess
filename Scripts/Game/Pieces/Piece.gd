@@ -351,6 +351,7 @@ func start_turn(_path: Array[Vector2i]):
 	path = _path
 	var destination: Space = space.board.get_space(path[path.size() - 1])
 	if (destination != null and destination != space):
+		Main.game_state.is_active_round = true
 		z_index = GameState.ZIndex.DYNAMIC
 		is_moving = true
 		lerp_i = 0.0
