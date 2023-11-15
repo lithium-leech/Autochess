@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://tr746w375w6i"
+uid="uid://uamv2q3yofdd"
 path="res://.godot/imported/BattleMusic.ogg-bc2378bb6aa0171dad7156e58196e4cd.oggvorbisstr"
 
 [deps]
@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/BattleMusic.ogg-bc2378bb6aa0171dad7156e58196e
 
 [params]
 
-loop=true
-loop_offset=0.0
-bpm=0.0
+loop=false
+loop_offset=0
+bpm=0
 beat_count=0
 bar_beats=4

@@ -4,12 +4,13 @@ class_name GameState
 
 # An enumeration containing each Z index.
 enum ZIndex {
-	DEFAULT,
-	TERRAIN,
-	PIECE,
-	EQUIPMENT,
-	HIGHLIGHT,
-	DYNAMIC,
+	DEFAULT = 0,
+	TERRAIN = 1,
+	PIECE = 2,
+	EQUIPMENT = 3,
+	HIGHLIGHT = 4,
+	DYNAMIC = 5,
+	UPGRADE = 11
 }
 
 

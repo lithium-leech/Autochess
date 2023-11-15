@@ -1,33 +1,31 @@
-[gd_scene load_steps=40 format=3 uid="uid://c0bxbhtgvobvb"]
+[gd_scene load_steps=38 format=3 uid="uid://c0bxbhtgvobvb"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/FrontMenu.gd" id="1_qtiig"]
-[ext_resource type="Texture2D" uid="uid://b4i5b77wm83is" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="2_dqdh3"]
+[ext_resource type="Texture2D" uid="uid://c0v1uu56orb7q" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="2_dqdh3"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_w7jqx"]
-[ext_resource type="Texture2D" uid="uid://dn3p25capqptv" path="res://Sprites/Buttons/Button1x6/Button1x6Pressed.png" id="3_r2rra"]
-[ext_resource type="Texture2D" uid="uid://lkni8undshg7" path="res://Sprites/Buttons/Button1x6/Button1x6Highlighted.png" id="4_o60lj"]
-[ext_resource type="Texture2D" uid="uid://54vtq1o8ufnb" path="res://Sprites/Buttons/Button1x6/Button1x6Disabled.png" id="5_uy8jr"]
-[ext_resource type="Texture2D" uid="uid://b5e5dqcirqcfn" path="res://Sprites/GameIcons/Play.png" id="6_s3pp7"]
+[ext_resource type="Texture2D" uid="uid://cq06moghj4ufu" path="res://Sprites/Buttons/Button1x6/Button1x6Pressed.png" id="3_r2rra"]
+[ext_resource type="Texture2D" uid="uid://bd0ihfwea32xj" path="res://Sprites/Buttons/Button1x6/Button1x6Highlighted.png" id="4_o60lj"]
+[ext_resource type="Texture2D" uid="uid://cj77yxcyjetpg" path="res://Sprites/Buttons/Button1x6/Button1x6Disabled.png" id="5_uy8jr"]
+[ext_resource type="Texture2D" uid="uid://bplyjefijk5hg" path="res://Sprites/GameIcons/Play.png" id="6_s3pp7"]
 [ext_resource type="Script" path="res://Scripts/Localization/TextureFlipper.gd" id="7_iswyn"]
-[ext_resource type="Texture2D" uid="uid://cujhn7fivn23d" path="res://Sprites/GameIcons/Settings.png" id="8_gn6tb"]
-[ext_resource type="Texture2D" uid="uid://cgx810nc2tbxo" path="res://Sprites/GameIcons/Cross.png" id="9_vb3w7"]
-[ext_resource type="Texture2D" uid="uid://do2ava0aymg5k" path="res://Sprites/Panels/ScreenCover.png" id="10_pe2ej"]
+[ext_resource type="Texture2D" uid="uid://bfkve8kgl0h08" path="res://Sprites/GameIcons/Settings.png" id="8_gn6tb"]
+[ext_resource type="Texture2D" uid="uid://bceqxsrwbhqio" path="res://Sprites/GameIcons/Cross.png" id="9_vb3w7"]
+[ext_resource type="Texture2D" uid="uid://u3p8800rnfw0" path="res://Sprites/Panels/ScreenCover.png" id="10_pe2ej"]
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenu.gd" id="11_hbyl3"]
-[ext_resource type="Texture2D" uid="uid://cmsswpiqcaa1g" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDefault.png" id="12_wbifo"]
-[ext_resource type="Texture2D" uid="uid://bisn8m4nephbn" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftPressed.png" id="13_kkh62"]
-[ext_resource type="Texture2D" uid="uid://cexb2yasfdqb7" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftHighlighted.png" id="14_82g1t"]
-[ext_resource type="Texture2D" uid="uid://cumm05rdsb4jb" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDisabled.png" id="15_3yfbi"]
+[ext_resource type="Texture2D" uid="uid://botxnc31d51a0" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDefault.png" id="12_wbifo"]
+[ext_resource type="Texture2D" uid="uid://c65fwbx3b3x06" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftPressed.png" id="13_kkh62"]
+[ext_resource type="Texture2D" uid="uid://b33ufkdin0nmt" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftHighlighted.png" id="14_82g1t"]
+[ext_resource type="Texture2D" uid="uid://bjw6q6v04tw8m" path="res://Sprites/Buttons/ButtonArrowLeft/ButtonArrowLeftDisabled.png" id="15_3yfbi"]
 [ext_resource type="Script" path="res://Scripts/Localization/ButtonFlipper.gd" id="16_ghl0t"]
-[ext_resource type="Texture2D" uid="uid://i5hj7x4dt3a0" path="res://Sprites/Buttons/Button1x1/Button1x1Disabled.png" id="17_t8im1"]
-[ext_resource type="Texture2D" uid="uid://crhjbfcnb3lj0" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDefault.png" id="18_ig36a"]
-[ext_resource type="Texture2D" uid="uid://6f57gtwgxef4" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightPressed.png" id="19_1rg8y"]
-[ext_resource type="Texture2D" uid="uid://dh27143dktngr" path="res://Sprites/Panels/BlackSquareTrue.png" id="19_v4vn3"]
-[ext_resource type="Texture2D" uid="uid://bowifvwujxjvq" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightHighlighted.png" id="20_2yatp"]
-[ext_resource type="Texture2D" uid="uid://uk1argu2bry" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDisabled.png" id="21_p1mr6"]
-[ext_resource type="Texture2D" uid="uid://c1l3356rx4yh2" path="res://Sprites/Buttons/Button1x7/Button1x7Default.png" id="22_oby7b"]
-[ext_resource type="Texture2D" uid="uid://crjpvcake34pd" path="res://Sprites/Buttons/Button1x7/Button1x7Pressed.png" id="23_1oqg4"]
-[ext_resource type="Texture2D" uid="uid://bjngfnlsso725" path="res://Sprites/Buttons/Button1x7/Button1x7Highlighted.png" id="24_fv0ek"]
-[ext_resource type="Texture2D" uid="uid://dj4a4ymsl7kuf" path="res://Sprites/Panels/WhiteSquareTrue.png" id="24_nlm0l"]
-[ext_resource type="Texture2D" uid="uid://pr5x0wytcl84" path="res://Sprites/Buttons/Button1x7/Button1x7Disabled.png" id="25_ogjf2"]
+[ext_resource type="Texture2D" uid="uid://c2dcicixwcl2m" path="res://Sprites/Buttons/Button1x1/Button1x1Disabled.png" id="17_t8im1"]
+[ext_resource type="Texture2D" uid="uid://b24co5pt6tfir" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDefault.png" id="18_ig36a"]
+[ext_resource type="Texture2D" uid="uid://vcjm0o14c243" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightPressed.png" id="19_1rg8y"]
+[ext_resource type="Texture2D" uid="uid://bewdsuibdik33" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightHighlighted.png" id="20_2yatp"]
+[ext_resource type="Texture2D" uid="uid://cswbggwvrtbad" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDisabled.png" id="21_p1mr6"]
+[ext_resource type="Texture2D" uid="uid://cnduddhpfktfp" path="res://Sprites/Buttons/Button1x7/Button1x7Default.png" id="22_oby7b"]
+[ext_resource type="Texture2D" uid="uid://bv187qaki5yav" path="res://Sprites/Buttons/Button1x7/Button1x7Pressed.png" id="23_1oqg4"]
+[ext_resource type="Texture2D" uid="uid://dqchqpyq74t1v" path="res://Sprites/Buttons/Button1x7/Button1x7Highlighted.png" id="24_fv0ek"]
+[ext_resource type="Texture2D" uid="uid://brb5c0rfrphsj" path="res://Sprites/Buttons/Button1x7/Button1x7Disabled.png" id="25_ogjf2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46ms0"]
 font_size = 27
@@ -276,7 +274,6 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("19_v4vn3")
 
 [node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Board"]
 layout_mode = 0
@@ -324,7 +321,6 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("24_nlm0l")
 
 [node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Set"]
 layout_mode = 0
