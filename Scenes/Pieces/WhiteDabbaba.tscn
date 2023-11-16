@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpkbln8yakuao"]
 
-[ext_resource type="Texture2D" uid="uid://lhmivkn1624x" path="res://Sprites/Pieces/WhiteDabbaba.png" id="1_j6mmt"]
+[ext_resource type="Texture2D" uid="uid://ondyrpv553q5" path="res://Sprites/Pieces/WhiteDabbaba.png" id="1_j6mmt"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Dabbaba.gd" id="2_vp011"]
 
 [node name="WhiteDabbaba" type="Sprite2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0jiis77xrh3"]
 
-[ext_resource type="Texture2D" uid="uid://cajiniij7gnmv" path="res://Sprites/Boards/Hourglass.png" id="1_tvna6"]
+[ext_resource type="Texture2D" uid="uid://bjt8tw2ecx6ql" path="res://Sprites/Boards/Hourglass.png" id="1_tvna6"]
 
 [node name="Hourglass" type="Sprite2D"]
 texture = ExtResource("1_tvna6")

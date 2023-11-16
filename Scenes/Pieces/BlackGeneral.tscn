@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvhonv7rssoxh"]
 
-[ext_resource type="Texture2D" uid="uid://dq36t45sr7e4e" path="res://Sprites/Pieces/BlackGeneral.png" id="1_jrhqw"]
+[ext_resource type="Texture2D" uid="uid://crs6pum08abjf" path="res://Sprites/Pieces/BlackGeneral.png" id="1_jrhqw"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/General.gd" id="2_j2jr3"]
 
 [node name="BlackGeneral" type="Sprite2D"]

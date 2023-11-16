@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyse45y73wmi1"]
 
-[ext_resource type="Texture2D" uid="uid://dh5reb6t7misj" path="res://Sprites/Pieces/WhiteTokin.png" id="1_w4ex5"]
+[ext_resource type="Texture2D" uid="uid://cfwqgi6ky65uh" path="res://Sprites/Pieces/WhiteTokin.png" id="1_w4ex5"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Tokin.gd" id="2_ka1w8"]
 
 [node name="WhiteTokin" type="Sprite2D"]

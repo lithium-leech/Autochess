@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d33lva5mpyqie"]
 
-[ext_resource type="Texture2D" uid="uid://dbc40in60mbf8" path="res://Sprites/Pieces/BlackFerz.png" id="1_ar1wx"]
+[ext_resource type="Texture2D" uid="uid://7uosppp77jwg" path="res://Sprites/Pieces/BlackFerz.png" id="1_ar1wx"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Ferz.gd" id="2_evsuc"]
 
 [node name="BlackFerz" type="Sprite2D"]

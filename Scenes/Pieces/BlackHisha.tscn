@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dblcotw5mcqep"]
 
-[ext_resource type="Texture2D" uid="uid://4sf5gdjbpo2h" path="res://Sprites/Pieces/BlackHisha.png" id="1_xyk2i"]
+[ext_resource type="Texture2D" uid="uid://dpvvy5rm51mwc" path="res://Sprites/Pieces/BlackHisha.png" id="1_xyk2i"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Hisha.gd" id="2_6g3dq"]
 
 [node name="BlackHisha" type="Sprite2D"]

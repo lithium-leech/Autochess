@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5ulnns40o6tu"]
 
-[ext_resource type="Texture2D" uid="uid://cytpirvlnqlj" path="res://Sprites/Pieces/BlackElephant.png" id="1_lu6u4"]
+[ext_resource type="Texture2D" uid="uid://ct8byitpyrwnf" path="res://Sprites/Pieces/BlackElephant.png" id="1_lu6u4"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Elephant.gd" id="2_jckdm"]
 
 [node name="BlackElephant" type="Sprite2D"]

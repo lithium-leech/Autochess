@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rx1gli6nctcd"]
 
-[ext_resource type="Texture2D" uid="uid://bmyxw1wbswa4x" path="res://Sprites/Pieces/BlackKing.png" id="1_7vadm"]
+[ext_resource type="Texture2D" uid="uid://egqw0ggo7fis" path="res://Sprites/Pieces/BlackKing.png" id="1_7vadm"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/King.gd" id="2_8ucnk"]
 
 [node name="BlackKing" type="Sprite2D"]

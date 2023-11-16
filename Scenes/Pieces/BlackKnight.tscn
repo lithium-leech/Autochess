@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://rle1mq7l7jkh"]
 
-[ext_resource type="Texture2D" uid="uid://c8wxly1ropkkh" path="res://Sprites/Pieces/BlackKnight.png" id="1_dq3qt"]
+[ext_resource type="Texture2D" uid="uid://db5f6g0jxbabn" path="res://Sprites/Pieces/BlackKnight.png" id="1_dq3qt"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Knight.gd" id="2_dr7v0"]
 
 [node name="BlackKnight" type="Sprite2D"]

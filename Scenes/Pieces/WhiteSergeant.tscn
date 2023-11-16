@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://yda8u8g2hty"]
 
-[ext_resource type="Texture2D" uid="uid://bx5dyyewr54jf" path="res://Sprites/Pieces/WhiteSergeant.png" id="1_ll8g1"]
+[ext_resource type="Texture2D" uid="uid://dmpyh6mjhlbqs" path="res://Sprites/Pieces/WhiteSergeant.png" id="1_ll8g1"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Sergeant.gd" id="2_prc25"]
 
 [node name="WhiteSergeant" type="Sprite2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwfofd6aj7xdv"]
 
-[ext_resource type="Texture2D" uid="uid://b4a2e45j2s31o" path="res://Sprites/Pieces/WhiteRyuma.png" id="1_sx1ha"]
+[ext_resource type="Texture2D" uid="uid://ccu6jtxsmjvbg" path="res://Sprites/Pieces/WhiteRyuma.png" id="1_sx1ha"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Ryuma.gd" id="2_xs1kb"]
 
 [node name="WhiteRyuma" type="Sprite2D"]

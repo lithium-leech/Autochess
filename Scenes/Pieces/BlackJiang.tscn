@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dem4wwdeehnuk"]
 
-[ext_resource type="Texture2D" uid="uid://cojj23nds1vi7" path="res://Sprites/Pieces/BlackJiang.png" id="1_36x5u"]
+[ext_resource type="Texture2D" uid="uid://dxg1fitd1f1i6" path="res://Sprites/Pieces/BlackJiang.png" id="1_36x5u"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Jiang.gd" id="2_mkq67"]
 
 [node name="BlackJiang" type="Sprite2D"]

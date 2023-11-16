@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dlj24t1yftrwm"]
 
-[ext_resource type="Texture2D" uid="uid://bqiyhl3fsorx7" path="res://Sprites/Highlights/RedSideR.png" id="1_i5q2o"]
+[ext_resource type="Texture2D" uid="uid://b4tq4fr8dhbts" path="res://Sprites/Highlights/RedSideR.png" id="1_i5q2o"]
 
 [node name="RedSideR" type="Sprite2D"]
 texture = ExtResource("1_i5q2o")

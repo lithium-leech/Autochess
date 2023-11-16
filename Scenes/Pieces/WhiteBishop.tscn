@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0tcxnnrwfjqy"]
 
-[ext_resource type="Texture2D" uid="uid://bcpjduet26ni3" path="res://Sprites/Pieces/WhiteBishop.png" id="1_167d0"]
+[ext_resource type="Texture2D" uid="uid://fpsgbie54ios" path="res://Sprites/Pieces/WhiteBishop.png" id="1_167d0"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Bishop.gd" id="2_3leyy"]
 
 [node name="WhiteBishop" type="Sprite2D"]

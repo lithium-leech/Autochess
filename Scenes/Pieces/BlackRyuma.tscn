@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://8dmfmps8ikxu"]
 
-[ext_resource type="Texture2D" uid="uid://behg6vp6klbwe" path="res://Sprites/Pieces/BlackRyuma.png" id="1_gle75"]
+[ext_resource type="Texture2D" uid="uid://q615uw3jlxp5" path="res://Sprites/Pieces/BlackRyuma.png" id="1_gle75"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Ryuma.gd" id="2_imd2o"]
 
 [node name="BlackRyuma" type="Sprite2D"]

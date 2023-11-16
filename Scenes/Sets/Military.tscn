@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://pkmapwebwcn0"]
 
-[ext_resource type="Texture2D" uid="uid://cgwg81hk45psk" path="res://Sprites/Sets/Military.png" id="1_r3wth"]
+[ext_resource type="Texture2D" uid="uid://88qbdmyiom0o" path="res://Sprites/Sets/Military.png" id="1_r3wth"]
 
 [node name="Military" type="Sprite2D"]
 texture = ExtResource("1_r3wth")

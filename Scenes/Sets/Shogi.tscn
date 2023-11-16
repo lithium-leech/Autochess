@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b3g42rsdkhbh7"]
 
-[ext_resource type="Texture2D" uid="uid://dr0c0y7uh8kj5" path="res://Sprites/Sets/Shogi.png" id="1_4v7rb"]
+[ext_resource type="Texture2D" uid="uid://cq5dyiiauskwp" path="res://Sprites/Sets/Shogi.png" id="1_4v7rb"]
 
 [node name="Shogi" type="Sprite2D"]
 texture = ExtResource("1_4v7rb")

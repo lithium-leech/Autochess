@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://y3r36lalu7bf"]
 
-[ext_resource type="Texture2D" uid="uid://drn45q0mpyoo6" path="res://Sprites/Pieces/BlackMa.png" id="1_7deiq"]
+[ext_resource type="Texture2D" uid="uid://bur3aibkank7q" path="res://Sprites/Pieces/BlackMa.png" id="1_7deiq"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Ma.gd" id="2_1aihi"]
 
 [node name="BlackMa" type="Sprite2D"]

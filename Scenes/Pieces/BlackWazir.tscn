@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://wtbdgmu382by"]
 
-[ext_resource type="Texture2D" uid="uid://d8fh736gmnks" path="res://Sprites/Pieces/BlackWazir.png" id="1_6f63x"]
+[ext_resource type="Texture2D" uid="uid://in5cpqdt5f4m" path="res://Sprites/Pieces/BlackWazir.png" id="1_6f63x"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Wazir.gd" id="2_rruyn"]
 
 [node name="BlackWazir" type="Sprite2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://0d0t8387ldsf"]
 
-[ext_resource type="Texture2D" uid="uid://bwt2qqswd8y05" path="res://Sprites/Pieces/BlackNarigin.png" id="1_48ino"]
+[ext_resource type="Texture2D" uid="uid://b2evrgyhft0os" path="res://Sprites/Pieces/BlackNarigin.png" id="1_48ino"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Narigin.gd" id="2_1emu4"]
 
 [node name="BlackNarigin" type="Sprite2D"]

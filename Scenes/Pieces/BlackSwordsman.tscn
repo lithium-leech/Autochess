@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://kwcw0r5jvs4y"]
 
-[ext_resource type="Texture2D" uid="uid://kibcgwbkx01a" path="res://Sprites/Pieces/BlackSwordsman.png" id="1_v6wkf"]
+[ext_resource type="Texture2D" uid="uid://cqlx5qt4wt5wu" path="res://Sprites/Pieces/BlackSwordsman.png" id="1_v6wkf"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Swordsman.gd" id="2_5mj66"]
 
 [node name="BlackSwordsman" type="Sprite2D"]

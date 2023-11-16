@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://spv32qjuhxh6"]
 
-[ext_resource type="Texture2D" uid="uid://btlhje6fg1x8h" path="res://Sprites/Pieces/WhiteRyuo.png" id="1_fd0tu"]
+[ext_resource type="Texture2D" uid="uid://dn5nket15272i" path="res://Sprites/Pieces/WhiteRyuo.png" id="1_fd0tu"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Ryuo.gd" id="2_1to2k"]
 
 [node name="WhiteRyuo" type="Sprite2D"]

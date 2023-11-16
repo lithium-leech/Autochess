@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://clpuw1mhwsa14"]
 
-[ext_resource type="Texture2D" uid="uid://d2v56r8kxtqmw" path="res://Sprites/Pieces/BlackNarikyo.png" id="1_4vw1e"]
+[ext_resource type="Texture2D" uid="uid://cdtct36t4agiy" path="res://Sprites/Pieces/BlackNarikyo.png" id="1_4vw1e"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Narikyo.gd" id="2_wy0w4"]
 
 [node name="BlackNarikyo" type="Sprite2D"]

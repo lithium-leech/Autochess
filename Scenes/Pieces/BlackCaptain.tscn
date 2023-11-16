@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfb18n5dufmme"]
 
-[ext_resource type="Texture2D" uid="uid://cxfkdew4tvj5v" path="res://Sprites/Pieces/BlackCaptain.png" id="1_ivhrm"]
+[ext_resource type="Texture2D" uid="uid://dqyf4hphublg4" path="res://Sprites/Pieces/BlackCaptain.png" id="1_ivhrm"]
 [ext_resource type="Script" path="res://Scripts/Game/Pieces/Captain.gd" id="2_flcuy"]
 
 [node name="BlackCaptain" type="Sprite2D"]
