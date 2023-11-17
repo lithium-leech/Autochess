@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://beg1k12wps3aq"]
-
-[ext_resource type="Texture2D" uid="uid://dni1wpc4sytck" path="res://Sprites/Tiles/SideRT.png" id="1_psyqd"]
-
-[node name="SideRT" type="Sprite2D"]
-texture = ExtResource("1_psyqd")

@@ -11,21 +11,20 @@ enum Kind {
 	SMALL
 }
 
-# A collection of prefabricated game board icons.
-static var prefabs: Dictionary = {
-	Kind.CLASSIC: "res://Scenes/Boards/Classic.tscn",
-	Kind.HOURGLASS: "res://Scenes/Boards/Hourglass.tscn",
-	Kind.ZIGZAG: "res://Scenes/Boards/ZigZag.tscn",
-	Kind.CENTERCROSS: "res://Scenes/Boards/CenterCross.tscn",
-	Kind.SMALL: "res://Scenes/Boards/Small.tscn"
+# A collection of board icons.
+static var images: Dictionary = {
+	Kind.CLASSIC: "res://Sprites/Boards/Classic.png",
+	Kind.HOURGLASS: "res://Sprites/Boards/Hourglass.png",
+	Kind.ZIGZAG: "res://Sprites/Boards/ZigZag.png",
+	Kind.CENTERCROSS: "res://Sprites/Boards/CenterCross.png",
+	Kind.SMALL: "res://Sprites/Boards/Small.png"
 }
 
-# Creates a new icon for a requested game board.
-# 	kind: The kind of game board to create an icon for.
+# Gets an icon for the requested game board.
+# 	kind: The kind of game board to get an icon for.
 # 	return: An icon.
-static func create_board_icon(kind: Kind) -> Sprite2D:
-	var scene: PackedScene = load(prefabs[kind])
-	return scene.instantiate() as Sprite2D
+static func get_icon(kind: Kind) -> CompressedTexture2D:
+	return load(images[kind])
 
 
 # The Game that this board exists in.

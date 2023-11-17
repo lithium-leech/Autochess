@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpa1vgmjoqfyt"]
-
-[ext_resource type="Texture2D" uid="uid://crr8ihmc35evp" path="res://Sprites/Highlights/RedInsideCornerBR.png" id="1_ycrh1"]
-
-[node name="RedInsideCornerBR" type="Sprite2D"]
-texture = ExtResource("1_ycrh1")

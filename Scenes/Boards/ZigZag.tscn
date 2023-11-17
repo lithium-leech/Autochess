@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2y7ee75wwksg"]
-
-[ext_resource type="Texture2D" uid="uid://dw5akkws2ksnk" path="res://Sprites/Boards/ZigZag.png" id="1_wmafc"]
-
-[node name="ZigZag" type="Sprite2D"]
-texture = ExtResource("1_wmafc")

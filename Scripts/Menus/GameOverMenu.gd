@@ -21,6 +21,7 @@ func _ready():
 
 # Called when the menu is opened.
 func on_open():
+	# Set the score values.
 	get_label(score_text).text = tr("Text.Score").format({score = Main.game_state.level - 1})
 	get_label(high_score_text).text = tr("Text.Highscore").format({score = Main.game_state.high_score})
 

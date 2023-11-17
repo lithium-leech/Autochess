@@ -404,7 +404,6 @@ offset_top = 16.0
 offset_right = 272.0
 offset_bottom = 192.0
 texture = ExtResource("34_0ds8b")
-script = ExtResource("8_bwmad")
 
 [node name="Selected" type="TextureRect" parent="Choice/Menu/Info"]
 layout_mode = 0
@@ -421,7 +420,6 @@ offset_top = 8.0
 offset_right = 72.0
 offset_bottom = 40.0
 texture = ExtResource("36_7k4d5")
-script = ExtResource("8_bwmad")
 
 [node name="PlayerName" type="Label" parent="Choice/Menu/Info"]
 layout_mode = 0

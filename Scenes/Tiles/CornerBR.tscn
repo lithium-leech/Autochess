@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://beyfa50v40c1x"]
-
-[ext_resource type="Texture2D" uid="uid://cob8ysyu2t0fe" path="res://Sprites/Tiles/CornerBR.png" id="1_t2glm"]
-
-[node name="CornerBR" type="Sprite2D"]
-texture = ExtResource("1_t2glm")

@@ -18,36 +18,36 @@ enum Kind {
 	SIDE_T
 }
 
-# A collection of prefabricated green highlights.
-static var green_prefabs: Dictionary = {
-	Kind.CORNER_BL: "res://Scenes/Highlights/GreenCornerBL.tscn",
-	Kind.CORNER_BR: "res://Scenes/Highlights/GreenCornerBR.tscn",
-	Kind.CORNER_TL: "res://Scenes/Highlights/GreenCornerTL.tscn",
-	Kind.CORNER_TR: "res://Scenes/Highlights/GreenCornerTR.tscn",
-	Kind.INSIDE_CORNER_BL: "res://Scenes/Highlights/GreenInsideCornerBL.tscn",
-	Kind.INSIDE_CORNER_BR: "res://Scenes/Highlights/GreenInsideCornerBR.tscn",
-	Kind.INSIDE_CORNER_TL: "res://Scenes/Highlights/GreenInsideCornerTL.tscn",
-	Kind.INSIDE_CORNER_TR: "res://Scenes/Highlights/GreenInsideCornerTR.tscn",
-	Kind.SIDE_B: "res://Scenes/Highlights/GreenSideB.tscn",
-	Kind.SIDE_L: "res://Scenes/Highlights/GreenSideL.tscn",
-	Kind.SIDE_R: "res://Scenes/Highlights/GreenSideR.tscn",
-	Kind.SIDE_T: "res://Scenes/Highlights/GreenSideT.tscn"
+# A collection of green highlight images.
+static var green_images: Dictionary = {
+	Kind.CORNER_BL: "res://Sprites/Highlights/GreenCornerBL.png",
+	Kind.CORNER_BR: "res://Sprites/Highlights/GreenCornerBR.png",
+	Kind.CORNER_TL: "res://Sprites/Highlights/GreenCornerTL.png",
+	Kind.CORNER_TR: "res://Sprites/Highlights/GreenCornerTR.png",
+	Kind.INSIDE_CORNER_BL: "res://Sprites/Highlights/GreenInsideCornerBL.png",
+	Kind.INSIDE_CORNER_BR: "res://Sprites/Highlights/GreenInsideCornerBR.png",
+	Kind.INSIDE_CORNER_TL: "res://Sprites/Highlights/GreenInsideCornerTL.png",
+	Kind.INSIDE_CORNER_TR: "res://Sprites/Highlights/GreenInsideCornerTR.png",
+	Kind.SIDE_B: "res://Sprites/Highlights/GreenSideB.png",
+	Kind.SIDE_L: "res://Sprites/Highlights/GreenSideL.png",
+	Kind.SIDE_R: "res://Sprites/Highlights/GreenSideR.png",
+	Kind.SIDE_T: "res://Sprites/Highlights/GreenSideT.png"
 }
 
-# A collection of prefabricated red highlights.
-static var red_prefabs: Dictionary = {
-	Kind.CORNER_BL: "res://Scenes/Highlights/RedCornerBL.tscn",
-	Kind.CORNER_BR: "res://Scenes/Highlights/RedCornerBR.tscn",
-	Kind.CORNER_TL: "res://Scenes/Highlights/RedCornerTL.tscn",
-	Kind.CORNER_TR: "res://Scenes/Highlights/RedCornerTR.tscn",
-	Kind.INSIDE_CORNER_BL: "res://Scenes/Highlights/RedInsideCornerBL.tscn",
-	Kind.INSIDE_CORNER_BR: "res://Scenes/Highlights/RedInsideCornerBR.tscn",
-	Kind.INSIDE_CORNER_TL: "res://Scenes/Highlights/RedInsideCornerTL.tscn",
-	Kind.INSIDE_CORNER_TR: "res://Scenes/Highlights/RedInsideCornerTR.tscn",
-	Kind.SIDE_B: "res://Scenes/Highlights/RedSideB.tscn",
-	Kind.SIDE_L: "res://Scenes/Highlights/RedSideL.tscn",
-	Kind.SIDE_R: "res://Scenes/Highlights/RedSideR.tscn",
-	Kind.SIDE_T: "res://Scenes/Highlights/RedSideT.tscn"
+# A collection of red highlight images.
+static var red_images: Dictionary = {
+	Kind.CORNER_BL: "res://Sprites/Highlights/RedCornerBL.png",
+	Kind.CORNER_BR: "res://Sprites/Highlights/RedCornerBR.png",
+	Kind.CORNER_TL: "res://Sprites/Highlights/RedCornerTL.png",
+	Kind.CORNER_TR: "res://Sprites/Highlights/RedCornerTR.png",
+	Kind.INSIDE_CORNER_BL: "res://Sprites/Highlights/RedInsideCornerBL.png",
+	Kind.INSIDE_CORNER_BR: "res://Sprites/Highlights/RedInsideCornerBR.png",
+	Kind.INSIDE_CORNER_TL: "res://Sprites/Highlights/RedInsideCornerTL.png",
+	Kind.INSIDE_CORNER_TR: "res://Sprites/Highlights/RedInsideCornerTR.png",
+	Kind.SIDE_B: "res://Sprites/Highlights/RedSideB.png",
+	Kind.SIDE_L: "res://Sprites/Highlights/RedSideL.png",
+	Kind.SIDE_R: "res://Sprites/Highlights/RedSideR.png",
+	Kind.SIDE_T: "res://Sprites/Highlights/RedSideT.png"
 }
 
 # Creates a requested highlight.
@@ -55,11 +55,10 @@ static var red_prefabs: Dictionary = {
 # 	player: True if the highlight is green, false if red.
 # 	return: A highlight.
 static func create_highlight(kind: Kind, green: bool) -> Sprite2D:
-	var scene: PackedScene
+	var sprite: Sprite2D = Sprite2D.new()
 	if (green):
-		scene = load(green_prefabs[kind])
+		sprite.texture = load(green_images[kind])
 	else:
-		scene = load(red_prefabs[kind])
-	var sprite: Sprite2D = scene.instantiate()
+		sprite.texture = load(red_images[kind])
 	sprite.z_index = GameState.ZIndex.HIGHLIGHT
 	return sprite

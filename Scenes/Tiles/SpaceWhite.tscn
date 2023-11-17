@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bww6h8uuhr5a7"]
-
-[ext_resource type="Texture2D" uid="uid://bcrkadn7ydnft" path="res://Sprites/Tiles/SpaceWhite.png" id="1_6hpym"]
-
-[node name="SpaceWhite" type="Sprite2D"]
-texture = ExtResource("1_6hpym")

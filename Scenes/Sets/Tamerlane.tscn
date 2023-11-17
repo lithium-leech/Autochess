@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cs2i4k4phf4w4"]
-
-[ext_resource type="Texture2D" uid="uid://b8larrty75o1m" path="res://Sprites/Sets/Tamerlane.png" id="1_xch4a"]
-
-[node name="Tamerlane" type="Sprite2D"]
-texture = ExtResource("1_xch4a")

@@ -3,17 +3,23 @@ class_name SettingsMenu extends Menu
 
 
 # The icon representing the current starting board.
-var board_icon: Sprite2D
+var board_icon: TextureRect
 
 # The icon representing the current starting set.
-var set_icon: Sprite2D
+var set_icon: TextureRect
+
+# The label containing the volume value.
+var volume_value: Label
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	board_icon = $StartingMap/Board/Socket/Icon
+	set_icon = $StartingMap/Set/Socket/Icon
 	set_starting_board(Main.game_state.start_board)
 	set_starting_set(Main.game_state.start_set)
-	$Volume/Value.text = "{volume}%".format({ "volume": Main.music_box.volume * 10 })
+	volume_value = $Volume/Value
+	volume_value.text = "{volume}%".format({ "volume": Main.music_box.volume * 10 })
 
 
 # Called when the left board button is pressed.
@@ -88,24 +94,14 @@ func _on_exit_button_pressed():
 # Sets the starting board to the given index.
 # 	index: The index to switch to.
 func set_starting_board(index: int):
-	if (board_icon != null):
-		board_icon.queue_free()
-		board_icon = null
-	board_icon = Board.create_board_icon(index)
-	$StartingMap/Board/Socket.add_child(board_icon)
-	board_icon.position = Vector2i(24, 24)
+	board_icon.texture = Board.get_icon(index)
 	Main.game_state.start_board = index as Board.Kind
 
 
 # Sets the starting set to the given index.
 # 	index: The index to switch to.
 func set_starting_set(index: int):
-	if (set_icon != null):
-		set_icon.queue_free()
-		set_icon = null
-	set_icon = Set.create_set_icon(index)
-	$StartingMap/Set/Socket.add_child(set_icon)
-	set_icon.position = Vector2i(24, 24)
+	set_icon.texture = Set.get_icon(index)
 	Main.game_state.start_set = index as Set.Kind
 
 
@@ -116,7 +112,7 @@ func set_volume(level: int):
 	level = clamp(level, 0, 10)
 	Main.music_box.set_volume(level)
 	# Update the volume text.
-	get_label($Volume/Value).text = "{volume}%".format({ "volume": level * 10 })
+	get_label(volume_value).text = "{volume}%".format({ "volume": level * 10 })
 
 
 # Sets the current locale to the given index.

@@ -10,11 +10,11 @@ enum Kind {
 	BATTLE
 }
 
-# A collection of prefabricated music players.
-static var prefabs: Dictionary = {
-	Kind.MENU: "res://Scenes/Music/Menu.tscn",
-	Kind.PLANNING: "res://Scenes/Music/Planning.tscn",
-	Kind.BATTLE: "res://Scenes/Music/Battle.tscn"
+# A collection of music recordings.
+static var recordings: Dictionary = {
+	Kind.MENU: "res://Audio/Music/MenuMusic.ogg",
+	Kind.PLANNING: "res://Audio/Music/PlanningMusic.ogg",
+	Kind.BATTLE: "res://Audio/Music/BattleMusic.ogg"
 }
 
 # Creates a new music player with the requested music track.
@@ -22,5 +22,6 @@ static var prefabs: Dictionary = {
 # 	return: A music player.
 static func create_music_player(kind: Kind) -> AudioStreamPlayer2D:
 	if (kind == Kind.NONE): return null
-	var scene: PackedScene = load(prefabs[kind])
-	return scene.instantiate() as AudioStreamPlayer2D
+	var player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	player.stream = load(recordings[kind])
+	return player

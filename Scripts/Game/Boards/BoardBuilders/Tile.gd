@@ -28,35 +28,36 @@ enum Kind {
 	SPACE_WHITE
 }
 
-# A collection of prefabricated board tiles.
-static var prefabs: Dictionary = {
-	Kind.CORNER_BL: "res://Scenes/Tiles/CornerBL.tscn",
-	Kind.CORNER_BLP: "res://Scenes/Tiles/CornerBLP.tscn",
-	Kind.CORNER_BR: "res://Scenes/Tiles/CornerBR.tscn",
-	Kind.CORNER_BRP: "res://Scenes/Tiles/CornerBRP.tscn",
-	Kind.CORNER_TL: "res://Scenes/Tiles/CornerTL.tscn",
-	Kind.CORNER_TLP: "res://Scenes/Tiles/CornerTLP.tscn",
-	Kind.CORNER_TR: "res://Scenes/Tiles/CornerTR.tscn",
-	Kind.CORNER_TRP: "res://Scenes/Tiles/CornerTRP.tscn",
-	Kind.SIDE_BL: "res://Scenes/Tiles/SideBL.tscn",
-	Kind.SIDE_BLP: "res://Scenes/Tiles/SideBLP.tscn",
-	Kind.SIDE_BR: "res://Scenes/Tiles/SideBR.tscn",
-	Kind.SIDE_BRP: "res://Scenes/Tiles/SideBRP.tscn",
-	Kind.SIDE_LB: "res://Scenes/Tiles/SideLB.tscn",
-	Kind.SIDE_LT: "res://Scenes/Tiles/SideLT.tscn",
-	Kind.SIDE_RB: "res://Scenes/Tiles/SideRB.tscn",
-	Kind.SIDE_RT: "res://Scenes/Tiles/SideRT.tscn",
-	Kind.SIDE_TL: "res://Scenes/Tiles/SideTL.tscn",
-	Kind.SIDE_TLP: "res://Scenes/Tiles/SideTLP.tscn",
-	Kind.SIDE_TR: "res://Scenes/Tiles/SideTR.tscn",
-	Kind.SIDE_TRP: "res://Scenes/Tiles/SideTRP.tscn",
-	Kind.SPACE_BLACK: "res://Scenes/Tiles/SpaceBlack.tscn",
-	Kind.SPACE_WHITE: "res://Scenes/Tiles/SpaceWhite.tscn"
+# A collection of board tile images.
+static var images: Dictionary = {
+	Kind.CORNER_BL: "res://Sprites/Tiles/CornerBL.png",
+	Kind.CORNER_BLP: "res://Sprites/Tiles/CornerBLP.png",
+	Kind.CORNER_BR: "res://Sprites/Tiles/CornerBR.png",
+	Kind.CORNER_BRP: "res://Sprites/Tiles/CornerBRP.png",
+	Kind.CORNER_TL: "res://Sprites/Tiles/CornerTL.png",
+	Kind.CORNER_TLP: "res://Sprites/Tiles/CornerTLP.png",
+	Kind.CORNER_TR: "res://Sprites/Tiles/CornerTR.png",
+	Kind.CORNER_TRP: "res://Sprites/Tiles/CornerTRP.png",
+	Kind.SIDE_BL: "res://Sprites/Tiles/SideBL.png",
+	Kind.SIDE_BLP: "res://Sprites/Tiles/SideBLP.png",
+	Kind.SIDE_BR: "res://Sprites/Tiles/SideBR.png",
+	Kind.SIDE_BRP: "res://Sprites/Tiles/SideBRP.png",
+	Kind.SIDE_LB: "res://Sprites/Tiles/SideLB.png",
+	Kind.SIDE_LT: "res://Sprites/Tiles/SideLT.png",
+	Kind.SIDE_RB: "res://Sprites/Tiles/SideRB.png",
+	Kind.SIDE_RT: "res://Sprites/Tiles/SideRT.png",
+	Kind.SIDE_TL: "res://Sprites/Tiles/SideTL.png",
+	Kind.SIDE_TLP: "res://Sprites/Tiles/SideTLP.png",
+	Kind.SIDE_TR: "res://Sprites/Tiles/SideTR.png",
+	Kind.SIDE_TRP: "res://Sprites/Tiles/SideTRP.png",
+	Kind.SPACE_BLACK: "res://Sprites/Tiles/SpaceBlack.png",
+	Kind.SPACE_WHITE: "res://Sprites/Tiles/SpaceWhite.png"
 }
 
 # Creates a requested board tile.
 # 	kind: The kind of board tile to create.
 # 	return: A tile.
 static func create_tile(kind: Kind) -> Sprite2D:
-	var scene: PackedScene = load(prefabs[kind])
-	return scene.instantiate() as Sprite2D
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.texture = load(images[kind])
+	return sprite

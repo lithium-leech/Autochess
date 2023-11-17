@@ -7,7 +7,19 @@ class_name Upgrade
 # 	game: The game to show choices in.
 func _base_init(_game: Game):
 	game = _game
-	n_choices = 3
+
+
+# The number of available choices.
+const N_CHOICES = 3
+
+# The game to show choices in.
+var game: Game
+
+# A node containing the sprites that don't change.
+var static_node: Node2D
+
+# A node containing the sprites that do change.
+var dynamic_node: Node2D
 
 
 # Must be implemented by inheriting classes.
@@ -24,8 +36,9 @@ func show_choices():
 
 
 # Must be implemented by inheriting classes.
-# Displays info about the selected upgrade choice.
-func show_info():
+# Displays information about the selected upgrade choice.
+# 	choice: The choice to display information about.
+func show_info(_choice: int):
 	pass
 
 
@@ -36,38 +49,8 @@ func apply_choice(_choice: int):
 	pass
 
 
-# The game to show choices in.
-var game: Game
-
-# The number of available choices.
-var n_choices: int
-
-# A node containing the sprites that don't change.
-var static_node: Node2D
-
-# A node containing the sprites that do change.
-var dynamic_node: Node2D
-
-
-# Creates the display for this set of upgrade choices.
-func create_display():
-	create_panels()
-	show_choices()
-
-
-# Creates the panels displayed behind the various sprites.
-func create_panels():
-	pass
-
-
-# Removes the display for this set of upgrade choices.
-func remove_display():
-	remove_panels_and_choices()
-	remove_info()
-
-
-# Removes the background panels and choice sprites.
-func remove_panels_and_choices():
+# Removes the choice sprites.
+func remove_choices():
 	if (static_node != null):
 		static_node.queue_free()
 
@@ -76,7 +59,7 @@ func remove_panels_and_choices():
 func remove_info():
 	if (dynamic_node != null):
 		dynamic_node.queue_free()
-	pass
+	game.choice_menu.set_info_text("", "", "", "")
 
 
 # Gets the position of a desired choice to display.
@@ -84,15 +67,10 @@ func remove_info():
 # 	player: True if this is the player's half of the choice.
 # 	return: A game world position.
 func get_choice_position(choice: int, player: bool) -> Vector2i:
-	var x: int
-	match choice:
-		0:
-			x = 100
-		1:
-			x = 200
-		2:
-			x = 300
-	var y: int = 100 if player else 200
+	var button: TextureButton = game.choice_menu.choice_buttons[choice]
+	var position: Vector2 = button.global_position
+	var x: int = int(position.x) + 24
+	var y: int = int(position.y) + (56 if player else 24)
 	return Vector2i(x, y)
 
 
@@ -100,6 +78,8 @@ func get_choice_position(choice: int, player: bool) -> Vector2i:
 # 	player: True if this is the player's half of the choice.
 # 	return: A game world position.
 func get_info_position(player: bool) -> Vector2i:
-	var x: int = 100 if player else 200
-	var y: int = 400
+	var button: TextureRect = game.choice_menu.info_button
+	var position: Vector2 = button.global_position
+	var x: int = int(position.x) + (24 if player else 56)
+	var y: int = int(position.y) + 24
 	return Vector2i(x, y)

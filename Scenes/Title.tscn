@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://c0bxbhtgvobvb"]
+[gd_scene load_steps=42 format=3 uid="uid://c0bxbhtgvobvb"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/FrontMenu.gd" id="1_qtiig"]
 [ext_resource type="Texture2D" uid="uid://c0v1uu56orb7q" path="res://Sprites/Buttons/Button1x6/Button1x6Default.png" id="2_dqdh3"]
@@ -22,12 +22,14 @@
 [ext_resource type="Texture2D" uid="uid://vcjm0o14c243" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightPressed.png" id="19_1rg8y"]
 [ext_resource type="Texture2D" uid="uid://3pp02nolbomj" path="res://Sprites/Panels/BlackSquare.png" id="19_vdkao"]
 [ext_resource type="Texture2D" uid="uid://bewdsuibdik33" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightHighlighted.png" id="20_2yatp"]
+[ext_resource type="Texture2D" uid="uid://c8eb6kd7a4ap0" path="res://Sprites/Boards/Classic.png" id="20_ccjab"]
 [ext_resource type="Texture2D" uid="uid://cswbggwvrtbad" path="res://Sprites/Buttons/ButtonArrowRight/ButtonArrowRightDisabled.png" id="21_p1mr6"]
 [ext_resource type="Texture2D" uid="uid://cnduddhpfktfp" path="res://Sprites/Buttons/Button1x7/Button1x7Default.png" id="22_oby7b"]
 [ext_resource type="Texture2D" uid="uid://bv187qaki5yav" path="res://Sprites/Buttons/Button1x7/Button1x7Pressed.png" id="23_1oqg4"]
 [ext_resource type="Texture2D" uid="uid://dqchqpyq74t1v" path="res://Sprites/Buttons/Button1x7/Button1x7Highlighted.png" id="24_fv0ek"]
 [ext_resource type="Texture2D" uid="uid://cp1sfy38p3va4" path="res://Sprites/Panels/WhiteSquare.png" id="24_oa823"]
 [ext_resource type="Texture2D" uid="uid://brb5c0rfrphsj" path="res://Sprites/Buttons/Button1x7/Button1x7Disabled.png" id="25_ogjf2"]
+[ext_resource type="Texture2D" uid="uid://bnfxgnpbtv5cl" path="res://Sprites/Sets/Western.png" id="26_cyp7s"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_46ms0"]
 font_size = 27
@@ -278,6 +280,14 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("19_vdkao")
 
+[node name="Icon" type="TextureRect" parent="Settings/Menu/StartingMap/Board/Socket"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("20_ccjab")
+
 [node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Board"]
 layout_mode = 0
 offset_left = 92.0
@@ -325,6 +335,14 @@ offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("24_oa823")
+
+[node name="Icon" type="TextureRect" parent="Settings/Menu/StartingMap/Set/Socket"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("26_cyp7s")
 
 [node name="Right" type="TextureButton" parent="Settings/Menu/StartingMap/Set"]
 layout_mode = 0
