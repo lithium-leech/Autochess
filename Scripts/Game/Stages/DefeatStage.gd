@@ -22,12 +22,6 @@ func start():
 	game.game_over_menu.retry_button.pressed.connect(_on_retry_pressed)
 
 
-# Runs repeatedly while the player is in this stage.
-# 	delta: The elapsed time since the previous frame.
-func during(_delta: float):
-	pass
-
-
 # Runs once when the stage ends.
 func end():
 	# Remove button signals.

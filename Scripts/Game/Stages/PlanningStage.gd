@@ -112,7 +112,25 @@ func end():
 	# Remove highlights.
 	highlight_node.queue_free()
 	# Save the player's placement set up.
-	pass
+	game.player_placements = []
+	for x in range(game.game_board.width):
+		for y in range(game.game_board.height):
+			var space: Space = game.game_board.get_space(Vector2i(x, y))
+			if (space.terrain != null and space.terrain.is_player):
+				var record: Placement = Placement.record_object(space.terrain, space.coordinates, true)
+				game.player_placements.append(record)
+			if (space.object != null and space.object.is_player):
+				var record: Placement = Placement.record_object(space.object, space.coordinates, true)
+				game.player_placements.append(record)
+	for x in range(game.side_board.width):
+		for y in range(game.side_board.height):
+			var space: Space = game.side_board.get_space(Vector2i(x, y))
+			if (space.terrain != null and space.terrain.is_player):
+				var record: Placement = Placement.record_object(space.terrain, space.coordinates, false)
+				game.player_placements.append(record)
+			if (space.object != null and space.object.is_player):
+				var record: Placement = Placement.record_object(space.object, space.coordinates, false)
+				game.player_placements.append(record)
 
 
 # Starts the fight sequence.
@@ -121,7 +139,6 @@ func start_fight():
 	game.in_game_menu.fight_button.pressed.disconnect(start_fight)
 	# Queue the combat stage.
 	game.next_stage = CombatStage.new(game)
-	pass
 
 
 # Displays the concede menu to the player.

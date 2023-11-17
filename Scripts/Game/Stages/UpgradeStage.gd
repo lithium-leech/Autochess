@@ -13,6 +13,9 @@ var game: Game
 # The upgrade being offered in this stage.
 var upgrade: Upgrade
 
+# The selected choice.
+var selected: int = -1
+
 
 # Runs once when the stage starts.
 func start():
@@ -25,20 +28,26 @@ func start():
 	upgrade.show_choices()
 	game.in_game_menu.get_label_group().visible_text = false
 	Main.menu_manager.add_active_menu(game.choice_menu)
-	# Add button signals.
+	# Add signal connections.
 	for i in range(Upgrade.N_CHOICES):
 		var button: TextureButton = game.choice_menu.choice_buttons[i]
 		button.pressed.connect(func(): select(i))
-
-
-# Runs repeatedly while the player is in this stage.
-# 	delta: The elapsed time since the previous frame.
-func during(_delta: float):
-	pass
+	game.choice_menu.confirm_button.pressed.connect(_on_confirm_pressed)
 
 
 # Runs once when the stage ends.
 func end():
+	# Remove signal connections.
+	for i in range(Upgrade.N_CHOICES):
+		var button: TextureButton = game.choice_menu.choice_buttons[i]
+		for connection in button.pressed.get_connections():
+			connection["signal"].disconnect(connection["callable"])
+	game.choice_menu.confirm_button.pressed.disconnect(_on_confirm_pressed)
+	# Default to the first choice if one was not selected.
+	if (selected < 0):
+		selected = 0
+	# Apply the selected choice.
+	upgrade.apply_choice(selected)
 	# Go to the next level.
 	Main.game_state.level += 1
 	if (Main.game_state.level > Main.game_state.high_score):
@@ -54,6 +63,16 @@ func end():
 func select(choice: int):
 	for i in range(Upgrade.N_CHOICES):
 		var button: TextureButton = game.choice_menu.choice_buttons[i]
-		button.button_pressed = choice == i
+		if (choice == i):
+			button.button_pressed = true
+			selected = i
+		else:
+			button.button_pressed = false
 	game.choice_menu.confirm_button.disabled = false
 	upgrade.show_info(choice)
+
+
+# Called when the confirm button is pressed.
+func _on_confirm_pressed():
+	if (selected > -1):
+		game.next_stage = PlanningStage.new(game)

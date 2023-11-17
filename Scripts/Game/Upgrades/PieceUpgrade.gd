@@ -60,8 +60,14 @@ func show_info(choice: int):
 
 # Applies the given choice to the game.
 # 	choice: The index of the selected choice.
-func apply_choice(_choice: int):
-	pass
+func apply_choice(choice: int):
+	# Add the enemy piece.
+	game.enemy_pieces.append(enemy_pieces[choice])
+	# Add the player piece
+	var space: Space = game.side_board.get_first_empty_space()
+	if (space != null):
+		var record: Placement = Placement.record_new_piece(player_pieces[choice], space.coordinates, false)
+		game.player_placements.append(record)
 
 
 # Creates a new piece displayed at a given position.

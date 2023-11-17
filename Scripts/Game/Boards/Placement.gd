@@ -11,15 +11,14 @@ static func record_object(object: GameObject, coordinates: Vector2i, _is_game: b
 	var record: Placement = Placement.new()
 	# Record the object
 	record.is_player = object.is_player
-	match object:
-		Piece:
-			record.is_piece = true
-			record.piece = object.kind
-			if (object.equipment != null):
-				record.item = object.equipment.kind
-		Item:
-			record.is_piece = false
-			record.item = object.kind
+	if (object is Piece):
+		record.is_piece = true
+		record.piece = object.get_kind()
+		if (object.equipment != null):
+			record.item = object.equipment.kind
+	elif (object is Item):
+		record.is_piece = false
+		record.item = object.kind
 	# Record the space
 	record.is_game = _is_game
 	record.x = coordinates.x
