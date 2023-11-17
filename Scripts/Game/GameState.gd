@@ -10,7 +10,6 @@ enum ZIndex {
 	EQUIPMENT = 3,
 	HIGHLIGHT = 4,
 	DYNAMIC = 5,
-	UPGRADE = 11
 }
 
 

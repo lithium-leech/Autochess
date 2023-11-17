@@ -46,3 +46,9 @@ func _on_speed_pressed():
 		speed_index = 0
 	Main.game_state.turn_pause = speeds[speed_index]
 	speed_icon.texture = speed_sprites[speed_index]
+
+
+# Sets the level text.
+# 	level: The level to set the text to.
+func set_level(level: int):
+	get_label(level_text).text = str(level)

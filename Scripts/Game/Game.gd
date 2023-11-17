@@ -69,7 +69,7 @@ func _ready():
 	Main.game_state.turn_pause = 2.0
 	Main.game_state.is_player_white = false
 	Main.game_state.level = 1
-	in_game_menu.get_label(in_game_menu.level_text).text = str(Main.game_state.level)
+	in_game_menu.set_level(Main.game_state.level)
 	# Create the static boards.
 	side_board = SideBoardBuilder.new(self).build()
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()

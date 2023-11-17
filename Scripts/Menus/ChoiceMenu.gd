@@ -2,17 +2,29 @@
 class_name ChoiceMenu extends Menu
 
 
+# The confirm button.
+var confirm_button: TextureButton
+
 # The choice buttons.
 var choice_buttons: Array[TextureButton]
-
-# The info button.
-var info_button: TextureRect
 
 # The choice backgrounds.
 var choice_backgrounds: Array[TextureRect]
 
 # The info backgrounds.
 var info_backgrounds: Array[TextureRect]
+
+# The icons for the player's half of the choices.
+var player_choices: Array[TextureRect]
+
+# The icons for the enemy's half of the choices.
+var enemy_choices: Array[TextureRect]
+
+# The icon for the player's half of the selected choice.
+var player_info: TextureRect
+
+# The icon for the enemy's half of the selected choice.
+var enemy_info: TextureRect
 
 # The name of the player's half of the selected choice.
 var player_name_text: Label
@@ -29,6 +41,7 @@ var enemy_info_text: Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	confirm_button = $Choice/Confirm
 	choice_buttons = [
 		$Choice/Choice1,
 		$Choice/Choice2,
@@ -40,7 +53,16 @@ func _ready():
 	info_backgrounds = [
 		$Info/Selected/Background,
 		$Info/Background]
-	info_button = $Info/Selected
+	player_choices = [
+		$Choice/Choice1/PlayerIcon,
+		$Choice/Choice2/PlayerIcon,
+		$Choice/Choice3/PlayerIcon]
+	enemy_choices = [
+		$Choice/Choice1/EnemyIcon,
+		$Choice/Choice2/EnemyIcon,
+		$Choice/Choice3/EnemyIcon]
+	player_info = $Info/Selected/PlayerIcon
+	enemy_info = $Info/Selected/EnemyIcon
 	player_name_text = $Info/PlayerName
 	player_info_text = $Info/PlayerInfo
 	enemy_name_text = $Info/EnemyName

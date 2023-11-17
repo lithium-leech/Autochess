@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bongdm2q7t3th"]
+[gd_scene load_steps=62 format=3 uid="uid://bongdm2q7t3th"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Game.gd" id="1_2b1we"]
 [ext_resource type="Script" path="res://Scripts/Menus/LabelGroup.gd" id="2_axujq"]
@@ -37,7 +37,13 @@
 [ext_resource type="Texture2D" uid="uid://bkh6ec6kkinqj" path="res://Sprites/Panels/ChoiceVertical.png" id="27_cxejc"]
 [ext_resource type="Texture2D" uid="uid://bceqxsrwbhqio" path="res://Sprites/GameIcons/Cross.png" id="27_f7xhf"]
 [ext_resource type="Texture2D" uid="uid://iwb0tsffqvcn" path="res://Sprites/GameIcons/Check.png" id="27_n34vl"]
+[ext_resource type="Texture2D" uid="uid://db5f6g0jxbabn" path="res://Sprites/Pieces/BlackKnight.png" id="28_3r5tv"]
 [ext_resource type="Texture2D" uid="uid://dsppxp561ftdl" path="res://Sprites/Panels/InfoCover.png" id="28_aosyd"]
+[ext_resource type="Texture2D" uid="uid://fpsgbie54ios" path="res://Sprites/Pieces/WhiteBishop.png" id="29_7susg"]
+[ext_resource type="Texture2D" uid="uid://bgjcnx7yvlahp" path="res://Sprites/Pieces/BlackQueen.png" id="30_jl62g"]
+[ext_resource type="Texture2D" uid="uid://b1txi1pslgbo5" path="res://Sprites/Pieces/WhiteRook.png" id="31_nox10"]
+[ext_resource type="Texture2D" uid="uid://bwm6u08vuyb3m" path="res://Sprites/Pieces/BlackPawn.png" id="32_81ppx"]
+[ext_resource type="Texture2D" uid="uid://cp21aep56rq1i" path="res://Sprites/Pieces/WhiteKing.png" id="33_jkw6q"]
 [ext_resource type="Texture2D" uid="uid://chfhmjy5kkb0s" path="res://Sprites/Buttons/Button1x2/Button1x2Disabled.png" id="33_wr0x3"]
 [ext_resource type="Texture2D" uid="uid://dc60fy4pt1qcs" path="res://Sprites/Panels/ChoiceInfo.png" id="34_0ds8b"]
 [ext_resource type="Texture2D" uid="uid://cn4yj48r2s6r7" path="res://Sprites/Panels/ChoiceHorizontal.png" id="36_7k4d5"]
@@ -316,6 +322,22 @@ offset_right = 40.0
 offset_bottom = 72.0
 texture = ExtResource("27_cxejc")
 
+[node name="PlayerIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 72.0
+texture = ExtResource("28_3r5tv")
+
+[node name="EnemyIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice1"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("29_7susg")
+
 [node name="Choice2" type="TextureButton" parent="Choice/Menu/Choice"]
 layout_mode = 0
 offset_left = 104.0
@@ -335,6 +357,22 @@ offset_top = 8.0
 offset_right = 40.0
 offset_bottom = 72.0
 texture = ExtResource("27_cxejc")
+
+[node name="PlayerIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 72.0
+texture = ExtResource("30_jl62g")
+
+[node name="EnemyIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice2"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("31_nox10")
 
 [node name="Choice3" type="TextureButton" parent="Choice/Menu/Choice"]
 layout_mode = 0
@@ -356,12 +394,29 @@ offset_right = 40.0
 offset_bottom = 72.0
 texture = ExtResource("27_cxejc")
 
+[node name="PlayerIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 72.0
+texture = ExtResource("32_81ppx")
+
+[node name="EnemyIcon" type="TextureRect" parent="Choice/Menu/Choice/Choice3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("33_jkw6q")
+
 [node name="Confirm" type="TextureButton" parent="Choice/Menu/Choice"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 184.0
 offset_right = 232.0
 offset_bottom = 232.0
+disabled = true
 texture_normal = ExtResource("21_43frc")
 texture_pressed = ExtResource("22_vw7ih")
 texture_hover = ExtResource("23_mg2sn")
@@ -420,6 +475,20 @@ offset_top = 8.0
 offset_right = 72.0
 offset_bottom = 40.0
 texture = ExtResource("36_7k4d5")
+
+[node name="PlayerIcon" type="TextureRect" parent="Choice/Menu/Info/Selected"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyIcon" type="TextureRect" parent="Choice/Menu/Info/Selected"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 8.0
+offset_right = 72.0
+offset_bottom = 40.0
 
 [node name="PlayerName" type="Label" parent="Choice/Menu/Info"]
 layout_mode = 0

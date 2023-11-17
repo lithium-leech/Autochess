@@ -65,7 +65,7 @@ func during(delta: float):
 		game.next_stage = DefeatStage.new(game)
 		return
 	elif (game.game_board.enemy_pieces.size() < 1):
-		game.next_stage = UpgradeStage.new()
+		game.next_stage = UpgradeStage.new(game)
 		return
 	# Start the fight music on the first turn.
 	if (is_first_turn):
