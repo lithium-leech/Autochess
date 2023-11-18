@@ -74,9 +74,9 @@ func during(delta: float):
 	# Move the current player's pieces.
 	var pieces: Array[Piece]
 	if (is_player_turn):
-		pieces = game.game_board.player_pieces
+		pieces = game.game_board.player_pieces.duplicate()
 	else:
-		pieces = game.game_board.enemy_pieces
+		pieces = game.game_board.enemy_pieces.duplicate()
 	Main.game_state.is_active_round = false
 	run_round(pieces)
 	if (Main.game_state.is_active_round):

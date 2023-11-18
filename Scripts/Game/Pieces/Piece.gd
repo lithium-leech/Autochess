@@ -348,31 +348,31 @@ func add_diagonal_paths(start: Array[Vector2i], i: int, steps: int, jump: bool, 
 # This piece starts traversing the given path.
 # 	path: The path to traverse.
 func start_turn(_path: Array[Vector2i]):
+	# Check that the piece is doing something.
 	path = _path
 	var destination: Space = space.board.get_space(path[path.size() - 1])
 	if (destination != null and destination != space):
+		# Start the turn
 		Main.game_state.is_active_round = true
 		z_index = GameState.ZIndex.DYNAMIC
 		is_moving = true
 		lerp_i = 0.0
 		space.exit(self)
 		destination.enter(self)
-	space.board.game.on_move_finish.connect(finish_moving)
+		space.board.game.on_move_finish.connect(finish_moving, CONNECT_ONE_SHOT)
 
 
 # Resolves final actions once the piece is done moving.
 func finish_moving():
-	# Remove the listener for this move
-	space.board.game.on_move_finish.disconnect(finish_moving)
-	# Destroy the captured piece.
-	if (captured != null):
-		captured.destroy()
-		captured = null
-	# Perform promotion.
-	if (promotion != Kind.NONE):
-		var _space = space
-		_space.exit(self)
-		_space.board.add_piece(promotion, is_player, _space)
-		queue_free()
-	# Return to the stationary z index
-	z_index = GameState.ZIndex.PIECE
+		# Destroy the captured piece.
+		if (captured != null):
+			captured.destroy()
+			captured = null
+		# Perform promotion.
+		if (promotion != Kind.NONE):
+			var _space = space
+			_space.exit(self)
+			_space.board.add_piece(promotion, is_player, _space)
+			queue_free()
+		# Return to the stationary z index
+		z_index = GameState.ZIndex.PIECE
