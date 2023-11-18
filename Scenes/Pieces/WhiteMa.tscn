@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0w1ugj3xqwwj"]
-
-[ext_resource type="Texture2D" uid="uid://bpepaemexb2ib" path="res://Sprites/Pieces/WhiteMa.png" id="1_u2g4b"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ma.gd" id="2_qoeno"]
-
-[node name="WhiteMa" type="Sprite2D"]
-texture = ExtResource("1_u2g4b")
-script = ExtResource("2_qoeno")

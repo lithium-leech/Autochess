@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1uac1fa7tpg5"]
-
-[ext_resource type="Texture2D" uid="uid://bpksd78uslmi4" path="res://Sprites/Pieces/BlackTokin.png" id="1_pmp3s"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Tokin.gd" id="2_eh7js"]
-
-[node name="BlackTokin" type="Sprite2D"]
-texture = ExtResource("1_pmp3s")
-script = ExtResource("2_eh7js")

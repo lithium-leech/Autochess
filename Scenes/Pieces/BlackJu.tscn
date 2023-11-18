@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://biacsdfodemka"]
-
-[ext_resource type="Texture2D" uid="uid://c2tngchyrmmkj" path="res://Sprites/Pieces/BlackJu.png" id="1_bhahk"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ju.gd" id="2_biesa"]
-
-[node name="BlackJu" type="Sprite2D"]
-texture = ExtResource("1_bhahk")
-script = ExtResource("2_biesa")

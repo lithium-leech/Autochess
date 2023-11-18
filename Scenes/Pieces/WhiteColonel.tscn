@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d11ddcuc2m5vl"]
-
-[ext_resource type="Texture2D" uid="uid://coyfs4ek1anap" path="res://Sprites/Pieces/WhiteColonel.png" id="1_myj6e"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Colonel.gd" id="2_348wv"]
-
-[node name="WhiteColonel" type="Sprite2D"]
-texture = ExtResource("1_myj6e")
-script = ExtResource("2_348wv")

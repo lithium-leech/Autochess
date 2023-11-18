@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cedthalkvlsw0"]
-
-[ext_resource type="Texture2D" uid="uid://bvk621rdlj0j2" path="res://Sprites/Pieces/BlackCamel.png" id="1_pq4xs"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Camel.gd" id="2_oogtk"]
-
-[node name="BlackCamel" type="Sprite2D"]
-texture = ExtResource("1_pq4xs")
-script = ExtResource("2_oogtk")

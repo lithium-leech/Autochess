@@ -29,13 +29,10 @@ func get_title_text():
 # Displays the offered upgrade choices.
 func show_choices():
 	# Set the sprites for each choice.
+	var player_white: bool = Main.game_state.is_player_white
 	for i in range(N_CHOICES):
-		# Set this choice's player piece.
-		var player_piece: Piece = create_piece(player_pieces[i], true)
-		game.choice_menu.player_choices[i].texture = player_piece.texture
-		# Set this choice's enemy piece.
-		var enemy_piece: Piece = create_piece(enemy_pieces[i], false)
-		game.choice_menu.enemy_choices[i].texture = enemy_piece.texture
+		game.choice_menu.player_choices[i].texture = Piece.get_icon(player_pieces[i], player_white)
+		game.choice_menu.enemy_choices[i].texture = Piece.get_icon(enemy_pieces[i], not player_white)
 
 
 # Displays info about the selected upgrade choice.
@@ -44,10 +41,9 @@ func show_info(choice: int):
 	# Erase previously displayed info.
 	remove_info()
 	# Set the info pieces.
-	var player_piece: Piece = create_piece(player_pieces[choice], true)
-	var enemy_piece: Piece = create_piece(enemy_pieces[choice], false)
-	game.choice_menu.player_info.texture = player_piece.texture
-	game.choice_menu.enemy_info.texture = enemy_piece.texture
+	var player_white: bool = Main.game_state.is_player_white
+	game.choice_menu.player_info.texture = Piece.get_icon(player_pieces[choice], player_white)
+	game.choice_menu.enemy_info.texture = Piece.get_icon(enemy_pieces[choice], not player_white)
 	# Change the text.
 	var p_key: String = Piece.Kind.keys()[player_pieces[choice]].to_pascal_case()
 	var e_key: String = Piece.Kind.keys()[enemy_pieces[choice]].to_pascal_case()
@@ -68,13 +64,3 @@ func apply_choice(choice: int):
 	if (space != null):
 		var record: Placement = Placement.record_new_piece(player_pieces[choice], space.coordinates, false)
 		game.player_placements.append(record)
-
-
-# Creates a new piece displayed at a given position.
-# 	kind: The kind of piece to create.
-# 	player: True if this piece is for the player.
-# 	position: The game world position to display the piece.
-func create_piece(kind: Piece.Kind, player: bool) -> Piece:
-	var white: bool = (Main.game_state.is_player_white and player) or \
-					  (not Main.game_state.is_player_white and not player)
-	return Piece.create_piece(kind, white)

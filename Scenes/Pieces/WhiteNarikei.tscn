@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6h2od4u1xr45"]
-
-[ext_resource type="Texture2D" uid="uid://dyvv1mql66e8h" path="res://Sprites/Pieces/WhiteNarikei.png" id="1_1xm3c"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Narikei.gd" id="2_nsrov"]
-
-[node name="WhiteNarikei" type="Sprite2D"]
-texture = ExtResource("1_1xm3c")
-script = ExtResource("2_nsrov")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b1375278iq0ev"]
-
-[ext_resource type="Texture2D" uid="uid://cscmbljuck7iq" path="res://Sprites/Pieces/WhitePrivate.png" id="1_o4b11"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Private.gd" id="2_j1es4"]
-
-[node name="WhitePrivate" type="Sprite2D"]
-texture = ExtResource("1_o4b11")
-script = ExtResource("2_j1es4")

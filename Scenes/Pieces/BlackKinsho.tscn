@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://benq7ausepycw"]
-
-[ext_resource type="Texture2D" uid="uid://bgo1x583fnmg7" path="res://Sprites/Pieces/BlackKinsho.png" id="1_dg17r"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Kinsho.gd" id="2_p1du4"]
-
-[node name="BlackKinsho" type="Sprite2D"]
-texture = ExtResource("1_dg17r")
-script = ExtResource("2_p1du4")

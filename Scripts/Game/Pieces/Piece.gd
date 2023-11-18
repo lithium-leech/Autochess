@@ -48,109 +48,165 @@ enum Kind {
 	PAO
 }
 
-# A collection of prefabricated white pieces.
-static var white_prefabs: Dictionary = {
-Kind.PAWN: "res://Scenes/Pieces/WhitePawn.tscn",
-	Kind.ROOK: "res://Scenes/Pieces/WhiteRook.tscn",
-	Kind.KNIGHT: "res://Scenes/Pieces/WhiteKnight.tscn",
-	Kind.BISHOP: "res://Scenes/Pieces/WhiteBishop.tscn",
-	Kind.QUEEN: "res://Scenes/Pieces/WhiteQueen.tscn",
-	Kind.KING: "res://Scenes/Pieces/WhiteKing.tscn",
-	Kind.PRIVATE: "res://Scenes/Pieces/WhitePrivate.tscn",
-	Kind.CAPTAIN: "res://Scenes/Pieces/WhiteCaptain.tscn",
-	Kind.SERGEANT: "res://Scenes/Pieces/WhiteSergeant.tscn",
-	Kind.LIEUTENANT: "res://Scenes/Pieces/WhiteLieutenant.tscn",
-	Kind.COLONEL: "res://Scenes/Pieces/WhiteColonel.tscn",
-	Kind.GENERAL: "res://Scenes/Pieces/WhiteGeneral.tscn",
-	Kind.FERZ: "res://Scenes/Pieces/WhiteFerz.tscn",
-	Kind.WAZIR: "res://Scenes/Pieces/WhiteWazir.tscn",
-	Kind.DABBABA: "res://Scenes/Pieces/WhiteDabbaba.tscn",
-	Kind.TALIAH: "res://Scenes/Pieces/WhiteTaliah.tscn",
-	Kind.CAMEL: "res://Scenes/Pieces/WhiteCamel.tscn",
-	Kind.ELEPHANT: "res://Scenes/Pieces/WhiteElephant.tscn",
-	Kind.GIRAFFE: "res://Scenes/Pieces/WhiteGiraffe.tscn",
-	Kind.SWORDSMAN: "res://Scenes/Pieces/WhiteSwordsman.tscn",
-	Kind.FUHYO: "res://Scenes/Pieces/WhiteFuhyo.tscn",
-	Kind.TOKIN: "res://Scenes/Pieces/WhiteTokin.tscn",
-	Kind.HISHA: "res://Scenes/Pieces/WhiteHisha.tscn",
-	Kind.RYUO: "res://Scenes/Pieces/WhiteRyuo.tscn",
-	Kind.KAKUGYO: "res://Scenes/Pieces/WhiteKakugyo.tscn",
-	Kind.RYUMA: "res://Scenes/Pieces/WhiteRyuma.tscn",
-	Kind.KEIMA: "res://Scenes/Pieces/WhiteKeima.tscn",
-	Kind.NARIKEI: "res://Scenes/Pieces/WhiteNarikei.tscn",
-	Kind.OSHO: "res://Scenes/Pieces/WhiteOsho.tscn",
-	Kind.KYOSHA: "res://Scenes/Pieces/WhiteKyosha.tscn",
-	Kind.NARIKYO: "res://Scenes/Pieces/WhiteNarikyo.tscn",
-	Kind.GINSHO: "res://Scenes/Pieces/WhiteGinsho.tscn",
-	Kind.NARIGIN: "res://Scenes/Pieces/WhiteNarigin.tscn",
-	Kind.KINSHO: "res://Scenes/Pieces/WhiteKinsho.tscn",
-	Kind.ZU: "res://Scenes/Pieces/WhiteZu.tscn",
-	Kind.JU: "res://Scenes/Pieces/WhiteJu.tscn",
-	Kind.MA: "res://Scenes/Pieces/WhiteMa.tscn",
-	Kind.XIANG: "res://Scenes/Pieces/WhiteXiang.tscn",
-	Kind.JIANG: "res://Scenes/Pieces/WhiteJiang.tscn",
-	Kind.SHI: "res://Scenes/Pieces/WhiteShi.tscn",
-	Kind.PAO: "res://Scenes/Pieces/WhitePao.tscn"
+
+# A collection of piece scripts.
+static var scripts: Dictionary = {
+	Kind.PAWN: "res://Scripts/Game/Pieces/Pawn.gd",
+	Kind.ROOK: "res://Scripts/Game/Pieces/Rook.gd",
+	Kind.KNIGHT: "res://Scripts/Game/Pieces/Knight.gd",
+	Kind.BISHOP: "res://Scripts/Game/Pieces/Bishop.gd",
+	Kind.QUEEN: "res://Scripts/Game/Pieces/Queen.gd",
+	Kind.KING: "res://Scripts/Game/Pieces/King.gd",
+	Kind.PRIVATE: "res://Scripts/Game/Pieces/Private.gd",
+	Kind.CAPTAIN: "res://Scripts/Game/Pieces/Captain.gd",
+	Kind.SERGEANT: "res://Scripts/Game/Pieces/Sergeant.gd",
+	Kind.LIEUTENANT: "res://Scripts/Game/Pieces/Lieutenant.gd",
+	Kind.COLONEL: "res://Scripts/Game/Pieces/Colonel.gd",
+	Kind.GENERAL: "res://Scripts/Game/Pieces/General.gd",
+	Kind.FERZ: "res://Scripts/Game/Pieces/Ferz.gd",
+	Kind.WAZIR: "res://Scripts/Game/Pieces/Wazir.gd",
+	Kind.DABBABA: "res://Scripts/Game/Pieces/Dabbaba.gd",
+	Kind.TALIAH: "res://Scripts/Game/Pieces/Taliah.gd",
+	Kind.CAMEL: "res://Scripts/Game/Pieces/Camel.gd",
+	Kind.ELEPHANT: "res://Scripts/Game/Pieces/Elephant.gd",
+	Kind.GIRAFFE: "res://Scripts/Game/Pieces/Giraffe.gd",
+	Kind.SWORDSMAN: "res://Scripts/Game/Pieces/Swordsman.gd",
+	Kind.FUHYO: "res://Scripts/Game/Pieces/Fuhyo.gd",
+	Kind.TOKIN: "res://Scripts/Game/Pieces/Tokin.gd",
+	Kind.HISHA: "res://Scripts/Game/Pieces/Hisha.gd",
+	Kind.RYUO: "res://Scripts/Game/Pieces/Ryuo.gd",
+	Kind.KAKUGYO: "res://Scripts/Game/Pieces/Kakugyo.gd",
+	Kind.RYUMA: "res://Scripts/Game/Pieces/Ryuma.gd",
+	Kind.KEIMA: "res://Scripts/Game/Pieces/Keima.gd",
+	Kind.NARIKEI: "res://Scripts/Game/Pieces/Narikei.gd",
+	Kind.OSHO: "res://Scripts/Game/Pieces/Osho.gd",
+	Kind.KYOSHA: "res://Scripts/Game/Pieces/Kyosha.gd",
+	Kind.NARIKYO: "res://Scripts/Game/Pieces/Narikyo.gd",
+	Kind.GINSHO: "res://Scripts/Game/Pieces/Ginsho.gd",
+	Kind.NARIGIN: "res://Scripts/Game/Pieces/Narigin.gd",
+	Kind.KINSHO: "res://Scripts/Game/Pieces/Kinsho.gd",
+	Kind.ZU: "res://Scripts/Game/Pieces/Zu.gd",
+	Kind.JU: "res://Scripts/Game/Pieces/Ju.gd",
+	Kind.MA: "res://Scripts/Game/Pieces/Ma.gd",
+	Kind.XIANG: "res://Scripts/Game/Pieces/Xiang.gd",
+	Kind.JIANG: "res://Scripts/Game/Pieces/Jiang.gd",
+	Kind.SHI: "res://Scripts/Game/Pieces/Shi.gd",
+	Kind.PAO: "res://Scripts/Game/Pieces/Pao.gd"
 }
 
-# A collection of prefabricated black pieces.
-static var black_prefabs: Dictionary = {
-	Kind.PAWN: "res://Scenes/Pieces/BlackPawn.tscn",
-	Kind.ROOK: "res://Scenes/Pieces/BlackRook.tscn",
-	Kind.KNIGHT: "res://Scenes/Pieces/BlackKnight.tscn",
-	Kind.BISHOP: "res://Scenes/Pieces/BlackBishop.tscn",
-	Kind.QUEEN: "res://Scenes/Pieces/BlackQueen.tscn",
-	Kind.KING: "res://Scenes/Pieces/BlackKing.tscn",
-	Kind.PRIVATE: "res://Scenes/Pieces/BlackPrivate.tscn",
-	Kind.CAPTAIN: "res://Scenes/Pieces/BlackCaptain.tscn",
-	Kind.SERGEANT: "res://Scenes/Pieces/BlackSergeant.tscn",
-	Kind.LIEUTENANT: "res://Scenes/Pieces/BlackLieutenant.tscn",
-	Kind.COLONEL: "res://Scenes/Pieces/BlackColonel.tscn",
-	Kind.GENERAL: "res://Scenes/Pieces/BlackGeneral.tscn",
-	Kind.FERZ: "res://Scenes/Pieces/BlackFerz.tscn",
-	Kind.WAZIR: "res://Scenes/Pieces/BlackWazir.tscn",
-	Kind.DABBABA: "res://Scenes/Pieces/BlackDabbaba.tscn",
-	Kind.TALIAH: "res://Scenes/Pieces/BlackTaliah.tscn",
-	Kind.CAMEL: "res://Scenes/Pieces/BlackCamel.tscn",
-	Kind.ELEPHANT: "res://Scenes/Pieces/BlackElephant.tscn",
-	Kind.GIRAFFE: "res://Scenes/Pieces/BlackGiraffe.tscn",
-	Kind.SWORDSMAN: "res://Scenes/Pieces/BlackSwordsman.tscn",
-	Kind.FUHYO: "res://Scenes/Pieces/BlackFuhyo.tscn",
-	Kind.TOKIN: "res://Scenes/Pieces/BlackTokin.tscn",
-	Kind.HISHA: "res://Scenes/Pieces/BlackHisha.tscn",
-	Kind.RYUO: "res://Scenes/Pieces/BlackRyuo.tscn",
-	Kind.KAKUGYO: "res://Scenes/Pieces/BlackKakugyo.tscn",
-	Kind.RYUMA: "res://Scenes/Pieces/BlackRyuma.tscn",
-	Kind.KEIMA: "res://Scenes/Pieces/BlackKeima.tscn",
-	Kind.NARIKEI: "res://Scenes/Pieces/BlackNarikei.tscn",
-	Kind.OSHO: "res://Scenes/Pieces/BlackOsho.tscn",
-	Kind.KYOSHA: "res://Scenes/Pieces/BlackKyosha.tscn",
-	Kind.NARIKYO: "res://Scenes/Pieces/BlackNarikyo.tscn",
-	Kind.GINSHO: "res://Scenes/Pieces/BlackGinsho.tscn",
-	Kind.NARIGIN: "res://Scenes/Pieces/BlackNarigin.tscn",
-	Kind.KINSHO: "res://Scenes/Pieces/BlackKinsho.tscn",
-	Kind.ZU: "res://Scenes/Pieces/BlackZu.tscn",
-	Kind.JU: "res://Scenes/Pieces/BlackJu.tscn",
-	Kind.MA: "res://Scenes/Pieces/BlackMa.tscn",
-	Kind.XIANG: "res://Scenes/Pieces/BlackXiang.tscn",
-	Kind.JIANG: "res://Scenes/Pieces/BlackJiang.tscn",
-	Kind.SHI: "res://Scenes/Pieces/BlackShi.tscn",
-	Kind.PAO: "res://Scenes/Pieces/BlackPao.tscn"
+
+# A collection of white piece sprites.
+static var white_images: Dictionary = {
+	Kind.PAWN: "res://Sprites/Pieces/WhitePawn.png",
+	Kind.ROOK: "res://Sprites/Pieces/WhiteRook.png",
+	Kind.KNIGHT: "res://Sprites/Pieces/WhiteKnight.png",
+	Kind.BISHOP: "res://Sprites/Pieces/WhiteBishop.png",
+	Kind.QUEEN: "res://Sprites/Pieces/WhiteQueen.png",
+	Kind.KING: "res://Sprites/Pieces/WhiteKing.png",
+	Kind.PRIVATE: "res://Sprites/Pieces/WhitePrivate.png",
+	Kind.CAPTAIN: "res://Sprites/Pieces/WhiteCaptain.png",
+	Kind.SERGEANT: "res://Sprites/Pieces/WhiteSergeant.png",
+	Kind.LIEUTENANT: "res://Sprites/Pieces/WhiteLieutenant.png",
+	Kind.COLONEL: "res://Sprites/Pieces/WhiteColonel.png",
+	Kind.GENERAL: "res://Sprites/Pieces/WhiteGeneral.png",
+	Kind.FERZ: "res://Sprites/Pieces/WhiteFerz.png",
+	Kind.WAZIR: "res://Sprites/Pieces/WhiteWazir.png",
+	Kind.DABBABA: "res://Sprites/Pieces/WhiteDabbaba.png",
+	Kind.TALIAH: "res://Sprites/Pieces/WhiteTaliah.png",
+	Kind.CAMEL: "res://Sprites/Pieces/WhiteCamel.png",
+	Kind.ELEPHANT: "res://Sprites/Pieces/WhiteElephant.png",
+	Kind.GIRAFFE: "res://Sprites/Pieces/WhiteGiraffe.png",
+	Kind.SWORDSMAN: "res://Sprites/Pieces/WhiteSwordsman.png",
+	Kind.FUHYO: "res://Sprites/Pieces/WhiteFuhyo.png",
+	Kind.TOKIN: "res://Sprites/Pieces/WhiteTokin.png",
+	Kind.HISHA: "res://Sprites/Pieces/WhiteHisha.png",
+	Kind.RYUO: "res://Sprites/Pieces/WhiteRyuo.png",
+	Kind.KAKUGYO: "res://Sprites/Pieces/WhiteKakugyo.png",
+	Kind.RYUMA: "res://Sprites/Pieces/WhiteRyuma.png",
+	Kind.KEIMA: "res://Sprites/Pieces/WhiteKeima.png",
+	Kind.NARIKEI: "res://Sprites/Pieces/WhiteNarikei.png",
+	Kind.OSHO: "res://Sprites/Pieces/WhiteOsho.png",
+	Kind.KYOSHA: "res://Sprites/Pieces/WhiteKyosha.png",
+	Kind.NARIKYO: "res://Sprites/Pieces/WhiteNarikyo.png",
+	Kind.GINSHO: "res://Sprites/Pieces/WhiteGinsho.png",
+	Kind.NARIGIN: "res://Sprites/Pieces/WhiteNarigin.png",
+	Kind.KINSHO: "res://Sprites/Pieces/WhiteKinsho.png",
+	Kind.ZU: "res://Sprites/Pieces/WhiteZu.png",
+	Kind.JU: "res://Sprites/Pieces/WhiteJu.png",
+	Kind.MA: "res://Sprites/Pieces/WhiteMa.png",
+	Kind.XIANG: "res://Sprites/Pieces/WhiteXiang.png",
+	Kind.JIANG: "res://Sprites/Pieces/WhiteJiang.png",
+	Kind.SHI: "res://Sprites/Pieces/WhiteShi.png",
+	Kind.PAO: "res://Sprites/Pieces/WhitePao.png"
 }
+
+# A collection of black piece sprites.
+static var black_images: Dictionary = {
+	Kind.PAWN: "res://Sprites/Pieces/BlackPawn.png",
+	Kind.ROOK: "res://Sprites/Pieces/BlackRook.png",
+	Kind.KNIGHT: "res://Sprites/Pieces/BlackKnight.png",
+	Kind.BISHOP: "res://Sprites/Pieces/BlackBishop.png",
+	Kind.QUEEN: "res://Sprites/Pieces/BlackQueen.png",
+	Kind.KING: "res://Sprites/Pieces/BlackKing.png",
+	Kind.PRIVATE: "res://Sprites/Pieces/BlackPrivate.png",
+	Kind.CAPTAIN: "res://Sprites/Pieces/BlackCaptain.png",
+	Kind.SERGEANT: "res://Sprites/Pieces/BlackSergeant.png",
+	Kind.LIEUTENANT: "res://Sprites/Pieces/BlackLieutenant.png",
+	Kind.COLONEL: "res://Sprites/Pieces/BlackColonel.png",
+	Kind.GENERAL: "res://Sprites/Pieces/BlackGeneral.png",
+	Kind.FERZ: "res://Sprites/Pieces/BlackFerz.png",
+	Kind.WAZIR: "res://Sprites/Pieces/BlackWazir.png",
+	Kind.DABBABA: "res://Sprites/Pieces/BlackDabbaba.png",
+	Kind.TALIAH: "res://Sprites/Pieces/BlackTaliah.png",
+	Kind.CAMEL: "res://Sprites/Pieces/BlackCamel.png",
+	Kind.ELEPHANT: "res://Sprites/Pieces/BlackElephant.png",
+	Kind.GIRAFFE: "res://Sprites/Pieces/BlackGiraffe.png",
+	Kind.SWORDSMAN: "res://Sprites/Pieces/BlackSwordsman.png",
+	Kind.FUHYO: "res://Sprites/Pieces/BlackFuhyo.png",
+	Kind.TOKIN: "res://Sprites/Pieces/BlackTokin.png",
+	Kind.HISHA: "res://Sprites/Pieces/BlackHisha.png",
+	Kind.RYUO: "res://Sprites/Pieces/BlackRyuo.png",
+	Kind.KAKUGYO: "res://Sprites/Pieces/BlackKakugyo.png",
+	Kind.RYUMA: "res://Sprites/Pieces/BlackRyuma.png",
+	Kind.KEIMA: "res://Sprites/Pieces/BlackKeima.png",
+	Kind.NARIKEI: "res://Sprites/Pieces/BlackNarikei.png",
+	Kind.OSHO: "res://Sprites/Pieces/BlackOsho.png",
+	Kind.KYOSHA: "res://Sprites/Pieces/BlackKyosha.png",
+	Kind.NARIKYO: "res://Sprites/Pieces/BlackNarikyo.png",
+	Kind.GINSHO: "res://Sprites/Pieces/BlackGinsho.png",
+	Kind.NARIGIN: "res://Sprites/Pieces/BlackNarigin.png",
+	Kind.KINSHO: "res://Sprites/Pieces/BlackKinsho.png",
+	Kind.ZU: "res://Sprites/Pieces/BlackZu.png",
+	Kind.JU: "res://Sprites/Pieces/BlackJu.png",
+	Kind.MA: "res://Sprites/Pieces/BlackMa.png",
+	Kind.XIANG: "res://Sprites/Pieces/BlackXiang.png",
+	Kind.JIANG: "res://Sprites/Pieces/BlackJiang.png",
+	Kind.SHI: "res://Sprites/Pieces/BlackShi.png",
+	Kind.PAO: "res://Sprites/Pieces/BlackPao.png"
+}
+
+
+# Gets an icon for the requested piece.
+# 	kind: The kind of piece to get an icon for.
+# 	white: True if the piece is white, false if black.
+# 	return: An icon.
+static func get_icon(_kind: Piece.Kind, white: bool):
+	if (white):
+		return load(white_images[_kind])
+	else:
+		return load(black_images[_kind])
+
 
 # Creates a requested piece.
 # 	kind: The kind of piece to create.
 # 	white: True if the piece is white, false if black.
 # 	return: A piece.
 static func create_piece(_kind: Kind, white: bool) -> Piece:
-	var scene: PackedScene
-	if (white):
-		scene = load(white_prefabs[_kind])
-	else:
-		scene = load(black_prefabs[_kind])
-	var piece: Piece = scene.instantiate()
-	piece.z_index = GameState.ZIndex.PIECE
-	return piece
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.texture = get_icon(_kind, white)
+	sprite.set_script(load(scripts[_kind]))
+	sprite.z_index = GameState.ZIndex.PIECE
+	return sprite as Piece
 
 
 # Must be implemented by inheriting classes.

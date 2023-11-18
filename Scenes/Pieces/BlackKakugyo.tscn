@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqpho0eepucyj"]
-
-[ext_resource type="Texture2D" uid="uid://8q26n34kbm7y" path="res://Sprites/Pieces/BlackKakugyo.png" id="1_uujr7"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Kakugyo.gd" id="2_ybqv6"]
-
-[node name="BlackKakugyo" type="Sprite2D"]
-texture = ExtResource("1_uujr7")
-script = ExtResource("2_ybqv6")

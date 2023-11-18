@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dah6j3xngavip"]
-
-[ext_resource type="Texture2D" uid="uid://1vpt3pe5d746" path="res://Sprites/Pieces/BlackZu.png" id="1_bonxu"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Zu.gd" id="2_0cpgn"]
-
-[node name="BlackZu" type="Sprite2D"]
-texture = ExtResource("1_bonxu")
-script = ExtResource("2_0cpgn")

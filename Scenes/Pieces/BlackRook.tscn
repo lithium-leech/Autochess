@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://crhw4875djedn"]
-
-[ext_resource type="Texture2D" uid="uid://c6jytgvbvere" path="res://Sprites/Pieces/BlackRook.png" id="1_5btwm"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Rook.gd" id="2_4skh8"]
-
-[node name="BlackRook" type="Sprite2D"]
-texture = ExtResource("1_5btwm")
-script = ExtResource("2_4skh8")

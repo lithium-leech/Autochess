@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfi63rxurhjyl"]
-
-[ext_resource type="Texture2D" uid="uid://b6lsdm3g2bm4p" path="res://Sprites/Pieces/WhiteXiang.png" id="1_vf5e2"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Xiang.gd" id="2_uobnu"]
-
-[node name="WhiteXiang" type="Sprite2D"]
-texture = ExtResource("1_vf5e2")
-script = ExtResource("2_uobnu")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ux8o6o5ttpco"]
-
-[ext_resource type="Texture2D" uid="uid://d0cu1kew0x8dk" path="res://Sprites/Pieces/WhiteGinsho.png" id="1_13kth"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ginsho.gd" id="2_6ftav"]
-
-[node name="WhiteGinsho" type="Sprite2D"]
-texture = ExtResource("1_13kth")
-script = ExtResource("2_6ftav")

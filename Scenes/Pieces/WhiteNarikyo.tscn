@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cshaetq8mnvq2"]
-
-[ext_resource type="Texture2D" uid="uid://c0ht4v8u0mrvb" path="res://Sprites/Pieces/WhiteNarikyo.png" id="1_0u0eu"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Narikyo.gd" id="2_otoks"]
-
-[node name="WhiteNarikyo" type="Sprite2D"]
-texture = ExtResource("1_0u0eu")
-script = ExtResource("2_otoks")

@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbt6kisu81rdd"]
-
-[ext_resource type="Texture2D" uid="uid://c6r1dvrwa3hex" path="res://Sprites/Pieces/BlackRyuo.png" id="1_d7etp"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ryuo.gd" id="2_n6a3r"]
-
-[node name="BlackRyuo" type="Sprite2D"]
-texture = ExtResource("1_d7etp")
-script = ExtResource("2_n6a3r")

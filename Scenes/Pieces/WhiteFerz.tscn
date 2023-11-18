@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwbo0caqfecf5"]
-
-[ext_resource type="Texture2D" uid="uid://locksw2eg4ty" path="res://Sprites/Pieces/WhiteFerz.png" id="1_d5vpj"]
-[ext_resource type="Script" path="res://Scripts/Game/Pieces/Ferz.gd" id="2_j5827"]
-
-[node name="WhiteFerz" type="Sprite2D"]
-texture = ExtResource("1_d5vpj")
-script = ExtResource("2_j5827")
