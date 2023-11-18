@@ -14,7 +14,7 @@ var game: Game
 var upgrade: Upgrade
 
 # The selected choice.
-var selected: int = -1
+var selected: int
 
 
 # Runs once when the stage starts.
@@ -24,6 +24,10 @@ func start():
 	# Determine the upgrade to give.
 	upgrade = PieceUpgrade.new(game)
 	# Display the choice menu.
+	selected = -1
+	for i in range(Upgrade.N_CHOICES):
+		var button: TextureButton = game.choice_menu.choice_buttons[i]
+		button.button_pressed = false
 	upgrade.remove_info()
 	upgrade.show_choices()
 	game.in_game_menu.get_label_group().visible_text = false
