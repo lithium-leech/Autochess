@@ -12,9 +12,9 @@ enum Kind {
 
 # A collection of music recordings.
 static var recordings: Dictionary = {
-	Kind.MENU: "res://Audio/Music/MenuMusic.ogg",
-	Kind.PLANNING: "res://Audio/Music/PlanningMusic.ogg",
-	Kind.BATTLE: "res://Audio/Music/BattleMusic.ogg"
+	Kind.MENU: preload("res://Audio/Music/MenuMusic.ogg"),
+	Kind.PLANNING: preload("res://Audio/Music/PlanningMusic.ogg"),
+	Kind.BATTLE: preload("res://Audio/Music/BattleMusic.ogg")
 }
 
 # Creates a new music player with the requested music track.
@@ -23,5 +23,5 @@ static var recordings: Dictionary = {
 static func create_music_player(kind: Kind) -> AudioStreamPlayer2D:
 	if (kind == Kind.NONE): return null
 	var player: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
-	player.stream = load(recordings[kind])
+	player.stream = recordings[kind]
 	return player
