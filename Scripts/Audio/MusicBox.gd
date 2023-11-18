@@ -6,7 +6,10 @@ class_name MusicBox
 var volume: int = 7
 
 # The music player.
-var player: AudioStreamPlayer2D
+var player: AudioStreamPlayer2D = null
+
+# The current music.
+var current: Music.Kind = Music.Kind.NONE
 
 # The decibel value to set music players to.
 var db: int = 0
@@ -15,6 +18,9 @@ var db: int = 0
 # Plays the requested music.
 # 	music: The music to play.
 func play_music(music: Music.Kind):
+	# Check if the music is already playing.
+	if (music == current):
+		return
 	# Remove the current music player.
 	if (player != null):
 		player.stop()
@@ -22,6 +28,7 @@ func play_music(music: Music.Kind):
 		player = null
 	# Create the requested music player.
 	if (music != Music.Kind.NONE):
+		current = music
 		player = Music.create_music_player(music)
 		Main.node.add_child(player)
 		player.volume_db = db
