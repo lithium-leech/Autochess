@@ -10,3 +10,19 @@ enum Kind {
 	WALL,
 	SHIELD
 }
+
+
+# Must be implemented by inheriting classes.
+# The kind of power this is.
+func get_kind() -> Kind:
+	return Kind.FIRST
+
+
+# Applies this power to the current game.
+func activate():
+	pass
+
+
+# Unapplies this power from the current game.
+func deactivate():
+	pass

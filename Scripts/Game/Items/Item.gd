@@ -9,3 +9,9 @@ enum Kind {
 	MINE,
 	SHIELD
 }
+
+
+# Must be implemented by inheriting classes.
+# The kind of item this is.
+func get_kind() -> Kind:
+	return Kind.NONE
