@@ -75,6 +75,7 @@ func _ready():
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
 	# Create the starting map.
+	current_set = Set.create_set(Main.game_state.start_set)
 	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
 	# TEMPORARY: Create starting pieces
 	enemy_pieces.append(Piece.Kind.PAWN)

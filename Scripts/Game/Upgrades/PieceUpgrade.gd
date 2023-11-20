@@ -5,12 +5,16 @@ class_name PieceUpgrade extends Upgrade
 # Create a new instance of a piece upgrade.
 func _init(_game: Game):
 	_base_init(_game)
+	# Determine player and enemy strength
+	var map_number: int = floor(Main.game_state.level / float(GameState.MAP_ROUNDS))
+	var map_progress: int = (Main.game_state.level - 1) % GameState.MAP_ROUNDS
+	var map_strength: float = map_progress / float(GameState.MAP_ROUNDS - 1)
+	var player_strength: float = map_strength - (0.1 * map_number)
+	var enemy_strength: float = map_strength + (0.1 * map_number)
 	# Pick random pieces.
 	for i in range(N_CHOICES):
-		pass
-	# TEMPORARILY: Set the piece choices
-	player_pieces = [Piece.Kind.ROOK, Piece.Kind.PAWN, Piece.Kind.KNIGHT]
-	enemy_pieces = [Piece.Kind.QUEEN, Piece.Kind.KING, Piece.Kind.BISHOP]
+		player_pieces.append(game.current_set.get_piece(player_strength))
+		enemy_pieces.append(game.current_set.get_piece(enemy_strength))
 
 
 # The available player pieces to choose from.

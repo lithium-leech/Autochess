@@ -12,6 +12,14 @@ enum ZIndex {
 	DYNAMIC = 5,
 }
 
+# The number of rounds until a piece upgrade is offered.
+const PIECE_ROUNDS: int = 1
+
+# The number of rounds until a power upgrade is offered.
+const POWER_ROUNDS: int = 5
+
+# The number of rounds until a map upgrade is offered.
+const MAP_ROUNDS: int = 20
 
 # The board to load when a game starts.
 var start_board: Board.Kind = Board.Kind.CLASSIC
