@@ -22,7 +22,16 @@ func start():
 	# Start the planning music.
 	Main.music_box.play_music(Music.Kind.PLANNING)
 	# Determine the upgrade to give.
-	upgrade = PieceUpgrade.new(game)
+	if (Main.game_state.level % GameState.MAP_ROUNDS == 0):
+		upgrade = MapUpgrade.new(game)
+	elif (Main.game_state.level % GameState.POWER_ROUNDS == 0):
+		upgrade = PieceUpgrade.new(game)
+	elif (Main.game_state.level % GameState.PIECE_ROUNDS == 0):
+		upgrade = PieceUpgrade.new(game)
+	else:
+		game.next_stage = PlanningStage.new(game)
+		upgrade = Upgrade.new()
+		upgrade._base_init(game)
 	# Display the choice menu.
 	selected = -1
 	for i in range(Upgrade.N_CHOICES):

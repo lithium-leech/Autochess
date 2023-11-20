@@ -6,8 +6,8 @@ class_name Board
 enum Kind {
 	CLASSIC,
 	HOURGLASS,
-	ZIGZAG,
-	CENTERCROSS,
+	ZIG_ZAG,
+	CENTER_CROSS,
 	SMALL
 }
 
@@ -15,8 +15,8 @@ enum Kind {
 static var images: Dictionary = {
 	Kind.CLASSIC: "res://Sprites/Boards/Classic.png",
 	Kind.HOURGLASS: "res://Sprites/Boards/Hourglass.png",
-	Kind.ZIGZAG: "res://Sprites/Boards/ZigZag.png",
-	Kind.CENTERCROSS: "res://Sprites/Boards/CenterCross.png",
+	Kind.ZIG_ZAG: "res://Sprites/Boards/ZigZag.png",
+	Kind.CENTER_CROSS: "res://Sprites/Boards/CenterCross.png",
 	Kind.SMALL: "res://Sprites/Boards/Small.png"
 }
 
@@ -76,7 +76,7 @@ func add_piece(kind: Piece.Kind, player: bool, space: Space):
 	piece.is_grabable = player
 	Main.game_world.add_child(piece)
 	# Flip pieces with directional sprites.
-	var flip = func(): if (not player): piece.texture.flip_v = true
+	var flip = func(): if (not player): piece.flip_v = true
 	match kind:
 		Piece.Kind.FUHYO: flip.call()
 		Piece.Kind.GINSHO: flip.call()

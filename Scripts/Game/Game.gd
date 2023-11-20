@@ -39,6 +39,9 @@ var player_powers: Array[Power] = []
 # The current set of pieces being played with.
 var current_set: Set
 
+# The kind of board currently being used as the game board.
+var current_board: Board.Kind
+
 # The board that fights take place on.
 var game_board: Board
 
@@ -75,8 +78,9 @@ func _ready():
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
 	# Create the starting map.
-	current_set = Set.create_set(Main.game_state.start_set)
-	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
+	current_set = Set.get_set(Main.game_state.start_set)
+	current_board = Main.game_state.start_board
+	game_board = BoardBuilder.get_board_builder(current_board, self).build()
 	# TEMPORARY: Create starting pieces
 	enemy_pieces.append(Piece.Kind.PAWN)
 	var record: Placement = Placement.record_new_piece( \

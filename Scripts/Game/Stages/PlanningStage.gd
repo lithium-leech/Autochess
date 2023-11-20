@@ -116,12 +116,13 @@ func end():
 	for x in range(game.game_board.width):
 		for y in range(game.game_board.height):
 			var space: Space = game.game_board.get_space(Vector2i(x, y))
-			if (space.terrain != null and space.terrain.is_player):
-				var record: Placement = Placement.record_object(space.terrain, space.coordinates, true)
-				game.player_placements.append(record)
-			if (space.object != null and space.object.is_player):
-				var record: Placement = Placement.record_object(space.object, space.coordinates, true)
-				game.player_placements.append(record)
+			if (space != null):
+				if (space.terrain != null and space.terrain.is_player):
+					var record: Placement = Placement.record_object(space.terrain, space.coordinates, true)
+					game.player_placements.append(record)
+				if (space.object != null and space.object.is_player):
+					var record: Placement = Placement.record_object(space.object, space.coordinates, true)
+					game.player_placements.append(record)
 	for x in range(game.side_board.width):
 		for y in range(game.side_board.height):
 			var space: Space = game.side_board.get_space(Vector2i(x, y))

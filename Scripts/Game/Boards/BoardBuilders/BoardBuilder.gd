@@ -9,9 +9,9 @@ static func get_board_builder(kind: Board.Kind, _game: Game):
 			return ClassicBoardBuilder.new(_game)
 		Board.Kind.HOURGLASS:
 			return HourglassBoardBuilder.new(_game)
-		Board.Kind.ZIGZAG:
+		Board.Kind.ZIG_ZAG:
 			return ZigZagBoardBuilder.new(_game)
-		Board.Kind.CENTERCROSS:
+		Board.Kind.CENTER_CROSS:
 			return CenterCrossBoardBuilder.new(_game)
 		Board.Kind.SMALL:
 			return SmallBoardBuilder.new(_game)

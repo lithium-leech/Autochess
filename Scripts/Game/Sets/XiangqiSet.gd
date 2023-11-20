@@ -13,6 +13,11 @@ var pieces: Array = [
 ]
 
 
+# The kind of set this is.
+func get_kind() -> Kind:
+	return Kind.XIANGQI
+
+
 # Gets the pieces available in this set.
 func get_pieces() -> Array:
 	return pieces

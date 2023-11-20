@@ -27,10 +27,10 @@ static func get_icon(kind: Kind) -> CompressedTexture2D:
 	return load(images[kind])
 
 
-# Creates a set containing kinds of pieces to choose from.
-# 	kind: The kind of set to create.
+# Gets a set containing kinds of pieces to choose from.
+# 	kind: The kind of set to get.
 # 	return: A set containing kinds of pieces.
-static func create_set(kind: Kind) -> Set:
+static func get_set(kind: Kind) -> Set:
 	match kind:
 		Kind.WESTERN:
 			return WesternSet.new()
@@ -43,6 +43,12 @@ static func create_set(kind: Kind) -> Set:
 		Kind.MILITARY:
 			return MilitarySet.new()
 	return null
+
+
+# Must be implemented by inheriting classes.
+# The kind of set this is.
+func get_kind() -> Kind:
+	return Kind.WESTERN
 
 
 # Must be implemented by inheriting classes.
