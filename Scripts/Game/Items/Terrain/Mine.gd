@@ -21,7 +21,7 @@ func is_enterable(object: GameObject) -> bool:
 
 # Performs the effects of entering this terrain.
 # 	piece: The piece entering.
-func on_enter(piece: Piece):
+func enter(piece: Piece):
 	victim = piece
 	space.board.game.on_move_finish.connect(explode, CONNECT_ONE_SHOT)
 

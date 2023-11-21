@@ -15,7 +15,7 @@ static func record_object(object: GameObject, coordinates: Vector2i, _is_game: b
 		record.is_piece = true
 		record.piece = object.get_kind()
 		if (object.equipment != null):
-			record.item = object.equipment.kind
+			record.item = object.equipment.get_kind()
 	elif (object is Item):
 		record.is_piece = false
 		record.item = object.get_kind()
@@ -87,30 +87,69 @@ var y: int = 0
 # Places the recorded object onto its recorded space.
 # 	game_board: The game to place the object in.
 func place_recorded_object(game: Game):
-	# Create the recorded piece.
-	var object: GameObject
-	var white: bool = (Main.game_state.is_player_white and is_player) or \
-					  (not Main.game_state.is_player_white and not is_player)
-	if (is_piece):
-		object = Piece.create_piece(piece, white)
-		object.is_player = is_player
-		object.is_white = white
-		object.is_grabable = is_player
-		Main.game_world.add_child(object)
-		# Create the piece's equipment
-		if (item != Item.Kind.NONE):
-			pass
-	# Create the recorded item.
-	else:
-		object = Item.create_item(item, white)
-		object.is_player = is_player
-		object.is_white = white
-		object.is_grabable = is_player
-		Main.game_world.add_child(object)
-	# Place the object on the recorded space.
-	var space: Space
+	# Get the recorded space.
+	var space: Space = null
 	if (is_game):
 		space = game.game_board.get_space(Vector2i(x, y))
 	else:
 		space = game.side_board.get_space(Vector2i(x, y))
-	space.add_object(object)
+	# Check that the space is empty.
+	if (space != null and space.is_empty()):
+		# Create the recorded piece.
+		var object: GameObject
+		var white: bool = (Main.game_state.is_player_white and is_player) or \
+						(not Main.game_state.is_player_white and not is_player)
+		if (is_piece):
+			object = Piece.create_piece(piece, white)
+			object.is_player = is_player
+			object.is_white = white
+			object.is_grabable = is_player
+			Main.game_world.add_child(object)
+			space.add_object(object)
+			# Create the piece's equipment
+			if (item != Item.Kind.NONE):
+				var equip: Equipment = Item.create_item(item, white)
+				equip.is_player = is_player
+				equip.is_white = white
+				equip.is_grabable = is_player
+				Main.game_world.add_child(equip)
+				space.add_object(equip)
+		# Create the recorded item.
+		else:
+			object = Item.create_item(item, white)
+			object.is_player = is_player
+			object.is_white = white
+			object.is_grabable = is_player
+			Main.game_world.add_child(object)
+			space.add_object(object)
+
+
+# Gets the first space on the side board that isn't taken by another placement record.
+# 	game: The game to look for an empty space in.
+# 	return: The first free space.
+static func get_first_empty_side_board_space(game: Game) -> Space:
+	# Create a boolean mapping which shows the free spaces.
+	var width: int = game.side_board.width
+	var height: int = game.side_board.height
+	var free: Array = []
+	for _x in range(width):
+		free.append([])
+		for _y in range(height):
+			var space: Space = game.side_board.get_space(Vector2i(_x, _y))
+			free[_x].append(space != null)
+	# Go through the given records and mark taken spaces.
+	for record in game.player_placements:
+		if (not record.is_game):
+			free[record.x][record.y] = false
+	# Return the first free space.
+	if (Main.atlas.in_rtl):
+		for _y in range(height-1, -1, -1):
+			for _x in range(width-1, -1, -1):
+				if (free[_x][_y]):
+					return game.side_board.get_space(Vector2i(_x, _y))
+	else:
+		for _y in range(height-1, -1, -1):
+			for _x in range(0, width):
+				if (free[_x][_y]):
+					return game.side_board.get_space(Vector2i(_x, _y))
+	return null

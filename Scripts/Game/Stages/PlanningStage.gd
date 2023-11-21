@@ -84,13 +84,14 @@ func during(_delta: float):
 			space.add_object(held)
 		else:
 			held.space.add_object(held)
-		match held:
-			Equipment:
-				held.z_index = GameState.ZIndex.EQUIPMENT
-			Piece:
-				held.z_index = GameState.ZIndex.PIECE
-			_:
-				held.z_index = GameState.ZIndex.TERRAIN
+		# Drop objects in the appropriate layer.
+		if (held is Piece):
+			held.z_index = GameState.ZIndex.PIECE
+		elif (held is Equipment):
+			held.z_index = GameState.ZIndex.EQUIPMENT
+		else:
+			held.z_index = GameState.ZIndex.TERRAIN
+		# Release the dropped object.
 		held = null
 	# Disable the fight button when there are no pieces on the board
 	if (game.game_board.player_pieces.size() > 0):

@@ -76,16 +76,18 @@ func exit(piece: Piece):
 func grab() -> GameObject:
 	var grabbed: GameObject = null
 	# Grab any equipment.
-	# if (object is Piece and object.equipment != null):
-	#	return object.unequip()
+	if (object != null and object is Piece and \
+		object.equipment != null and object.equipment.is_grabable):
+		grabbed = object.equipment
 	# Grab any game object.
-	if (object != null):
+	elif (object != null and object.is_grabable):
 		grabbed = object
 	# Grab any terrain.
-	elif (terrain != null):
+	elif (terrain != null and terrain.is_grabable):
 		grabbed = terrain
 	# Remove and return the grabbed object
-	remove_object(grabbed)
+	if (grabbed != null):
+		remove_object(grabbed)
 	return grabbed
 
 
@@ -94,7 +96,7 @@ func grab() -> GameObject:
 func add_object(_object: GameObject):
 	# Check if the object can be added.
 	if (not is_enterable(_object)):
-		return false
+		return
 	# Update the object.
 	_object.space = self
 	# Add the object as a piece.
@@ -103,7 +105,7 @@ func add_object(_object: GameObject):
 			board.player_pieces.append(_object)
 		else:
 			board.enemy_pieces.append(_object)
-		object = _object;
+		object = _object
 		_object.warp_to(position)
 	# Add the object as an equipment.
 	elif (_object is Equipment and object is Piece and object.equipment == null):
@@ -134,12 +136,12 @@ func remove_object(_object: GameObject):
 	elif (_object is Equipment and object is Piece):
 		if (object.equipment != _object):
 			return
-		object.equipment = null;
+		_object.unequip()
 	# Remove a terrain.
 	elif (_object is Terrain):
 		if (terrain != _object):
 			return
-		terrain = null;
+		terrain = null
 	# Remove an object.
 	else:
 		if (object != _object):
@@ -156,7 +158,7 @@ func clear():
 	# Clear terrain.
 	if (terrain != null):
 		terrain.destroy()
-		terrain = null;
+		terrain = null
 
 
 # Checks if this space is empty.

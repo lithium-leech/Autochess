@@ -22,7 +22,7 @@ func build() -> Board:
 	board.enemy_rows = 0
 	board.player_pieces = []
 	board.enemy_pieces = []
-	board.corner_tl = Vector2i(-64, 46) if start_white else Vector2i(-64, -272)
+	board.corner_tl = Vector2i(-64, 48) if start_white else Vector2i(-64, -272)
 	board.corner_br = board.corner_tl + Vector2i(board.width*32, board.height*32)
 	# Create a square array of spaces.
 	board.spaces = []

@@ -14,18 +14,18 @@ func get_kind() -> Kind:
 
 # Performs additional behaviors when equipped.
 func on_equip():
-	space.board.game.on_round_finish.connect(lower_duration)
+	piece.space.board.game.on_round_finish.connect(lower_duration)
 
 
 # Performs additional behaviors when unequipped.
 func on_unequip():
-	space.board.game.on_round_finish.disconnect(lower_duration)
+	piece.space.board.game.on_round_finish.disconnect(lower_duration)
 
 
 # Checks if the equipped piece is protected from the given piece.
 # 	piece: The attacking piece.
 # 	return: True if the equipped piece is protected.
-func is_protected(_piece: Piece):
+func protects_from(_piece: Piece):
 	return true
 
 

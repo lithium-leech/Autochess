@@ -42,12 +42,13 @@ static func create_item(kind: Kind, white: bool) -> Item:
 	match kind:
 		Kind.WALL, Kind.MINE:
 			sprite.texture = get_icon(kind, white)
+			sprite.z_index = GameState.ZIndex.TERRAIN
 		Kind.SHIELD:
 			var equipment: Equipment = sprite
 			equipment.item_sprite = get_icon(kind, true)
 			equipment.equip_sprite = get_icon(kind, false)
 			sprite.texture = equipment.item_sprite
-	sprite.z_index = GameState.ZIndex.PIECE
+			sprite.z_index = GameState.ZIndex.EQUIPMENT
 	return sprite as Item
 
 

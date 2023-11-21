@@ -87,7 +87,7 @@ func are_pieces_moving() -> bool:
 	for piece in enemy_pieces:
 		if (piece.is_moving):
 			return true
-	return false;
+	return false
 
 
 # Gets the first empty space on the board.
@@ -101,23 +101,6 @@ func get_first_empty_space() -> Space:
 					return spaces[x][y]
 	else:
 		for y in range(height-1, -1, -1):
-			for x in range(0, width):
-				if (spaces[x][y].is_empty()):
-					return spaces[x][y]
-	return null;
-
-
-# Gets the last empty space on the board.
-# 	return: A board space.
-# 	remark: Returns null if there is no empty space.
-func get_last_empty_space() -> Space:	
-	if (Main.atlas.in_rtl):
-		for y in range(0, height):
-			for x in range(width-1, -1, -1):
-				if (spaces[x][y].is_empty()):
-					return spaces[x][y]
-	else:
-		for y in range(0, height):
 			for x in range(0, width):
 				if (spaces[x][y].is_empty()):
 					return spaces[x][y]

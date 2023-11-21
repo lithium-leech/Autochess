@@ -51,23 +51,25 @@ func show_info(choice: int):
 # 	choice: The index of the selected choice.
 func apply_choice(choice: int):
 	# Create and activate the enemy power.
-	var player_power: Power = Power.create_power(player_powers[choice])
-	player_power.is_player = true
-	player_power.is_white = false
-	player_power.is_grabable = false
-	Main.game_world.add_child(player_power)
 	var player_space: Space = game.player_power_board.get_first_empty_space()
-	game.player_power_board.add_object(player_power, player_space)
-	player_power.activate()
+	if (player_space != null):
+		var player_power: Power = Power.create_power(player_powers[choice])
+		player_power.is_player = true
+		player_power.is_white = false
+		player_power.is_grabable = false
+		Main.game_world.add_child(player_power)
+		player_space.add_object(player_power)
+		player_power.activate()
 	# Create and activate the player power.
-	var enemy_power: Power = Power.create_power(enemy_powers[choice])
-	enemy_power.is_player = false
-	enemy_power.is_white = false
-	enemy_power.is_grabable = false
-	Main.game_world.add_child(enemy_power)
 	var enemy_space: Space = game.enemy_power_board.get_first_empty_space()
-	game.enemy_power_board.add_object(enemy_power, enemy_space)
-	enemy_power.activate()
+	if (enemy_space != null):
+		var enemy_power: Power = Power.create_power(enemy_powers[choice])
+		enemy_power.is_player = false
+		enemy_power.is_white = false
+		enemy_power.is_grabable = false
+		Main.game_world.add_child(enemy_power)
+		enemy_space.add_object(enemy_power)
+		enemy_power.activate()
 
 
 # Gets the random choices of powers.

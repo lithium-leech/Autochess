@@ -69,9 +69,7 @@ func apply_choice(choice: int):
 	game.player_placements.clear()
 	# Remove powers.
 	game.enemy_power_board.clear()
-	game.enemy_powers.clear()
 	game.player_power_board.clear()
-	game.player_powers.clear()
 	# Remove the old board.
 	game.game_board.destroy()
 	# Create the new board.

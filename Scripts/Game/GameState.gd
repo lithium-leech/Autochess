@@ -10,6 +10,7 @@ enum ZIndex {
 	EQUIPMENT = 3,
 	HIGHLIGHT = 4,
 	DYNAMIC = 5,
+	DYNAMIC_EQUIPMENT = 6,
 }
 
 # The number of rounds until a piece upgrade is offered.

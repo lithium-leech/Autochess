@@ -39,6 +39,7 @@ func start():
 		button.button_pressed = false
 	upgrade.remove_info()
 	upgrade.show_choices()
+	game.choice_menu.set_title_text(upgrade.get_title_text())
 	game.in_game_menu.get_label_group().visible_text = false
 	Main.menu_manager.add_active_menu(game.choice_menu)
 	# Add signal connections.

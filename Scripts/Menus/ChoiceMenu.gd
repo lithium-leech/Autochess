@@ -26,6 +26,9 @@ var player_info: TextureRect
 # The icon for the enemy's half of the selected choice.
 var enemy_info: TextureRect
 
+# The title displayed at the top of the menu.
+var title_text: Label
+
 # The name of the player's half of the selected choice.
 var player_name_text: Label
 
@@ -63,6 +66,7 @@ func _ready():
 		$Choice/Choice3/EnemyIcon]
 	player_info = $Info/Selected/PlayerIcon
 	enemy_info = $Info/Selected/EnemyIcon
+	title_text = $Choice/Text
 	player_name_text = $Info/PlayerName
 	player_info_text = $Info/PlayerInfo
 	enemy_name_text = $Info/EnemyName
@@ -94,3 +98,9 @@ func set_info_text(p_name: String, p_info: String, e_name: String, e_info: Strin
 	get_label(player_info_text).text = p_info
 	get_label(enemy_name_text).text = e_name
 	get_label(enemy_info_text).text = e_info
+
+
+# Sets the menu's title text.
+# 	title: The text to set the title to.
+func set_title_text(title: String):
+	get_label(title_text).text = title

@@ -18,13 +18,17 @@ func _process(_delta: float):
 	# Follow the equipped piece.
 	if (piece != null):
 		warp_to(piece.position)
+		if (piece.is_moving):
+			z_index = GameState.ZIndex.DYNAMIC_EQUIPMENT
+		else:
+			z_index = GameState.ZIndex.EQUIPMENT
 
 
 # Determines if this object can be placed in a given space.
 #   space: The space to check.
 #   return: True if this object can be placed in the given space.
 func is_placeable(new_space: Space) -> bool:
-	return new_space.has_ally(self.is_player)
+	return new_space.has_ally(is_player)
 
 
 # Equips this to a given piece.
@@ -70,5 +74,5 @@ func destroy():
 # Checks if the equipped piece is protected from the given piece.
 # 	piece: The attacking piece.
 # 	return: True if the equipped piece is protected.
-func is_protected(_piece: Piece):
+func protects_from(_piece: Piece):
 	return false

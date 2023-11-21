@@ -431,7 +431,7 @@ func finish_moving():
 			new_piece.is_white = is_white
 			new_piece.is_grabable = is_grabable
 			Main.game_world.add_child(new_piece)
-			_space.board.add_object(new_piece, _space)
+			_space.add_object(new_piece)
 			queue_free()
 		# Return to the stationary z index
 		z_index = GameState.ZIndex.PIECE

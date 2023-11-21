@@ -18,11 +18,11 @@ func is_enterable(_object: GameObject) -> bool:
 
 # Performs the effects of entering this terrain.
 # 	piece: The piece entering.
-func on_enter(_piece: Piece):
+func enter(_piece: Piece):
 	pass
 
 
 # Performs the effects of exiting this terrain.
 # 	piece: The piece exiting.
-func on_exit(_piece:Piece):
+func exit(_piece:Piece):
 	pass

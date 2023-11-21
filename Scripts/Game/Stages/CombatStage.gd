@@ -136,6 +136,6 @@ func end_concede():
 		game.concede_menu.confirm_button.pressed.disconnect(confirm_concede)
 	if (game.concede_menu.cancel_button.pressed.is_connected(end_concede)):
 		game.concede_menu.cancel_button.pressed.disconnect(end_concede)
-	rounds_to_concede = 40;
-	rounds_static = 0;
-	is_concede_shown = false;
+	rounds_to_concede = 40
+	rounds_static = 0
+	is_concede_shown = false
