@@ -21,7 +21,7 @@ static var images: Dictionary = {
 }
 
 # Gets the icon for a requested set of pieces.
-# 	kind: The kind of piece set get an icon for.
+# 	kind: The kind of set to get an icon for.
 # 	return: An icon.
 static func get_icon(kind: Kind) -> CompressedTexture2D:
 	return load(images[kind])

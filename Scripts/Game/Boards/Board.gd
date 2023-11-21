@@ -62,47 +62,6 @@ var corner_br: Vector2i
 var tile_node: Node2D
 
 
-# Creates and adds a piece at a given space.
-# 	kind: The kind of piece to add.
-# 	player: True if the piece is for the player.
-# 	space: The space to place the piece at.
-func add_piece(kind: Piece.Kind, player: bool, space: Space):
-	# Create a new piece.
-	var white: bool = (Main.game_state.is_player_white and player) or \
-					  (not Main.game_state.is_player_white and not player)
-	var piece: Piece = Piece.create_piece(kind, white)
-	piece.is_player = player
-	piece.is_white = white
-	piece.is_grabable = player
-	Main.game_world.add_child(piece)
-	# Flip pieces with directional sprites.
-	var flip = func(): if (not player): piece.flip_v = true
-	match kind:
-		Piece.Kind.FUHYO: flip.call()
-		Piece.Kind.GINSHO: flip.call()
-		Piece.Kind.HISHA: flip.call()
-		Piece.Kind.KAKUGYO: flip.call()
-		Piece.Kind.KEIMA: flip.call()
-		Piece.Kind.KINSHO: flip.call()
-		Piece.Kind.KYOSHA: flip.call()
-		Piece.Kind.NARIGIN: flip.call()
-		Piece.Kind.NARIKEI: flip.call()
-		Piece.Kind.NARIKYO: flip.call()
-		Piece.Kind.OSHO: flip.call()
-		Piece.Kind.RYUMA: flip.call()
-		Piece.Kind.RYUO: flip.call()
-		Piece.Kind.TOKIN: flip.call()
-		Piece.Kind.ZU: flip.call()
-		Piece.Kind.JU: flip.call()
-		Piece.Kind.MA: flip.call()
-		Piece.Kind.XIANG: flip.call()
-		Piece.Kind.JIANG: flip.call()
-		Piece.Kind.SHI: flip.call()
-		Piece.Kind.PAO: flip.call()
-	# Add the new piece to the board.
-	add_object(piece, space)
-
-
 # Adds an object at the given space.
 # 	object: The object to add.
 # 	space: The space to place the object at.

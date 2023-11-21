@@ -24,9 +24,9 @@ func start():
 	# Determine the upgrade to give.
 	if (Main.game_state.level % GameState.MAP_ROUNDS == 0):
 		upgrade = MapUpgrade.new(game)
-	elif (Main.game_state.level % GameState.POWER_ROUNDS == 0):
-		upgrade = PieceUpgrade.new(game)
-	elif (Main.game_state.level % GameState.PIECE_ROUNDS == 0):
+	elif ((Main.game_state.level + 1) % GameState.POWER_ROUNDS == 0):
+		upgrade = PowerUpgrade.new(game)
+	elif ((Main.game_state.level + 1) % GameState.PIECE_ROUNDS == 0):
 		upgrade = PieceUpgrade.new(game)
 	else:
 		game.next_stage = PlanningStage.new(game)

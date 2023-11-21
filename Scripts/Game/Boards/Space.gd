@@ -107,7 +107,7 @@ func add_object(_object: GameObject):
 		_object.warp_to(position)
 	# Add the object as an equipment.
 	elif (_object is Equipment and object is Piece and object.equipment == null):
-		_object.equip_to(object)
+		_object.equip(object)
 	# Add the object as a terrain.
 	elif (_object is Terrain):
 		terrain = _object

@@ -48,7 +48,6 @@ enum Kind {
 	PAO
 }
 
-
 # A collection of piece scripts.
 static var scripts: Dictionary = {
 	Kind.PAWN: "res://Scripts/Game/Pieces/Pawn.gd",
@@ -93,7 +92,6 @@ static var scripts: Dictionary = {
 	Kind.SHI: "res://Scripts/Game/Pieces/Shi.gd",
 	Kind.PAO: "res://Scripts/Game/Pieces/Pao.gd"
 }
-
 
 # A collection of white piece sprites.
 static var white_images: Dictionary = {
@@ -186,27 +184,27 @@ static var black_images: Dictionary = {
 }
 
 
-# Gets an icon for the requested piece.
-# 	kind: The kind of piece to get an icon for.
-# 	white: True if the piece is white, false if black.
-# 	return: An icon.
-static func get_icon(_kind: Piece.Kind, white: bool):
-	if (white):
-		return load(white_images[_kind])
-	else:
-		return load(black_images[_kind])
-
-
 # Creates a requested piece.
 # 	kind: The kind of piece to create.
 # 	white: True if the piece is white, false if black.
 # 	return: A piece.
-static func create_piece(_kind: Kind, white: bool) -> Piece:
+static func create_piece(kind: Kind, white: bool) -> Piece:
 	var sprite: Sprite2D = Sprite2D.new()
-	sprite.texture = get_icon(_kind, white)
-	sprite.set_script(load(scripts[_kind]))
+	sprite.texture = get_icon(kind, white)
+	sprite.set_script(load(scripts[kind]))
 	sprite.z_index = GameState.ZIndex.PIECE
 	return sprite as Piece
+
+
+# Gets an icon for the requested piece.
+# 	kind: The kind of piece to get an icon for.
+# 	white: True if the piece is white, false if black.
+# 	return: An icon.
+static func get_icon(kind: Piece.Kind, white: bool):
+	if (white):
+		return load(white_images[kind])
+	else:
+		return load(black_images[kind])
 
 
 # Must be implemented by inheriting classes.
@@ -428,7 +426,12 @@ func finish_moving():
 		if (promotion != Kind.NONE):
 			var _space = space
 			_space.exit(self)
-			_space.board.add_piece(promotion, is_player, _space)
+			var new_piece: Piece = Piece.create_piece(promotion, is_white)
+			new_piece.is_player = is_player
+			new_piece.is_white = is_white
+			new_piece.is_grabable = is_grabable
+			Main.game_world.add_child(new_piece)
+			_space.board.add_object(new_piece, _space)
 			queue_free()
 		# Return to the stationary z index
 		z_index = GameState.ZIndex.PIECE

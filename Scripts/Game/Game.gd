@@ -27,14 +27,8 @@ var enemy_pieces: Array[Piece.Kind] = []
 # The enemy's collection of items.
 var enemy_items: Array[Item.Kind] = []
 
-# The enemy's acquired power ups.
-var enemy_powers: Array[Power] = []
-
 # The player's placed pieces and items.
 var player_placements: Array[Placement] = []
-
-# The player's acquired power ups.
-var player_powers: Array[Power] = []
 
 # The current set of pieces being played with.
 var current_set: Set
@@ -78,16 +72,12 @@ func _ready():
 	enemy_power_board = PowerBoardBuilder.new(self, false).build()
 	player_power_board = PowerBoardBuilder.new(self, true).build()
 	# Create the starting map.
+	game_board = BoardBuilder.get_board_builder(Main.game_state.start_board, self).build()
 	current_set = Set.get_set(Main.game_state.start_set)
-	current_board = Main.game_state.start_board
-	game_board = BoardBuilder.get_board_builder(current_board, self).build()
-	# TEMPORARY: Create starting pieces
-	enemy_pieces.append(Piece.Kind.PAWN)
-	var record: Placement = Placement.record_new_piece( \
-		Piece.Kind.PAWN, \
-		side_board.get_first_empty_space().coordinates, \
-		false)
-	player_placements.append(record)
+	var start_piece: Piece.Kind = current_set.get_starting_piece()
+	var empty: Vector2i = side_board.get_first_empty_space().coordinates
+	enemy_pieces.append(start_piece)
+	player_placements.append(Placement.record_new_piece(start_piece, empty, false))
 	# Start the planning phase
 	next_stage = PlanningStage.new(self)
 

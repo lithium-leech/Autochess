@@ -18,7 +18,7 @@ static func record_object(object: GameObject, coordinates: Vector2i, _is_game: b
 			record.item = object.equipment.kind
 	elif (object is Item):
 		record.is_piece = false
-		record.item = object.kind
+		record.item = object.get_kind()
 	# Record the space
 	record.is_game = _is_game
 	record.x = coordinates.x
@@ -89,9 +89,9 @@ var y: int = 0
 func place_recorded_object(game: Game):
 	# Create the recorded piece.
 	var object: GameObject
-	if (is_piece):
-		var white: bool = (Main.game_state.is_player_white and is_player) or \
+	var white: bool = (Main.game_state.is_player_white and is_player) or \
 					  (not Main.game_state.is_player_white and not is_player)
+	if (is_piece):
 		object = Piece.create_piece(piece, white)
 		object.is_player = is_player
 		object.is_white = white
@@ -102,7 +102,11 @@ func place_recorded_object(game: Game):
 			pass
 	# Create the recorded item.
 	else:
-		pass
+		object = Item.create_item(item, white)
+		object.is_player = is_player
+		object.is_white = white
+		object.is_grabable = is_player
+		Main.game_world.add_child(object)
 	# Place the object on the recorded space.
 	var space: Space
 	if (is_game):

@@ -81,6 +81,6 @@ func apply_choice(choice: int):
 	game.current_set = Set.get_set(sets[choice])
 	# Add the starting pieces.
 	var start_kind: Piece.Kind = game.current_set.get_starting_piece()
-	var space: Space = game.side_board.get_first_empty_space()
+	var empty: Vector2i = game.side_board.get_first_empty_space().coordinates
 	game.enemy_pieces.append(start_kind)
-	game.player_placements.append(Placement.record_new_piece(start_kind, space.coordinates, false))
+	game.player_placements.append(Placement.record_new_piece(start_kind, empty, false))

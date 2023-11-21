@@ -3,10 +3,10 @@ class_name Equipment extends Item
 
 
 # The sprite shown when this is unequipped.
-var item_sprite: String
+var item_sprite: CompressedTexture2D
 
 # The sprite shown when this is equipped.
-var equip_sprite: String
+var equip_sprite: CompressedTexture2D
 
 # The piece this is equipped to.
 var piece: Piece
@@ -35,7 +35,7 @@ func equip(_piece: Piece):
 	piece.equipment = self
 	on_equip()
 	# Replace the item sprite with the equipped sprite.
-	texture = load(equip_sprite) as CompressedTexture2D
+	texture = equip_sprite
 
 
 # Unequips this from its equipped piece.
@@ -45,7 +45,7 @@ func unequip():
 	piece.equipment = null
 	piece = null
 	# Replace the equipped sprite with the item sprite.
-	texture = load(item_sprite) as CompressedTexture2D
+	texture = item_sprite
 
 
 # Performs additional behaviors when equipped.
