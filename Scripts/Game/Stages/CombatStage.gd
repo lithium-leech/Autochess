@@ -96,6 +96,9 @@ func during(delta: float):
 
 # Runs once when the stage ends.
 func end():
+	# call a final round/movement end.
+	game.on_move_finish.emit()
+	game.on_round_finish.emit()
 	# Remove any remaining pieces.
 	game.game_board.clear()
 	game.side_board.clear()
