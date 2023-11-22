@@ -8,7 +8,7 @@ var pieces: Array = [
 	[Piece.Kind.PAWN],
 	[Piece.Kind.KING, Piece.Kind.FERZ, Piece.Kind.WAZIR, Piece.Kind.ELEPHANT, Piece.Kind.DABBABA],
 	[Piece.Kind.KNIGHT, Piece.Kind.CAMEL, Piece.Kind.SWORDSMAN],
-	[Piece.Kind.TALIAH, Piece.Kind.RYUMA],
+	[Piece.Kind.TALIAH],
 	[Piece.Kind.ROOK, Piece.Kind.GIRAFFE]
 ]
 

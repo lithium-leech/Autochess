@@ -295,10 +295,10 @@ func is_valid_path(_path: Array[Vector2i], jump: bool) -> bool:
 	if (_path[0] != space.coordinates):
 		return false
 	# Check that the path is traversable
-	for i in range(1, path.size()):
-		if (!space.board.on_board(path[i])):
+	for i in range(1, _path.size()):
+		if (!space.board.on_board(_path[i])):
 			return false
-		var _space: Space = space.board.get_space(path[i])
+		var _space: Space = space.board.get_space(_path[i])
 		if (!jump and _space == null):
 			return false
 		elif (jump and _space == null):

@@ -11,9 +11,14 @@ func get_kind() -> Kind:
 func take_turn():
 	# Assume initially that the piece cannot move.
 	var _path: Array[Vector2i] = [space.coordinates]
-	# Get the possible moves and captures this piece can make.
+	# Get the possible moves this piece can make.
 	var moves: Array = []
+	add_orthogonal_paths(_path, 1, 1, false, moves, [])
+	add_diagonal_paths(_path, 1, 1, false, moves, [])
+	# Get the possible captures this piece can make.
 	var captures: Array = []
+	add_orthogonal_paths(_path, 1, 2, false, [], captures)
+	add_diagonal_paths(_path, 1, 2, false, [], captures)
 	# Capture a piece if possible.
 	if (captures.size() > 0):
 		_path = captures[randi_range(0, captures.size() - 1)]

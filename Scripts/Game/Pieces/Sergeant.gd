@@ -14,6 +14,7 @@ func take_turn():
 	# Get the possible moves and captures this piece can make.
 	var moves: Array = []
 	var captures: Array = []
+	add_orthogonal_paths(_path, 1, 3, true, moves, captures)
 	# Capture a piece if possible.
 	if (captures.size() > 0):
 		_path = captures[randi_range(0, captures.size() - 1)]
