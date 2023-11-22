@@ -193,6 +193,33 @@ static func create_piece(kind: Kind, white: bool) -> Piece:
 	sprite.texture = get_icon(kind, white)
 	sprite.set_script(load(scripts[kind]))
 	sprite.z_index = GameState.ZIndex.PIECE
+	# Flip pieces with directional sprites.
+	if (white and not Main.game_state.is_player_white or \
+		not white and Main.game_state.is_player_white):
+		var flip = func():
+			sprite.flip_v = true
+		match kind:
+			Piece.Kind.FUHYO: flip.call()
+			Piece.Kind.GINSHO: flip.call()
+			Piece.Kind.HISHA: flip.call()
+			Piece.Kind.KAKUGYO: flip.call()
+			Piece.Kind.KEIMA: flip.call()
+			Piece.Kind.KINSHO: flip.call()
+			Piece.Kind.KYOSHA: flip.call()
+			Piece.Kind.NARIGIN: flip.call()
+			Piece.Kind.NARIKEI: flip.call()
+			Piece.Kind.NARIKYO: flip.call()
+			Piece.Kind.OSHO: flip.call()
+			Piece.Kind.RYUMA: flip.call()
+			Piece.Kind.RYUO: flip.call()
+			Piece.Kind.TOKIN: flip.call()
+			Piece.Kind.ZU: flip.call()
+			Piece.Kind.JU: flip.call()
+			Piece.Kind.MA: flip.call()
+			Piece.Kind.XIANG: flip.call()
+			Piece.Kind.JIANG: flip.call()
+			Piece.Kind.SHI: flip.call()
+			Piece.Kind.PAO: flip.call()
 	return sprite as Piece
 
 
