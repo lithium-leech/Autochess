@@ -1,4 +1,4 @@
-# A chess piece.
+# A xiangqi chess piece.
 extends Piece
 
 

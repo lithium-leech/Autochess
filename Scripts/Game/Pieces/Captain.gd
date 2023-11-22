@@ -1,4 +1,4 @@
-# A chess piece.
+# A military chess piece.
 extends Piece
 
 

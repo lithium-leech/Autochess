@@ -1,4 +1,4 @@
-# A chess piece.
+# A tamerlane chess piece.
 extends Piece
 
 

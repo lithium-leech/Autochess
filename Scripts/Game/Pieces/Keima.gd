@@ -1,4 +1,4 @@
-# A chess piece.
+# A shogi  chess piece.
 extends Piece
 
 
