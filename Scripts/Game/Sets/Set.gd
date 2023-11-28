@@ -73,8 +73,8 @@ func get_piece(strength: float) -> Piece.Kind:
 	var min_v: int = 0
 	var max_v: int = pieces.size() - 1
 	var expected: int = round(strength * max_v)
-	var roll: int = randi_range(min_v, max_v) + randi_range(min_v, max_v)
-	var result: int = clamp(expected + (roll - max_v), min_v, max_v)
+	var roll: float = (randi_range(0,5) + randi_range(0, 5)) / 2.0
+	var result: int = clamp(expected + (roll - 2), min_v, max_v)
 	# Pick a piece with the chosen value.
 	return pieces[result][randi_range(0, pieces[result].size() - 1)]
 
